@@ -1,11 +1,10 @@
 # Arbo
-美術館・展示会共有アプリ
 
 ## サイト概要
 
 ### サイトテーマ
 
-Arboは、美術館のイベントに関する情報を記録し、感想を共有するためのサービスです。
+Arboは美術館・展示会共有アプリで、イベント情報の記録と感想共有を行えます。
 
 ### テーマを選んだ理由
 
@@ -42,17 +41,3 @@ Arboは、美術館のイベントに関する情報を記録し、感想を共�
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
-
-## 使用方法
-```
-$ git clone git@github.com:ryumasgit/Arbo.git
-$ cd arbo_app
-$ rails db:migrate
-$ rails db:seed
-$ yarn install
-$ bundle install
-$ yarn add @babel/plugin-proposal-private-methods @babel/plugin-proposal-private-property-in-object
-$ rails s
-```
-## 使用素材
-<!--テーマを設定・提出する時点では不要です-->

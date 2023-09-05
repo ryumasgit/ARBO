@@ -1,0 +1,2 @@
+class BookmarkMuseum < ApplicationRecord
+end

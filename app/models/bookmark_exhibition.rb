@@ -1,0 +1,2 @@
+class BookmarkExhibition < ApplicationRecord
+end

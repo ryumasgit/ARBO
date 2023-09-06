@@ -16,3 +16,13 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
+
+import $ from 'jquery';
+global.$ = jQuery = $;
+
+
+$(function(){
+  $('.1').mouseover(function(){
+    $('.1').css({'color': '#112233'});
+  });
+});

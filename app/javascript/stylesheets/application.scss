@@ -4,7 +4,7 @@
 #hm-icon {
   position: fixed;
   right: 20px;
-  top: 25px;
+  top: 30px;
   z-index: 10;
 }
 .menu-trigger,
@@ -66,4 +66,12 @@
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #efefef;
 }

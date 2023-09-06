@@ -3,4 +3,6 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+  validates :admin_name, presence: true, uniqueness: true, length: { maximum: 25 }
 end

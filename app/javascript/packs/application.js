@@ -16,13 +16,12 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
+require('jquery')
 
-import $ from 'jquery';
-global.$ = jQuery = $;
-
-
-$(function(){
-  $('.1').mouseover(function(){
-    $('.1').css({'color': '#112233'});
+$(function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
   });
 });

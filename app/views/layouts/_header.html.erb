@@ -6,8 +6,18 @@
           <%= image_tag 'header_logo.png', width: '6%', height: '6%' %>
         <% end %>
       </div>
-      <div class="1">
-        1
+      <div id="sp-menu">
+        <div class=""><%= link_to 'top', root_path, class: "btn" %></div>
+        <div class=""><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>
+        <div class=""><%= link_to 'log in', member_session_path, class: "btn" %></div>
+        <div class=""><%= link_to 'log out', destroy_member_session_path, method: :delete, class: "btn" %></div>
+      </div>
+      <div id="hm-icon">
+        <a class="menu-trigger" href="#">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
       </div>
     </div>
   </div>

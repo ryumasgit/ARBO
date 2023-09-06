@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  namespace :public do
+  scope module: :public do
     root to: "homes#top"
     get "welcome" => "homes#welcome"
     resources :members, only: [], param: :user_name do

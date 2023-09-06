@@ -2,7 +2,7 @@ class Artist < ApplicationRecord
   has_many :entry_artists, dependent: :destroy
   has_many :entered_artists, through: :entry_artists, source: :exhibition
   
-  has_many_attached :artist_images, default_url: Rails.root.join("app/assets/images/default_artist_image.jpeg")
+  has_many_attached :artist_images
 
   validates :artist_name, presence: true, uniqueness: true
   validates :introduction, presence: true, length: { maximum: 255 }

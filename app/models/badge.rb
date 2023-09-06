@@ -2,7 +2,7 @@ class Badge < ApplicationRecord
   has_many :earned_badges, dependent: :destroy
   has_many :reports, through: :earned_badges
   
-  has_one_attached :badge_image, default_url: Rails.root.join("app/assets/images/default_badge_image.jpeg")
+  has_one_attached :badge_image
   
   validates :badge_name, presence: true, uniqueness: true
   validates :introduction, presence: true, length: { maximum: 255 }

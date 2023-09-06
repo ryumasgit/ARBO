@@ -20,9 +20,9 @@ class Member < ApplicationRecord
   has_many :bookmark_exhibitions, dependent: :destroy
   has_many :exhibitions, through: :bookmark_exhibitions
 
-  has_one_attached :member_image, default_url: Rails.root.join("app/assets/images/default_member_image.jpeg")
+  has_one_attached :member_image
 
-  validates :user_name, presence: true, uniqueness: true, length:  { maximum: 25 }
+  validates :user_name, presence: true, uniqueness: true, length: {in: 3..25}
   validates :introduction, length: { maximum: 255 }
   validates :is_active, presence: true, inclusion: { in: [true, false] }
 

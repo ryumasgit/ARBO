@@ -5,7 +5,7 @@ class Exhibition < ApplicationRecord
   has_many :artists, through: :entry_artists
   belongs_to :museum
   
-  has_many_attached :exhibition_images, default_url: Rails.root.join("app/assets/images/default_exhibition_image.jpeg")
+  has_many_attached :exhibition_images
 
   validates :exhibition_name, presence: true
   validates :introduction, presence: true, length: { maximum: 255 }

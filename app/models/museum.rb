@@ -3,7 +3,7 @@ class Museum < ApplicationRecord
   has_many :bookmark_museums, dependent: :destroy
   has_many :museums, through: :bookmark_museums
 
-  has_many_attached :museum_images, default_url: Rails.root.join("app/assets/images/default_museum_image.jpeg")
+  has_many_attached :museum_images
 
   validates :museum_name, presence: true, uniqueness: true
   validates :introduction, presence: true, length: { maximum: 255 }

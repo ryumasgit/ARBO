@@ -17,9 +17,9 @@ class Public::MembersController < ApplicationController
 
   def withdraw
   end
-  
+
   protected
-  
+
   def redirect_if_member_not_found(member)
     if member.nil?
       flash[:alert] = "メンバーが見つかりません。"

@@ -18,13 +18,39 @@
   <div id="sp-menu">
     <div class="row justify-content-center m-4">
       <div class="text-center">
-        <div><%= link_to 'top', root_path, class: "btn" %></div>
-        <div><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>
-        <div><%= link_to 'log in', member_session_path, class: "btn" %></div>
-        <div><%= link_to 'log out', destroy_member_session_path, method: :delete, class: "btn" %></div>
-        <i class="fa-brands fa-x-twitter mt-5 mr-5"></i>
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-facebook ml-5"></i>
+        <% if member_signed_in? %>
+          <div class="col-4">
+            <div><%= link_to 'top', root_path, class: "btn" %></div>
+            <div><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>
+            <div><%= link_to 'log in', member_session_path, class: "btn" %></div>
+            <div><%= link_to 'log out', destroy_member_session_path, method: :delete, class: "btn" %></div>
+          </div>
+          <div class="col-4">
+            <div><%= link_to 'timeline', reviews_path, class: "btn" %></div>
+            <div><%= link_to 'search', new_search_path, class: "btn" %></div>
+            <div><%= link_to 'event', museums_path, class: "btn" %></div>
+            <div><%= link_to 'mypage', member_my_page_path(member_user_name: current_member.user_name), class: "btn" %></div>
+          </div>
+        <% elsif admin_signed_in? %>
+          <div class="col-4">
+            <div><%= link_to 'top', root_path, class: "btn" %></div>
+            <div><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>
+            <div><%= link_to 'log in', member_session_path, class: "btn" %></div>
+            <div><%= link_to 'log out', destroy_member_session_path, method: :delete, class: "btn" %></div>
+          </div>
+          <div class="col-4">
+            <div><%= link_to 'timeline', admin_reviews_path, class: "btn" %></div>
+            <div><%= link_to 'member', admin_members_path, class: "btn" %></div>
+            <div><%= link_to 'event', admin_museums_path, class: "btn" %></div>
+          </div>
+        <% else %>
+            <div><%= link_to 'top', root_path, class: "btn" %></div>
+            <div><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>
+            <div><%= link_to 'log in', member_session_path, class: "btn" %></div>
+        <% end %>
+        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-brands fa-instagram m-5"></i>
+        <i class="fa-brands fa-facebook"></i>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
 class EarnedBadge < ApplicationRecord
-  belongs_to :report
+  belongs_to :member
   belongs_to :badge
 end

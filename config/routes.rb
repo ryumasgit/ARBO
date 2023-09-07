@@ -25,14 +25,13 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
+      resources :badges, only: [:index]
       resources :member_tags, only: [:index]
       resources :favorites, only: [:index]
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
     end
-    resources :reports, only: [:show] do
-      resources :badges, only: [:index]
-    end
+    resources :reports, only: [:show]
     resources :reviews, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :review_comments, only: [:create, :index, :destroy]
       resource :favorites, only: [:create, :destroy]
@@ -53,16 +52,15 @@ Rails.application.routes.draw do
     resources :members, only: [:index, :show, :edit, :update] do
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
+      resources :badges, only: [] do
+        get "earned" => "badges#badges"
+      end
       resources :member_tags, only: [:index]
       resources :favorites, only: [:index]
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
     end
-    resources :reports, only: [:show] do
-      resources :badges, only: [] do
-        get "earned" => "badges#badges"
-      end
-    end
+    resources :reports, only: [:show]
     resources :badges, only: [:new, :create, :index, :edit, :update, :destroy]
     resources :reviews, only: [:show, :index, :destroy] do
       resources :review_comments, only: [:index, :destroy]

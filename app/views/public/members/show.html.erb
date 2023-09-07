@@ -1,22 +1,31 @@
-<% member_name = current_member.member_name %>
-
-<div class="container-fluid h-100per">
-  <div class="row member-show">
-    <div class="col text-center">
-      <h5>メンバー情報</h5>
-      <div class="mb-1">
-        <% if @member == current_member %>
-          <%= image_tag @member.get_member_image(250, 250) %>
-        <% else %>
-          <%= render 'public/relationships/btn', member: @member %>
-        <% end %>
-      </div>
-      <div>
-        <%= @member.member_name %>
-        <%= link_to member_information_edit_path(member_member_name: member_name), class: "btn btn-sm" do %>
-          <i class="fa-solid fa-gear"></i>
-        <% end %>
-      </div>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <h6>メンバー情報</h6>
+  </div>
+  <div class="row m-3">
+    <div class="col text-right">
+      <%= image_tag @member.get_member_image(160, 160), class: "rounded-circle" %>
     </div>
+    <div class="col d-flex">
+      <%= content_tag :h3, @member.member_name %>
+      <% if @member == current_member %>
+        <%= link_to member_information_edit_path(member_member_name: current_member.member_name ), class: "btn btn-sm" do %>
+          <i class="fa-solid fa-gear align-bottom"></i>
+        <% end %>
+      <% else %>
+        <%= render 'public/relationships/btn', member: @member %>
+      <% end %>
+      <%= content_tag :p, @member.introduction %>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+      <%= @member.reviews.count %> レビュー
+      <%= content_tag :span, @member.earned_badges.count, class: "ml-3" %> バッジ
+      <%= link_to member_follows_path(member_member_name: @member.member_name) do %>
+        <p class="ml-3"><%= @member.follower.count %> フォロー</p>
+      <% end %>
+      <%= link_to member_follows_path(member_member_name: @member.member_name) do %>
+        <p class="ml-3"><%= @member.follower.count %> フォロワー</p>
+      <% end %>
   </div>
 </div>

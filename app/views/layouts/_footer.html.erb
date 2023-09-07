@@ -1,5 +1,3 @@
-<% member_name = current_member.member_name %>
-
 <div class="container-fluid">
   <div class="row m-2">
     <div class="col">
@@ -15,7 +13,7 @@
             <%= image_tag 'event_logo.png', width: '145px', height: 'auto' %>
           <% end %>
           <% unless current_member.guest? %>
-            <%= link_to member_my_page_path(member_member_name: member_name) do %>
+            <%= link_to member_my_page_path(member_member_name: current_member.member_name ) do %>
               <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto' %>
             <% end %>
           <% end %>

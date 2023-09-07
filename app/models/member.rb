@@ -25,6 +25,7 @@ class Member < ApplicationRecord
   validates :member_name, presence: true, uniqueness: true, length: {in: 3..25}
   validates :introduction, length: { maximum: 255 }
   validates :is_active, presence: true, inclusion: { in: [true, false] }
+  validates :is_guest, inclusion: { in: [true, false] }
 
   def follow(member_id)
     follower.create(followed_id: member_id)
@@ -43,6 +44,20 @@ class Member < ApplicationRecord
       member_image.variant(resize_to_limit: [width, height]).processed
     else
       ActionController::Base.helpers.asset_path("default_member_image.jpeg")
+    end
+  end
+
+  def guest?
+    is_guest
+  end
+
+GUEST_USER_EMAIL = "guest@example.com"
+
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |member|
+      member.password = SecureRandom.urlsafe_base64
+      member.member_name = "guest"
+      member.is_guest = "true"
     end
   end
 end

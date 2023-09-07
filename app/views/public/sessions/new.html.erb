@@ -1,26 +1,30 @@
-<h2>Log in</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="text-center">
+        <h2>Member log in</h2>
+        <%= form_with model: @member, url: member_session_path do |f| %>
+          <%= render "public/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+          <div class="field mt-5">
+            <%= f.email_field :email, placeholder: "メールアドレス", autofocus: true, autocomplete: "email", class: "form-control mb-2" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+          <div class="field">
+            <%= f.password_field :password, placeholder: "パスワード", autocomplete: "current-password", class: "form-control" %>
+          </div>
+          
+          <div class="actions m-2">
+            <%= f.submit "Log in", class: "btn btn-success" %>
+          </div>
+        <% end %>
+        <%= link_to new_member_registration_path do %>
+          <p>アカウントの新規登録</p>
+        <% end %>
+        <%= link_to guest_sign_in_path, method: :post do %>
+          <p>ゲストログイン</p>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>

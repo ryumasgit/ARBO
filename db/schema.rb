@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.string "member_name", null: false
     t.string "introduction"
     t.boolean "is_active", default: true, null: false
-    t.boolean "is_guest", null: false
+    t.boolean "is_guest", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

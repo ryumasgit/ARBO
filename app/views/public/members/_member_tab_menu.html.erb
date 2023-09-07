@@ -1,0 +1,43 @@
+<div class="container-fluid border-bottom border-top">
+  <div class="row m-2">
+    <div class="col">
+      <div class="text-center">
+        <%= link_to reviews_path do %>
+          <%= image_tag 'review_logo.png', width: '150px', height: 'auto' %>
+        <% end %>
+        <%= link_to new_search_path do %>
+          <%= image_tag 'favorite_logo.png', width: '150px', height: 'auto' %>
+        <% end %>
+        <%= link_to museums_path do %>
+          <%= image_tag 'report_logo.png', width: '150px', height: 'auto' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#section1">セクション1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#section2">セクション2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#section3">セクション3</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="section1" class="tab-pane fade show active">
+      <p>セクション1のコンテンツが表示されます。</p>
+    </div>
+    <div id="section2" class="tab-pane fade">
+      <p>セクション2のコンテンツが表示されます。</p>
+    </div>
+    <div id="section3" class="tab-pane fade">
+      <p>セクション3のコンテンツが表示されます。</p>
+    </div>
+  </div>
+</div>

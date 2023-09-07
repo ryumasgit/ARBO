@@ -12,9 +12,12 @@
           <%= link_to museums_path do %>
             <%= image_tag 'event_logo.png', width: '145px', height: 'auto' %>
           <% end %>
-          <%= link_to member_my_page_path(member_member_name: current_member.member_name) do %>
-            <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto' %>
+          <% unless current_member.guest? %>
+            <%= link_to member_my_page_path(member_member_name: current_member.member_name) do %>
+              <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto' %>
+            <% end %>
           <% end %>
+          
         <% elsif admin_signed_in? %>
           <%= link_to admin_reviews_path do %>
             <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto' %>
@@ -25,6 +28,7 @@
           <%= link_to admin_museums_path do %>
             <%= image_tag 'event_logo.png', width: '145px', height: 'auto' %>
           <% end %>
+          
         <% else %>
           <i class="fa-brands fa-x-twitter"></i>
           <i class="fa-brands fa-instagram m-5"></i>

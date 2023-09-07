@@ -4,17 +4,17 @@ class Public::SessionsController < Devise::SessionsController
   before_action :member_state, only: [:create]
 
   def after_sign_in_path_for(resource)
-    reviews_path
+    welcome_path
   end
 
   def after_sign_out_path_for(resource)
     root_path
   end
-  
+
   def guest_sign_in
     member = Member.guest
     sign_in member
-    redirect_to reviews_path(member)
+    redirect_to welcome_path
   end
 
   # before_action :configure_sign_in_params, only: [:create]

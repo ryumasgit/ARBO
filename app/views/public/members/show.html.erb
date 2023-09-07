@@ -1,9 +1,10 @@
 <% member_name = current_member.member_name %>
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid h-100per">
+  <div class="row member-show">
     <div class="col text-center">
-      <div class="mb-2">
+      <h5>メンバー情報</h5>
+      <div class="mb-1">
         <% if @member == current_member %>
           <%= image_tag @member.get_member_image(250, 250) %>
         <% else %>

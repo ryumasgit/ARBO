@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "welcome" => "homes#welcome"
-    resources :members, only: [], param: :user_name do
+    resources :members, only: [], param: :member_name do
       patch "update" => "members#update"
       get "my_page" => "members#show"
       get "information/edit" => "members#edit"
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       get "reviews" => "exhibitions#reviews"
       resource :bookmark_exhibitions, only: [:create, :destroy]
     end
-    resources :search, only: [:new, :index]
+    resources :searches, only: [:new, :index]
   end
 
   namespace :admin do

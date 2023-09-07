@@ -1,2 +1,18 @@
-<h1>Public::Members#show</h1>
-<p>Find me in app/views/public/members/show.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col text-center">
+      <div class="mb-2">
+        <% if @member == current_member %>
+          <%= image_tag @member.get_member_image(250, 250) %>
+          <%= render 'relationships/btn', member: @member %>
+        <% end %>
+      </div>
+      <div>
+        <%= @member.member_name %>
+        <%= link_to member_information_edit_path(member_member_name: current_member.member_name), class: "btn btn-sm" do %>
+          <i class="fa-solid fa-gear"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

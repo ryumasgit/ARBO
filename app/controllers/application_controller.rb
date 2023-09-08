@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   private
 
   def check_admin_access
-    if admin_controller? && !admin_signed_in? && request.path != '/admin/sign_in' && request.path != '/admin'
+    if admin_controller? && !admin_signed_in? && request.path != '/admin/sign_in'
+      flash[:notice] = "権限がありません ブロックされました"
       redirect_to root_path
     end
   end

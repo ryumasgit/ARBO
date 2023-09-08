@@ -9,21 +9,20 @@ class Public::MembersController < ApplicationController
   end
 
   def edit
-    redirect_if_member_not_found(@member)
   end
+
   def update
     @original_member = current_member
-
     if @member.update(member_params)
       flash[:notice] = "メンバー情報の保存に成功しました"
-      redirect_to member_my_page_path(member_member_name: current_member.member_name )
+      redirect_to member_my_page_path(member_member_name: current_member.member_name)
     else
       # エラー箇所に元のデータを代入する
       @original_member.attributes.each do |attr, value|
         @member[attr] = value unless @member.errors[attr].empty?
         @member.introduction = @original_member.introduction
       end
-      flash[:notice] =  "メンバー情報の保存に失敗しました"
+      flash[:notice] = "メンバー情報の保存に失敗しました"
       render :edit
     end
   end

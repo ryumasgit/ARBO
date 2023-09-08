@@ -20,18 +20,16 @@ Rails.application.routes.draw do
       patch "update" => "members#update"
       get "my_page" => "members#show"
       get "information/edit" => "members#edit"
-      get "confirm_withdraw", on: :member
-      patch "withdraw", on: :member
+      get "confirm_withdraw"
+      patch "withdraw"
       resource :relationships, only: [:create, :destroy]
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
       resources :badges, only: [:index]
       resources :member_tags, only: [:index]
-      resources :favorites, only: [:index]
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
     end
-    resources :reports, only: [:show]
     resources :reviews, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :review_comments, only: [:create, :index, :destroy]
       resource :favorites, only: [:create, :destroy]
@@ -56,11 +54,9 @@ Rails.application.routes.draw do
         get "earned" => "badges#badges"
       end
       resources :member_tags, only: [:index]
-      resources :favorites, only: [:index]
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
     end
-    resources :reports, only: [:show]
     resources :badges, only: [:new, :create, :index, :edit, :update, :destroy]
     resources :reviews, only: [:show, :index, :destroy] do
       resources :review_comments, only: [:index, :destroy]

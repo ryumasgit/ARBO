@@ -1,8 +1,9 @@
 <div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
     <div class="col-md-2">
       <div class="text-center">
-        <h2>Member sign up</h2>
+        <h2>Member Sign Up</h2>
         <%= form_with model: @member, url: member_registration_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
 
@@ -12,7 +13,7 @@
           </div>
 
           <div class="field">
-            <%= f.text_field :member_name, placeholder: "メンバーネーム（3文字以上25文字以下）", autofocus: true, class: "form-control mb-2" %>
+            <%= f.text_field :member_name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control mb-2" %>
           </div>
 
           <div class="field">

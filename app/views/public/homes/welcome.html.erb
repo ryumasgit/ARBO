@@ -1,8 +1,11 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col">
       <div class="text-center homes-welcome">
-        <%= image_tag 'welcome_msg.png', width: '250px', height: 'auto' %>
+        <% if current_member.guest? %>
+          <h5 class="text-danger">ゲストメンバーは一部機能が制限されます。</h5>
+        <% end %>
+        <%= image_tag 'welcome_msg.png', width: '200px', height: 'auto' %>
         <h4 class="m-3">ようこそARBOへ</h4>
         <p>ARBO で芸術と文化の世界を探索しましょう。<br>
         美術館や展覧会の体験を記録し、美術愛好家仲間と意見を共有し、新しい視点を発見することができます。</p>

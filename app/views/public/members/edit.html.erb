@@ -7,7 +7,7 @@
         <%= form_with model: @member, url: member_update_path(member_member_name: current_member.member_name) do |f| %>
 
           <div class="field m-5">
-            <%= image_tag @member.get_member_image(200, 200), class: "mb-3" %>
+            <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle mb-3" %>
             <%= f.file_field :member_image, accept: "image/*", class: "form-control-file" %>
           </div>
 

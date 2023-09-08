@@ -1,6 +1,6 @@
 class Badge < ApplicationRecord
   has_many :earned_badges, dependent: :destroy
-  has_many :reports, through: :earned_badges
+  has_many :members, through: :earned_badges
   
   has_one_attached :badge_image
   

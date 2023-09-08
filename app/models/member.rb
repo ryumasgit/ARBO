@@ -9,6 +9,8 @@ class Member < ApplicationRecord
   has_many :followings, through: :follower, source: :followed
   has_many :followers, through: :followed, source: :follower
   has_one :report, dependent: :destroy
+  has_many :earned_badges, dependent: :destroy
+  has_many :badges, through: :earned_badges
   has_many :member_tags, dependent: :destroy
   has_many :tags, through: :member_tags
   has_many :reviews, dependent: :destroy
@@ -22,9 +24,9 @@ class Member < ApplicationRecord
 
   has_one_attached :member_image
 
-  validates :member_name, presence: true, uniqueness: true, length: {in: 3..25}
+  validates :member_name, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :introduction, length: { maximum: 255 }
-  validates :is_active, presence: true, inclusion: { in: [true, false] }
+  validates :is_active, inclusion: { in: [true, false] }
   validates :is_guest, inclusion: { in: [true, false] }
 
   def follow(member_id)

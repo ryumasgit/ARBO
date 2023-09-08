@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
-    <div class="col-md-5">
+    <div class="col-md-2">
       <div class="text-center">
-        <h2>Member log in</h2>
+        <h2>Member Log In</h2>
         <%= form_with model: @member, url: member_session_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
 
@@ -13,18 +14,18 @@
           <div class="field">
             <%= f.password_field :password, placeholder: "パスワード", autocomplete: "current-password", class: "form-control" %>
           </div>
-          
-          <div class="actions m-2">
+
+          <div class="actions m-3">
             <%= f.submit "Log in", class: "btn btn-success" %>
           </div>
         <% end %>
-        <%= link_to new_member_registration_path do %>
-          <p>アカウントの新規登録</p>
+        <%= link_to new_member_registration_path, class: "mr-5" do %>
+          新規登録
         <% end %>
         <%= link_to guest_sign_in_path, method: :post do %>
-          <p>ゲストログイン</p>
+          ゲストログイン
         <% end %>
-      </div>
+       </div>
     </div>
   </div>
 </div>

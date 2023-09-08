@@ -87,12 +87,12 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   end
 
   create_table "earned_badges", force: :cascade do |t|
-    t.integer "report_id", null: false
+    t.integer "member_id", null: false
     t.integer "badge_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["badge_id"], name: "index_earned_badges_on_badge_id"
-    t.index ["report_id"], name: "index_earned_badges_on_report_id"
+    t.index ["member_id"], name: "index_earned_badges_on_member_id"
   end
 
   create_table "entry_artists", force: :cascade do |t|
@@ -220,7 +220,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   add_foreign_key "bookmark_museums", "members"
   add_foreign_key "bookmark_museums", "museums"
   add_foreign_key "earned_badges", "badges"
-  add_foreign_key "earned_badges", "reports"
+  add_foreign_key "earned_badges", "members"
   add_foreign_key "entry_artists", "artists"
   add_foreign_key "entry_artists", "exhibitions"
   add_foreign_key "exhibitions", "museums"

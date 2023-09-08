@@ -1,0 +1,14 @@
+<% members.each do |member| %>
+  <div class="row d-flex justify-content-center">
+    <div class="col text-right">
+      <%= image_tag member.get_member_image(80, 80), class: "rounded-circle" %>
+    </div>
+    <div class="col d-flex">
+      <%= content_tag :h3, member.member_name %>
+      <%= render 'public/relationships/btn', member: member %>
+      <%= member.reviews.count %> レビュー
+      <%= member.earned_badges.count %> バッジ
+      <%= member.follower.count %> フォロー
+      <%= member.follower.count %> フォロワー
+  </div>
+<% end %>

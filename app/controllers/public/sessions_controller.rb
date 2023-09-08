@@ -4,16 +4,19 @@ class Public::SessionsController < Devise::SessionsController
   before_action :member_state, only: [:create]
 
   def after_sign_in_path_for(resource)
+    flash[:notice] = "ログインしました"
     welcome_path
   end
 
   def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトしました"
     root_path
   end
 
   def guest_sign_in
     member = Member.guest
     sign_in member
+    flash[:notice] = "ゲストログインしました"
     redirect_to welcome_path
   end
 
@@ -25,9 +28,9 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # # DELETE /resource/sign_out
   # def destroy
@@ -40,13 +43,13 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  protected
 
   def member_state
-    @member = Member.find_by(email: params[:email])
+    @member = Member.find_by(email: params[:member][:email])
     return if !@member
-    if @member.valid_password?(params[:email][:password]) && (@member.is_active == false)
-      redirect_to new_member_registration_path, notice: "退会済みのメンバーです。新規登録をしてご利用ください。"
+    if @member.valid_password?(params[:member][:password]) && (@member.is_active == false)
+      flash[:notice] = "入力されたメンバーは退会済みです 新規登録をご利用ください"
+      redirect_to new_member_registration_path
     end
   end
 end

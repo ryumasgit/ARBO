@@ -6,13 +6,15 @@
     <div class="col">
       <div class="row">
         <%= content_tag :h3, member.member_name %>
-        <% if @member == current_member %>
-          <%= link_to member_information_edit_path(member_member_name: current_member.member_name), class: "btn btn-sm" do %>
-            <i class="fa-solid fa-gear align-bottom"></i>
+        <div class="col">
+          <% if @member == current_member %>
+            <%= link_to member_information_edit_path(member_member_name: current_member.member_name), class: "btn btn-sm" do %>
+              <i class="fa-solid fa-gear align-bottom"></i>
+            <% end %>
+          <% else %>
+            <%= render 'public/relationships/btn', member: member %>
           <% end %>
-        <% else %>
-          <%= render 'public/relationships/btn', member: member %>
-        <% end %>
+        </div>
       </div>
       <div class="row">
         <% if member.introduction.present? %>
@@ -27,8 +29,8 @@
       <%= link_to member_follows_path(member_member_name: member.member_name) do %>
         <p class="ml-3"><%= member.follower.count %>フォロー</p>
       <% end %>
-      <%= link_to member_follows_path(member_member_name: member.member_name) do %>
-        <p class="ml-3"><%= member.follower.count %>フォロワー</p>
+      <%= link_to member_followers_path(member_member_name: member.member_name) do %>
+        <p class="ml-3"><%= member.followed.count %>フォロワー</p>
       <% end %>
   </div>
 </div>

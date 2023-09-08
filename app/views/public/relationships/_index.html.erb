@@ -1,14 +1,38 @@
-<% members.each do |member| %>
-  <div class="row d-flex justify-content-center">
-    <div class="col text-right">
-      <%= image_tag member.get_member_image(80, 80), class: "rounded-circle" %>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>メンバーネーム</th>
+            <th>レビュー</th>
+            <th>バッジ</th>
+            <th>フォロー</th>
+            <th>フォロワー</th>
+          </tr>
+        </thead>
+          <tbody>
+            <% members.each do |member| %>
+            <tr>
+              <td>
+                <%= link_to member_my_page_path(member_member_name: member.member_name) do %>
+                  <%= image_tag member.get_member_image(65, 65), class: "rounded-circle" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to member_my_page_path(member_member_name: member.member_name) do %>
+                  <%= member.member_name %>
+                <% end %>
+              </td>
+              <td><%= member.reviews.count %></td>
+              <td><%= member.earned_badges.count %></td>
+              <td><%= member.follower.count %></td>
+              <td><%= member.follower.count %></td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
     </div>
-    <div class="col d-flex">
-      <%= content_tag :h3, member.member_name %>
-      <%= render 'public/relationships/btn', member: member %>
-      <%= member.reviews.count %> レビュー
-      <%= member.earned_badges.count %> バッジ
-      <%= member.follower.count %> フォロー
-      <%= member.follower.count %> フォロワー
   </div>
-<% end %>
+</div>

@@ -42,11 +42,7 @@ class Member < ApplicationRecord
   end
 
   def get_member_image(width, height)
-    if member_image.attached?
-      member_image.variant(resize_to_limit: [width, height]).processed
-    else
-      ActionController::Base.helpers.asset_path("default_member_image.jpeg")
-    end
+    member_image.variant(resize: "#{width}x#{height}^", gravity: 'center', extent: "#{width}x#{height}").processed
   end
 
   def guest?

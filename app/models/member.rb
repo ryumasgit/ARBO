@@ -29,12 +29,14 @@ class Member < ApplicationRecord
   validates :is_active, inclusion: { in: [true, false] }
   validates :is_guest, inclusion: { in: [true, false] }
 
-  def follow(member_id)
-    follower.create(followed_id: member_id)
+  def follow(member_name)
+    followed_member = Member.find_by(member_name: member_name)
+    follower.create(followed: followed_member)
   end
 
-  def unfollow(member_id)
-    follower.find_by(followed_id: member_id).destroy
+  def unfollow(member_name)
+    followed_member = Member.find_by(member_name: member_name)
+    follower.find_by(followed: followed_member).destroy
   end
 
   def following?(member)

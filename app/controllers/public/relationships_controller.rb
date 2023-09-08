@@ -2,12 +2,14 @@ class Public::RelationshipsController < ApplicationController
   before_action :authenticate_member!
 
   def create
-    current_member.follow(member_name: params[:member_member_name])
+    member_name = params[:member_member_name]
+    current_member.follow(member_name)
     redirect_to request.referer
   end
 
   def destroy
-    current_member.unfollow(member_name: params[:member_member_name])
+    member_name = params[:member_member_name]
+    current_member.unfollow(member_name)
     redirect_to request.referer
   end
 
@@ -24,6 +26,7 @@ class Public::RelationshipsController < ApplicationController
   private
 
   def get_member
-    @member = Member.find_by(member_name: params[:member_member_name])
+    member = Member.page(params[:page]).per(10)
+    @member = member.find_by(member_name: params[:member_member_name])
   end
 end

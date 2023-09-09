@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "admin_name", null: false
+    t.string "name", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   end
 
   create_table "artists", force: :cascade do |t|
-    t.string "artist_name", null: false
+    t.string "name", null: false
     t.string "introduction", null: false
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   end
 
   create_table "badges", force: :cascade do |t|
-    t.string "badge_name", null: false
+    t.string "name", null: false
     t.string "introduction", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
 
   create_table "exhibitions", force: :cascade do |t|
     t.integer "museum_id", null: false
-    t.string "exhibition_name", null: false
+    t.string "name", null: false
     t.string "introduction", null: false
     t.string "official_website", null: false
     t.boolean "is_active", default: true, null: false
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   create_table "members", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "member_name", null: false
+    t.string "name", null: false
     t.string "introduction"
     t.boolean "is_active", default: true, null: false
     t.boolean "is_guest", default: false, null: false
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   end
 
   create_table "museums", force: :cascade do |t|
-    t.string "museum_name", null: false
+    t.string "name", null: false
     t.string "introduction", null: false
     t.string "official_website", null: false
     t.boolean "is_active", default: true, null: false
@@ -208,7 +208,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "tag_name", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

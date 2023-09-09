@@ -16,13 +16,13 @@
             <% members.each do |member| %>
             <tr>
               <td>
-                <%= link_to member_my_page_path(member_member_name: member.member_name) do %>
+                <%= link_to member_my_page_path(member_member_name: member.name) do %>
                   <%= image_tag member.get_member_image(65, 65), class: "rounded-circle" %>
                 <% end %>
               </td>
               <td>
-                <%= link_to member_my_page_path(member_member_name: member.member_name) do %>
-                  <%= member.member_name %>
+                <%= link_to member_my_page_path(member_member_name: member.name) do %>
+                  <%= member.name %>
                 <% end %>
               </td>
               <td><%= member.reviews.count %></td>

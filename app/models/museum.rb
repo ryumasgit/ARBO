@@ -5,18 +5,15 @@ class Museum < ApplicationRecord
 
   has_many_attached :museum_images
 
-  validates :museum_name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   validates :introduction, presence: true, length: { maximum: 255 }
   validates :official_website, presence: true
-  validates :is_active, presence: true, inclusion: { in: [true, false] }
+  validates :is_active, inclusion: { in: [true, false] }
   validate :validate_museum_images_count
-  
+
   def get_museum_images(width, height)
-    if museum_images.attached?
-      museum_images.variant(resize_to_limit: [width, height]).processed
-    else
-      ActionController::Base.helpers.asset_path("default_museum_image.jpeg")
-    end
+    first_image = museum_images.first
+    first_image.variant(resize: "#{width}x#{height}^", gravity: 'center', extent: "#{width}x#{height}").processed
   end
 
   private

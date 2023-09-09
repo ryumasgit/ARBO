@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col">
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>展示会名</th>
+            <th>ブックマーク</th>
+            <th>公開ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+          <tbody>
+            <% exhibitions.each do |exhibition| %>
+            <tr>
+              <td>
+                <%= link_to admin_exhibition_path(exhibition) do %>
+                  <%= image_tag exhibition.get_exhibition_images(65, 65) %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_exhibition_path(exhibition) do %>
+                  <%= exhibition.name %>
+                <% end %>
+              </td>
+              <td><%= exhibition.bookmark_exhibitions.count %></td>
+              <td><%=exhibition_is_active_display(exhibition) %></td>
+              <td>
+                <%= link_to edit_admin_exhibition_path(exhibition), class: "btn" do %>
+                  <i class="fa-solid fa-gear align-bottom"></i>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

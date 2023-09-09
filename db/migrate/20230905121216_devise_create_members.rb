@@ -7,7 +7,7 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       
-      t.string :member_name, null: false, unique: true
+      t.string :name, null: false, unique: true
       t.string :introduction
       t.boolean :is_active, null: false, default: true
       t.boolean :is_guest, null: false, default: false

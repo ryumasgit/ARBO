@@ -31,7 +31,7 @@ class Admin::MembersController < ApplicationController
   protected
 
   def member_params
-    params.require(:member).permit(:member_image, :member_name, :introduction, :email, :is_active)
+    params.require(:member).permit(:member_image, :name, :introduction, :email, :is_active)
   end
 
   def get_member_id

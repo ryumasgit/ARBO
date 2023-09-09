@@ -28,8 +28,8 @@
           <div><%= link_to 'top', root_path, class: "btn" %></div>
           <div><%= link_to 'log out', destroy_member_session_path, method: :delete, class: "btn" %></div>
         <% elsif admin_signed_in? %>
-          <div><%= link_to 'top', admin_root_path, class: "btn" %></div>
-          <div><%= link_to 'log out', destroy_admin_session_path, method: :delete, class: "btn" %></div>
+          <div><%= link_to 'admin top', admin_root_path, class: "btn" %></div>
+          <div><%= link_to 'admin log out', destroy_admin_session_path, method: :delete, class: "btn" %></div>
         <% else %>
           <div><%= link_to 'top', root_path, class: "btn" %></div>
           <div><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>

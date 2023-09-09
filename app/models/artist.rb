@@ -4,17 +4,14 @@ class Artist < ApplicationRecord
   
   has_many_attached :artist_images
 
-  validates :artist_name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   validates :introduction, presence: true, length: { maximum: 255 }
-  validates :is_active, presence: true, inclusion: { in: [true, false] }
+  validates :is_active, inclusion: { in: [true, false] }
   validate :validate_artist_images_count
 
   def get_artist_images(width, height)
-    if artist_images.attached?
-      artist_images.variant(resize_to_limit: [width, height]).processed
-    else
-      ActionController::Base.helpers.asset_path("default_artist_image.jpeg")
-    end
+    first_image = artist_images.first
+    first_image.variant(resize: "#{width}x#{height}^", gravity: 'center', extent: "#{width}x#{height}").processed
   end
 
   private

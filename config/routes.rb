@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :museums, only: [:show, :index] do
       resource :bookmark_museums, only: [:create, :destroy]
     end
-    resources :exhibitions, only: [:show, :index] do
+    resources :exhibitions, only: [:show] do
       get "reviews" => "exhibitions#reviews"
       resource :bookmark_exhibitions, only: [:create, :destroy]
     end
@@ -62,9 +62,9 @@ Rails.application.routes.draw do
       resources :review_comments, only: [:index, :destroy]
     end
     resources :museums, only: [:new, :create, :show, :index, :edit, :update, :destroy]
-    resources :exhibitions, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+    resources :exhibitions, only: [:new, :create, :show, :edit, :update, :destroy] do
       get "reviews" => "exhibitions#reviews"
     end
-    resources :artists, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+    resources :artists, only: [:new, :create, :show, :edit, :update, :destroy]
   end
 end

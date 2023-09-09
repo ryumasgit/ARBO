@@ -2,14 +2,19 @@ class Public::RelationshipsController < ApplicationController
   before_action :authenticate_member!
 
   def create
-    member_name = params[:member_member_name]
-    current_member.follow(member_name)
-    redirect_to request.referer
+    name = params[:member_member_name]
+    unless name = "guest"
+      current_member.follow(name)
+      redirect_to request.referer
+    else
+      flash[:notice] = "このユーザーはフォローできません"
+      redirect_to member_my_page_path(member_member_name: current_member.name)
+    end
   end
 
   def destroy
-    member_name = params[:member_member_name]
-    current_member.unfollow(member_name)
+    name = params[:member_member_name]
+    current_member.unfollow(name)
     redirect_to request.referer
   end
 
@@ -27,6 +32,6 @@ class Public::RelationshipsController < ApplicationController
 
   def get_member
     member = Member.page(params[:page]).per(10)
-    @member = member.find_by(member_name: params[:member_member_name])
+    @member = member.find_by(name: params[:member_member_name])
   end
 end

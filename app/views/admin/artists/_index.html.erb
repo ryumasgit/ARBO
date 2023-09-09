@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col">
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>アーティスト</th>
+            <th>公開ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+          <tbody>
+            <% artists.each do |artist| %>
+            <tr>
+              <td>
+                <%= link_to admin_artist_path(artist) do %>
+                  <%= image_tag artist.get_artist_images(65, 65) %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_artist_path(artist) do %>
+                  <%= artist.name %>
+                <% end %>
+              </td>
+              <td><%=artist_is_active_display(artist) %></td>
+              <td>
+                <%= link_to edit_admin_artist_path(artist), class: "btn" do %>
+                  <i class="fa-solid fa-gear align-bottom"></i>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

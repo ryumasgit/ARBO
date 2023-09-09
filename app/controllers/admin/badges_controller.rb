@@ -34,10 +34,10 @@ class Admin::BadgesController < ApplicationController
 
   def destroy
     if @badge.destroy
-      flash[:notice] = "バッジ情報の削除に成功しました"
+      flash[:notice] = "バッジの削除に成功しました"
       redirect_to admin_badges_path
     else
-      flash[:notice] = "バッジ情報の削除に失敗しました"
+      flash[:notice] = "バッジの削除に失敗しました"
       render :edit
     end
   end

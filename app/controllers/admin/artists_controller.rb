@@ -1,5 +1,5 @@
 class Admin::ArtistsController < ApplicationController
-  before_action :get_artist_id, except: [:index]
+  before_action :get_artist_id
 
   def new
   end
@@ -8,9 +8,6 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def show
-  end
-
-  def index
   end
 
   def edit
@@ -34,10 +31,10 @@ class Admin::ArtistsController < ApplicationController
   def destroy
     delete_artist_images
     if @artist.destroy
-      flash[:notice] = "アーティスト情報の削除に成功しました"
-      redirect_to admin_artists_path
+      flash[:notice] = "アーティストの削除に成功しました"
+      redirect_to admin_museums_path
     else
-      flash[:notice] = "アーティスト情報の削除に失敗しました"
+      flash[:notice] = "アーティストの削除に失敗しました"
       render :edit
     end
   end
@@ -45,7 +42,7 @@ class Admin::ArtistsController < ApplicationController
   protected
 
   def artist_params
-    params.require(:artist).permit(:artist_images, :name, :introduction, :is_active)
+    params.require(:artist).permit(:name, :introduction, :is_active, artist_images: [])
   end
 
   def get_artist_id
@@ -53,7 +50,7 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def delete_artist_images
-    artist_images.each do |image|
+    @artist.artist_images.each do |image|
       image.purge
     end
   end

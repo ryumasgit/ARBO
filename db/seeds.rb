@@ -5,12 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#　管理者初期データ
   Admin.create!(
   name: 'admin',
   email: 'admin@login',
   password: '111111'
   )
 
+  #　ゲストメンバー初期データ
   guest = Member.create!(
   name: 'guest',
   email: 'guest@example.com',
@@ -19,6 +22,7 @@
   password: '111111'
   )
 
+  #　メンバー初期データ
   guest.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/GeorgiaO’Keeffe.jpg')), filename: 'GeorgiaO’Keeffe.jpg')
 
   member1 =  Member.create!(
@@ -60,6 +64,7 @@
   is_active: 'true',
   )
 
+  #　美術館初期データ
   museum1.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image1.jpeg')), filename: 'museum_image1.jpeg')
 
   museum2 = Museum.create!(
@@ -82,6 +87,7 @@
   is_active: 'true',
   )
 
+  #　展示会初期データ
   exhibition1.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image1.jpg')), filename: 'exhibition_image1.jpg')
 
   exhibition2 = Exhibition.create!(
@@ -102,6 +108,7 @@
   is_active: 'true',
   )
 
+  #　アーティスト初期データ
   claude_monet.artist_images.attach(io: File.open(Rails.root.join('app/assets/images/artists/Stacks of Wheat (End of Summer).jpg')), filename: 'Stacks of Wheat (End of Summer).jpg')
 
   edouard_manet = Artist.create!(
@@ -127,3 +134,53 @@
   )
 
   camille_pissarro.artist_images.attach(io: File.open(Rails.root.join('app/assets/images/artists/Young Peasant Having Her Coffee.jpg')), filename: 'Young Peasant Having Her Coffee.jpg')
+
+
+  #　バッジ初期データ
+  first_post = Badge.create!(
+  name: 'First Post',
+  introduction: 'このバッジは、初めて投稿したメンバーに授与されます。アイデアや情報を共有してコミュニティに貢献しましょう。',
+  is_active: 'true',
+  )
+
+  first_post.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_post.png')), filename: 'first_post.png')
+
+  first_comment = Badge.create!(
+  name: 'First Comment',
+  introduction: ' このバッジは、他のメンバーの投稿に初めてコメントしたメンバーに授与されます。他のメンバーとの対話を楽しんで、意見を交換しましょう。',
+  is_active: 'true',
+  )
+
+  first_comment.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_comment.png')), filename: 'first_comment.png')
+
+  first_follower = Badge.create!(
+  name: 'First Follower',
+  introduction: 'このバッジは、他のメンバーから初めてフォローされたメンバーに授与されます。コンテンツが注目されていることを示します。',
+  is_active: 'true',
+  )
+
+  first_follower.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_follower.png')), filename: 'first_follower.png')
+
+  first_favorited = Badge.create!(
+  name: 'First Favorited',
+  introduction: 'このバッジは、他のメンバーから初めてお気に入りに登録されたメンバーに授与されます。あなたのコンテンツが人々に愛されています。',
+  is_active: 'true',
+  )
+
+  first_favorited.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_favorited.png')), filename: 'first_favorited.png')
+
+  museum_enthusiast = Badge.create!(
+  name: 'Museum Enthusiast',
+  introduction: 'このバッジは、美術館に多く足を運んだメンバーに授与されます。これからも美術館の魅力を伝え、共有しましょう。',
+  is_active: 'true',
+  )
+
+  museum_enthusiast.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/museum_enthusiast.png')), filename: 'museum_enthusiast.png')
+
+  exhibition_enthusiast = Badge.create!(
+  name: 'Exhibition Enthusiast',
+  introduction: 'このバッジは、展示会に多く足を運んだメンバーに授与されます。これからも展示会の魅力を伝え、共有しましょう。',
+  is_active: 'true',
+  )
+
+  exhibition_enthusiast.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/exhibition_enthusiast.png')), filename: 'exhibition_enthusiast.png')

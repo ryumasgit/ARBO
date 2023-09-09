@@ -1,6 +1,6 @@
 class Exhibition < ApplicationRecord
   has_many :bookmark_exhibitions, dependent: :destroy
-  has_many :exhibitions, through: :bookmark_exhibitions
+  has_many :members, through: :bookmark_exhibitions
   has_many :entry_artists, dependent: :destroy
   has_many :artists, through: :entry_artists
   belongs_to :museum

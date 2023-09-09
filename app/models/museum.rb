@@ -1,7 +1,7 @@
 class Museum < ApplicationRecord
   has_many :exhibitions, dependent: :destroy
   has_many :bookmark_museums, dependent: :destroy
-  has_many :museums, through: :bookmark_museums
+  has_many :members, through: :bookmark_museums
 
   has_many_attached :museum_images
 

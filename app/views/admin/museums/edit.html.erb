@@ -38,6 +38,7 @@
             <%= f.submit "保存", class: "btn btn-success" %>
           </div>
         <% end %>
+        <%= link_to "削除する", admin_museum_path(@museum), method: :delete, data: { confirm: "元には戻せません、本当に削除しますか？" } %>
       </div>
     </div>
   </div>

@@ -57,7 +57,7 @@ Rails.application.routes.draw do
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
     end
-    resources :badges, only: [:new, :create, :index, :edit, :update, :destroy]
+    resources :badges, only: [:new, :create, :show, :index, :edit, :update, :destroy]
     resources :reviews, only: [:show, :index, :destroy] do
       resources :review_comments, only: [:index, :destroy]
     end

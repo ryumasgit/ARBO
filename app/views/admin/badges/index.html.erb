@@ -1,2 +1,40 @@
-<h1>Admin::Badges#index</h1>
-<p>Find me in app/views/admin/badges/index.html.erb</p>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>バッジ名</th>
+            <th>獲得メンバー数</th>
+            <th>公開ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+          <tbody>
+            <% @badges.each do |badge| %>
+            <tr>
+              <td>
+                <%= link_to admin_badge_path(badge) do %>
+                  <%= image_tag badge.get_badge_image(80, 80) %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_badge_path(badge) do %>
+                  <%= badge.name %>
+                <% end %>
+              </td>
+              <td><%= badge.earned_badges.count %></td>
+              <td><%= badge_is_active_display(badge) %></td>
+              <td>
+                <%= link_to edit_admin_badge_path(badge), class: "btn" do %>
+                  <i class="fa-solid fa-gear align-bottom"></i>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

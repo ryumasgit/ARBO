@@ -15,7 +15,7 @@
             <tr>
               <td>
                 <%= link_to admin_artist_path(artist) do %>
-                  <%= image_tag artist.get_artist_images(65, 65) %>
+                  <%= image_tag artist.get_artist_images(80, 80) %>
                 <% end %>
               </td>
               <td>
@@ -23,7 +23,7 @@
                   <%= artist.name %>
                 <% end %>
               </td>
-              <td><%=artist_is_active_display(artist) %></td>
+              <td><%= artist_is_active_display(artist) %></td>
               <td>
                 <%= link_to edit_admin_artist_path(artist), class: "btn" do %>
                   <i class="fa-solid fa-gear align-bottom"></i>

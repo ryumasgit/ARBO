@@ -35,13 +35,12 @@ class Admin::MuseumsController < ApplicationController
   end
 
   def destroy
-    image = ActiveStorage::Attachment.find(params[:id])
-    delete_museum_images(image)
+    delete_museum_images
     if @museum.destroy
-      flash[:notice] = "美術館情報の削除に成功しました"
+      flash[:notice] = "美術館の削除に成功しました"
       redirect_to admin_museums_path
     else
-      flash[:notice] = "美術館情報の削除に失敗しました"
+      flash[:notice] = "美術館の削除に失敗しました"
       render :edit
     end
   end
@@ -49,14 +48,16 @@ class Admin::MuseumsController < ApplicationController
   protected
 
   def museum_params
-    params.require(:museum).permit(:museum_images, :name, :introduction, :official_website, :is_active)
+    params.require(:museum).permit(:name, :introduction, :official_website, :is_active, museum_images: [])
   end
 
   def get_museum_id
     @museum = Museum.find(params[:id])
   end
 
-  def delete_museum_images(image)
-    image.purge
+  def delete_museum_images
+    @museum.museum_images.each do |image|
+      image.purge
+    end
   end
 end

@@ -1,5 +1,5 @@
 class Admin::ExhibitionsController < ApplicationController
-  before_action :get_exhibition_id, except: [:index]
+  before_action :get_exhibition_id
 
   def new
   end
@@ -8,9 +8,6 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def show
-  end
-
-  def index
   end
 
   def edit
@@ -34,10 +31,10 @@ class Admin::ExhibitionsController < ApplicationController
   def destroy
     delete_exhibition_images
     if @exhibition.destroy
-      flash[:notice] = "展示会情報の削除に成功しました"
-      redirect_to admin_exhibitions_path
+      flash[:notice] = "展示会の削除に成功しました"
+      redirect_to admin_museums_path
     else
-      flash[:notice] = "展示会情報の削除に失敗しました"
+      flash[:notice] = "展示会の削除に失敗しました"
       render :edit
     end
   end
@@ -45,7 +42,7 @@ class Admin::ExhibitionsController < ApplicationController
   protected
 
   def exhibition_params
-    params.require(:exhibition).permit(:exhibition_images, :name, :introduction, :official_website, :is_active)
+    params.require(:exhibition).permit(:name, :introduction, :official_website, :is_active, exhibition_images: [] )
   end
 
   def get_exhibition_id
@@ -53,7 +50,7 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def delete_exhibition_images
-    exhibition_images.each do |image|
+    @exhibition.exhibition_images.each do |image|
       image.purge
     end
   end

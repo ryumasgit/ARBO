@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
-    resources :members, only: [:index, :show, :edit, :update] do
+    resources :members, only: [:index, :show, :edit, :update, :destroy] do
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
       resources :badges, only: [] do

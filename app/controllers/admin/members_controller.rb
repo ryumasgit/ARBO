@@ -28,6 +28,21 @@ class Admin::MembersController < ApplicationController
     end
   end
 
+  def destroy
+    unless is_guest?
+      if @member.destroy
+        flash[:notice] = "メンバーの削除に成功しました"
+        redirect_to admin_members_path
+      else
+        flash[:notice] = "メンバーの削除に失敗しました"
+        render :edit
+      end
+    else
+      flash[:notice] = "このメンバーは削除できません"
+      render :edit
+    end
+  end
+
   protected
 
   def member_params
@@ -36,6 +51,10 @@ class Admin::MembersController < ApplicationController
 
   def get_member_id
     @member = Member.find(params[:id])
+  end
+
+  def is_guest?
+    @member.name == "guest"
   end
 
   def redirect_if_member_not_found(member)

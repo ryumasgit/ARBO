@@ -1,14 +1,16 @@
 class Admin::ExhibitionsController < ApplicationController
+  before_action :get_exhibition_id, except: [:index]
+
   def new
   end
 
   def create
   end
 
-  def index
+  def show
   end
 
-  def show
+  def index
   end
 
   def edit
@@ -18,5 +20,11 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def destroy
+  end
+
+  protected
+
+  def get_exhibition_id
+    @exhibition = Exhibition.find(params[:id])
   end
 end

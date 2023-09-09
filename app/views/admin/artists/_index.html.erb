@@ -7,6 +7,7 @@
             <th></th>
             <th>画家名</th>
             <th>公開ステータス</th>
+            <th></th>
           </tr>
         </thead>
           <tbody>
@@ -14,7 +15,7 @@
             <tr>
               <td>
                 <%= link_to admin_artist_path(artist) do %>
-                  <%= image_tag artist.get_artist_images(65, 65), class: "rounded-circle" %>
+                  <%= image_tag artist.get_artist_images(65, 65) %>
                 <% end %>
               </td>
               <td>
@@ -23,6 +24,11 @@
                 <% end %>
               </td>
               <td><%=artist_is_active_display(artist) %></td>
+              <td>
+                <%= link_to edit_admin_artist_path(artist), class: "btn" do %>
+                  <i class="fa-solid fa-gear align-bottom"></i>
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>

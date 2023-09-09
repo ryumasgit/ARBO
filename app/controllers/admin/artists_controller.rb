@@ -1,14 +1,16 @@
 class Admin::ArtistsController < ApplicationController
+  before_action :get_artist_id, except: [:index]
+
   def new
   end
 
   def create
   end
 
-  def index
+  def show
   end
 
-  def show
+  def index
   end
 
   def edit
@@ -18,5 +20,11 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def destroy
+  end
+
+  protected
+
+  def get_artist_id
+    @artist = Artist.find(params[:id])
   end
 end

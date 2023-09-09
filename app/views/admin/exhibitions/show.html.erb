@@ -1,2 +1,25 @@
-<h1>Admin::Exhibitions#edit</h1>
-<p>Find me in app/views/admin/exhibitions/edit.html.erb</p>
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row m-3">
+    <div class="col text-right">
+      <%= image_tag @exhibition.get_exhibition_images(500, 500) %>
+    </div>
+    <div class="col offset-1 d-flex align-items-center">
+      <div class="row">
+        <%= content_tag :h3, @exhibition.name %>
+        <%= link_to edit_admin_exhibition_path(@exhibition), class: "btn" do %>
+          <i class="fa-solid fa-gear align-top"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <% if @exhibition.introduction.present? %>
+      <%= @exhibition.introduction.scan(/.{1,80}/).join("<br>").html_safe %>
+    <% end %>
+  </div>
+   <div class="row justify-content-center align-items-center">
+    <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
+    <%= @exhibition.bookmark_exhibitions.count %>
+  </div>
+</div>

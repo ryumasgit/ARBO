@@ -15,8 +15,11 @@
   </div>
   <div class="row justify-content-center">
     <% if @museum.introduction.present? %>
-      <%= @museum.introduction.scan(/.{1,80}/).join("<br>").html_safe %>
+      <%= @museum.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
     <% end %>
+  </div>
+  <div class="row justify-content-center m-3">
+    <%= link_to "公式サイト", @museum.official_website, target: "_blank" %>
   </div>
   <div class="row justify-content-center align-items-center">
     <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>

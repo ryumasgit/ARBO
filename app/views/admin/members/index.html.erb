@@ -11,6 +11,7 @@
             <th>フォロー</th>
             <th>フォロワー</th>
             <th>入会ステータス</th>
+            <th></th>
           </tr>
         </thead>
           <tbody>
@@ -31,6 +32,11 @@
               <td><%= member.follower.count %></td>
               <td><%= member.follower.count %></td>
               <td><%= member_is_active_display(member) %></td>
+              <td>
+                <%= link_to edit_admin_member_path(member), class: "btn" do %>
+                  <i class="fa-solid fa-gear align-bottom"></i>
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>

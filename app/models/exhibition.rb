@@ -10,7 +10,7 @@ class Exhibition < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true, length: { maximum: 255 }
   validates :official_website, presence: true
-  validates :is_active, presence: true, inclusion: { in: [true, false] }
+  validates :is_active, inclusion: { in: [true, false] }
   validate :validate_exhibition_images_count
 
   def get_exhibition_images(width, height)

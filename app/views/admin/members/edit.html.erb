@@ -11,22 +11,22 @@
             <%= f.file_field :member_image, accept: "image/*", class: "form-control-file" %>
           </div>
 
-          <div class="field text-left">
-            <%= f.label :member_name, "氏名" %>
-            <%= f.text_field :name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control mb-2" %>
+          <div class="field text-left my-2">
+            <%= f.label :name, "氏名" %>
+            <%= f.text_field :name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control" %>
           </div>
 
-          <div class="field text-left">
+          <div class="field text-left my-2">
             <%= f.label :introduction, "自己紹介" %>
-            <%= f.text_area :introduction, placeholder: "自己紹介（255文字以下）", class: "form-control mb-2", rows: 5 %>
+            <%= f.text_area :introduction, placeholder: "自己紹介（255文字以下）", class: "form-control", rows: 5 %>
           </div>
 
-          <div class="field text-left">
+          <div class="field text-left my-2">
             <%= f.label :email, "email" %>
-            <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control mb-2" %>
+            <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control" %>
           </div>
 
-          <div class="field text-left">
+          <div class="field text-left my-2">
             <%= f.radio_button :is_active, true %>
             <%= f.label :is_active_true, "入会" %>
             <%= f.radio_button :is_active, false, class: "ml-3" %>

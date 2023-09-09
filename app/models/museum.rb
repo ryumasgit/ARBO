@@ -8,7 +8,7 @@ class Museum < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :introduction, presence: true, length: { maximum: 255 }
   validates :official_website, presence: true
-  validates :is_active, presence: true, inclusion: { in: [true, false] }
+  validates :is_active, inclusion: { in: [true, false] }
   validate :validate_museum_images_count
 
   def get_museum_images(width, height)

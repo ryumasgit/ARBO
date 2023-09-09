@@ -28,7 +28,7 @@ class Public::ReviewsController < ApplicationController
   protected
 
   def ensure_correct_member
-    @member = Member.find_by(member_name: params[:member_member_name])
+    @member = Member.find_by(member_name: params[:member_name])
     unless @member == current_member
     redirect_to reviews_path
     end

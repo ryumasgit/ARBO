@@ -4,7 +4,7 @@ class Public::MembersController < ApplicationController
   before_action :ensure_correct_member,  only: [:edit, :update, :withdraw]
 
   def show
-    @member = Member.find_by(member_name: params[:member_member_name])
+    @member = Member.find_by(name: params[:member_member_name])
     redirect_if_member_not_found(@member)
   end
 
@@ -15,7 +15,7 @@ class Public::MembersController < ApplicationController
     @original_member = current_member
     if @member.update(member_params)
       flash[:notice] = "メンバー情報の保存に成功しました"
-      redirect_to member_my_page_path(member_member_name: current_member.member_name)
+      redirect_to member_my_page_path(member_member_name: current_member.name)
     else
       # エラー箇所に元のデータを代入する
       @original_member.attributes.each do |attr, value|
@@ -41,7 +41,7 @@ class Public::MembersController < ApplicationController
   protected
 
   def member_params
-    params.require(:member).permit(:member_image, :member_name, :introduction, :email, :is_active)
+    params.require(:member).permit(:member_image, :name, :introduction, :email, :is_active)
   end
 
   def get_current_member
@@ -49,16 +49,16 @@ class Public::MembersController < ApplicationController
   end
 
   def redirect_if_member_not_found(member)
-    if member.nil? || member.is_active == false || member.member_name == "guest"
+    if member.nil? || member.is_active == false || member.name == "guest"
       flash[:notice] = "メンバーが見つかりません"
       redirect_to root_path
     end
   end
 
   def ensure_correct_member
-    @member = Member.find_by(member_name: params[:member_member_name])
+    @member = Member.find_by(name: params[:member_member_name])
     unless @member == current_member
-    redirect_to member_my_page_path(member_member_name: current_member.member_name )
+    redirect_to member_my_page_path(member_member_name: current_member.name )
     end
   end
 end

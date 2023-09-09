@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col">
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>画家名</th>
+            <th>公開ステータス</th>
+          </tr>
+        </thead>
+          <tbody>
+            <% artists.each do |artist| %>
+            <tr>
+              <td>
+                <%= link_to admin_artist_path(artist) do %>
+                  <%= image_tag artist.get_artist_images(65, 65), class: "rounded-circle" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_artist_path(artist) do %>
+                  <%= artist.name %>
+                <% end %>
+              </td>
+              <td><%=artist_is_active_display(artist) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

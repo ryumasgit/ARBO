@@ -13,7 +13,7 @@
             <%= image_tag 'event_logo.png', width: '145px', height: 'auto' %>
           <% end %>
           <% unless current_member.guest? %>
-            <%= link_to member_my_page_path(member_member_name: current_member.member_name) do %>
+            <%= link_to member_my_page_path(member_member_name: current_member.name) do %>
               <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto' %>
             <% end %>
           <% end %>
@@ -27,6 +27,9 @@
           <% end %>
           <%= link_to admin_museums_path do %>
             <%= image_tag 'event_logo.png', width: '145px', height: 'auto' %>
+          <% end %>
+          <%= link_to admin_badges_path do %>
+            <%= image_tag 'badge_logo.png', width: '145px', height: 'auto' %>
           <% end %>
 
         <% else %>

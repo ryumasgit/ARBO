@@ -4,7 +4,7 @@
     <div class="col-md-2">
       <div class="text-center">
         <h2>Member Information Edit</h2>
-        <%= form_with model: @member, url: member_update_path(member_member_name: current_member.member_name) do |f| %>
+        <%= form_with model: @member, url: member_update_path(member_member_name: current_member.name) do |f| %>
 
           <div class="field m-5">
             <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle mb-3" %>
@@ -13,7 +13,7 @@
 
           <div class="field text-left">
             <%= f.label :member_name, "氏名" %>
-            <%= f.text_field :member_name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control mb-2" %>
+            <%= f.text_field :name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control mb-2" %>
           </div>
 
           <div class="field text-left">
@@ -31,7 +31,7 @@
             <%= f.submit "保存", class: "btn btn-success" %>
           </div>
         <% end %>
-        <%= link_to "退会を希望の方", member_confirm_withdraw_path(member_member_name: current_member.member_name) %>
+        <%= link_to "退会を希望の方", member_confirm_withdraw_path(member_member_name: current_member.name) %>
       </div>
     </div>
   </div>

@@ -6,6 +6,9 @@ class Admin::MuseumsController < ApplicationController
   end
 
   def index
+    @museums = Museum.page(params[:page]).per(10)
+    @exhibitions = Exhibition.page(params[:page]).per(10)
+    @artists = Artist.page(params[:page]).per(10)
   end
 
   def show

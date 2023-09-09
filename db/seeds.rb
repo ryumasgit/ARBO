@@ -139,31 +139,31 @@
   #　バッジ初期データ
   first_post = Badge.create!(
   name: 'First Post',
-  introduction: '',
+  introduction: 'このバッジは、初めて投稿したメンバーに授与されます。アイデアや情報を共有してコミュニティに貢献しましょう。',
   is_active: 'true',
   )
 
   first_post.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_post.png')), filename: 'first_post.png')
 
   first_comment = Badge.create!(
-  name: 'First Post',
-  introduction: '',
+  name: 'First Comment',
+  introduction: ' このバッジは、他のメンバーの投稿に初めてコメントしたメンバーに授与されます。他のメンバーとの対話を楽しんで、意見を交換しましょう。',
   is_active: 'true',
   )
 
-  first_comment.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/first_comment.png')), filename: 'first_comment.png')
+  first_comment.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_comment.png')), filename: 'first_comment.png')
 
   first_follower = Badge.create!(
   name: 'First Follower',
-  introduction: '',
+  introduction: 'このバッジは、他のメンバーから初めてフォローされたメンバーに授与されます。コンテンツが注目されていることを示します。',
   is_active: 'true',
   )
 
-  first_follower.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/first_follower.png')), filename: 'first_follower.png')
+  first_follower.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_follower.png')), filename: 'first_follower.png')
 
   first_favorited = Badge.create!(
   name: 'First Favorited',
-  introduction: '',
+  introduction: 'このバッジは、他のメンバーから初めてお気に入りに登録されたメンバーに授与されます。あなたのコンテンツが人々に愛されています。',
   is_active: 'true',
   )
 
@@ -171,15 +171,15 @@
 
   museum_enthusiast = Badge.create!(
   name: 'Museum Enthusiast',
-  introduction: '',
+  introduction: 'このバッジは、美術館に多く足を運んだメンバーに授与されます。これからも美術館の魅力を伝え、共有しましょう。',
   is_active: 'true',
   )
 
-  museum_enthusiast.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/museum_enthusiast.png')), filename: 'museum_enthusiast.png')
+  museum_enthusiast.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/museum_enthusiast.png')), filename: 'museum_enthusiast.png')
 
   exhibition_enthusiast = Badge.create!(
   name: 'Exhibition Enthusiast',
-  introduction: '',
+  introduction: 'このバッジは、展示会に多く足を運んだメンバーに授与されます。これからも展示会の魅力を伝え、共有しましょう。',
   is_active: 'true',
   )
 

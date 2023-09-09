@@ -32,6 +32,7 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def destroy
+    delete_artist_images
     if @artist.destroy
       flash[:notice] = "アーティスト情報の削除に成功しました"
       redirect_to admin_artists_path
@@ -46,7 +47,14 @@ class Admin::ArtistsController < ApplicationController
   def artist_params
     params.require(:artist).permit(:artist_images, :name, :introduction, :is_active)
   end
+
   def get_artist_id
     @artist = Artist.find(params[:id])
+  end
+
+  def delete_artist_images
+    artist_images.each do |image|
+      image.purge
+    end
   end
 end

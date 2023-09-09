@@ -32,6 +32,7 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def destroy
+    delete_exhibition_images
     if @exhibition.destroy
       flash[:notice] = "展示会情報の削除に成功しました"
       redirect_to admin_exhibitions_path
@@ -49,5 +50,11 @@ class Admin::ExhibitionsController < ApplicationController
 
   def get_exhibition_id
     @exhibition = Exhibition.find(params[:id])
+  end
+
+  def delete_exhibition_images
+    exhibition_images.each do |image|
+      image.purge
+    end
   end
 end

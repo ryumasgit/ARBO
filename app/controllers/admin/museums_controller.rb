@@ -35,7 +35,8 @@ class Admin::MuseumsController < ApplicationController
   end
 
   def destroy
-    delete_museum_images(@museum)
+    image = ActiveStorage::Attachment.find(params[:id])
+    delete_museum_images(image)
     if @museum.destroy
       flash[:notice] = "美術館情報の削除に成功しました"
       redirect_to admin_museums_path
@@ -55,9 +56,7 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.find(params[:id])
   end
 
-  def delete_museum_images(museum)
-    museum.museum_images.each do |image|
-      image.purge
-    end
+  def delete_museum_images(image)
+    image.purge
   end
 end

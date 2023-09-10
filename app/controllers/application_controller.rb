@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   def admin_controller?
     self.class.to_s.start_with?("Admin::")
   end
+  
+  def set_flash_message(message)
+    flash[:notice] = message
+  end
 end

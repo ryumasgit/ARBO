@@ -13,16 +13,13 @@ class Public::MembersController < ApplicationController
 
   def update
     @original_member = current_member
+    
     if @member.update(member_params)
-      flash[:notice] = "メンバー情報の保存に成功しました"
+      set_flash_message("メンバー情報の保存に成功しました")
       redirect_to member_my_page_path(member_member_name: current_member.name)
     else
-      # エラー箇所に元のデータを代入する
-      @original_member.attributes.each do |attr, value|
-        @member[attr] = value unless @member.errors[attr].empty?
-        @member.introduction = @original_member.introduction
-      end
-      flash[:notice] = "メンバー情報の保存に失敗しました"
+      copy_error_attributes_from_original_member
+      set_flash_message("メンバー情報の保存に失敗しました")
       render :edit
     end
   end
@@ -30,10 +27,10 @@ class Public::MembersController < ApplicationController
   def withdraw
     if current_member.update(is_active: false)
       reset_session
-      flash[:notice] = "退会が完了しました"
+      set_flash_message("退会が完了しました")
       redirect_to root_path
     else
-      flash[:notice] = "退会に失敗しました"
+      set_flash_message("退会に失敗しました")
       render :confirm_withdraw
     end
   end
@@ -50,7 +47,7 @@ class Public::MembersController < ApplicationController
 
   def redirect_if_member_not_found(member)
     if member.nil? || member.is_active == false || member.name == "guest"
-      flash[:notice] = "メンバーが見つかりません"
+      set_flash_message("メンバーが見つかりません")
       redirect_to root_path
     end
   end
@@ -58,7 +55,16 @@ class Public::MembersController < ApplicationController
   def ensure_correct_member
     @member = Member.find_by(name: params[:member_member_name])
     unless @member == current_member
+    set_flash_message("権限がありません ブロックされました")
     redirect_to member_my_page_path(member_member_name: current_member.name )
+    end
+  end
+  
+  def copy_error_attributes_from_original_member
+    # エラー箇所に元のデータを代入する
+    @original_member.attributes.each do |attr, value|
+      @member[attr] = value unless @member.errors[attr].empty?
+      @member.introduction = @original_member.introduction
     end
   end
 end

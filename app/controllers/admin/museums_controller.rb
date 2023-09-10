@@ -10,16 +10,16 @@ class Admin::MuseumsController < ApplicationController
 
     # 画像データがない場合は保存禁止
     unless params[:museum][:museum_images].present?
-      flash[:notice] = "画像が最低1つは必要です"
+      set_flash_message("画像が最低1つは必要です")
       redirect_to new_admin_museum_path
       return
     end
 
     if @museum.save
-      flash[:notice] = "美術館の作成に成功しました"
+      set_flash_message("美術館の作成に成功しました")
       redirect_to admin_museum_path(@museum)
     else
-      flash[:notice] = "美術館の作成に失敗しました"
+      set_flash_message("美術館の作成に失敗しました")
       render :new
     end
   end
@@ -40,17 +40,14 @@ class Admin::MuseumsController < ApplicationController
     @original_museum = Museum.find(params[:id])
 
     if museum_images_delete
-      flash[:notice] = "画像が最低1つは必要です"
+      set_flash_message("画像が最低1つは必要です")
       redirect_to edit_admin_museum_path(@museum)
     elsif @museum.update(museum_params)
-      flash[:notice] = "美術館情報の保存に成功しました"
+      set_flash_message("美術館情報の保存に成功しました")
       redirect_to admin_museum_path(@museum)
     else
-      # エラー箇所に元のデータを代入する
-      @original_museum.attributes.each do |attr, value|
-        @museum[attr] = value unless @museum.errors[attr].empty?
-      end
-      flash[:notice] = "美術館情報の保存に失敗しました"
+      copy_error_attributes_from_original_museum
+      set_flash_message("美術館情報の保存に失敗しました")
       render :edit
     end
   end
@@ -58,10 +55,10 @@ class Admin::MuseumsController < ApplicationController
   def destroy
     museum_images_all_delete
     if @museum.destroy
-      flash[:notice] = "美術館の削除に成功しました"
+      set_flash_message("美術館の削除に成功しました")
       redirect_to admin_museums_path
     else
-      flash[:notice] = "美術館の削除に失敗しました"
+      set_flash_message("美術館の削除に失敗しました")
       render :edit
     end
   end
@@ -87,6 +84,13 @@ class Admin::MuseumsController < ApplicationController
           image.purge
         end
       end
+    end
+  end
+
+  def copy_error_attributes_from_original_museum
+   # エラー箇所に元のデータを代入する
+    @original_museum.attributes.each do |attr, value|
+      @museum[attr] = value unless @museum.errors[attr].empty?
     end
   end
 

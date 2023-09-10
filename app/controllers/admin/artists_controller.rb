@@ -1,5 +1,5 @@
 class Admin::ArtistsController < ApplicationController
-  before_action :get_artist_id, except: [:new, :index]
+  before_action :get_artist_id, except: [:new, :create, :index]
 
   def new
     @artist = Artist.new
@@ -7,11 +7,19 @@ class Admin::ArtistsController < ApplicationController
 
   def create
     @artist = Artist.new(artist_params)
+
+    # 画像データがない場合は保存禁止
+    unless params[:artist][:artist_images].present?
+      set_flash_message("画像が最低1つは必要です")
+      redirect_to new_admin_artist_path
+      return
+    end
+
     if @artist.save
-      flash[:notice] = "アーティストの作成に成功しました"
+      set_flash_message("アーティストの作成に成功しました")
       redirect_to admin_artist_path(@artist)
     else
-      flash[:notice] = "アーティストの作成に失敗しました"
+      set_flash_message("アーティストの作成に失敗しました")
       render :new
     end
   end
@@ -24,26 +32,27 @@ class Admin::ArtistsController < ApplicationController
 
   def update
     @original_artist = Artist.find(params[:id])
-    if @artist.update(artist_params)
-      flash[:notice] = "アーティスト情報の保存に成功しました"
+
+    if artist_images_delete
+      set_flash_message("画像が最低1つは必要です")
+      redirect_to edit_admin_artist_path(@artist)
+    elsif @artist.update(artist_params)
+      set_flash_message("アーティスト情報の保存に成功しました")
       redirect_to admin_artist_path(@artist)
     else
-      # エラー箇所に元のデータを代入する
-      @original_artist.attributes.each do |attr, value|
-        @artist[attr] = value unless @artist.errors[attr].empty?
-      end
-      flash[:notice] = "アーティスト情報の保存に失敗しました"
+      copy_error_attributes_from_original_artist
+      set_flash_message("アーティスト情報の保存に失敗しました")
       render :edit
     end
   end
 
   def destroy
-    delete_artist_images
+    artist_images_all_delete
     if @artist.destroy
-      flash[:notice] = "アーティストの削除に成功しました"
+      set_flash_message("アーティストの削除に成功しました")
       redirect_to admin_museums_path
     else
-      flash[:notice] = "アーティストの削除に失敗しました"
+      set_flash_message("アーティストの削除に失敗しました")
       render :edit
     end
   end
@@ -58,7 +67,29 @@ class Admin::ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
   end
 
-  def delete_artist_images
+  # 選択された画像ファイルを削除かつ、全ての画像ファイルの削除禁止
+  def artist_images_delete
+    if params[:artist][:artist_image_id].present?
+      if params[:artist][:artist_image_id].count == @artist.artist_images.count
+        return true
+      else
+        params[:artist][:artist_image_id].each do |image_id|
+          image = @artist.artist_images.find(image_id)
+          image.purge
+        end
+      end
+    end
+  end
+
+  def copy_error_attributes_from_original_artist
+   # エラー箇所に元のデータを代入する
+    @original_artist.attributes.each do |attr, value|
+      @artist[attr] = value unless @artist.errors[attr].empty?
+    end
+  end
+
+  # 画像ファイルを全削除
+  def artist_images_all_delete
     @artist.artist_images.each do |image|
       image.purge
     end

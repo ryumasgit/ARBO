@@ -1,10 +1,19 @@
 class Admin::ArtistsController < ApplicationController
-  before_action :get_artist_id
+  before_action :get_artist_id, except: [:new, :index]
 
   def new
+    @artist = Artist.new
   end
 
   def create
+    @artist = Artist.new(artist_params)
+    if @artist.save
+      flash[:notice] = "アーティストの作成に成功しました"
+      redirect_to admin_artist_path(@artist)
+    else
+      flash[:notice] = "アーティストの作成に失敗しました"
+      render :new
+    end
   end
 
   def show

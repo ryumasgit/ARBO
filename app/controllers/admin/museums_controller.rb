@@ -1,10 +1,19 @@
 class Admin::MuseumsController < ApplicationController
-  before_action :get_museum_id, except: [:index]
+  before_action :get_museum_id, except: [:new, :create, :index]
 
   def new
+    @museum = Museum.new
   end
 
   def create
+    @museum = Museum.new(museum_params)
+    if @museum.save
+      flash[:notice] = "美術館の作成に成功しました"
+      redirect_to admin_museum_path(@museum)
+    else
+      flash[:notice] = "美術館の作成に失敗しました"
+      render :new
+    end
   end
 
   def show
@@ -21,7 +30,11 @@ class Admin::MuseumsController < ApplicationController
 
   def update
     @original_museum = Museum.find(params[:id])
-    if @museum.update(museum_params)
+
+    if museum_images_delete
+      flash[:notice] = "画像が最低1つは必要です"
+      redirect_to edit_admin_museum_path(@museum)
+    elsif @museum.update(museum_params)
       flash[:notice] = "美術館情報の保存に成功しました"
       redirect_to admin_museum_path(@museum)
     else
@@ -35,7 +48,7 @@ class Admin::MuseumsController < ApplicationController
   end
 
   def destroy
-    delete_museum_images
+    museum_images_all_delete
     if @museum.destroy
       flash[:notice] = "美術館の削除に成功しました"
       redirect_to admin_museums_path
@@ -55,7 +68,22 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.find(params[:id])
   end
 
-  def delete_museum_images
+    # 選択された画像ファイルを削除
+  def museum_images_delete
+    if params[:museum][:museum_image_id].present?
+      if params[:museum][:museum_image_id].count == @museum.museum_images.count
+        return true
+      else
+        params[:museum][:museum_image_id].each do |image_id|
+          image = @museum.museum_images.find(image_id)
+          image.purge
+        end
+      end
+    end
+  end
+
+  # 画像ファイルを全削除
+  def museum_images_all_delete
     @museum.museum_images.each do |image|
       image.purge
     end

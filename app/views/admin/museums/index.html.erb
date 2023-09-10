@@ -22,12 +22,29 @@
         </ul>
         <div class="tab-content border-top">
           <div id="section1" class="tab-pane fade show active">
+            <div class="row justify-content-end mr-4">
+              <%= link_to new_admin_museum_path, class: "btn m-1" do %>
+                <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+              <% end %>
+            </div>
             <%= render "index", museums: @museums %>
           </div>
+
           <div id="section2" class="tab-pane fade">
+            <div class="row justify-content-end mr-4">
+              <%= link_to new_admin_exhibition_path, class: "btn m-1" do %>
+                <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+              <% end %>
+            </div>
             <%= render "admin/exhibitions/index", exhibitions: @exhibitions %>
           </div>
+
           <div id="section3" class="tab-pane fade">
+            <div class="row justify-content-end mr-4">
+              <%= link_to new_admin_artist_path, class: "btn m-1" do %>
+                <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+              <% end %>
+            </div>
             <%= render "admin/artists/index", artists: @artists %>
           </div>
         </div>

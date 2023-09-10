@@ -16,6 +16,7 @@
   #　ゲストメンバー初期データ
   guest = Member.create!(
   name: 'guest',
+  introduction: "ようこそ、ゲストメンバーのプロフィールへ！私はこのコミュニティへの新しい訪問者です。美術と文化に興味があり、さまざまなアーティストの作品を楽しんでいます。どうぞお気軽にコミュニティに参加してください。",
   email: 'guest@example.com',
   is_active: 'true',
   is_guest: 'true',
@@ -27,6 +28,7 @@
 
   member1 =  Member.create!(
   name: 'John Doe',
+  introduction: "こんにちは、私はJohn Doeです。美術愛好者で、特に印象派の作品が大好きです。美術館やギャラリーで新しい芸術体験を探すことが趣味です。アートについて語り合いましょう！",
   email: 'john@example.com',
   is_active: 'true',
   is_guest: 'false',
@@ -37,6 +39,7 @@
 
   member2 = Member.create!(
   name: 'Robert Johnson',
+  introduction: "私の名前はRobert Johnsonです。建築家で、美術館や建築デザインに興味を持っています。美術館の建築や展示会の空間デザインについて議論したり、アイデアを共有したりできる仲間を探しています。",
   email: 'robert@example.com',
   is_active: 'false',
   is_guest: 'false',
@@ -47,6 +50,7 @@
 
   member3 = Member.create!(
   name: 'Mike',
+  introduction: "こんにちは、私はMikeです。アートと音楽が大好きなエンターテイメント愛好者です。美術館での音楽イベントやアートフェスティバルに参加するのが楽しみです。アートと音楽の世界に一緒に浸りましょう！",
   email: 'mike@com',
   is_active: 'true',
   is_guest: 'false',

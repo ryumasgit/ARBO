@@ -1,10 +1,18 @@
 class Admin::BadgesController < ApplicationController
-  before_action :get_badge_id, except: [:index]
+  before_action :get_badge_id, except: [:new, :index]
 
   def new
+    @badge = Badge.new
   end
 
   def create
+    if @badge.save(bagde_params)
+      flash[:notice] = "バッジの作成に成功しました"
+      redirect_to admin_badge_path(@badge)
+    else
+      flash[:notice] = "バッジの作成に失敗しました"
+      render :new
+    end
   end
 
   def index

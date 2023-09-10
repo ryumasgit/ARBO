@@ -7,6 +7,7 @@ class Artist < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :introduction, presence: true, length: { maximum: 255 }
   validates :is_active, inclusion: { in: [true, false] }
+  validates :artist_images, presence: true
   validate :validate_artist_images_count
 
   def get_artist_images(width, height)

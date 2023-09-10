@@ -1,10 +1,19 @@
 class Admin::ExhibitionsController < ApplicationController
-  before_action :get_exhibition_id
+  before_action :get_exhibition_id, except: [:new, :index]
 
   def new
+    @exhibition = Exhibition.new
   end
 
   def create
+    @exhibition = Exhibition.new(exhibition_params)
+    if @exhibition.save
+      flash[:notice] = "展示会の作成に成功しました"
+      redirect_to admin_exhibition_path(@exhibition)
+    else
+      flash[:notice] = "展示会の作成に失敗しました"
+      render :new
+    end
   end
 
   def show

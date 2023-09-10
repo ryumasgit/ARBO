@@ -1,10 +1,27 @@
 class Admin::MuseumsController < ApplicationController
-  before_action :get_museum_id, except: [:index]
+  before_action :get_museum_id, except: [:new, :create, :index]
 
   def new
+    @museum = Museum.new
   end
 
   def create
+    @museum = Museum.new(museum_params)
+
+    # 画像データがない場合は保存禁止
+    unless params[:museum][:museum_images].present?
+      set_flash_message("画像が最低1つは必要です")
+      redirect_to new_admin_museum_path
+      return
+    end
+
+    if @museum.save
+      set_flash_message("美術館の作成に成功しました")
+      redirect_to admin_museum_path(@museum)
+    else
+      set_flash_message("美術館の作成に失敗しました")
+      render :new
+    end
   end
 
   def show
@@ -21,26 +38,27 @@ class Admin::MuseumsController < ApplicationController
 
   def update
     @original_museum = Museum.find(params[:id])
-    if @museum.update(museum_params)
-      flash[:notice] = "美術館情報の保存に成功しました"
+
+    if museum_images_delete
+      set_flash_message("画像が最低1つは必要です")
+      redirect_to edit_admin_museum_path(@museum)
+    elsif @museum.update(museum_params)
+      set_flash_message("美術館情報の保存に成功しました")
       redirect_to admin_museum_path(@museum)
     else
-      # エラー箇所に元のデータを代入する
-      @original_museum.attributes.each do |attr, value|
-        @museum[attr] = value unless @museum.errors[attr].empty?
-      end
-      flash[:notice] = "美術館情報の保存に失敗しました"
+      copy_error_attributes_from_original_museum
+      set_flash_message("美術館情報の保存に失敗しました")
       render :edit
     end
   end
 
   def destroy
-    delete_museum_images
+    museum_images_all_delete
     if @museum.destroy
-      flash[:notice] = "美術館の削除に成功しました"
+      set_flash_message("美術館の削除に成功しました")
       redirect_to admin_museums_path
     else
-      flash[:notice] = "美術館の削除に失敗しました"
+      set_flash_message("美術館の削除に失敗しました")
       render :edit
     end
   end
@@ -55,7 +73,29 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.find(params[:id])
   end
 
-  def delete_museum_images
+  # 選択された画像ファイルを削除かつ、全ての画像ファイルの削除禁止
+  def museum_images_delete
+    if params[:museum][:museum_image_id].present?
+      if params[:museum][:museum_image_id].count == @museum.museum_images.count
+        return true
+      else
+        params[:museum][:museum_image_id].each do |image_id|
+          image = @museum.museum_images.find(image_id)
+          image.purge
+        end
+      end
+    end
+  end
+
+  def copy_error_attributes_from_original_museum
+   # エラー箇所に元のデータを代入する
+    @original_museum.attributes.each do |attr, value|
+      @museum[attr] = value unless @museum.errors[attr].empty?
+    end
+  end
+
+  # 画像ファイルを全削除
+  def museum_images_all_delete
     @museum.museum_images.each do |image|
       image.purge
     end

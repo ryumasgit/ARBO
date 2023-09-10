@@ -15,15 +15,11 @@ class Admin::MembersController < ApplicationController
   def update
     @original_member = Member.find(params[:id])
     if @member.update(member_params)
-      flash[:notice] = "メンバー情報の保存に成功しました"
+      set_flash_message("メンバー情報の保存に成功しました")
       redirect_to admin_member_path(@member)
     else
-      # エラー箇所に元のデータを代入する
-      @original_member.attributes.each do |attr, value|
-        @member[attr] = value unless @member.errors[attr].empty?
-        @member.introduction = @original_member.introduction
-      end
-      flash[:notice] = "メンバー情報の保存に失敗しました"
+      copy_error_attributes_from_original_member
+      set_flash_message("メンバー情報の保存に失敗しました")
       render :edit
     end
   end
@@ -31,14 +27,14 @@ class Admin::MembersController < ApplicationController
   def destroy
     unless is_guest?
       if @member.destroy
-        flash[:notice] = "メンバーの削除に成功しました"
+        set_flash_message("メンバーの削除に成功しました")
         redirect_to admin_members_path
       else
-        flash[:notice] = "メンバーの削除に失敗しました"
+        set_flash_message("メンバーの削除に失敗しました")
         render :edit
       end
     else
-      flash[:notice] = "このメンバーは削除できません"
+      set_flash_message("このメンバーは削除できません")
       render :edit
     end
   end
@@ -59,8 +55,15 @@ class Admin::MembersController < ApplicationController
 
   def redirect_if_member_not_found(member)
     if member.nil?
-      flash[:notice] = "メンバーが見つかりません"
+      set_flash_message("メンバーが見つかりません")
       redirect_to admin_root_path
+    end
+  end
+
+  def copy_error_attributes_from_original_member
+   # エラー箇所に元のデータを代入する
+    @original_member.attributes.each do |attr, value|
+      @member[attr] = value unless @member.errors[attr].empty?
     end
   end
 end

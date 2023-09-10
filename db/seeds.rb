@@ -16,9 +16,10 @@
   #　ゲストメンバー初期データ
   guest = Member.create!(
   name: 'guest',
+  introduction: "ようこそ、ゲストメンバーのプロフィールへ！私はこのコミュニティへの新しい訪問者です。美術と文化に興味があり、さまざまなアーティストの作品を楽しんでいます。どうぞお気軽にコミュニティに参加してください。",
   email: 'guest@example.com',
-  is_active: 'true',
-  is_guest: 'true',
+  is_active: true,
+  is_guest: true,
   password: '111111'
   )
 
@@ -27,9 +28,10 @@
 
   member1 =  Member.create!(
   name: 'John Doe',
+  introduction: "こんにちは、私はJohn Doeです。美術愛好者で、特に印象派の作品が大好きです。美術館やギャラリーで新しい芸術体験を探すことが趣味です。アートについて語り合いましょう！",
   email: 'john@example.com',
-  is_active: 'true',
-  is_guest: 'false',
+  is_active: true,
+  is_guest: false,
   password: '111111'
   )
 
@@ -37,9 +39,10 @@
 
   member2 = Member.create!(
   name: 'Robert Johnson',
+  introduction: "私の名前はRobert Johnsonです。建築家で、美術館や建築デザインに興味を持っています。美術館の建築や展示会の空間デザインについて議論したり、アイデアを共有したりできる仲間を探しています。",
   email: 'robert@example.com',
-  is_active: 'false',
-  is_guest: 'false',
+  is_active: false,
+  is_guest: false,
   password: '111111'
   )
 
@@ -47,47 +50,47 @@
 
   member3 = Member.create!(
   name: 'Mike',
+  introduction: "こんにちは、私はMikeです。アートと音楽が大好きなエンターテイメント愛好者です。美術館での音楽イベントやアートフェスティバルに参加するのが楽しみです。アートと音楽の世界に一緒に浸りましょう！",
   email: 'mike@com',
-  is_active: 'true',
-  is_guest: 'false',
+  is_active: true,
+  is_guest: false,
   password: '111111'
   )
 
   member3.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/AlmaThomas.jpg')), filename: 'AlmaThomas.jpg')
 
+
+  # 美術館初期データ
   museum1 = Museum.create!(
-  name: 'エデン・アートギャラリー',
-  introduction: 'エデン・アートギャラリーは、芸術と創造性の楽園です。世界中から集められた美術品が、ここで新しい命を吹き込まれ、あなたの心に触れるでしょう。
-  絵画、彫刻、写真、インスタレーションアートなど、あらゆるジャンルの作品が展示され、訪れる人々に魔法のような体験を提供します。
-  我々の使命は、芸術を通じて人々をつなぎ、魅了し、啓発することです。エデン・アートギャラリーで、新しい視点を見つけましょう。',
-  official_website: 'https://web-camp.io/commit/',
-  is_active: 'true',
+    name: 'エデン・アートギャラリー',
+    introduction: 'エデン・アートギャラリーは、芸術と創造性の楽園です。世界中から集められた美術品が、ここで新しい命を吹き込まれ、あなたの心に触れるでしょう。絵画、彫刻、写真、インスタレーションアートなど、あらゆるジャンルの作品が展示され、訪れる人々に魔法のような体験を提供します。我々の使命は、芸術を通じて人々をつなぎ、魅了し、啓発することです。エデン・アートギャラリーで、新しい視点を見つけましょう。',
+    official_website: 'https://web-camp.io/commit/',
+    is_active: true
   )
 
-  #　美術館初期データ
   museum1.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image1.jpeg')), filename: 'museum_image1.jpeg')
 
   museum2 = Museum.create!(
-  name: 'セレスティアル・アートインスティチュート',
-  introduction: 'セレスティアル・アートインスティチュートは、天空の彼方から灵感を受けた美術の聖域です。ここでは、宇宙とアートが融合し、驚異的な作品が生み出されています。
-  星座のようなアート作品、銀河を旅するようなインスタレーション、宇宙の謎に触れる美術品が展示されています。
-  セレスティアル・アートインスティチュートを訪れて、宇宙の美しさと無限の可能性に触れ、魅了されることでしょう。我々の使命は、芸術を通じて宇宙への旅を提供することです。',
-  official_website: 'https://web-camp.io/commit/',
-  is_active: 'true',
+    name: 'セレスティアル・アートインスティチュート',
+    introduction: 'セレスティアル・アートインスティチュートは、天空の彼方から灵感を受けた美術の聖域です。ここでは、宇宙とアートが融合し、驚異的な作品が生み出されています。星座のようなアート作品、銀河を旅するようなインスタレーション、宇宙の謎に触れる美術品が展示されています。セレスティアル・アートインスティチュートを訪れて、宇宙の美しさと無限の可能性に触れ、魅了されることでしょう。我々の使命は、芸術を通じて宇宙への旅を提供することです。',
+    official_website: 'https://web-camp.io/commit/',
+    is_active: true
   )
 
   museum2.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image2.jpeg')), filename: 'museum_image2.jpeg')
 
+
+
+    #　展示会初期データ
   exhibition1 = Exhibition.create!(
   museum_id: 1,
   name: '未来の色彩：創造性の旅',
   introduction: '未来の色彩：創造性の旅」展示会は、色彩と想像力の饗宴です。この展示会では、未来の美しい世界を描くためのアーティストたちが、鮮やかな色彩と独自の視点を結集しました。
   絵画、彫刻、デジタルアート、立体作品など、さまざまなメディアを駆使して、未知の風景を探求します。我々は未来を夢見、色彩でその可能性を表現します。この展示会で、創造性の旅に出発しましょう。',
   official_website: 'https://web-camp.io/commit/',
-  is_active: 'true',
+  is_active: true
   )
 
-  #　展示会初期データ
   exhibition1.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image1.jpg')), filename: 'exhibition_image1.jpg')
 
   exhibition2 = Exhibition.create!(
@@ -97,24 +100,25 @@
   ファンタジーの世界、魔法の生き物、神秘的な風景、そして夢の中の物語が、絵画、彫刻、フォトマニピュレーション、立体作品として具現化されます。我々はアートを通じて新たな世界を創造し、幻想の境界に足を踏み入れます。
   この展示会で、アートの魔法を体験しましょう。',
   official_website: 'https://web-camp.io/commit/',
-  is_active: 'true',
+  is_active: true
   )
 
   exhibition2.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image2.jpg')), filename: 'exhibition_image2.jpg')
 
+
+  #　アーティスト初期データ
   claude_monet = Artist.create!(
   name: 'クロード・モネ',
   introduction: '印象派の巨匠。自然光と色彩に魅了され、美しい睡蓮や風景を描く画家。印象、日の出、睡蓮の名作。',
-  is_active: 'true',
+  is_active: true
   )
 
-  #　アーティスト初期データ
   claude_monet.artist_images.attach(io: File.open(Rails.root.join('app/assets/images/artists/Stacks of Wheat (End of Summer).jpg')), filename: 'Stacks of Wheat (End of Summer).jpg')
 
   edouard_manet = Artist.create!(
   name: 'エドゥアール・マネ',
   introduction: '印象派の先駆者。都市の魅力と社会を捉え、モダンな都会生活を描く画家。',
-  is_active: 'true',
+  is_active: true
   )
 
   edouard_manet.artist_images.attach(io: File.open(Rails.root.join('app/assets/images/artists/Woman Reading.jpg')), filename: 'Woman Reading.jpg')
@@ -122,7 +126,7 @@
   pierre_auguste_renoir = Artist.create!(
   name: 'ピエール＝オーギュスト・ルノワール',
   introduction: '明るく活気あふれる印象派の一員。人々や風景、ダンスを美しく描く。',
-  is_active: 'true',
+  is_active: true
   )
 
   pierre_auguste_renoir.artist_images.attach(io: File.open(Rails.root.join('app/assets/images/artists/Two Sisters (On the Terrace).jpg')), filename: 'Two Sisters (On the Terrace).jpg')
@@ -130,7 +134,7 @@
   camille_pissarro = Artist.create!(
   name: 'カミーユ・ピサロ',
   introduction: '印象派の創始者の一人。農村風景や都市を通じて風景画に情熱を注ぐ。',
-  is_active: 'true',
+  is_active: true
   )
 
   camille_pissarro.artist_images.attach(io: File.open(Rails.root.join('app/assets/images/artists/Young Peasant Having Her Coffee.jpg')), filename: 'Young Peasant Having Her Coffee.jpg')
@@ -140,7 +144,7 @@
   first_post = Badge.create!(
   name: 'First Post',
   introduction: 'このバッジは、初めて投稿したメンバーに授与されます。アイデアや情報を共有してコミュニティに貢献しましょう。',
-  is_active: 'true',
+  is_active: true
   )
 
   first_post.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_post.png')), filename: 'first_post.png')
@@ -148,7 +152,7 @@
   first_comment = Badge.create!(
   name: 'First Comment',
   introduction: ' このバッジは、他のメンバーの投稿に初めてコメントしたメンバーに授与されます。他のメンバーとの対話を楽しんで、意見を交換しましょう。',
-  is_active: 'true',
+  is_active: true
   )
 
   first_comment.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_comment.png')), filename: 'first_comment.png')
@@ -156,7 +160,7 @@
   first_follower = Badge.create!(
   name: 'First Follower',
   introduction: 'このバッジは、他のメンバーから初めてフォローされたメンバーに授与されます。コンテンツが注目されていることを示します。',
-  is_active: 'true',
+  is_active: true
   )
 
   first_follower.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_follower.png')), filename: 'first_follower.png')
@@ -164,7 +168,7 @@
   first_favorited = Badge.create!(
   name: 'First Favorited',
   introduction: 'このバッジは、他のメンバーから初めてお気に入りに登録されたメンバーに授与されます。あなたのコンテンツが人々に愛されています。',
-  is_active: 'true',
+  is_active: true
   )
 
   first_favorited.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_favorited.png')), filename: 'first_favorited.png')
@@ -172,7 +176,7 @@
   museum_enthusiast = Badge.create!(
   name: 'Museum Enthusiast',
   introduction: 'このバッジは、美術館に多く足を運んだメンバーに授与されます。これからも美術館の魅力を伝え、共有しましょう。',
-  is_active: 'true',
+  is_active: true
   )
 
   museum_enthusiast.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/museum_enthusiast.png')), filename: 'museum_enthusiast.png')
@@ -180,7 +184,7 @@
   exhibition_enthusiast = Badge.create!(
   name: 'Exhibition Enthusiast',
   introduction: 'このバッジは、展示会に多く足を運んだメンバーに授与されます。これからも展示会の魅力を伝え、共有しましょう。',
-  is_active: 'true',
+  is_active: true
   )
 
   exhibition_enthusiast.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/exhibition_enthusiast.png')), filename: 'exhibition_enthusiast.png')

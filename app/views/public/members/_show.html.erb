@@ -9,7 +9,7 @@
         <div class="col">
           <% if @member == current_member %>
             <%= link_to member_information_edit_path(member_member_name: current_member.name), class: "btn btn-sm" do %>
-              <i class="fa-solid fa-gear align-bottom"></i>
+              <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
             <% end %>
           <% else %>
             <%= render 'public/relationships/btn', member: member %>

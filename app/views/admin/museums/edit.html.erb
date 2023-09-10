@@ -6,9 +6,20 @@
         <h2>Museum Information Edit</h2>
         <%= form_with model: @museum, url: admin_museum_path(@museum) do |f| %>
 
-          <div class="field m-5">
-            <%= image_tag @museum.get_museum_images(200, 200), class: "rounded-circle mb-3" %>
-            <%= f.file_field :museum_images, accept: "image/*", class: "form-control-file" %>
+        <p>選択した特定の画像を削除できます</p>
+
+          <div class="field d-flex justify-content-center my-3">
+            <% @museum.museum_images.each do |image| %>
+              <div class="delete-image-check">
+                <%= f.check_box :museum_image_id, { multiple: true }, image.id, false %>
+                <%= image_tag image.variant(resize: "200x100", gravity: 'center', extent: "200x100").processed, class: "m-1" %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="field my-2">
+            <%= f.file_field :museum_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+            <p class="mt-3">画像は最大4個まで登録できます</p>
           </div>
 
           <div class="field text-left my-2">

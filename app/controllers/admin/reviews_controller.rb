@@ -10,11 +10,11 @@ class Admin::ReviewsController < ApplicationController
   def destroy
     delete_review_images
     if @review.destroy
-      flash[:notice] = "レビュー情報の削除に成功しました"
+      set_flash_message("レビュー情報の削除に成功しました")
       flash[:tab] = 'section2'
       redirect_to admin_reviews_path
     else
-      flash[:notice] = "レビュー情報の削除に失敗しました"
+      set_flash_message("レビュー情報の削除に失敗しました")
       render :show
     end
   end

@@ -3,11 +3,11 @@ class Public::RelationshipsController < ApplicationController
 
   def create
     name = params[:member_member_name]
-    unless name = "guest"
+    unless name == "guest"
       current_member.follow(name)
       redirect_to request.referer
     else
-      flash[:notice] = "このユーザーはフォローできません"
+      set_flash_message("このユーザーはフォローできません")
       redirect_to member_my_page_path(member_member_name: current_member.name)
     end
   end

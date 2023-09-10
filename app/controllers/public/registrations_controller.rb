@@ -4,7 +4,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    flash[:notice] = "新規登録しました"
+    set_flash_message("新規登録しました")
     welcome_path
   end
 

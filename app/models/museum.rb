@@ -23,4 +23,10 @@ class Museum < ApplicationRecord
       errors.add(:museum_images, "は最大4つまでです")
     end
   end
+
+  def museum_images_are_attached
+    if museum_images.blank?
+      errors.add(:museum_images, "は最低1つ以上アタッチしてください")
+    end
+  end
 end

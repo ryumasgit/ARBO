@@ -7,30 +7,24 @@
             <th></th>
             <th>美術館</th>
             <th>展示会数</th>
-            <th>公開ステータス</th>
-            <th></th>
+            <th><i class="fa-solid fa-bookmark" aria-hidden="true"></i></th>
           </tr>
         </thead>
           <tbody>
             <% museums.each do |museum| %>
             <tr>
               <td>
-                <%= link_to admin_museum_path(museum) do %>
+                <%= link_to museum_path(museum) do %>
                   <%= image_tag museum.get_museum_images(100, 100) %>
                 <% end %>
               </td>
               <td>
-                <%= link_to admin_museum_path(museum) do %>
+                <%= link_to museum_path(museum) do %>
                   <%= museum.name %>
                 <% end %>
               </td>
               <td><%= museum.exhibitions.count %></td>
-              <td><%= museum_is_active_display(museum) %></td>
-              <td>
-                <%= link_to edit_admin_museum_path(museum), class: "btn" do %>
-                  <i class="fa-solid fa-gear align-bottom"></i>
-                <% end %>
-              </td>
+              <td><%= museum.bookmark_museums.count %></td>
             </tr>
             <% end %>
           </tbody>

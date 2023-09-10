@@ -9,7 +9,6 @@ class Museum < ApplicationRecord
   validates :introduction, presence: true, length: { maximum: 255 }
   validates :official_website, presence: true
   validates :is_active, inclusion: { in: [true, false] }
-  validates :museum_images, presence: true
   validate :validate_museum_images_count
 
   def get_museum_images(width, height)
@@ -22,6 +21,12 @@ class Museum < ApplicationRecord
   def validate_museum_images_count
     if museum_images.attached? && museum_images.length > 4
       errors.add(:museum_images, "は最大4つまでです")
+    end
+  end
+
+  def museum_images_are_attached
+    if museum_images.blank?
+      errors.add(:museum_images, "は最低1つ以上アタッチしてください")
     end
   end
 end

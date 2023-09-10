@@ -7,6 +7,14 @@ class Admin::MuseumsController < ApplicationController
 
   def create
     @museum = Museum.new(museum_params)
+
+    # 画像データがない場合は保存禁止
+    unless params[:museum][:museum_images].present?
+      flash[:notice] = "画像が最低1つは必要です"
+      redirect_to new_admin_museum_path
+      return
+    end
+
     if @museum.save
       flash[:notice] = "美術館の作成に成功しました"
       redirect_to admin_museum_path(@museum)
@@ -68,7 +76,7 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.find(params[:id])
   end
 
-    # 選択された画像ファイルを削除
+  # 選択された画像ファイルを削除かつ、全ての画像ファイルの削除禁止
   def museum_images_delete
     if params[:museum][:museum_image_id].present?
       if params[:museum][:museum_image_id].count == @museum.museum_images.count

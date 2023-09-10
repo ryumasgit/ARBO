@@ -1,2 +1,29 @@
-<h1>Public::Museums#index</h1>
-<p>Find me in app/views/public/museums/index.html.erb</p>
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row justify-content-center m-2">
+    <div class="text-center">
+      <div class="tabs">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#section1">
+              <%= image_tag 'museum_logo.png', width: '150px', height: 'auto' %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section2">
+              <%= image_tag 'exhibition_logo.png', width: '150px', height: 'auto' %>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content border-top">
+          <div id="section1" class="tab-pane fade show active">
+            <%= render "index", museums: @museums %>
+          </div>
+          <div id="section2" class="tab-pane fade">
+            <%= render "public/exhibitions/index", exhibitions: @exhibitions %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

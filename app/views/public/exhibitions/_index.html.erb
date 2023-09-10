@@ -7,20 +7,20 @@
             <th></th>
             <th>展示会</th>
             <th>開催美術館</th>
-            <th>公開ステータス</th>
-            <th></th>
+            <th><i class="fa-solid fa-bookmark" aria-hidden="true"></i></th>
+            <th>レビュー</th>
           </tr>
         </thead>
           <tbody>
             <% exhibitions.each do |exhibition| %>
             <tr>
               <td>
-                <%= link_to admin_exhibition_path(exhibition) do %>
+                <%= link_to exhibition_path(exhibition) do %>
                   <%= image_tag exhibition.get_exhibition_images(100, 100) %>
                 <% end %>
               </td>
               <td>
-                <%= link_to admin_exhibition_path(exhibition) do %>
+                <%= link_to exhibition_path(exhibition) do %>
                   <%= exhibition.name %>
                 <% end %>
               </td>
@@ -29,12 +29,8 @@
                   <%= exhibition.museum.name %>
                 <% end %>
               </td>
-              <td><%= exhibition_is_active_display(exhibition) %></td>
-              <td>
-                <%= link_to edit_admin_exhibition_path(exhibition), class: "btn" do %>
-                  <i class="fa-solid fa-gear align-bottom"></i>
-                <% end %>
-              </td>
+              <td><%= exhibition.bookmark_exhibitions.count %></td>
+              <td><%= exhibition.reviews.count %></td>
             </tr>
             <% end %>
           </tbody>

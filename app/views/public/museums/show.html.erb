@@ -1,2 +1,24 @@
-<h1>Public::Museums#show</h1>
-<p>Find me in app/views/public/museums/show.html.erb</p>
+<div class="container-fluid">
+  <div class="row m-3">
+    <div class="col text-right">
+      <%= image_tag @museum.get_museum_images(500, 500) %>
+    </div>
+    <div class="col offset-1 d-flex align-items-center">
+      <div class="row">
+        <%= content_tag :h3, @museum.name %>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <% if @museum.introduction.present? %>
+      <%= @museum.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
+    <% end %>
+  </div>
+  <div class="row justify-content-center m-3">
+    <%= link_to "公式サイト", @museum.official_website, target: "_blank" %>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
+    <%= @museum.bookmark_museums.count %>
+  </div>
+</div>

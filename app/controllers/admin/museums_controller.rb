@@ -11,10 +11,16 @@ class Admin::MuseumsController < ApplicationController
     if params[:museum][:museum_images].nil?
       set_flash_message("画像は最低1つは必要です")
       redirect_to new_admin_museum_path
-    elsif params[:museum][:museum_images].length > 4
+      return
+    end
+
+    if params[:museum][:museum_images].length > 4
       set_flash_message("画像は最大4つまでです")
       redirect_to new_admin_museum_path
-    elsif @museum.save
+      return
+    end
+
+    if @museum.save
       set_flash_message("美術館の作成に成功しました")
       redirect_to admin_museum_path(@museum)
     else
@@ -41,19 +47,23 @@ class Admin::MuseumsController < ApplicationController
     if museum_images_over_count?
       set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_museum_path(@museum)
-    elsif museum_images_count_zero?
+      return
+    end
+
+    if museum_images_count_zero?
       set_flash_message("画像は最低1つは必要です")
       redirect_to edit_admin_museum_path(@museum)
+      return
+    end
+
+    museum_images_delete
+    if @museum.update(museum_params)
+      set_flash_message("美術館情報の保存に成功しました")
+      redirect_to admin_museum_path(@museum)
     else
-      museum_images_delete
-      if @museum.update(museum_params)
-        set_flash_message("美術館情報の保存に成功しました")
-        redirect_to admin_museum_path(@museum)
-      else
-        copy_error_attributes_from_original_museum
-        set_flash_message("美術館情報の保存に失敗しました")
-        render :edit
-      end
+      copy_error_attributes_from_original_museum
+      set_flash_message("美術館情報の保存に失敗しました")
+      render :edit
     end
   end
 

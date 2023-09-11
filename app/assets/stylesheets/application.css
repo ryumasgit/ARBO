@@ -83,8 +83,8 @@
   font-weight: bold;
 }
 
-header {
-  margin-bottom: 3%;
+main {
+  margin: 3% auto 5% auto;
 }
 
 footer {

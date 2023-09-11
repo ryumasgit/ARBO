@@ -11,10 +11,16 @@ class Admin::ArtistsController < ApplicationController
     if params[:artist][:artist_images].nil?
       set_flash_message("画像は最低1つは必要です")
       redirect_to new_admin_artist_path
-    elsif params[:artist][:artist_images].length > 4
+      return
+    end
+      
+    if params[:artist][:artist_images].length > 4
       set_flash_message("画像は最大4つまでです")
       redirect_to new_admin_artist_path
-    elsif @artist.save
+      return
+    end
+    
+    if @artist.save
       set_flash_message("アーティストの作成に成功しました")
       redirect_to admin_artist_path(@artist)
     else
@@ -32,22 +38,26 @@ class Admin::ArtistsController < ApplicationController
   def update
     @original_artist = Artist.find(params[:id])
 
-     if artist_images_over_count?
+    if artist_images_over_count?
       set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_artist_path(@artist)
-    elsif artist_images_count_zero?
+      return
+    end
+    
+    if artist_images_count_zero?
       set_flash_message("画像は最低1つは必要です")
       redirect_to edit_admin_artist_path(@artist)
+      return
+    end
+    
+    artist_images_delete
+    if @artist.update(artist_params)
+      set_flash_message("アーティスト情報の保存に成功しました")
+      redirect_to admin_artist_path(@artist)
     else
-      artist_images_delete
-      if @artist.update(artist_params)
-        set_flash_message("アーティスト情報の保存に成功しました")
-        redirect_to admin_artist_path(@artist)
-      else
-        copy_error_attributes_from_original_artist
-        set_flash_message("アーティスト情報の保存に失敗しました")
-        render :edit
-      end
+      copy_error_attributes_from_original_artist
+      set_flash_message("アーティスト情報の保存に失敗しました")
+      render :edit
     end
   end
 

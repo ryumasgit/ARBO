@@ -16,17 +16,38 @@
     </div>
   </div>
 
-
   <div class="row justify-content-center">
     <% if @museum.introduction.present? %>
       <%= @museum.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
     <% end %>
   </div>
   <div class="row justify-content-center m-3">
-    <%= link_to "#{@museum.name} 公式サイト", @museum.official_website, target: "_blank" %>
+    <%= link_to "#{@museum.name} 公式サイト", @museum.official_website, target: "_blank", class: "mr-3" %>
+    <%= link_to "https://goo.gl/maps/Pue94AkNR1e5rwGt6", target: "_blank", class: "text-dark" do %>
+      MAP <i class="fa-solid fa-map-location-dot"></i>
+    <% end %>
   </div>
   <div class="row justify-content-center align-items-center">
     <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
     <%= @museum.bookmark_museums.count %>
+  </div>
+
+  <div class="border mt-5"></div>
+  <h2 class="text-center m-3">開催中の展示会</h2>
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <% @museum.exhibitions.each_slice(2) do |exhibitions| %>
+        <div class="d-flex">
+          <% exhibitions.each do |exhibition| %>
+            <div class="d-flex flex-column m-5">
+              <%= link_to admin_exhibition_path(exhibition) do %>
+                <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1" %>
+              <% end %>
+              <%= exhibition.name %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

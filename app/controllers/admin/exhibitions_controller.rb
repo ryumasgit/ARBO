@@ -11,10 +11,23 @@ class Admin::ExhibitionsController < ApplicationController
     if params[:exhibition][:exhibition_images].nil?
       set_flash_message("画像は最低1つは必要です")
       redirect_to new_admin_exhibition_path
-    elsif params[:exhibition][:exhibition_images].length > 4
+      return
+    end
+
+    if params[:exhibition][:exhibition_images].length > 4
       set_flash_message("画像は最大4つまでです")
       redirect_to new_admin_exhibition_path
-    elsif @exhibition.save
+      return
+    end
+
+    if @exhibition.save
+      # 選択されたアーティストを関連付ける
+      artist_ids = params[:exhibition][:artist_ids]
+      if artist_ids.present?
+        artist_ids.each do |artist_id|
+          EntryArtist.create(exhibition_id: @exhibition.id, artist_id: artist_id)
+        end
+      end
       set_flash_message("展示会の作成に成功しました")
       redirect_to admin_exhibition_path(@exhibition)
     else
@@ -35,19 +48,23 @@ class Admin::ExhibitionsController < ApplicationController
     if exhibition_images_over_count?
       set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_exhibition_path(@exhibition)
-    elsif exhibition_images_count_zero?
+      return
+    end
+    
+    if exhibition_images_count_zero?
       set_flash_message("画像は最低1つは必要です")
       redirect_to edit_admin_exhibition_path(@exhibition)
+      return
+    end
+    
+    exhibition_images_delete
+    if @exhibition.update(exhibition_params)
+      set_flash_message("展示会情報の保存に成功しました")
+      redirect_to admin_exhibition_path(@exhibition)
     else
-      exhibition_images_delete
-      if @exhibition.update(exhibition_params)
-        set_flash_message("展示会情報の保存に成功しました")
-        redirect_to admin_exhibition_path(@exhibition)
-      else
-        copy_error_attributes_from_original_exhibition
-        set_flash_message("展示会情報の保存に失敗しました")
-        render :edit
-      end
+      copy_error_attributes_from_original_exhibition
+      set_flash_message("展示会情報の保存に失敗しました")
+      render :edit
     end
   end
 
@@ -65,7 +82,7 @@ class Admin::ExhibitionsController < ApplicationController
   protected
 
   def exhibition_params
-    params.require(:exhibition).permit(:museum_id, :name, :introduction, :official_website, :is_active, exhibition_images: [] )
+    params.require(:exhibition).permit(:museum_id, :artist_ids, :name, :introduction, :official_website, :is_active, exhibition_images: [] )
   end
 
   def get_exhibition_id

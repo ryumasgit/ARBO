@@ -30,10 +30,3 @@ document.addEventListener("turbolinks:load", function() {
   $('.images').slick({
   });
 });
-
-function limitFileSelection(input, maxFiles) {
-  if (input.files.length > maxFiles) {
-    alert(`最大${maxFiles}個のファイルしか選択できません。`);
-    input.value = '';
-  }
-}

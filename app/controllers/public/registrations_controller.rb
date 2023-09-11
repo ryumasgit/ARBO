@@ -4,8 +4,19 @@ class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    set_flash_message("新規登録しました")
+    flash[:notice] = "新規登録しました"
     welcome_path
+  end
+  
+  # POST /resource
+  def create
+    build_resource(sign_up_params)
+    unless resource.member_image.present?
+      flash[:notice] =  "画像が最低1つは必要です"
+      redirect_to new_member_registration_path
+      return
+    end
+    super
   end
 
   protected
@@ -18,11 +29,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   # def new
-  #   super
-  # end
-
-  # POST /resource
-  # def create
   #   super
   # end
 

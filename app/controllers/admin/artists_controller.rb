@@ -8,14 +8,13 @@ class Admin::ArtistsController < ApplicationController
   def create
     @artist = Artist.new(artist_params)
 
-    # 画像データがない場合は保存禁止
-    unless params[:artist][:artist_images].present?
-      set_flash_message("画像が最低1つは必要です")
+    if params[:artist][:artist_images].nil?
+      set_flash_message("画像は最低1つは必要です")
       redirect_to new_admin_artist_path
-      return
-    end
-
-    if @artist.save
+    elsif params[:artist][:artist_images].length > 4
+      set_flash_message("画像は最大4つまでです")
+      redirect_to new_admin_artist_path
+    elsif @artist.save
       set_flash_message("アーティストの作成に成功しました")
       redirect_to admin_artist_path(@artist)
     else
@@ -33,16 +32,22 @@ class Admin::ArtistsController < ApplicationController
   def update
     @original_artist = Artist.find(params[:id])
 
-    if artist_images_delete
-      set_flash_message("画像が最低1つは必要です")
+     if artist_images_over_count?
+      set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_artist_path(@artist)
-    elsif @artist.update(artist_params)
-      set_flash_message("アーティスト情報の保存に成功しました")
-      redirect_to admin_artist_path(@artist)
+    elsif artist_images_count_zero?
+      set_flash_message("画像は最低1つは必要です")
+      redirect_to edit_admin_artist_path(@artist)
     else
-      copy_error_attributes_from_original_artist
-      set_flash_message("アーティスト情報の保存に失敗しました")
-      render :edit
+      artist_images_delete
+      if @artist.update(artist_params)
+        set_flash_message("アーティスト情報の保存に成功しました")
+        redirect_to admin_artist_path(@artist)
+      else
+        copy_error_attributes_from_original_artist
+        set_flash_message("アーティスト情報の保存に失敗しました")
+        render :edit
+      end
     end
   end
 
@@ -67,16 +72,22 @@ class Admin::ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
   end
 
-  # 選択された画像ファイルを削除かつ、全ての画像ファイルの削除禁止
+  # 画像登録数規制（最大）
+  def artist_images_over_count?
+    params[:artist][:artist_images].present? && params[:artist][:artist_images].length > 4
+  end
+
+  # 画像登録数規制（0）
+  def artist_images_count_zero?
+    params[:artist][:artist_image_id].present? && params[:artist][:artist_image_id].count == @artist.artist_images.count
+  end
+
+  # 選択された画像ファイルを削除
   def artist_images_delete
     if params[:artist][:artist_image_id].present?
-      if params[:artist][:artist_image_id].count == @artist.artist_images.count
-        return true
-      else
-        params[:artist][:artist_image_id].each do |image_id|
-          image = @artist.artist_images.find(image_id)
-          image.purge
-        end
+      params[:artist][:artist_image_id].each do |image_id|
+        image = @artist.artist_images.find(image_id)
+        image.purge
       end
     end
   end

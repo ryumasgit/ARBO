@@ -6,16 +6,13 @@ class Admin::BadgesController < ApplicationController
   end
 
   def create
-    @badge = Badge.new(nadge_params)
-    
+    @badge = Badge.new(badge_params)
+
     # 画像データがない場合は保存禁止
-    unless params[:badge][:badge_image].present?
+    if params[:badge][:badge_image].nil?
       set_flash_message("画像が最低1つは必要です")
       redirect_to new_admin_badge_path
-      return
-    end
-    
-    if @badge.save(bagde_params)
+    elsif @badge.save
       set_flash_message("バッジの作成に成功しました")
       redirect_to admin_badge_path(@badge)
     else
@@ -36,7 +33,7 @@ class Admin::BadgesController < ApplicationController
 
   def update
     @original_badge = Badge.find(params[:id])
-    
+
     if @badge.update(badge_params)
       set_flash_message("バッジ情報の保存に成功しました")
       redirect_to admin_badge_path(@badge)
@@ -69,7 +66,7 @@ class Admin::BadgesController < ApplicationController
   def get_badge_id
     @badge = Badge.find(params[:id])
   end
-  
+
   def copy_error_attributes_from_original_badge
    # エラー箇所に元のデータを代入する
     @original_badge.attributes.each do |attr, value|

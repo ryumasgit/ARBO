@@ -21,13 +21,7 @@ class Admin::ExhibitionsController < ApplicationController
     end
 
     if @exhibition.save
-      # 選択されたアーティストを関連付ける
-      artist_ids = params[:exhibition][:artist_ids]
-      if artist_ids.present?
-        artist_ids.each do |artist_id|
-          EntryArtist.create(exhibition_id: @exhibition.id, artist_id: artist_id)
-        end
-      end
+      attach_selected_artists
       set_flash_message("展示会の作成に成功しました")
       redirect_to admin_exhibition_path(@exhibition)
     else
@@ -37,6 +31,7 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def show
+    @artists = @exhibition.artists.page(params[:page]).per(10)
   end
 
   def edit
@@ -45,20 +40,22 @@ class Admin::ExhibitionsController < ApplicationController
   def update
     @original_exhibition = Exhibition.find(params[:id])
 
-    if exhibition_images_over_count?
+    if exhibition_images_count_exceeds_limit?
       set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_exhibition_path(@exhibition)
       return
     end
-    
-    if exhibition_images_count_zero?
+
+    if exhibition_images_count_equals_zero?
       set_flash_message("画像は最低1つは必要です")
       redirect_to edit_admin_exhibition_path(@exhibition)
       return
     end
-    
+
     exhibition_images_delete
     if @exhibition.update(exhibition_params)
+      remove_unused_artists(@exhibition, params[:exhibition][:artist_ids])
+      attach_selected_artists
       set_flash_message("展示会情報の保存に成功しました")
       redirect_to admin_exhibition_path(@exhibition)
     else
@@ -90,12 +87,12 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   # 画像登録数規制（最大）
-  def exhibition_images_over_count?
+  def exhibition_images_count_exceeds_limit?
     params[:exhibition][:exhibition_images].present? && params[:exhibition][:exhibition_images].length > 4
   end
 
   # 画像登録数規制（0）
-  def exhibition_images_count_zero?
+  def exhibition_images_count_equals_zero?
     params[:exhibition][:exhibition_image_id].present? && params[:exhibition][:exhibition_image_id].count == @exhibition.exhibition_images.count
   end
 
@@ -106,6 +103,25 @@ class Admin::ExhibitionsController < ApplicationController
         image = @exhibition.exhibition_images.find(image_id)
         image.purge
       end
+    end
+  end
+
+  # 選択されたアーティストを関連付ける
+  def attach_selected_artists
+    artist_ids = params[:exhibition][:artist_ids]
+    if artist_ids.present?
+      artist_ids.each do |artist_id|
+        EntryArtist.create(exhibition_id: @exhibition.id, artist_id: artist_id)
+      end
+    end
+  end
+
+  # 更新時に差異のあるデータを削除
+  def remove_unused_artists(exhibition, new_artist_ids)
+    if new_artist_ids.present?
+      current_artist_ids = exhibition.artist_ids
+      artists_to_remove = current_artist_ids - new_artist_ids
+      EntryArtist.where(exhibition_id: exhibition.id, artist_id: artists_to_remove).destroy_all
     end
   end
 

@@ -28,5 +28,7 @@ document.addEventListener("turbolinks:load", function() {
 
 document.addEventListener("turbolinks:load", function() {
   $('.images').slick({
+    autoplay:true,
+    autoplaySpeed: 5000
   });
 });

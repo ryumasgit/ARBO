@@ -6,14 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#　管理者初期データ
+  # adminモデル初期データ
   Admin.create!(
   name: 'admin',
   email: 'admin@login',
   password: '111111'
   )
 
-  #　ゲストメンバー初期データ
+  # memberモデル(guest)初期データ
   guest = Member.create!(
   name: 'guest',
   introduction: "ようこそ、ゲストメンバーのプロフィールへ！私はこのコミュニティへの新しい訪問者です。美術と文化に興味があり、さまざまなアーティストの作品を楽しんでいます。どうぞお気軽にコミュニティに参加してください。",
@@ -23,7 +23,7 @@
   password: '111111'
   )
 
-  #　メンバー初期データ
+  # memberモデル初期データ
   guest.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/GeorgiaO’Keeffe.jpg')), filename: 'GeorgiaO’Keeffe.jpg')
 
   member1 =  Member.create!(
@@ -60,7 +60,7 @@
   member3.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/AlmaThomas.jpg')), filename: 'AlmaThomas.jpg')
 
 
-  # 美術館初期データ
+  # museumモデル初期データ
   museum1 = Museum.create!(
     name: 'エデン・アートギャラリー',
     introduction: 'エデン・アートギャラリーは、芸術と創造性の楽園です。世界中から集められた美術品が、ここで新しい命を吹き込まれ、あなたの心に触れるでしょう。絵画、彫刻、写真、インスタレーションアートなど、あらゆるジャンルの作品が展示され、訪れる人々に魔法のような体験を提供します。我々の使命は、芸術を通じて人々をつなぎ、魅了し、啓発することです。エデン・アートギャラリーで、新しい視点を見つけましょう。',
@@ -116,7 +116,7 @@
   museum6.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image6.jpg')), filename: 'museum_image6.jpg')
 
 
-    #　展示会初期データ
+  # exhibitionモデル初期データ
   exhibition1 = Exhibition.create!(
   museum_id: 1,
   name: '未来の色彩：創造性の旅',
@@ -144,7 +144,7 @@
   museum_id: 3,
   name: '未来のアートフェスティバル',
   introduction: '未来のアートフェスティバルは、最新のテクノロジーと芸術の融合をテーマにした展示会です。
-  ここでは、バーチャルリアリティ（VR）アート、人工知能（AI）によるアート、ロボットアートなど、未来のアートの可能性を探求します。
+  ここでは、バーチャルリアリティ（VR）アート、人工知能（AI）によるアート、ロボットアート���ど、未来のアートの可能性を探求します。
   アーティストたちが創り出す驚くべき未来のビジョンを体験できます。',
   official_website: 'https://web-camp.io/commit/',
   is_active: true
@@ -211,7 +211,7 @@
   exhibition8.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image8.jpg')), filename: 'exhibition_image8.jpg')
 
 
-  #　アーティスト初期データ
+  # artistモデル初期データ
   claude_monet = Artist.create!(
   name: 'クロード・モネ',
   introduction: '印象派の巨匠。自然光と色彩に魅了され、美しい睡蓮や風景を描く画家。印象、日の出、睡蓮の名作。',
@@ -294,8 +294,133 @@
     ]
   )
 
+  # entry_artistモデル初期データ
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 1
+  )
 
-  #　バッジ初期データ
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 3
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 4
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 5
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 6
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 2,
+  artist_id: 5
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 2,
+  artist_id: 3
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 2,
+  artist_id: 8
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 3,
+  artist_id: 1
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 3,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 3,
+  artist_id: 8
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 4,
+  artist_id: 7
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 4,
+  artist_id: 6
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 5,
+  artist_id: 4
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 5,
+  artist_id: 1
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 6,
+  artist_id: 1
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 6,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 6,
+  artist_id: 7
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 7,
+  artist_id: 8
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 7,
+  artist_id: 6
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 7,
+  artist_id: 7
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 8,
+  artist_id: 4
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 8,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 8,
+  artist_id: 5
+  )
+
+  # badgeモデル初期データ
   first_post = Badge.create!(
   name: 'First Post',
   introduction: 'このバッジは、初めて投稿したメンバーに授与されます。アイデアや情報を共有してコミュニティに貢献しましょう。',

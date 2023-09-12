@@ -32,8 +32,8 @@
           </div>
 
           <div class="field text-left my-4">
-            <%= f.label :artists, "アーティスト" %>
-            <%= f.collection_select :artist_ids, Artist.where(is_active: true), :id, :name, { include_hidden: false }, multiple: true, class: "form-control" %>
+            <%= f.label :artists_ids, "参加アーティスト" %>
+            <%= f.collection_select :artist_ids, Artist.where(is_active: true), :id, :name, { include_blank: false}, multiple: true, class: "form-control" %>
           </div>
 
           <div class="field text-left my-2">

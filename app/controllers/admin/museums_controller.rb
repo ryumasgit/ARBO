@@ -30,6 +30,8 @@ class Admin::MuseumsController < ApplicationController
   end
 
   def show
+    @exhibitions = @museum.exhibitions.where(is_active: :true)
+    page(params[:page]).per(10)
   end
 
   def index
@@ -44,13 +46,13 @@ class Admin::MuseumsController < ApplicationController
   def update
     @original_museum = Museum.find(params[:id])
 
-    if museum_images_over_count?
+    if museum_images_count_exceeds_limit?
       set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_museum_path(@museum)
       return
     end
 
-    if museum_images_count_zero?
+    if museum_images_count_equals_zero?
       set_flash_message("画像は最低1つは必要です")
       redirect_to edit_admin_museum_path(@museum)
       return
@@ -89,12 +91,12 @@ class Admin::MuseumsController < ApplicationController
   end
 
   # 画像登録数規制（最大）
-  def museum_images_over_count?
+  def museum_images_count_exceeds_limit?
     params[:museum][:museum_images].present? && params[:museum][:museum_images].length > 4
   end
 
   # 画像登録数規制（0）
-  def museum_images_count_zero?
+  def museum_images_count_equals_zero?
     params[:museum][:museum_image_id].present? && params[:museum][:museum_image_id].count == @museum.museum_images.count
   end
 

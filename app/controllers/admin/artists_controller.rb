@@ -30,6 +30,7 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def show
+    @exhibitions = @artist.exhibitions.page(params[:page]).per(10)
   end
 
   def edit
@@ -38,13 +39,13 @@ class Admin::ArtistsController < ApplicationController
   def update
     @original_artist = Artist.find(params[:id])
 
-    if artist_images_over_count?
+    if artist_images_count_exceeds_limit?
       set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_artist_path(@artist)
       return
     end
     
-    if artist_images_count_zero?
+    if artist_images_count_equals_zero?
       set_flash_message("画像は最低1つは必要です")
       redirect_to edit_admin_artist_path(@artist)
       return
@@ -83,12 +84,12 @@ class Admin::ArtistsController < ApplicationController
   end
 
   # 画像登録数規制（最大）
-  def artist_images_over_count?
+  def artist_images_count_exceeds_limit?
     params[:artist][:artist_images].present? && params[:artist][:artist_images].length > 4
   end
 
   # 画像登録数規制（0）
-  def artist_images_count_zero?
+  def artist_images_count_equals_zero?
     params[:artist][:artist_image_id].present? && params[:artist][:artist_image_id].count == @artist.artist_images.count
   end
 

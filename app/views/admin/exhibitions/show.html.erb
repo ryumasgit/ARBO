@@ -25,6 +25,35 @@
   </div>
   <div class="row justify-content-center align-items-center">
     <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-    <%= @exhibition.bookmark_exhibitions.count %>
+    <%= @exhibition.members.count %>
+  </div>
+
+  <div class="border mt-5"></div>
+  <h2 class="text-center m-3">開催美術館</h2>
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <%= link_to admin_museum_path(@exhibition) do %>
+        <%= @exhibition.museum.name %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="border mt-5"></div>
+  <h2 class="text-center m-3">出展アーティスト</h2>
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <% @artists.each_slice(2) do |artists| %>
+        <div class="d-flex">
+          <% artists.each do |artist| %>
+            <div class="d-flex flex-column m-5">
+              <%= link_to admin_artist_path(artist) do %>
+                <%= image_tag artist.artist_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1" %>
+              <% end %>
+              <%= artist.name %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

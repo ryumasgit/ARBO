@@ -20,4 +20,24 @@
       <%= @artist.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
     <% end %>
   </div>
+
+  <div class="border mt-5"></div>
+  <h2 class="text-center m-3">出展展示会</h2>
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <% @exhibitions.each_slice(2) do |exhibitions| %>
+        <div class="d-flex">
+          <% exhibitions.each do |exhibition| %>
+            <div class="d-flex flex-column m-5">
+              <%= link_to admin_exhibition_path(exhibition) do %>
+                <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1" %>
+              <% end %>
+              <%= exhibition.name %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 </div>

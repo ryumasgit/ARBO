@@ -10,9 +10,12 @@ class Museum < ApplicationRecord
   validates :official_website, presence: true
   validates :is_active, inclusion: { in: [true, false] }
 
-
   def get_museum_images(width, height)
     first_image = museum_images.first
     first_image.variant(resize: "#{width}x#{height}^", gravity: 'center', extent: "#{width}x#{height}").processed
+  end
+
+  def bookmarked_by?(member)
+    bookmark_museums.exists?(member_id: member.id)
   end
 end

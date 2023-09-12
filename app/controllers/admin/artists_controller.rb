@@ -1,5 +1,6 @@
 class Admin::ArtistsController < ApplicationController
   before_action :get_artist_id, except: [:new, :create, :index]
+  rescue_from ActiveRecord::RecordNotFound, with: :admin_event_handle_record_not_found
 
   def new
     @artist = Artist.new

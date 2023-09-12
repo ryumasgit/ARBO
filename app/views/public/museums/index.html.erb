@@ -14,6 +14,11 @@
               <%= image_tag 'exhibition_logo.png', width: '150px', height: 'auto' %>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section3">
+              <%= image_tag 'artist_logo.png', width: '150px', height: 'auto' %>
+            </a>
+          </li>
         </ul>
         <div class="tab-content border-top">
           <div id="section1" class="tab-pane fade show active">
@@ -21,6 +26,9 @@
           </div>
           <div id="section2" class="tab-pane fade">
             <%= render "public/exhibitions/index", exhibitions: @exhibitions %>
+          </div>
+          <div id="section3" class="tab-pane fade">
+            <%= render "public/artists/index", artists: @artists %>
           </div>
         </div>
       </div>

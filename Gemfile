@@ -60,3 +60,5 @@ gem 'devise'
 gem 'kaminari','~> 1.2.1'
 
 gem 'rmagick'
+
+gem "jquery-rails"

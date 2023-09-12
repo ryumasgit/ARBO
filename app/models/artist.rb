@@ -1,6 +1,5 @@
 class Artist < ApplicationRecord
   has_many :entry_artists, dependent: :destroy
-  has_many :entered_artists, through: :entry_artists, source: :exhibition
   has_many :exhibitions, through: :entry_artists
 
   has_many_attached :artist_images

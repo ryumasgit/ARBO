@@ -1,5 +1,6 @@
 class Admin::MembersController < ApplicationController
   before_action :get_member_id, except: [:index]
+  rescue_from ActiveRecord::RecordNotFound, with: :admin_memeber_handle_record_not_found
 
   def show
     redirect_if_member_not_found(@member)
@@ -15,13 +16,15 @@ class Admin::MembersController < ApplicationController
   def update
     @original_member = Member.find(params[:id])
     
-    if @member.update(member_params)
-      set_flash_message("メンバー情報の保存に成功しました")
-      redirect_to admin_member_path(@member)
-    else
-      copy_error_attributes_from_original_member
-      set_flash_message("メンバー情報の保存に失敗しました")
-      render :edit
+    unless is_guest?
+      if @member.update(member_params)
+        set_flash_message("メンバー情報の保存に成功しました")
+        redirect_to admin_member_path(@member)
+      else
+        copy_error_attributes_from_original_member
+        set_flash_message("メンバー情報の保存に失敗しました")
+        render :edit
+      end
     end
   end
 

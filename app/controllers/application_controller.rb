@@ -13,8 +13,38 @@ class ApplicationController < ActionController::Base
   def admin_controller?
     self.class.to_s.start_with?("Admin::")
   end
-  
+
   def set_flash_message(message)
     flash[:notice] = message
+  end
+
+  def public_event_handle_record_not_found
+    set_flash_message("指定されたURLは見つかりませんでした")
+    redirect_to museums_path
+    return
+  end
+
+  def admin_event_handle_record_not_found
+    set_flash_message("指定されたURLは見つかりませんでした")
+    redirect_to admin_museums_path
+    return
+  end
+
+  def admin_badge_handle_record_not_found
+    set_flash_message("指定されたURLは見つかりませんでした")
+    redirect_to admin_badges_path
+    return
+  end
+
+  def public_memeber_handle_record_not_found
+    set_flash_message("指定されたURLは見つかりませんでした")
+    redirect_to member_my_page_path(member_member_name: current_member.name)
+    return
+  end
+
+  def admin_memeber_handle_record_not_found
+    set_flash_message("指定されたURLは見つかりませんでした")
+    redirect_to admin_members_path
+    return
   end
 end

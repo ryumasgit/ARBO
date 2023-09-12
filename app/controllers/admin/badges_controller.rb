@@ -1,5 +1,6 @@
 class Admin::BadgesController < ApplicationController
   before_action :get_badge_id, except: [:new, :create, :index]
+  rescue_from ActiveRecord::RecordNotFound, with: :admin_badge_handle_record_not_found
 
   def new
     @badge = Badge.new

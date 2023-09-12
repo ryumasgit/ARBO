@@ -17,8 +17,8 @@
   <div class="row justify-content-center m-3">
     <%= link_to "公式サイト", @exhibition.official_website, target: "_blank" %>
   </div>
-   <div class="row justify-content-center align-items-center">
-    <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-    <%= @exhibition.bookmark_exhibitions.count %>
+  
+  <div id="bookmark_<%= @exhibition.id %>", class="row justify-content-center align-items-center">
+    <%= render "public/bookmark_exhibitions/bookmark", exhibition: @exhibition %>
   </div>
 </div>

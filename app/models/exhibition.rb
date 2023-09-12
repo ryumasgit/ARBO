@@ -17,4 +17,8 @@ class Exhibition < ApplicationRecord
     first_image = exhibition_images.first
     first_image.variant(resize: "#{width}x#{height}^", gravity: 'center', extent: "#{width}x#{height}").processed
   end
+
+  def bookmarked_by?(member)
+    bookmark_exhibitions.exists?(member_id: member.id)
+  end
 end

@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       resource :bookmark_exhibitions, only: [:create, :destroy]
     end
     resources :searches, only: [:new, :index]
+    resources :artists, only: [:show]
   end
 
   namespace :admin do

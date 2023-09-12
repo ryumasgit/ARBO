@@ -3,10 +3,12 @@ class Public::MuseumsController < ApplicationController
 
   def show
     @museum = Museum.find(params[:id])
+    exhibitions = @museum.exhibitions.where(is_active: :true)
+    @exhibitions = exhibitions.page(params[:page]).per(10)
   end
 
   def index
-    @museums = Museum.page(params[:page]).per(10)
-    @exhibitions = Exhibition.page(params[:page]).per(10)
+    @museums = Museum.where(is_active: true).page(params[:page]).per(10)
+    @exhibitions = Exhibition.where(museum_id: @museums.pluck(:id), is_active: true)
   end
 end

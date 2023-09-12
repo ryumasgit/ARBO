@@ -4,14 +4,14 @@
     <div class="col-md-2">
       <div class="text-center">
         <h2>Member Information Edit</h2>
-        <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
+        <% unless @member.name == "guest" %>
+          <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
 
-          <div class="field m-5">
-            <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle mb-3" %>
-            <%= f.file_field :member_image, accept: "image/*", class: "form-control-file" %>
-          </div>
+            <div class="field m-5">
+              <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle mb-3" %>
+              <%= f.file_field :member_image, accept: "image/*", class: "form-control-file" %>
+            </div>
 
-          <% unless @member.name == "guest" %>
             <div class="field text-left my-2">
               <%= f.label :name, "氏名" %>
               <%= f.text_field :name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control" %>
@@ -33,16 +33,16 @@
               <%= f.radio_button :is_active, false, class: "ml-3" %>
               <%= f.label :is_active_false, "退会" %>
             </div>
-          <% else %>
-            <p class="text-danger">このメンバーの情報を変えるはできません</p>
-          <% end %>
 
-          <div class="actions m-3">
-            <%= link_to  "キャンセル", admin_member_path, class: "btn btn-secondary mr-3" %>
-            <%= f.submit "保存", class: "btn btn-success" %>
-          </div>
+            <div class="actions m-3">
+              <%= link_to  "キャンセル", admin_member_path, class: "btn btn-secondary mr-3" %>
+              <%= f.submit "保存", class: "btn btn-success" %>
+            </div>
+          <% end %>
+          <%= link_to "削除する", admin_member_path(@member), method: :delete, data: { confirm: "元には戻せません、本当に削除しますか？" } %>
+        <% else %>
+          <p class="text-danger">このメンバーの情報を変えるはできません</p>
         <% end %>
-        <%= link_to "削除する", admin_member_path(@member), method: :delete, data: { confirm: "元には戻せません、本当に削除しますか？" } %>
       </div>
     </div>
   </div>

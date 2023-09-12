@@ -6,23 +6,14 @@ class Review < ApplicationRecord
   belongs_to :member
   belongs_to :exhibition
 
-  has_many_attached :review_images
+  has_one_attached :review_image
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, length: { maximum: 255 }
-  validate :validate_review_images_count
 
   def get_review_images(width, height)
-    if review_images.attached?
-      review_images.variant(resize_to_limit: [width, height]).processed
-    end
-  end
-
-  private
-
-  def validate_review_images_count
-    if review_images.attached? && review_images.length > 4
-      errors.add(:review_images, "は最大4つまでです")
+    if review_image.attached?
+      review_image.variant(resize_to_limit: [width, height]).processed
     end
   end
 end

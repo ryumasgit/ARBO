@@ -2,6 +2,7 @@ class Public::MembersController < ApplicationController
   before_action :authenticate_member!
   before_action :get_current_member, only: [:edit, :update]
   before_action :ensure_correct_member,  only: [:edit, :update, :withdraw]
+  rescue_from ActiveRecord::RecordNotFound, with: :public_memeber_handle_record_not_found
 
   def show
     @member = Member.find_by(name: params[:member_member_name])
@@ -13,7 +14,7 @@ class Public::MembersController < ApplicationController
 
   def update
     @original_member = current_member
-    
+
     if @member.update(member_params)
       set_flash_message("メンバー情報の保存に成功しました")
       redirect_to member_my_page_path(member_member_name: current_member.name)
@@ -56,10 +57,10 @@ class Public::MembersController < ApplicationController
     @member = Member.find_by(name: params[:member_member_name])
     unless @member == current_member
     set_flash_message("権限がありません ブロックされました")
-    redirect_to member_my_page_path(member_member_name: current_member.name )
+    redirect_to root_path
     end
   end
-  
+
   def copy_error_attributes_from_original_member
     # エラー箇所に元のデータを代入する
     @original_member.attributes.each do |attr, value|

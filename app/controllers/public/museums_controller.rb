@@ -10,5 +10,6 @@ class Public::MuseumsController < ApplicationController
   def index
     @museums = Museum.where(is_active: true).page(params[:page]).per(10)
     @exhibitions = Exhibition.where(museum_id: @museums.pluck(:id), is_active: true)
+    @artists = Artist.where(is_active: true).page(params[:page]).per(10)
   end
 end

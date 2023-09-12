@@ -8,9 +8,14 @@ class Admin::MuseumsController < ApplicationController
   def create
     @museum = Museum.new(museum_params)
 
-    # 画像データがない場合は保存禁止
-    unless params[:museum][:museum_images].present?
-      set_flash_message("画像が最低1つは必要です")
+    if params[:museum][:museum_images].nil?
+      set_flash_message("画像は最低1つは必要です")
+      redirect_to new_admin_museum_path
+      return
+    end
+
+    if params[:museum][:museum_images].length > 4
+      set_flash_message("画像は最大4つまでです")
       redirect_to new_admin_museum_path
       return
     end
@@ -25,6 +30,8 @@ class Admin::MuseumsController < ApplicationController
   end
 
   def show
+    exhibitions = @museum.exhibitions.where(is_active: :true)
+    @exhibitions = exhibitions.page(params[:page]).per(10)
   end
 
   def index
@@ -39,10 +46,20 @@ class Admin::MuseumsController < ApplicationController
   def update
     @original_museum = Museum.find(params[:id])
 
-    if museum_images_delete
-      set_flash_message("画像が最低1つは必要です")
+    if museum_images_count_exceeds_limit?
+      set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_museum_path(@museum)
-    elsif @museum.update(museum_params)
+      return
+    end
+
+    if museum_images_count_equals_zero?
+      set_flash_message("画像は最低1つは必要です")
+      redirect_to edit_admin_museum_path(@museum)
+      return
+    end
+
+    museum_images_delete
+    if @museum.update(museum_params)
       set_flash_message("美術館情報の保存に成功しました")
       redirect_to admin_museum_path(@museum)
     else
@@ -73,16 +90,22 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.find(params[:id])
   end
 
-  # 選択された画像ファイルを削除かつ、全ての画像ファイルの削除禁止
+  # 画像登録数規制（最大）
+  def museum_images_count_exceeds_limit?
+    params[:museum][:museum_images].present? && params[:museum][:museum_images].length > 4
+  end
+
+  # 画像登録数規制（0）
+  def museum_images_count_equals_zero?
+    params[:museum][:museum_image_id].present? && params[:museum][:museum_image_id].count == @museum.museum_images.count
+  end
+
+  # 選択された画像ファイルを削除
   def museum_images_delete
     if params[:museum][:museum_image_id].present?
-      if params[:museum][:museum_image_id].count == @museum.museum_images.count
-        return true
-      else
-        params[:museum][:museum_image_id].each do |image_id|
-          image = @museum.museum_images.find(image_id)
-          image.purge
-        end
+      params[:museum][:museum_image_id].each do |image_id|
+        image = @museum.museum_images.find(image_id)
+        image.purge
       end
     end
   end

@@ -14,6 +14,7 @@ class Admin::MembersController < ApplicationController
 
   def update
     @original_member = Member.find(params[:id])
+    
     if @member.update(member_params)
       set_flash_message("メンバー情報の保存に成功しました")
       redirect_to admin_member_path(@member)

@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
     <div class="col-md-8">
       <table class="table border-bottom">
@@ -30,7 +31,7 @@
               <td><%= member.reviews.count %></td>
               <td><%= member.earned_badges.count %></td>
               <td><%= member.follower.count %></td>
-              <td><%= member.follower.count %></td>
+              <td><%= member.followed.count %></td>
               <td><%= member_is_active_display(member) %></td>
               <td>
                 <%= link_to edit_admin_member_path(member), class: "btn" do %>

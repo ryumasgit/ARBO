@@ -6,14 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#　管理者初期データ
+  # adminモデル初期データ
   Admin.create!(
   name: 'admin',
   email: 'admin@login',
   password: '111111'
   )
 
-  #　ゲストメンバー初期データ
+  # memberモデル(guest)初期データ
   guest = Member.create!(
   name: 'guest',
   introduction: "ようこそ、ゲストメンバーのプロフィールへ！私はこのコミュニティへの新しい訪問者です。美術と文化に興味があり、さまざまなアーティストの作品を楽しんでいます。どうぞお気軽にコミュニティに参加してください。",
@@ -23,7 +23,7 @@
   password: '111111'
   )
 
-  #　メンバー初期データ
+  # memberモデル初期データ
   guest.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/GeorgiaO’Keeffe.jpg')), filename: 'GeorgiaO’Keeffe.jpg')
 
   member1 =  Member.create!(
@@ -60,7 +60,7 @@
   member3.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/AlmaThomas.jpg')), filename: 'AlmaThomas.jpg')
 
 
-  # 美術館初期データ
+  # museumモデル初期データ
   museum1 = Museum.create!(
     name: 'エデン・アートギャラリー',
     introduction: 'エデン・アートギャラリーは、芸術と創造性の楽園です。世界中から集められた美術品が、ここで新しい命を吹き込まれ、あなたの心に触れるでしょう。絵画、彫刻、写真、インスタレーションアートなど、あらゆるジャンルの作品が展示され、訪れる人々に魔法のような体験を提供します。我々の使命は、芸術を通じて人々をつなぎ、魅了し、啓発することです。エデン・アートギャラリーで、新しい視点を見つけましょう。',
@@ -68,7 +68,7 @@
     is_active: true
   )
 
-  museum1.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image1.jpeg')), filename: 'museum_image1.jpeg')
+  museum1.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image1.jpg')), filename: 'museum_image1.jpg')
 
   museum2 = Museum.create!(
     name: 'セレスティアル・アートインスティチュート',
@@ -77,11 +77,46 @@
     is_active: true
   )
 
-  museum2.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image2.jpeg')), filename: 'museum_image2.jpeg')
+  museum2.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image2.jpg')), filename: 'museum_image2.jpg')
+
+  museum3 = Museum.create!(
+    name: 'クリスタル・アートギャラリー',
+    introduction: 'クリスタル・アートギャラリーは、鉱物や宝石、結晶などの自然の美しさを称える美術館です。美しい鉱石や結晶が、アーティストたちによって芸術的な作品に昇華されています。訪れる人々は、地球の奇跡的な美しさに感銘を受け、宝石や鉱石の不思議な世界を探求できます。',
+    official_website: 'https://web-camp.io/commit/',
+    is_active: true
+  )
+
+  museum3.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image3.jpg')), filename: 'museum_image3.jpg')
+
+  museum4 = Museum.create!(
+    name: '未来のデジタル・アートセンター',
+    introduction: '未来のデジタル・アートセンターは、最新のテクノロジーを駆使して創られたデジタルアート作品を展示する施設です。ここでは、バーチャルリアリティ（VR）や拡張現実（AR）などを活用した、没入型の芸術体験が提供されます。訪れる人々は、未来のアートとテクノロジーの融合に圧倒されることでしょう。',
+    official_website: 'https://web-camp.io/commit/',
+    is_active: true
+  )
+
+  museum4.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image4.jpg')), filename: 'museum_image4.jpg')
+
+  museum5 = Museum.create!(
+    name: 'アンダーシー・アートギャラリー',
+    introduction: 'アンダーシー・アートギャラリーは、海洋と水中世界をテーマにした美術館です。ここでは、水中写真、海洋生物の彫刻、珊瑚の芸術、そして深海の謎に触れる作品が展示されています。訪れる人々は、海の神秘的な美しさに魅了され、自然の豊かさに感謝の気持ちを抱くことでしょう。',
+    official_website: 'https://web-camp.io/commit/',
+    is_active: true
+  )
+
+  museum5.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image5.jpg')), filename: 'museum_image5.jpg')
+
+  museum6 = Museum.create!(
+    name: 'インプレッション・アートギャラリー',
+    introduction: 'インプレッション・アートギャラリーは、印象派芸術の魔法の世界への招待状です。ここでは、19世紀末のフランスで生まれた印象派運動の美しさと革命的な影響が融合します。モネ、ルノワール、セザンヌ、ドガ、そして他の多くの印象派の巨匠たちの作品が、自然の中での瞬間の捉え方と鮮やかな色彩で展示されています。',
+    official_website: 'https://web-camp.io/commit/',
+    is_active: true
+  )
+
+  museum6.museum_images.attach(io: File.open(Rails.root.join('app/assets/images/museums/museum_image6.jpg')), filename: 'museum_image6.jpg')
 
 
-
-    #　展示会初期データ
+  # exhibitionモデル初期データ
   exhibition1 = Exhibition.create!(
   museum_id: 1,
   name: '未来の色彩：創造性の旅',
@@ -105,8 +140,78 @@
 
   exhibition2.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image2.jpg')), filename: 'exhibition_image2.jpg')
 
+  exhibition3 = Exhibition.create!(
+  museum_id: 3,
+  name: '未来のアートフェスティバル',
+  introduction: '未来のアートフェスティバルは、最新のテクノロジーと芸術の融合をテーマにした展示会です。
+  ここでは、バーチャルリアリティ（VR）アート、人工知能（AI）によるアート、ロボットアートど、未来のアートの可能性を探求します。
+  アーティストたちが創り出す驚くべき未来のビジョンを体験できます。',
+  official_website: 'https://web-camp.io/commit/',
+  is_active: true
+  )
 
-  #　アーティスト初期データ
+  exhibition3.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image3.jpg')), filename: 'exhibition_image3.jpg')
+
+  exhibition4 = Exhibition.create!(
+  museum_id: 4,
+  name: 'クラシカル・マスターピーシズ展',
+  introduction: 'クラシカル・マスターピーシズ展は、歴史的な美術の傑作を称える展示会です。
+  ここでは、ルネサンス期からバロック期までの名画や彫刻が一堂に展示され、訪れる人々にクラシックな芸術の美しさを提供します。
+  美術史の中で輝く作品たちを堪能できます。',
+  official_website: 'https://web-camp.io/commit/',
+  is_active: true
+  )
+
+  exhibition4.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image4.jpg')), filename: 'exhibition_image4.jpg')
+
+  exhibition5 = Exhibition.create!(
+  museum_id: 5,
+  name: '自然との対話: 環境アートショウ',
+  introduction: '自然との対話: 環境アートショウは、自然との調和をテーマにした展示会です。
+  アーティストたちは自然の素材を使用し、風景アート、リサイクルアート、植物アートなどを制作します。
+  訪れる人々は、環境への深い愛情を感じながら、美しい作品に触れることができます。',
+  official_website: 'https://web-camp.io/commit/',
+  is_active: true
+  )
+
+  exhibition5.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image5.jpg')), filename: 'exhibition_image5.jpg')
+
+  exhibition6 = Exhibition.create!(
+  museum_id: 1,
+  name: '未知の世界: 宇宙アートエキスポ',
+  introduction: '未知の世界: 宇宙アートエキスポは、宇宙と宇宙探査をテーマにした展示会です。
+  ここでは、宇宙写真、宇宙船デザイン、宇宙ステーション模型など、宇宙への情熱を表現したアートが展示されます。
+  宇宙の神秘的な美しさに魅了されることでしょう。',
+  official_website: 'https://web-camp.io/commit/',
+  is_active: true
+  )
+
+  exhibition6.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image6.jpg')), filename: 'exhibition_image6.jpg')
+
+  exhibition7 = Exhibition.create!(
+  museum_id: 2,
+  name: '感覚の迷宮: インタラクティブアートショー',
+  introduction: '感覚の迷宮: インタラクティブアートショーは、訪れる人々がアート作品と対話し、体験することを奨励する展示会です。
+  触れたり、音楽を奏でたり、アート作品を操作することで、感覚的な冒険が展開されます。アート作品との一体感を楽しんでください。',
+  official_website: 'https://web-camp.io/commit/',
+  is_active: true
+  )
+
+  exhibition7.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image7.jpg')), filename: 'exhibition_image7.jpg')
+
+  exhibition8 = Exhibition.create!(
+  museum_id: 3,
+  name: 'ワールド・カルチャーズ・フェスティバル',
+  introduction: 'ワールド・カルチャーズ・フェスティバルは、世界中の多様な文化と芸術を称える展示会です。
+  ここでは、異なる国々の伝統的な衣装、音楽、絵画、工芸品などが展示され、文化の豊かさが紹介されます。多彩な文化に触れ、国際的なアートとつながりましょう。',
+  official_website: 'https://web-camp.io/commit/',
+  is_active: true
+  )
+
+  exhibition8.exhibition_images.attach(io: File.open(Rails.root.join('app/assets/images/exhibitions/exhibition_image8.jpg')), filename: 'exhibition_image8.jpg')
+
+
+  # artistモデル初期データ
   claude_monet = Artist.create!(
   name: 'クロード・モネ',
   introduction: '印象派の巨匠。自然光と色彩に魅了され、美しい睡蓮や風景を描く画家。印象、日の出、睡蓮の名作。',
@@ -139,8 +244,183 @@
 
   camille_pissarro.artist_images.attach(io: File.open(Rails.root.join('app/assets/images/artists/Young Peasant Having Her Coffee.jpg')), filename: 'Young Peasant Having Her Coffee.jpg')
 
+  leonardo_da_vinci = Artist.create!(
+  name: 'レオナルド・ダ・ヴィンチ',
+  introduction: 'イタリアの万能な天才で、モナリザや最後の晩餐などの代表作で知られています。彼はルネサンス期の芸術家で、科学、工学、解剖学にも貢献しました。',
+  is_active: true
+  )
 
-  #　バッジ初期データ
+  leonardo_da_vinci.artist_images.attach(io: File.open(Rails.root.join("app/assets/images/artists/Madonna and Child (recto) and Fragment of Woman's Torso (verso).jpg")), filename: "Madonna and Child (recto) and Fragment of Woman's Torso (verso).jpg")
+
+  pablo_picasso = Artist.create!(
+  name: 'ピカソ',
+  introduction: 'スペイン出身の近代美術の巨匠で、キュビズムや抽象表現主義のパイオニアです。代表作に『ゲルニカ』があります。',
+  is_active: true
+  )
+
+  pablo_picasso.artist_images.attach(
+    [
+      { io: File.open(Rails.root.join('app/assets/images/artists/The Red Armchair.jpg')), filename: 'The Red Armchair.jpg' },
+      { io: File.open(Rails.root.join('app/assets/images/artists/The Old Guitarist.jpg')), filename: 'The Old Guitarist.jpg' },
+      { io: File.open(Rails.root.join('app/assets/images/artists/Mother and Child.jpg')), filename: 'Mother and Child.jpg' },
+      { io: File.open(Rails.root.join('app/assets/images/artists/Daniel-Henry Kahnweiler.jpg')), filename: 'Daniel-Henry Kahnweiler.jpg' }
+    ]
+  )
+
+  vincent_van_gogh = Artist.create!(
+  name: 'ヴィンセント・ファン・ゴッホ',
+  introduction: 'オランダの後期印象派の画家で、鮮やかな色彩と感情豊かな筆致が特徴です。代表作に『星月夜』や『ひまわり』があります。',
+  is_active: true
+  )
+
+  vincent_van_gogh.artist_images.attach(
+    [
+      { io: File.open(Rails.root.join('app/assets/images/artists/The Bedroom.jpg')), filename: 'The Bedroom.jpg' },
+      { io: File.open(Rails.root.join('app/assets/images/artists/Self-Portrait.jpg')), filename: 'Self-Portrait.jpg' },
+      { io: File.open(Rails.root.join('app/assets/images/artists/Fishing in Spring the Pont de Clichy.jpg')), filename: 'Fishing in Spring the Pont de Clichy.jpg' }
+    ]
+  )
+
+  jackson_pollock = Artist.create!(
+  name: 'ジャクソン・ポロック',
+  introduction: 'アメリカの抽象表現主義の代表的な画家で、ドリップ・ペインティングと呼ばれるスタイルで知られています。代表作に『ナンバー 1A, 1948』があります。',
+  is_active: true
+  )
+
+  jackson_pollock.artist_images.attach(
+    [
+      { io: File.open(Rails.root.join('app/assets/images/artists/The Key.jpg')), filename: 'The Key.jpg' },
+      { io: File.open(Rails.root.join('app/assets/images/artists/Untitled.jpg')), filename: 'Untitled.jpg' }
+    ]
+  )
+
+  # entry_artistモデル初期データ
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 1
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 3
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 4
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 5
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 1,
+  artist_id: 6
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 2,
+  artist_id: 5
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 2,
+  artist_id: 3
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 2,
+  artist_id: 8
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 3,
+  artist_id: 1
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 3,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 3,
+  artist_id: 8
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 4,
+  artist_id: 7
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 4,
+  artist_id: 6
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 5,
+  artist_id: 4
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 5,
+  artist_id: 1
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 6,
+  artist_id: 1
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 6,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 6,
+  artist_id: 7
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 7,
+  artist_id: 8
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 7,
+  artist_id: 6
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 7,
+  artist_id: 7
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 8,
+  artist_id: 4
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 8,
+  artist_id: 2
+  )
+
+  EntryArtist.create!(
+  exhibition_id: 8,
+  artist_id: 5
+  )
+
+  # badgeモデル初期データ
   first_post = Badge.create!(
   name: 'First Post',
   introduction: 'このバッジは、初めて投稿したメンバーに授与されます。アイデアや情報を共有してコミュニティに貢献しましょう。',
@@ -159,7 +439,7 @@
 
   first_follower = Badge.create!(
   name: 'First Follower',
-  introduction: 'このバッジは、他のメンバーから初めてフォローされたメンバーに授与されます。コンテンツが注目されていることを示します。',
+  introduction: 'このバッジは���他のメンバーから初めてフォローされたメンバーに授与されます。コンテンツが注目されていることを示します。',
   is_active: true
   )
 

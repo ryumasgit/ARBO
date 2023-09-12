@@ -8,14 +8,20 @@ class Admin::ExhibitionsController < ApplicationController
   def create
     @exhibition = Exhibition.new(exhibition_params)
 
-    # 画像データがない場合は保存禁止
-    unless params[:exhibition][:exhibition_images].present?
-      set_flash_message("画像が最低1つは必要です")
+    if params[:exhibition][:exhibition_images].nil?
+      set_flash_message("画像は最低1つは必要です")
+      redirect_to new_admin_exhibition_path
+      return
+    end
+
+    if params[:exhibition][:exhibition_images].length > 4
+      set_flash_message("画像は最大4つまでです")
       redirect_to new_admin_exhibition_path
       return
     end
 
     if @exhibition.save
+      attach_selected_artists
       set_flash_message("展示会の作成に成功しました")
       redirect_to admin_exhibition_path(@exhibition)
     else
@@ -25,6 +31,8 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def show
+    artists = @exhibition.artists.where(is_active: :true)
+    @artists = artists.page(params[:page]).per(10)
   end
 
   def edit
@@ -33,10 +41,22 @@ class Admin::ExhibitionsController < ApplicationController
   def update
     @original_exhibition = Exhibition.find(params[:id])
 
-    if exhibition_images_delete
-      set_flash_message("画像が最低1つは必要です")
+    if exhibition_images_count_exceeds_limit?
+      set_flash_message("画像は最大4つまでです")
       redirect_to edit_admin_exhibition_path(@exhibition)
-    elsif @exhibition.update(exhibition_params)
+      return
+    end
+
+    if exhibition_images_count_equals_zero?
+      set_flash_message("画像は最低1つは必要です")
+      redirect_to edit_admin_exhibition_path(@exhibition)
+      return
+    end
+
+    exhibition_images_delete
+    if @exhibition.update(exhibition_params)
+      remove_unused_artists(@exhibition, params[:exhibition][:artist_ids])
+      attach_selected_artists
       set_flash_message("展示会情報の保存に成功しました")
       redirect_to admin_exhibition_path(@exhibition)
     else
@@ -60,24 +80,49 @@ class Admin::ExhibitionsController < ApplicationController
   protected
 
   def exhibition_params
-    params.require(:exhibition).permit(:name, :introduction, :official_website, :is_active, exhibition_images: [] )
+    params.require(:exhibition).permit(:museum_id, :artist_ids, :name, :introduction, :official_website, :is_active, exhibition_images: [] )
   end
 
   def get_exhibition_id
     @exhibition = Exhibition.find(params[:id])
   end
 
-  # 選択された画像ファイルを削除かつ、全ての画像ファイルの削除禁止
+  # 画像登録数規制（最大）
+  def exhibition_images_count_exceeds_limit?
+    params[:exhibition][:exhibition_images].present? && params[:exhibition][:exhibition_images].length > 4
+  end
+
+  # 画像登録数規制（0）
+  def exhibition_images_count_equals_zero?
+    params[:exhibition][:exhibition_image_id].present? && params[:exhibition][:exhibition_image_id].count == @exhibition.exhibition_images.count
+  end
+
+  # 選択された画像ファイルを削除
   def exhibition_images_delete
     if params[:exhibition][:exhibition_image_id].present?
-      if params[:exhibition][:exhibition_image_id].count == @exhibition.exhibition_images.count
-        return true
-      else
-        params[:exhibition][:exhibition_image_id].each do |image_id|
-          image = @exhibition.exhibition_images.find(image_id)
-          image.purge
-        end
+      params[:exhibition][:exhibition_image_id].each do |image_id|
+        image = @exhibition.exhibition_images.find(image_id)
+        image.purge
       end
+    end
+  end
+
+  # 選択されたアーティストを関連付ける
+  def attach_selected_artists
+    artist_ids = params[:exhibition][:artist_ids]
+    if artist_ids.present?
+      artist_ids.each do |artist_id|
+        EntryArtist.create(exhibition_id: @exhibition.id, artist_id: artist_id)
+      end
+    end
+  end
+
+  # 更新時に差異のあるデータを削除
+  def remove_unused_artists(exhibition, new_artist_ids)
+    if new_artist_ids.present?
+      current_artist_ids = exhibition.artist_ids
+      artists_to_remove = current_artist_ids - new_artist_ids
+      EntryArtist.where(exhibition_id: exhibition.id, artist_id: artists_to_remove).destroy_all
     end
   end
 

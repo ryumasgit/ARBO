@@ -4,19 +4,19 @@ class Public::SessionsController < Devise::SessionsController
   before_action :member_state, only: [:create]
 
   def after_sign_in_path_for(resource)
-    set_flash_message("ログインしました")
+    flash[:notice] = "ログインしました"
     welcome_path
   end
 
   def after_sign_out_path_for(resource)
-    set_flash_message("ログアウトしました")
+    flash[:notice] = "ログアウトしました"
     root_path
   end
 
   def guest_sign_in
     member = Member.guest
     sign_in member
-    set_flash_message("ゲストログインしました")
+    flash[:notice] = "ゲストログインしました"
     redirect_to welcome_path
   end
 
@@ -48,7 +48,7 @@ class Public::SessionsController < Devise::SessionsController
     @member = Member.find_by(email: params[:member][:email])
     return if !@member
     if @member.valid_password?(params[:member][:password]) && (@member.is_active == false)
-      set_flash_message("入力されたメンバーは退会済みです 新規登録をご利用ください")
+      flash[:notice] =  "入力されたメンバーは退会済みです 新規登録をご利用ください"
       redirect_to new_member_registration_path
     end
   end

@@ -24,7 +24,7 @@
                   <%= artist.name %>
                 <% end %>
               </td>
-              <td><%= artist.exhibitions.count %></td>
+              <td><%= artist.exhibitions.where(is_active: true).count %></td>
               <td><%= artist_is_active_display(artist) %></td>
               <td>
                 <%= link_to edit_admin_artist_path(artist), class: "btn" do %>

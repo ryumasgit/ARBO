@@ -30,8 +30,8 @@ class Admin::MuseumsController < ApplicationController
   end
 
   def show
-    @exhibitions = @museum.exhibitions.where(is_active: :true)
-    page(params[:page]).per(10)
+    exhibitions = @museum.exhibitions.where(is_active: :true)
+    @exhibitions = exhibitions.page(params[:page]).per(10)
   end
 
   def index

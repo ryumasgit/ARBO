@@ -13,13 +13,13 @@ class Admin::ArtistsController < ApplicationController
       redirect_to new_admin_artist_path
       return
     end
-      
+
     if params[:artist][:artist_images].length > 4
       set_flash_message("画像は最大4つまでです")
       redirect_to new_admin_artist_path
       return
     end
-    
+
     if @artist.save
       set_flash_message("アーティストの作成に成功しました")
       redirect_to admin_artist_path(@artist)
@@ -30,7 +30,8 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def show
-    @exhibitions = @artist.exhibitions.page(params[:page]).per(10)
+    exhibitions = @artist.exhibitions.where(is_active: :true)
+    @exhibitions = exhibitions.page(params[:page]).per(10)
   end
 
   def edit
@@ -44,13 +45,13 @@ class Admin::ArtistsController < ApplicationController
       redirect_to edit_admin_artist_path(@artist)
       return
     end
-    
+
     if artist_images_count_equals_zero?
       set_flash_message("画像は最低1つは必要です")
       redirect_to edit_admin_artist_path(@artist)
       return
     end
-    
+
     artist_images_delete
     if @artist.update(artist_params)
       set_flash_message("アーティスト情報の保存に成功しました")

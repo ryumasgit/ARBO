@@ -1,5 +1,8 @@
 <div class="container-fluid">
   <p class="text-center"><%= flash[:notice] %></p>
+  <% if @artist.is_active == false %>
+    <h4 class="text-danger text-center">現在非公開中です</h4>
+  <% end %>
   <div class="row d-flex justify-content-center m-3">
     <div class="col-md-3">
       <div class="images">

@@ -32,7 +32,7 @@
                 <% end %>
               </td>
               <td></td>
-              <td><%= exhibition.artists.count %></td>
+              <td><%= exhibition.artists.where(is_active: true).count %></td>
               <td><%= exhibition_is_active_display(exhibition) %></td>
               <td>
                 <%= link_to edit_admin_exhibition_path(exhibition), class: "btn" do %>

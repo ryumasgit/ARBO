@@ -31,7 +31,8 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def show
-    @artists = @exhibition.artists.page(params[:page]).per(10)
+    artists = @exhibition.artists.where(is_active: :true)
+    @artists = artists.page(params[:page]).per(10)
   end
 
   def edit

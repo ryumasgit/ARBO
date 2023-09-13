@@ -110,9 +110,9 @@ class Admin::MuseumsController < ApplicationController
       end
     end
   end
-
+  
+  # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_museum
-   # エラー箇所に元のデータを代入する
     @original_museum.attributes.each do |attr, value|
       @museum[attr] = value unless @museum.errors[attr].empty?
     end

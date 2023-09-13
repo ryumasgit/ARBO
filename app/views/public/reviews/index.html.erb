@@ -1,7 +1,29 @@
 <div class="container-fluid">
-  <div class="row m-3">
-    <div class="col">
-
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <div class="tabs">
+        <ul class="nav nav-tabs justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#section1">
+              <%= image_tag 'latest_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section2">
+              <%= image_tag 'follow_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content border-top">
+          <div id="section1" class="tab-pane fade show active">
+            <%= render "latest_index", reviews: @reviews %>
+          </div>
+          <div id="section2" class="tab-pane fade">
+            <%= render "follow_index", reviews: @reviews %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

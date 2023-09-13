@@ -1,34 +1,28 @@
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col">
-      <table class="table border-bottom">
-        <thead>
-          <tr>
-            <th></th>
-            <th>美術館</th>
-            <th>展示会</th>
-            <th><i class="fa-solid fa-bookmark" aria-hidden="true"></i></th>
-          </tr>
-        </thead>
-          <tbody>
-            <% museums.each do |museum| %>
-            <tr>
-              <td>
-                <%= link_to museum_path(museum) do %>
-                  <%= image_tag museum.get_museum_images(100, 100) %>
-                <% end %>
-              </td>
-              <td>
-                <%= link_to museum_path(museum) do %>
-                  <%= museum.name %>
-                <% end %>
-              </td>
-              <td><%= museum.exhibitions.count %></td>
-              <td><%= museum.bookmark_museums.count %></td>
-            </tr>
-            <% end %>
-          </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<table class="table border-bottom m-3">
+  <thead>
+    <tr>
+      <th></th>
+      <th>美術館</th>
+      <th>展示会</th>
+      <th><i class="fa-solid fa-bookmark" aria-hidden="true"></i></th>
+    </tr>
+  </thead>
+    <tbody>
+      <% museums.each do |museum| %>
+      <tr>
+        <td>
+          <%= link_to museum_path(museum) do %>
+            <%= image_tag museum.get_museum_images(100, 100) %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to museum_path(museum) do %>
+            <%= museum.name %>
+          <% end %>
+        </td>
+        <td><%= museum.exhibitions.count %></td>
+        <td><%= museum.bookmark_museums.count %></td>
+      </tr>
+      <% end %>
+    </tbody>
+</table>

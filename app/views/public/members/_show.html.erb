@@ -1,36 +1,36 @@
-<div class="container-fluid">
-  <div class="row m-3">
-    <div class="col text-right">
-      <%= image_tag member.get_member_image(160, 160), class: "rounded-circle" %>
-    </div>
-    <div class="col">
-      <div class="row">
-        <%= content_tag :h3, member.name %>
-        <div class="col">
-          <% if @member == current_member %>
-            <%= link_to member_information_edit_path(member_member_name: current_member.name), class: "btn btn-sm" do %>
-              <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
-            <% end %>
-          <% else %>
-            <%= render 'public/relationships/btn', member: member %>
+<div class="row m-3">
+  <div class="col text-right">
+    <%= image_tag member.get_member_image(160, 160), class: "rounded-circle img-fluid" %>
+  </div>
+  <div class="col">
+    <div class="row">
+      <%= content_tag :h3, member.name %>
+      <div class="col">
+        <% if member == current_member %>
+          <%= link_to member_information_edit_path(member_member_name: current_member.name), class: "btn btn-sm" do %>
+            <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
           <% end %>
-        </div>
-      </div>
-      <div class="row">
-        <% if member.introduction.present? %>
-          <%= member.introduction.scan(/.{1,25}/).join("<br>").html_safe %>
+        <% else %>
+          <div id="relationship_<%= member.id %>">
+            <%= render 'public/relationships/btn', member: member %>
+          </div>
         <% end %>
       </div>
     </div>
-  </div>
-  <div class="row d-flex justify-content-center">
-      <%= member.reviews.count %>レビュー
-      <%= content_tag :span, member.earned_badges.count, class: "ml-3" %>バッジ
-      <%= link_to member_follows_path(member_member_name: member.name) do %>
-        <p class="ml-3"><%= member.follower.count %>フォロー</p>
+    <div class="row">
+      <% if member.introduction.present? %>
+        <%= member.introduction.scan(/.{1,25}/).join("<br>").html_safe %>
       <% end %>
-      <%= link_to member_followers_path(member_member_name: member.name) do %>
-        <p class="ml-3"><%= member.followed.count %>フォロワー</p>
-      <% end %>
+    </div>
   </div>
+</div>
+<div class="row d-flex justify-content-center">
+  <%= member.reviews.count %>レビュー
+  <%= content_tag :span, member.earned_badges.count, class: "ml-3" %>バッジ
+  <%= link_to member_follows_path(member_member_name: member.name) do %>
+    <p class="ml-3"><%= member.follower.count %>フォロー</p>
+  <% end %>
+  <%= link_to member_followers_path(member_member_name: member.name) do %>
+    <p class="ml-3"><%= member.followed.count %>フォロワー</p>
+  <% end %>
 </div>

@@ -39,7 +39,7 @@
   name: 'Robert Johnson',
   introduction: "私の名前はRobert Johnsonです。建築家で、美術館や建築デザインに興味を持っています。美術館の建築や展示会の空間デザインについて議論したり、アイデアを共有したりできる仲間を探しています。",
   email: 'robert@example.com',
-  is_active: false,
+  is_active: true,
   is_guest: false,
   password: '111111'
   )
@@ -442,7 +442,6 @@
   review1 = Review.create!(
   member_id: 2,
   exhibition_id: 1,
-  title: '美しい色彩の世界',
   body: 'この展示会は美しい色彩と芸術の調和を楽しむ素晴らしい機会でした。特に『未来の色彩』という作品には驚きました。'
   )
   review1.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/A Sunday on La Grande Jatte — 1884.jpg')), filename: 'A Sunday on La Grande Jatte — 1884.jpg')
@@ -450,7 +449,6 @@
   review2 = Review.create!(
   member_id: 3,
   exhibition_id: 2,
-  title: '感動的な芸術作品',
   body: '美術館の展示会は、現代アートの真髄を捉えたもので、芸術家の創造力に感銘を受けました。'
   )
   review2.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Arrival of the Normandy Train, Gare Saint-Lazare.jpg')), filename: 'Arrival of the Normandy Train, Gare Saint-Lazare.jpg')
@@ -458,7 +456,6 @@
   review3 = Review.create!(
   member_id: 4,
   exhibition_id: 3,
-  title: '印象的な作品',
   body: '印象派の名作が多数展示されており、風景画や人物画に魅了されました。特に、クロード・モネの作品は素晴らしかった。'
   )
   review3.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Ballet at the Paris Opera.jpg')), filename: 'Ballet at the Paris Opera.jpg')
@@ -466,7 +463,6 @@
   review4 = Review.create!(
   member_id: 2,
   exhibition_id: 4,
-  title: '現代のアート',
   body: '現代アートの展示会は斬新で興味深いもので、芸術の新しい方向性に触れることができました。'
   )
   review4.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Coronation Stone of Motecuhzoma II (Stone of the....jpg')), filename: 'Coronation Stone of Motecuhzoma II (Stone of the....jpg')
@@ -474,7 +470,6 @@
   review5 = Review.create!(
   member_id: 3,
   exhibition_id: 5,
-  title: '驚きの体験',
   body: '美術館の展示会は私にとって驚きの体験でした。異なるスタイルや時代の作品が共存し、多様性に触れました。'
   )
   review5.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Assumption of the Virgin.jpg')), filename: 'The Assumption of the Virgin.jpg')
@@ -482,7 +477,6 @@
   review6 = Review.create!(
   member_id: 4,
   exhibition_id: 8,
-  title: '芸術の饗宴',
   body: '美術館の展示会は美的な体験で、芸術家の創造力に敬意を表します。'
   )
   review6.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Beach at Sainte-Adresse.jpg')), filename: 'The Beach at Sainte-Adresse.jpg')
@@ -490,7 +484,6 @@
   review7 = Review.create!(
   member_id: 2,
   exhibition_id: 7,
-  title: '美的な体験',
   body: 'この展示会は美しい色彩と芸術の調和を楽しむ素晴らしい機会でした。特に『未来の色彩』という作品には驚きました。'
   )
   review7.review_image.attach(io: File.open(Rails.root.join("app/assets/images/reviews/The Child's Bath.jpg")), filename: "The Child's Bath.jpg")
@@ -498,7 +491,6 @@
   review8 = Review.create!(
   member_id: 3,
   exhibition_id: 8,
-  title: '感情的な旅',
   body: 'この展示会は美しい色彩と芸術の調和を楽しむ素晴らしい機会でした。特に『未来の色彩』という作品には驚きました。'
   )
   review8.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Herring Net.jpg')), filename: 'The Herring Net.jpg')
@@ -506,7 +498,6 @@
   review9 = Review.create!(
   member_id: 4,
   exhibition_id: 6,
-  title: '芸術への賛歌',
   body: 'この展示会は感情的な旅で、作品が魂に触れる瞬間でした。特に、ヴィンセント・ファン・ゴッホの作品に感動しました。'
   )
   review9.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Watermill with the Great Red Roof.jpg')), filename: 'The Watermill with the Great Red Roof.jpg')
@@ -514,7 +505,6 @@
   review10 = Review.create!(
   member_id: 2,
   exhibition_id: 1,
-  title: '魅力的な作品',
   body: '美術館の展示会には魅力的な作品が展示されており、芸術愛好家には必見の場所です。'
   )
   review10.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Under the Wave off Kanagawa (Kanagawa oki nami....jpg')), filename: 'Under the Wave off Kanagawa (Kanagawa oki nami....jpg')
@@ -522,7 +512,6 @@
   review11 = Review.create!(
   member_id: 3,
   exhibition_id: 2,
-  title: '美の探求',
   body: '美術館の展示会は美の探求の旅で、芸術作品が魔法のように魅了しました。心に残る体験でした。'
   )
   review11.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Veranda Post.jpg')), filename: 'Veranda Post.jpg')
@@ -530,7 +519,6 @@
   review12 = Review.create!(
   member_id: 4,
   exhibition_id: 3,
-  title: '歴史の対話',
   body: 'この展示会は歴史と対話する機会であり、過去から現在への美的な旅でした。展示作品は感動的でした。'
   )
   review12.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Woman at Her Toilette.jpg')), filename: 'Woman at Her Toilette.jpg')

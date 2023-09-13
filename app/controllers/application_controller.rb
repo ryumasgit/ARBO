@@ -47,4 +47,16 @@ class ApplicationController < ActionController::Base
     redirect_to admin_members_path
     return
   end
+
+  def public_review_handle_record_not_found
+    set_flash_message("指定されたURLは見つかりませんでした")
+    redirect_to reviews_path
+    return
+  end
+
+  def admin_review_handle_record_not_found
+    set_flash_message("指定されたURLは見つかりませんでした")
+    redirect_to admin_reviews_path
+    return
+  end
 end

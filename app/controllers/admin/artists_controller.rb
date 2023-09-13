@@ -105,8 +105,8 @@ class Admin::ArtistsController < ApplicationController
     end
   end
 
-  def copy_error_attributes_from_original_artist
    # エラー箇所に元のデータを代入する
+  def copy_error_attributes_from_original_artist
     @original_artist.attributes.each do |attr, value|
       @artist[attr] = value unless @artist.errors[attr].empty?
     end

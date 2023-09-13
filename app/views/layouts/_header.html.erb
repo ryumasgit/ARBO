@@ -4,11 +4,11 @@
       <div class="text-center">
         <% if admin_signed_in? %>
           <%= link_to admin_root_path do %>
-            <%= image_tag 'header_logo.png', width: '155px', height: 'auto' %>
+            <%= image_tag 'header_logo.png', width: '155px', height: 'auto', class: "img-fluid" %>
           <% end %>
         <% else %>
           <%= link_to root_path do %>
-            <%= image_tag 'header_logo.png', width: '155px', height: 'auto' %>
+            <%= image_tag 'header_logo.png', width: '155px', height: 'auto', class: "img-fluid" %>
           <% end %>
         <% end %>
       </div>

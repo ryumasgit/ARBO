@@ -1,11 +1,11 @@
 class Public::RelationshipsController < ApplicationController
   before_action :authenticate_member!
+  before_action :get_member
 
   def create
     name = params[:member_member_name]
     unless name == "guest"
       current_member.follow(name)
-      redirect_to request.referer
     else
       set_flash_message("このユーザーはフォローできません")
       redirect_to member_my_page_path(member_member_name: current_member.name)
@@ -15,7 +15,6 @@ class Public::RelationshipsController < ApplicationController
   def destroy
     name = params[:member_member_name]
     current_member.unfollow(name)
-    redirect_to request.referer
   end
 
   def follows

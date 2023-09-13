@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col">
+      <% reviews.each do |review| %>
+        <div class="col mx-auto">
+          <div class="card m-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
+                    <%= image_tag review.member.get_member_image(100, 100), class: "rounded-circle img-fluid" %>
+                  <% end %>
+                </div>
+                <div class="col-10">
+                  <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
+                    <h6 class="text-muted text-left"><%= review.member.name %></h6>
+                  <% end %>
+                  <%= link_to review_path(review) do %>
+                    <p class="text-dark text-left"><%= review.body %></p>
+                  <% end %>
+                  <div class="row">
+                    <i class="fa-solid fa-shoe-prints pt-1 btn-sm" aria-hidden="true"></i>
+                    <p><%= link_to review.exhibition.name, exhibition_path(review.exhibition) %></p>
+                  </div>
+                  <div class="row">
+                    <%= link_to review_review_comments_path(review), class: "btn" do %>
+                      <i class="fa-regular fa-comment" aria-hidden="true"></i>
+                      <%= review.review_comments.count %>
+                    <% end %>
+                    <div id="favorite_<%= review.id %>">
+                      <%= render "public/favorites/favorite", review: review %>
+                    </div>
+                      <% if review.review_image.attached? %>
+                        <i class="fa-regular fa-image" aria-hidden="true"></i>
+                        <%= review.review_image.count_all %>
+                      <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

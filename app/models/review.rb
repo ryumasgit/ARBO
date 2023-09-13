@@ -3,6 +3,7 @@ class Review < ApplicationRecord
   has_many :tags, through: :review_tags
   has_many :favorites, dependent: :destroy
   has_many :favorite_reviews, through: :favorites, source: :member
+  has_many :review_comments, dependent: :destroy
   belongs_to :member
   belongs_to :exhibition
 

@@ -1,39 +1,29 @@
 <div class="container-fluid">
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
-    <div class="col">
-      <% @reviews.each do |review| %>
-        <div class="col-md-6 mx-auto">
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-2 text-center">
-                  <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
-                    <%= image_tag review.member.get_member_image(100, 100), class: "rounded-circle img-fluid" %>
-                  <% end %>
-                </div>
-                <div class="col-10">
-                  <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
-                    <h6 class="text-muted text-left"><%= review.member.name %></h6>
-                  <% end %>
-                  <%= link_to review_path(review) do %>
-                    <p class="text-dark"><%= review.body.scan(/.{1,51}/).join("<br>").html_safe %></p>
-                  <% end %>
-                  <div class="row">
-                    <i class="fa-solid fa-shoe-prints pt-1 btn-sm" aria-hidden="true"></i>
-                    <p><%= link_to review.exhibition.name, exhibition_path(review.exhibition) %></p>
-                  </div>
-                  <div class="row">
-                    <div id="favorite_<%= review.id %>">
-                      <%= render "public/favorites/favorite", review: review %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="text-center">
+      <div class="tabs">
+        <ul class="nav nav-tabs justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#section1">
+              <%= image_tag 'latest_logo.png', width: '150px', height: 'auto' %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section2">
+              <%= image_tag 'follow_logo.png', width: '150px', height: 'auto' %>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content border-top">
+          <div id="section1" class="tab-pane fade show active">
+            <%= render "latest_index", reviews: @reviews %>
+          </div>
+          <div id="section2" class="tab-pane fade">
+            <%= render "follow_index", reviews: @reviews %>
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -15,7 +15,7 @@ class Admin::MembersController < ApplicationController
 
   def update
     @original_member = Member.find(params[:id])
-    
+
     unless is_guest?
       if @member.update(member_params)
         set_flash_message("メンバー情報の保存に成功しました")
@@ -64,8 +64,8 @@ class Admin::MembersController < ApplicationController
     end
   end
 
+  # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_member
-   # エラー箇所に元のデータを代入する
     @original_member.attributes.each do |attr, value|
       @member[attr] = value unless @member.errors[attr].empty?
     end

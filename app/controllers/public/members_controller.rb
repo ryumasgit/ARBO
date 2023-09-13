@@ -61,8 +61,8 @@ class Public::MembersController < ApplicationController
     end
   end
 
+  # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_member
-    # エラー箇所に元のデータを代入する
     @original_member.attributes.each do |attr, value|
       @member[attr] = value unless @member.errors[attr].empty?
       @member.introduction = @original_member.introduction

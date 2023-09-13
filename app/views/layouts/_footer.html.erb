@@ -4,32 +4,32 @@
       <div class="text-center">
         <% if member_signed_in? %>
           <%= link_to reviews_path do %>
-            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto' %>
+            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
           <%= link_to new_search_path do %>
-            <%= image_tag 'search_logo.png', width: '145px', height: 'auto' %>
+            <%= image_tag 'search_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
           <%= link_to museums_path do %>
-            <%= image_tag 'event_logo.png', width: '145px', height: 'auto' %>
+            <%= image_tag 'event_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
           <% unless current_member.guest? %>
             <%= link_to member_my_page_path(member_member_name: current_member.name) do %>
-              <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto' %>
+              <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
             <% end %>
           <% end %>
 
         <% elsif admin_signed_in? %>
           <%= link_to admin_reviews_path do %>
-            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto' %>
+            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
           <%= link_to admin_members_path do %>
-            <%= image_tag 'member_logo.png', width: '145px', height: 'auto' %>
+            <%= image_tag 'member_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
           <%= link_to admin_museums_path do %>
-            <%= image_tag 'event_logo.png', width: '145px', height: 'auto' %>
+            <%= image_tag 'event_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
           <%= link_to admin_badges_path do %>
-            <%= image_tag 'badge_logo.png', width: '145px', height: 'auto' %>
+            <%= image_tag 'badge_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
 
         <% else %>

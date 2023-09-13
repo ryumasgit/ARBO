@@ -127,8 +127,8 @@ class Admin::ExhibitionsController < ApplicationController
     end
   end
 
-  def copy_error_attributes_from_original_exhibition
    # エラー箇所に元のデータを代入する
+  def copy_error_attributes_from_original_exhibition
     @original_exhibition.attributes.each do |attr, value|
       @exhibition[attr] = value unless @exhibition.errors[attr].empty?
     end

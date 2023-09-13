@@ -11,7 +11,7 @@ class Review < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 255 }
 
-  def get_review_images(width, height)
+  def get_review_image(width, height)
     if review_image.attached?
       review_image.variant(resize_to_limit: [width, height]).processed
     end

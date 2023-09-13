@@ -11,9 +11,12 @@ class Admin::BadgesController < ApplicationController
 
     # 画像データがない場合は保存禁止
     if params[:badge][:badge_image].nil?
-      set_flash_message("画像が最低1つは必要です")
+      set_flash_message("画像が必要です")
       redirect_to new_admin_badge_path
-    elsif @badge.save
+      return
+    end
+
+    if @badge.save
       set_flash_message("バッジの作成に成功しました")
       redirect_to admin_badge_path(@badge)
     else
@@ -68,8 +71,8 @@ class Admin::BadgesController < ApplicationController
     @badge = Badge.find(params[:id])
   end
 
+  # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_badge
-   # エラー箇所に元のデータを代入する
     @original_badge.attributes.each do |attr, value|
       @badge[attr] = value unless @badge.errors[attr].empty?
     end

@@ -1,6 +1,7 @@
 class Public::RelationshipsController < ApplicationController
   before_action :authenticate_member!
   before_action :get_member
+  before_action :member_is_guest?, only: [:create, :destroy]
 
   def create
     name = params[:member_member_name]

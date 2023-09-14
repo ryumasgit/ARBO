@@ -5,7 +5,7 @@
   <% end %>
   <div class="row d-flex justify-content-center m-3">
     <div class="col-md-3">
-      <div class="images">
+      <div class="images my-auto">
         <% @museum.museum_images.each do |image| %>
           <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed %>
         <% end %>

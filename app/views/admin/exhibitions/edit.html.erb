@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row justify-content-center">
+    <div class="col-md-2">
+      <div class="text-center">
+        <h2>Exhibition Information Edit</h2>
+        <%= form_with model: @exhibition, url: admin_exhibition_path(@exhibition) do |f| %>
+        <p>選択した特定の画像を削除できます</p>
+
+          <div class="field d-flex justify-content-center my-3">
+            <% @exhibition.exhibition_images.each do |image| %>
+              <div class="delete-image-check">
+                <%= f.check_box :exhibition_image_id, { multiple: true }, image.id, false %>
+                <%= image_tag image.variant(resize: "200x100", gravity: 'center', extent: "200x100").processed, class: "m-1" %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="field my-2">
+            <%= f.file_field :exhibition_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+            <p class="mt-3">画像は最大4個まで登録できます</p>
+          </div>
+
+          <div class="field text-left my-2">
+            <%= f.label :name, "展示会名" %>
+            <%= f.text_field :name, placeholder: "展示会名", autofocus: true, class: "form-control" %>
+          </div>
+
+          <div class="field text-left my-2">
+            <%= f.label :introduction, "紹介文" %>
+            <%= f.text_area :introduction, placeholder: "紹介文（255文字以下）", class: "form-control", rows: 10 %>
+          </div>
+
+          <div class="field text-left my-2">
+            <%= f.label :official_website, "公式WEBサイトURL" %>
+            <%= f.text_area :official_website, placeholder: "公式WEBサイトURL（255文字以下）", class: "form-control" %>
+          </div>
+
+          <div class="field text-left my-4">
+            <%= f.label :museum_id, "開催元の美術館" %>
+            <%= f.collection_select :museum_id, Museum.where(is_active: true), :id, :name, prompt: "美術館を選択してください", class: "form-control" %>
+          </div>
+
+          <div class="field text-left my-4">
+            <%= f.label :artists, "参加アーティスト" %>
+            <%= f.collection_select :artist_ids, Artist.where(is_active: true), :id, :name, { include_hidden: false }, multiple: true, class: "form-control" %>
+          </div>
+
+          <div class="field text-left my-2">
+            <%= f.radio_button :is_active, true %>
+            <%= f.label :is_active_true, "公開" %>
+            <%= f.radio_button :is_active, false, class: "ml-3" %>
+            <%= f.label :is_active_false, "非公開" %>
+          </div>
+
+          <div class="actions m-3 mb-5">
+            <%= link_to  "キャンセル", admin_exhibition_path(@exhibition), class: "btn btn-secondary mr-3" %>
+            <%= f.submit "保存", class: "btn btn-success" %>
+          </div>
+        <% end %>
+        <%= link_to "削除する", admin_exhibition_path(@exhibition), method: :delete, data: { confirm: "元には戻せません、本当に削除しますか？" } %>
+      </div>
+    </div>
+  </div>
+</div>

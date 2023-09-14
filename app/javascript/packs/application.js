@@ -11,3 +11,24 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "../stylesheets/application";
+require('jquery')
+
+document.addEventListener("turbolinks:load", function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
+  });
+});
+
+document.addEventListener("turbolinks:load", function() {
+  $('.images').slick({
+    autoplay:true,
+    autoplaySpeed: 5000
+  });
+});

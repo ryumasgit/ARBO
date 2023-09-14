@@ -1,10 +1,10 @@
-# Arbo
+# ARBO
 
 ## サイト概要
 
 ### サイトテーマ
 
-Arboは美術館・展示会共有アプリで、イベント情報の記録と感想共有を行えます。
+ARBOはイベント情報の記録と感想共有を行える、美術館・展示会共有アプリです。
 
 ### テーマを選んだ理由
 
@@ -32,7 +32,33 @@ Arboは美術館・展示会共有アプリで、イベント情報の記録と�
 ​
 
 ## 設計書
-<!--テーマを設定・提出する時点では不要です-->
+- 実装機能リスト
+
+https://docs.google.com/spreadsheets/d/1wR-112WYZpwvsbtdh3nHNEnc5AYZRr2q39jUhWAIFtY/edit#gid=375590402
+
+- WBS
+
+https://docs.google.com/spreadsheets/d/1P8854L5xH0_X5BMEGUnfdblPfQCOKh4PqKbt6CrI9C4/edit#gid=1773513600
+
+- UI FLOW
+
+https://app.diagrams.net/#G11Q5D5pTKIOyV5tsmFNcGQR40zrshL3LM
+
+- ワイヤーフレーム
+
+https://app.diagrams.net/#G11CYU8Clf8sIl7wBrnjWO50Ov51t4NK0j#%7B%22pageId%22%3A%221I2uSup_9oQ0vCWFcfs_%22%7D
+
+- ER図
+
+https://app.diagrams.net/#G1-8RffLi1O6WpRtxVwpz64g1cFhevN4MZ
+
+- テーブル定義書
+
+https://docs.google.com/spreadsheets/d/1nGP3XG6cvkwvQhThALKN6Iuoh7QsJEgFDE71K-DNv4A/edit#gid=648111119
+
+- アプリケーション詳細設計書
+
+https://docs.google.com/spreadsheets/d/1NdCHVv7JTjX_BGQQWMKSt-wcBmr9YwSivpbXoi5-4Ss/edit#gid=549108681
 
 
 ## 開発環境

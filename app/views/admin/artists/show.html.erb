@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <% if @artist.is_active == false %>
+    <h4 class="text-danger text-center">現在非公開中です</h4>
+  <% end %>
+  <div class="row d-flex justify-content-center m-3">
+    <div class="col-md-3">
+      <div class="images my-auto">
+        <% @artist.artist_images.each do |image| %>
+          <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-3 d-flex justify-content-center align-items-center">
+      <%= content_tag :h4, @artist.name %>
+      <%= link_to edit_admin_artist_path(@artist), class: "btn" do %>
+        <i class="fa-solid fa-gear align-top"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <% if @artist.introduction.present? %>
+      <%= @artist.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
+    <% end %>
+  </div>
+
+  <div class="border mt-5"></div>
+  <h2 class="text-center m-3">出展展示会</h2>
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <% @exhibitions.each_slice(2) do |exhibitions| %>
+        <div class="d-flex">
+          <% exhibitions.each do |exhibition| %>
+            <div class="d-flex flex-column m-5">
+              <%= link_to admin_exhibition_path(exhibition) do %>
+                <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1" %>
+              <% end %>
+              <%= exhibition.name %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

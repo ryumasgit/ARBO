@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>メンバーネーム</th>
+            <th>レビュー</th>
+            <th>バッジ</th>
+            <th>フォロー</th>
+            <th>フォロワー</th>
+          </tr>
+        </thead>
+          <tbody>
+            <% members.each do |member| %>
+            <tr>
+              <td>
+                <%= link_to member_my_page_path(member_member_name: member.name) do %>
+                  <%= image_tag member.get_member_image(65, 65), class: "rounded-circle" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to member_my_page_path(member_member_name: member.name) do %>
+                  <%= member.name %>
+                <% end %>
+              </td>
+              <td><%= member.reviews.count %></td>
+              <td><%= member.earned_badges.count %></td>
+              <td><%= member.follower.count %></td>
+              <td><%= member.follower.count %></td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

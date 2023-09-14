@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <%= render 'show', member: @member %>
+  <div class="row justify-content-center m-2">
+    <div class="text-center">
+      <div class="tabs">
+        <ul class="nav nav-tabs justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#section1">
+              <%= image_tag 'review_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section2">
+              <%= image_tag 'favorite_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section3">
+              <%= image_tag 'report_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content border-top">
+          <div id="section1" class="tab-pane fade show active">
+
+          </div>
+          <div id="section2" class="tab-pane fade">
+
+          </div>
+          <div id="section3" class="tab-pane fade">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

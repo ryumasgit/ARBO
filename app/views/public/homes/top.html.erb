@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row">
+    <div class="col">
+      <div class="text-center">
+        <%= image_tag 'GeorgiaO’Keeffe.jpg', width: '45%', height: 'auto' %>
+      </div>
+      <div class="text-center mt-5">
+        <%= image_tag 'homes_top_about_image.png', width: '135px', height: 'auto' %><br>
+        <p>ARBOは美術館と展示会愛好家のためのコミュニティプラットフォームです。<br>
+        美術館巡りや展示会の感想を簡単に記録し、他のユーザーと共有できます。</p>
+        <p></p>
+        <p>美術館巡りをより楽しみ、美術愛好家とのつながりを築きましょう。</p>
+        <% if member_signed_in? && current_member.guest? %>
+          <h5 class="text-danger">ゲストメンバーは一部機能が制限されます。</h5>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

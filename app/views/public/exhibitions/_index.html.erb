@@ -1,0 +1,34 @@
+<table class="table border-bottom m-3">
+  <thead>
+    <tr>
+      <th></th>
+      <th>展示会</th>
+      <th>開催美術館</th>
+      <th><i class="fa-solid fa-bookmark" aria-hidden="true"></i></th>
+      <th>レビュー</th>
+    </tr>
+  </thead>
+    <tbody>
+      <% exhibitions.each do |exhibition| %>
+      <tr>
+        <td>
+          <%= link_to exhibition_path(exhibition) do %>
+            <%= image_tag exhibition.get_exhibition_images(100, 100) %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to exhibition_path(exhibition) do %>
+            <%= exhibition.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to museum_path(exhibition.museum) do %>
+            <%= exhibition.museum.name %>
+          <% end %>
+        </td>
+        <td><%= exhibition.bookmark_exhibitions.count %></td>
+        <td><%= exhibition.reviews.count %></td>
+      </tr>
+      <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row justify-content-center member-withdraw">
+    <div class="col-md-3">
+      <div class="text-center">
+        <h2>本当に退会しますか?</h2>
+        <p>
+          退会すると、メンバー情報やこれまでのレビューなどが閲覧できなくなります。<br>
+          退会する場合は、「退会する」をクリックしてください。
+        </p>
+        <%= link_to "退会しない", member_my_page_path, class: "btn btn-secondary mr-3" %>
+        <%= link_to "退会する", member_withdraw_path, method: :patch, class: "btn btn-danger", data: { confirm: "本当に退会しますか？" }  %>
+      </div>
+    </div>
+  </div>
+</div>

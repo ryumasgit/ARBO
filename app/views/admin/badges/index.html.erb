@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="row justify-content-end mr-5">
+        <%= link_to new_admin_badge_path, class: "btn m-1" do %>
+          <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+        <% end %>
+      </div>
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th></th>
+            <th>バッジ</th>
+            <th>獲得メンバー数</th>
+            <th>公開ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+          <tbody>
+            <% @badges.each do |badge| %>
+            <tr>
+              <td>
+                <%= link_to admin_badge_path(badge) do %>
+                  <%= image_tag badge.get_badge_image(100, 100) %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_badge_path(badge) do %>
+                  <%= badge.name %>
+                <% end %>
+              </td>
+              <td><%= badge.earned_badges.count %></td>
+              <td><%= badge_is_active_display(badge) %></td>
+              <td>
+                <%= link_to edit_admin_badge_path(badge), class: "btn" do %>
+                  <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -13,3 +13,123 @@
  *= require_tree .
  *= require_self
  */
+
+
+/* ---- ハンバーガーアイコン ---- */
+#hm-icon {
+  position: fixed;
+  right: 20px;
+  top: 30px;
+  z-index: 10;
+}
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  transition: all .4s;
+  box-sizing: border-box;
+}
+.menu-trigger {
+  position: relative;
+  width: 50px;
+  height: 44px;
+}
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #000;
+  border-radius: 4px;
+}
+.menu-trigger span:nth-child(1) {
+  top: 0;
+}
+.menu-trigger span:nth-child(2) {
+  top: 20px;
+}
+.menu-trigger span:nth-child(3) {
+  bottom: 0;
+}
+.menu-trigger.active span:nth-child(1) {
+  -webkit-transform: translateY(20px) rotate(-45deg);
+  transform: translateY(20px) rotate(-45deg);
+  background-color: #fff;
+}
+.menu-trigger.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-trigger.active span:nth-child(3) {
+  -webkit-transform: translateY(-20px) rotate(45deg);
+  transform: translateY(-20px) rotate(45deg);
+  background-color: #fff;
+}
+
+/* ------ spメニュー ------ */
+#sp-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  color: #fff;
+  width: 100%;
+  min-height: 100%;
+  display: none;
+  z-index: 9;
+}
+
+#sp-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  margin: 3% auto 5% auto;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: #efefef;
+}
+
+.review-new-btn {
+  font-size: 175%;
+  vertical-align: middle;
+}
+
+.fa-brands {
+  font-size: 25px;
+}
+
+.slick-next {
+    right: 10px !important;
+    z-index: 100;
+ }
+
+.slick-prev {
+    left: 10px !important;
+  z-index: 100;
+ }
+
+.images {
+  max-width: 80%;
+  margin: 0 auto 50px;
+  padding: 0;
+  height: auto;
+}
+
+.images img{
+  width: 100%;
+}
+
+.delete-image-check {
+  display: flex;
+  margin:5px 5px 5px 0;
+}
+
+.review-detail-member {
+  padding-right: 10%;
+}

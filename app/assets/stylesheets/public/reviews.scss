@@ -1,0 +1,27 @@
+// Place all the styles related to the public/reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.review-form {
+  margin-top: 10%;
+}
+
+.review-progress {
+  height: 20px;
+  width: 100%;
+}
+
+.review-progress-museums {
+  width: 33%;
+  font-size: 14px;
+}
+
+.review-progress-exhibitions {
+  width: 66%;
+  font-size: 14px;
+}
+
+.review-progress-body {
+  width: 100%;
+  font-size: 14px;
+}

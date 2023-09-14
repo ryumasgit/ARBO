@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row m-4">
+    <div class="col">
+      <div class="text-center">
+        <% if admin_signed_in? %>
+          <%= link_to admin_root_path do %>
+            <%= image_tag 'header_logo.png', width: '155px', height: 'auto', class: "img-fluid" %>
+          <% end %>
+        <% else %>
+          <%= link_to root_path do %>
+            <%= image_tag 'header_logo.png', width: '155px', height: 'auto', class: "img-fluid" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div id="hm-icon">
+      <a class="menu-trigger" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+  </div>
+  <div id="sp-menu">
+    <div class="row justify-content-center m-4">
+      <div class="text-center">
+        <% if member_signed_in? %>
+          <div><%= link_to 'top', root_path, class: "btn" %></div>
+          <div><%= link_to 'log out', destroy_member_session_path, method: :delete, class: "btn" %></div>
+        <% elsif admin_signed_in? %>
+          <div><%= link_to 'admin top', admin_root_path, class: "btn" %></div>
+          <div><%= link_to 'admin log out', destroy_admin_session_path, method: :delete, class: "btn" %></div>
+        <% else %>
+          <div><%= link_to 'top', root_path, class: "btn" %></div>
+          <div><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>
+          <div><%= link_to 'log in', member_session_path, class: "btn" %></div>
+        <% end %>
+        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+        <i class="fa-brands fa-instagram m-5" aria-hidden="true"></i>
+        <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</div>

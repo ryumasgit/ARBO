@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <%= render 'public/reviews/member', review: @review %>
+  <div class="border"></div>
+
+  <div class="row justify-content-center m-5">
+    <div class="text-center">
+      <%= image_tag 'review_detail_logo.png', width: '275px', height: 'auto', class: "img-fluid" %>
+      <% if @review.member == current_member %>
+        <%= link_to edit_review_path(@review), class: "btn pt-3" do %>
+          <i class="fa-solid fa-gear align-top"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center m-3">
+    <% if @review.review_image.attached? %>
+      <div class="col-md-3">
+        <div class="images my-auto">
+          <%= image_tag @review.get_review_image(600, 600), class: "img-fluid" %>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex justify-content-center align-items-center">
+        <%= content_tag :h4, @review.body %>
+      </div>
+    <% else %>
+        <%= content_tag :h4, @review.body %>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-center">
+<%= render 'public/reviews/event', review: @review %>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="btn">
+      <i class="fa-regular fa-comment" aria-hidden="true"></i>
+      <%= @review.review_comments.count %>
+    </div>
+    <div id="favorite_<%= @review.id %>">
+      <%= render "public/favorites/favorite", review: @review %>
+    </div>
+  </div>
+  <div class="border m-3"></div>
+</div>

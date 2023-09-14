@@ -30,10 +30,14 @@ Rails.application.routes.draw do
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
     end
-    resources :reviews, only: [:select_event, :new, :create, :show, :index, :edit, :update, :destroy] do
+    resources :reviews, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :review_comments, only: [:create, :index, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
+    get "select_museums" => "reviews#select_museums"
+    get "select_exhibitions" => "reviews#select_exhibitions"
+    post "selected_museum" => "reviews#selected_museum"
+    post "selected_exhibition" => "reviews#selected_exhibition"
     resources :member_tags, only: [:create, :destroy]
     resources :museums, only: [:show, :index] do
       resource :bookmark_museums, only: [:create, :destroy]

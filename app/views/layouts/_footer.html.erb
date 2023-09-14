@@ -10,7 +10,7 @@
             <%= image_tag 'search_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
           <% unless current_member.guest? %>
-            <%= link_to new_review_path do %>
+            <%= link_to select_museums_path do %>
               <i class="review-new-btn fa-solid fa-circle-plus text-dark" aria-hidden="true"></i>
             <% end %>
           <% end %>

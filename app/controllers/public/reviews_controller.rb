@@ -1,8 +1,28 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_member!
-  before_action :ensure_correct_member,  except: [:new, :show, :index]
-  before_action :member_is_guest?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_correct_member,  except: [:select_museums, :select_exhibitions, :selected_museum, :selected_exhibition, :new, :show, :index]
+  before_action :member_is_guest?, only: [:select_museums, :select_exhibitions, :selected_museum, :selected_exhibition, :new, :create, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :public_review_handle_record_not_found
+
+  def select_museums
+    @museums = Museum.new
+  end
+
+  def select_exhibitions
+    @exhibitions = Exhibition.new
+    @selected_museum = session[:selected_museum_id]
+    @selected_museum_id = Exhibition.where(museum_id: @selected_museum, is_active: true)
+  end
+
+  def selected_museum
+    session[:selected_museum_id] = params[:museum_id]
+    redirect_to select_exhibitions_path
+  end
+
+  def selected_exhibition
+    session[:selected_exhibitions_id] = params[:exhibition_id]
+    redirect_to new_review_path
+  end
 
   def new
     @review = Review.new

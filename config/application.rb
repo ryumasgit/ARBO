@@ -19,4 +19,6 @@ module ArtLabo
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
   end
+  
+  config.session_store :cookie_store, key: '_arbo_app_session'
 end

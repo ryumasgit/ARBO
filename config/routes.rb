@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
     end
-    resources :reviews, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+    resources :reviews, only: [:select_event, :new, :create, :show, :index, :edit, :update, :destroy] do
       resources :review_comments, only: [:create, :index, :destroy]
       resource :favorites, only: [:create, :destroy]
     end

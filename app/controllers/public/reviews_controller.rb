@@ -1,6 +1,7 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_member!
   before_action :ensure_correct_member,  except: [:new, :show, :index]
+  before_action :member_is_guest?, only: [:new, :create, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :public_review_handle_record_not_found
 
   def new
@@ -25,8 +26,20 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
-    reviews = Review.order(created_at: :desc).page(params[:page]).per(50)
-    @reviews = reviews.includes(:member).where(members: { is_active: true })
+    @all_reviews = Review.includes(:member)
+                .where(members: { is_active: true })
+                .order(created_at: :desc)
+                .page(params[:page])
+                .per(50)
+
+    following_member_ids = current_member.followings.pluck(:id)
+    @following_member_reviews = Review.includes(:member)
+                .where(members: { is_active: true })
+                .where(member_id: following_member_ids)
+                .order(created_at: :desc)
+                .page(params[:page])
+                .per(50)
+
   end
 
 

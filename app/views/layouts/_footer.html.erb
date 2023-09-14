@@ -9,6 +9,11 @@
           <%= link_to new_search_path do %>
             <%= image_tag 'search_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>
+          <% unless current_member.guest? %>
+            <%= link_to new_review_path do %>
+              <i class="review-new-btn fa-solid fa-circle-plus text-dark" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
           <%= link_to museums_path do %>
             <%= image_tag 'event_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
           <% end %>

@@ -59,4 +59,11 @@ class ApplicationController < ActionController::Base
     redirect_to admin_reviews_path
     return
   end
+  
+  def member_is_guest?
+    if current_member.guest?
+      set_flash_message("ゲストユーザーには権限がありません")
+      redirect_to request.referer
+    end
+  end
 end

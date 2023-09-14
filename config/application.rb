@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module ArtLabo
+module ArboApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
@@ -17,8 +17,8 @@ module ArtLabo
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = 'Tokyo'
     # config.eager_load_paths << Rails.root.join("extras")
+    config.session_store :cookie_store, key: '_arbo_app_session'
   end
-  
-  config.session_store :cookie_store, key: '_arbo_app_session'
 end

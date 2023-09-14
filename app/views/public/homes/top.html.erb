@@ -11,6 +11,9 @@
         美術館巡りや展示会の感想を簡単に記録し、他のユーザーと共有できます。</p>
         <p></p>
         <p>美術館巡りをより楽しみ、美術愛好家とのつながりを築きましょう。</p>
+        <% if member_signed_in? && current_member.guest? %>
+          <h5 class="text-danger">ゲストメンバーは一部機能が制限されます。</h5>
+        <% end %>
       </div>
     </div>
   </div>

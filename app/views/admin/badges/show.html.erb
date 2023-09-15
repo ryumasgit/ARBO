@@ -3,23 +3,27 @@
   <% if @badge.is_active == false %>
     <h4 class="text-danger text-center">現在非公開中です</h4>
   <% end %>
-    <div class="row d-flex justify-content-center m-3">
-      <div class="col-md-2">
-        <div class="text-center">
-          <%= image_tag @badge.get_badge_image(400, 400) %>
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="row d-flex justify-content-center m-3">
+        <div class="col-md-6">
+          <div class="text-center">
+            <%= image_tag @badge.get_badge_image(400, 400) %>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+          <%= content_tag :h4, @badge.name %>
+          <%= link_to edit_admin_badge_path(@badge), class: "btn" do %>
+            <i class="fa-solid fa-gear align-top"></i>
+          <% end %>
         </div>
       </div>
-      <div class="col-md-2 d-flex justify-content-center align-items-center">
-        <%= content_tag :h3, @badge.name %>
-        <%= link_to edit_admin_badge_path(@badge), class: "btn" do %>
-          <i class="fa-solid fa-gear align-top"></i>
-        <% end %>
-      </div>
     </div>
-    <div class="row justify-content-center">
-      <% if @badge.introduction.present? %>
-        <%= @badge.introduction.scan(/.{1,80}/).join("<br>").html_safe %>
-      <% end %>
-    </div>
+  </div>
+    
+  <div class="row justify-content-center">
+    <% if @badge.introduction.present? %>
+      <%= @badge.introduction.scan(/.{1,80}/).join("<br>").html_safe %>
+    <% end %>
   </div>
 </div>

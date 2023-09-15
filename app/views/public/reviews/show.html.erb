@@ -14,19 +14,23 @@
     </div>
   </div>
 
-  <div class="row justify-content-center m-3">
-    <% if @review.review_image.attached? %>
-      <div class="col-md-3">
-        <div class="images my-auto">
-          <%= image_tag @review.get_review_image(600, 600), class: "img-fluid" %>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="row justify-content-center m-3">
+        <% if @review.review_image.attached? %>
+          <div class="col-md-6">
+            <div class="images my-auto">
+              <%= image_tag @review.get_review_image(600, 600), class: "img-fluid" %>
+            </div>
+          </div>
+          <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <%= content_tag :h4, @review.body %>
+          </div>
+        <% else %>
+            <%= content_tag :h4, @review.body %>
+        <% end %>
       </div>
-      <div class="col-md-3 d-flex justify-content-center align-items-center">
-        <%= content_tag :h4, @review.body %>
-      </div>
-    <% else %>
-        <%= content_tag :h4, @review.body %>
-    <% end %>
+    </div>
   </div>
 
   <div class="row justify-content-center">

@@ -61,8 +61,8 @@ class ApplicationController < ActionController::Base
   end
 
   def member_is_guest?
-    if current_member.guest?
-      set_flash_message("ゲストユーザーには権限がありません")
+    if current_member.is_guest?
+      set_flash_message("権限がありません ブロックされました")
       redirect_to root_path
     end
   end

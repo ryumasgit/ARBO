@@ -17,9 +17,9 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "welcome" => "homes#welcome"
     resources :members, only: [], param: :member_name do
-      patch "update" => "members#update"
       get "my_page" => "members#show"
       get "information/edit" => "members#edit"
+      patch "update" => "members#update"
       get "confirm_withdraw"
       patch "withdraw"
       resource :relationships, only: [:create, :destroy]

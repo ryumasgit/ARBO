@@ -1,4 +1,4 @@
-<% unless current_member.guest? %>
+<% unless current_member.is_guest? %>
   <% if current_member.following?(member) %>
     <%= link_to "フォロー中", member_relationships_path(member_member_name: member.name), method: :delete, remote: true, data: {"turbolinks" => false}, class: "btn btn-sm btn-info" %>
   <% else %>

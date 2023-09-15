@@ -5,11 +5,7 @@ class Public::MuseumsController < ApplicationController
   def show
     @museum = Museum.find(params[:id])
 
-    if !museum_is_active?(@museum)
-      set_flash_message("権限がありません ブロックされました")
-      redirect_to museums_path
-      return
-    end
+    return museum_not_active_redirect unless museum_is_active?(@museum)
 
     exhibitions = @museum.exhibitions.where(is_active: :true)
     @exhibitions = exhibitions.page(params[:page]).per(10)
@@ -23,7 +19,12 @@ class Public::MuseumsController < ApplicationController
 
   protected
 
+  def museum_not_active_redirect
+    set_flash_message("権限がありません ブロックされました")
+    redirect_to museums_path
+  end
+
   def museum_is_active?(museum)
-    return museum.is_active
+    museum.is_active
   end
 end

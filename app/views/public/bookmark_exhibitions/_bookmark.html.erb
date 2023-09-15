@@ -1,4 +1,4 @@
-<% unless current_member.guest? %>
+<% unless current_member.is_guest? %>
   <% if exhibition.bookmarked_by?(current_member) %>
     <%= link_to exhibition_bookmark_exhibitions_path(exhibition), method: :delete, remote: true, data: {"turbolinks" => false} do %>
       <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>

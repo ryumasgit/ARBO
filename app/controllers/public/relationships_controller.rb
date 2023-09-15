@@ -2,11 +2,11 @@ class Public::RelationshipsController < ApplicationController
   before_action :authenticate_member!
   before_action :get_member
   before_action :member_is_guest?, only: [:create, :destroy]
+  before_action :get_followed_member_name, only: [:create, :destroy]
 
   def create
-    name = params[:member_member_name]
-    unless name == "guest"
-      current_member.follow(name)
+    unless @followed_member_name == "guest"
+      current_member.follow(@followed_member_name)
     else
       set_flash_message("このユーザーはフォローできません")
       redirect_to member_my_page_path(member_member_name: current_member.name)
@@ -14,8 +14,7 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def destroy
-    name = params[:member_member_name]
-    current_member.unfollow(name)
+    current_member.unfollow(@followed_member_name)
   end
 
   def follows
@@ -33,5 +32,9 @@ class Public::RelationshipsController < ApplicationController
   def get_member
     member = Member.page(params[:page]).per(10)
     @member = member.find_by(name: params[:member_member_name])
+  end
+
+  def get_followed_member_name
+    @followed_member_name = params[:member_member_name]
   end
 end

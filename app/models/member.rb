@@ -52,16 +52,17 @@ class Member < ApplicationRecord
     end
   end
 
-  def guest?
+  def is_guest?
     is_guest
   end
 
-GUEST_USER_EMAIL = "guest@example.com"
+  GUEST_MEMBER_EMAIL = "guest@example.com"
+  GUEST_MEMBER_NAME = "guest"
 
   def self.guest
-    find_or_create_by!(email: GUEST_USER_EMAIL) do |member|
+    find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |member|
       member.password = SecureRandom.urlsafe_base64
-      member.name = "guest"
+      member.name = GUEST_MEMBER_NAME
       member.is_guest = "true"
     end
   end

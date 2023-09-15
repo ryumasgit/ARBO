@@ -13,6 +13,7 @@ class Admin::RelationshipsController < ApplicationController
   private
 
   def get_member
-    @member = Member.where(id: params[:member_id]).page(params[:page]).per(10)
+    member = Member.page(params[:page]).per(10)
+    @member = member.find_by(id: params[:member_id])
   end
 end

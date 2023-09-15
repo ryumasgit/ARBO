@@ -137,3 +137,9 @@ footer {
 h4 {
   white-space: normal;
 }
+
+@media screen and (max-width:700px) {
+  main {
+  margin: 3% auto 30% auto;
+  }
+}

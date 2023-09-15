@@ -1,4 +1,4 @@
-<% unless current_member.guest? %>
+<% unless current_member.is_guest? %>
   <% if review.favorited_by?(current_member) %>
     <%= link_to review_favorites_path(review), method: :delete, remote: true, data: {"turbolinks" => false}, class: "btn", style: "color: red;" do %>
       <i class="fa-solid fa-heart" aria-hidden="true"></i>

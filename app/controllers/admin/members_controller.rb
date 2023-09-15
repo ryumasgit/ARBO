@@ -25,6 +25,9 @@ class Admin::MembersController < ApplicationController
         set_flash_message("メンバー情報の保存に失敗しました")
         render :edit
       end
+    else
+      set_flash_message("このメンバーの情報は編集できません")
+      redirect_to admin_root_path
     end
   end
 
@@ -39,7 +42,7 @@ class Admin::MembersController < ApplicationController
       end
     else
       set_flash_message("このメンバーは削除できません")
-      render :edit
+      redirect_to admin_root_path
     end
   end
 

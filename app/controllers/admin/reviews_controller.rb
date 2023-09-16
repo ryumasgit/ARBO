@@ -8,8 +8,7 @@ class Admin::ReviewsController < ApplicationController
   def index
     @reviews = Review.includes(:member)
                 .order(created_at: :desc)
-                .page(params[:page])
-                .per(50)
+                .page(params[:page]).per(50)
   end
 
   def destroy

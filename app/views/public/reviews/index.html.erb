@@ -17,10 +17,10 @@
         </ul>
         <div class="tab-content border-top">
           <div id="section1" class="tab-pane fade show active">
-            <%= render "latest_index", reviews: @all_reviews %>
+            <%= render "latest_index", reviews: @all_reviews, review_comment: @review_comment %>
           </div>
           <div id="section2" class="tab-pane fade">
-            <%= render "follow_index", reviews: @following_member_reviews %>
+            <%= render "follow_index", reviews: @following_member_reviews, review_comment: @review_comment %>
           </div>
         </div>
       </div>

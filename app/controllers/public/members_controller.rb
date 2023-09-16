@@ -8,6 +8,7 @@ class Public::MembersController < ApplicationController
   def show
     get_member_name
     redirect_if_member_not_found
+    @reviews = @member.reviews
   end
 
   def edit

@@ -2,17 +2,17 @@
   <% if review.favorited_by?(current_member) %>
     <%= link_to review_favorites_path(review), method: :delete, remote: true, data: {"turbolinks" => false}, class: "btn", style: "color: red;" do %>
       <i class="fa-solid fa-heart" aria-hidden="true"></i>
-      <%= review.favorites.count %>
+      <%= Favorite.joins(:member).where(review_id: review.id, members: { is_active: true }).count %>
     <% end %>
   <% else %>
     <%= link_to review_favorites_path(review), method: :post, remote: true, data: {"turbolinks" => false}, class: "btn" do %>
       <i class="fa-regular fa-heart" aria-hidden="true"></i>
-      <%= review.favorites.count %>
+      <%= Favorite.joins(:member).where(review_id: review.id, members: { is_active: true }).count %>
     <% end %>
   <% end %>
 <% else %>
   <div class="btn">
     <i class="fa-solid fa-heart" aria-hidden="true"></i>
-    <%= review.favorites.count %>
+    <%= Favorite.joins(:member).where(review_id: review.id, members: { is_active: true }).count %>
   </div>
 <% end %>

@@ -5,7 +5,10 @@ class Public::ReviewCommentsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :public_review_comment_handle_record_not_found
 
   def index
-    @review_comments = @review.review_comments.page(params[:page]).per(10)
+    @review_comments = @review.review_comments
+                .includes(:member)
+                .where(members: { is_active: true })
+                .page(params[:page]).per(10)
     @review_comment = ReviewComment.new
   end
 

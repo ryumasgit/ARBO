@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
-    <div class="col-md-2">
+    <div class="col-md-6">
       <div class="text-center">
         <h2>New Exhibition Create</h2>
         <%= form_with model: @exhibition, url: admin_exhibitions_path do |f| %>
 
           <div class="field m-5">
-            <%= f.file_field :exhibition_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+            <%= f.file_field :exhibition_images, multiple: true, accept: "image/*" %>
             <p class="mt-3">画像は最大4個まで登録できます</p>
           </div>
 

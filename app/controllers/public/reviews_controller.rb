@@ -69,6 +69,8 @@ class Public::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     redirect_if_review_not_found(@review)
+    @review_comments = @review.review_comments.page(params[:page]).per(10)
+    @review_comment = ReviewComment.new
   end
 
   def index

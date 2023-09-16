@@ -38,9 +38,12 @@
   <div class="row justify-content-center">
     <div class="btn">
       <i class="fa-regular fa-comment" aria-hidden="true"></i>
-      <%= @review.review_comments.count %>
+      <span id="comments_count_<%= @review.id %>">
+        <%= @review.review_comments.count %>
+      </span>
     </div>
       <%= render "admin/favorites/favorite", review: @review %>
   </div>
-  <div class="border m-3"></div>
+  <div class="border my-5"></div>
 </div>
+<%= render 'admin/review_comments/comments', review_comments: @review_comments %>

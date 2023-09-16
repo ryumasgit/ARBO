@@ -5,7 +5,7 @@
 
   <div class="row justify-content-center m-5">
     <div class="text-center">
-      <%= image_tag 'review_detail_logo.png', width: '275px', height: 'auto', class: "img-fluid" %>
+      <%= image_tag 'review_detail_logo.png', width: '200px', height: 'auto', class: "img-fluid" %>
       <% if @review.member == current_member %>
         <%= link_to edit_review_path(@review), class: "btn pt-3" do %>
           <i class="fa-solid fa-gear align-top" aria-hidden="true"></i>
@@ -40,11 +40,14 @@
   <div class="row justify-content-center">
     <div class="btn">
       <i class="fa-regular fa-comment" aria-hidden="true"></i>
-      <%= @review.review_comments.count %>
+        <span id="comments_count_<%= @review.id %>">
+          <%= @review.review_comments.count %>
+        </span>
     </div>
     <div id="favorite_<%= @review.id %>">
       <%= render "public/favorites/favorite", review: @review %>
     </div>
   </div>
-  <div class="border m-3"></div>
+  <div class="border my-5"></div>
 </div>
+<%= render 'public/review_comments/comments', review: @review, review_comment: @review_comment, review_comments: @review_comments %>

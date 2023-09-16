@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <p class="text-center"><%= flash[:notice] %></p>
+  <div class="row justify-content-center m-5">
+    <div class="text-center">
+      <%= image_tag 'review_comment_logo.png', width: '450px', height: 'auto', class: "img-fluid" %>
+    </div>
+  </div>
+  <% unless current_member.is_guest? %>
+    <%= render 'public/review_comments/form', review: review, review_comment: review_comment %>
+  <% end %>
+  <% if review_comments.present? %>
+    <%= render "public/review_comments/index", review_comments: review_comments %>
+  <% end %>
+</div>

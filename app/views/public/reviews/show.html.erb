@@ -46,6 +46,7 @@
       <%= render "public/favorites/favorite", review: @review %>
     </div>
   </div>
-  <div class="border m-5"></div>
-  <%= image_tag 'review_comment_logo.png', width: '450px', height: 'auto', class: "img-fluid" %>
+  <div class="border my-5"></div>
 </div>
+
+<%= render 'public/review_comments/comments', review: @review, review_comment: @review_comment, review_comments: @review_comments %>

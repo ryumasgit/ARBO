@@ -1,10 +1,14 @@
-<div class="row">
-  <div class="col-md-8">
-    <%= form_with model: review_comment, url: review_review_comments_path(review) do |f| %>
-      <%= f.text_area :comment, rows: '1', class: 'form-control' %>
-  </div>
-  <div class="col-md-4">
-    <%= f.submit "送信", class: 'btn btn-primary' %>
-  </div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <%= form_with model: [review, review_comment] do |f| %>
+      <div class="row">
+        <div class="col-8">
+          <%= f.text_area :comment, rows: '1', class: 'form-control' %>
+        </div>
+        <div class="col-4">
+          <%= f.submit "送信", class: 'btn btn-primary' %>
+        </div>
+      </div>
     <% end %>
+  </div>
 </div>

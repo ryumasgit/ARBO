@@ -2,6 +2,7 @@ class Admin::ReviewsController < ApplicationController
   before_action :get_review_id, except: [:index]
 
   def show
+    @review_comments = @review.review_comments.page(params[:page]).per(10)
   end
 
   def index

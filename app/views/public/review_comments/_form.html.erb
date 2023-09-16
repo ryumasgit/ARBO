@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-md-6">
-    <%= form_with model: [review, review_comment] do |f| %>
+    <%= form_with model: [review, review_comment], local: false do |f| %>
       <div class="row">
         <div class="col-8">
           <%= f.text_area :comment, rows: '1', class: 'form-control' %>

@@ -8,7 +8,9 @@
   <% unless current_member.is_guest? %>
     <%= render 'public/review_comments/form', review: review, review_comment: review_comment %>
   <% end %>
-  <% if review_comments.present? %>
-    <%= render "public/review_comments/index", review_comments: review_comments %>
-  <% end %>
+  <div id='review_comments'>
+    <% if review_comments.present? %>
+      <%= render "public/review_comments/index", review_comments: review_comments %>
+    <% end %>
+  </div>
 </div>

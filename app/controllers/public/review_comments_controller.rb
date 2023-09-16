@@ -14,14 +14,15 @@ class Public::ReviewCommentsController < ApplicationController
     review_comment = current_member.review_comments.new(review_comment_params)
     review_comment.review_id = review.id
     review_comment.save
-    redirect_to review_review_comments_path(review)
+    @review = Review.find(params[:review_id])
+    @review_comments = @review.review_comments.page(params[:page]).per(10)
   end
 
   def destroy
-    review = Review.find(params[:review_id])
     review_comment = ReviewComment.find(params[:id])
     review_comment.destroy
-    redirect_to review_review_comments_path(review)
+    @review = Review.find(params[:review_id])
+    @review_comments = @review.review_comments.page(params[:page]).per(10)
   end
 
   private

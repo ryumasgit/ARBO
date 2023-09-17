@@ -74,8 +74,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "exhibition_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["exhibition_id"], name: "index_bookmark_exhibitions_on_exhibition_id"
-    t.index ["member_id"], name: "index_bookmark_exhibitions_on_member_id"
   end
 
   create_table "bookmark_museums", force: :cascade do |t|
@@ -83,8 +81,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "museum_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_bookmark_museums_on_member_id"
-    t.index ["museum_id"], name: "index_bookmark_museums_on_museum_id"
   end
 
   create_table "earned_badges", force: :cascade do |t|
@@ -92,8 +88,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "badge_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["badge_id"], name: "index_earned_badges_on_badge_id"
-    t.index ["member_id"], name: "index_earned_badges_on_member_id"
   end
 
   create_table "entry_artists", force: :cascade do |t|
@@ -101,8 +95,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "artist_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["artist_id"], name: "index_entry_artists_on_artist_id"
-    t.index ["exhibition_id"], name: "index_entry_artists_on_exhibition_id"
   end
 
   create_table "exhibitions", force: :cascade do |t|
@@ -113,7 +105,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["museum_id"], name: "index_exhibitions_on_museum_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -121,8 +112,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_favorites_on_member_id"
-    t.index ["review_id"], name: "index_favorites_on_review_id"
   end
 
   create_table "member_tags", force: :cascade do |t|
@@ -130,8 +119,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_member_tags_on_member_id"
-    t.index ["tag_id"], name: "index_member_tags_on_tag_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -164,8 +151,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "followed_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -175,7 +160,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "exhibition_visits", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_reports_on_member_id"
   end
 
   create_table "review_comments", force: :cascade do |t|
@@ -184,8 +168,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.string "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_review_comments_on_member_id"
-    t.index ["review_id"], name: "index_review_comments_on_review_id"
   end
 
   create_table "review_tags", force: :cascade do |t|
@@ -193,8 +175,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["review_id"], name: "index_review_tags_on_review_id"
-    t.index ["tag_id"], name: "index_review_tags_on_tag_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -203,8 +183,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["exhibition_id"], name: "index_reviews_on_exhibition_id"
-    t.index ["member_id"], name: "index_reviews_on_member_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -215,26 +193,4 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bookmark_exhibitions", "exhibitions"
-  add_foreign_key "bookmark_exhibitions", "members"
-  add_foreign_key "bookmark_museums", "members"
-  add_foreign_key "bookmark_museums", "museums"
-  add_foreign_key "earned_badges", "badges"
-  add_foreign_key "earned_badges", "members"
-  add_foreign_key "entry_artists", "artists"
-  add_foreign_key "entry_artists", "exhibitions"
-  add_foreign_key "exhibitions", "museums"
-  add_foreign_key "favorites", "members"
-  add_foreign_key "favorites", "reviews"
-  add_foreign_key "member_tags", "members"
-  add_foreign_key "member_tags", "tags"
-  add_foreign_key "relationships", "members", column: "followed_id"
-  add_foreign_key "relationships", "members", column: "follower_id"
-  add_foreign_key "reports", "members"
-  add_foreign_key "review_comments", "members"
-  add_foreign_key "review_comments", "reviews"
-  add_foreign_key "review_tags", "reviews"
-  add_foreign_key "review_tags", "tags"
-  add_foreign_key "reviews", "exhibitions"
-  add_foreign_key "reviews", "members"
 end

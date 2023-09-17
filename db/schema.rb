@@ -198,8 +198,8 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "member_id", null: false
-    t.bigint "exhibition_id", null: false
+    t.integer "member_id", null: false
+    t.integer "exhibition_id", null: false
     t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

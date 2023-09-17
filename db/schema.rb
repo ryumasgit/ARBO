@@ -204,7 +204,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exhibition_id"], name: "index_reviews_on_exhibition_id"
-    t.index ["member_id"], name: "index_reviews_on_member_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -236,5 +235,4 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
   add_foreign_key "review_tags", "reviews"
   add_foreign_key "review_tags", "tags"
   add_foreign_key "reviews", "exhibitions"
-  add_foreign_key "reviews", "members"
 end

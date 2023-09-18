@@ -9,6 +9,10 @@ class Public::MembersController < ApplicationController
     get_member_name
     redirect_if_member_not_found
     @reviews = @member.reviews
+    @favorited_reviews = Review.joins(:favorites)
+                      .joins(:member)
+                      .where(favorites: { member_id: @member.id })
+                      .where(members: { is_active: true })
   end
 
   def edit

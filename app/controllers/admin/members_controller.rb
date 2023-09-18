@@ -4,6 +4,11 @@ class Admin::MembersController < ApplicationController
 
   def show
     redirect_if_member_not_found(@member)
+    @reviews = @member.reviews
+    @favorited_reviews = Review.joins(:favorites)
+                      .joins(:member)
+                      .where(favorites: { member_id: @member.id })
+                      .where(members: { is_active: true })
   end
 
   def index

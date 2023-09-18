@@ -1,8 +1,8 @@
 class CreateEarnedBadges < ActiveRecord::Migration[6.1]
   def change
     create_table :earned_badges do |t|
-      t.references :member, null: false, foreign_key: true
-      t.references :badge, null: false, foreign_key: true
+      t.integer :member_id, null: false
+      t.integer :badge_id, null: false
 
       t.timestamps
     end

@@ -10,46 +10,20 @@ class Public::ReviewsController < ApplicationController
 
   def select_exhibitions
     @exhibitions = Exhibition.new
-
-    if session_museum_present?
-      @selected_museum_id = session[:selected_museum_id]
-      session.delete(:selected_museum_id)
-    else
-      set_flash_message("選択に問題があります")
-      redirect_to select_museums_path
-    end
+    handle_museum_selection_session(session[:selected_museum_id])
   end
 
   def selected_museum
-    if params_museum_id_present?
-      session[:selected_museum_id] = params[:museum][:museum_id]
-      redirect_to select_exhibitions_path
-    else
-      set_flash_message("選択に問題があります")
-      redirect_to select_museums_path
-    end
+    handle_museum_selection(params[:museum][:museum_id])
   end
 
   def selected_exhibition
-    if params_exhibition_id_present?
-      session[:selected_exhibition_id] = params[:exhibition][:exhibition_id]
-      redirect_to new_review_path
-    else
-      set_flash_message("選択に問題があります")
-      redirect_to select_museums_path
-    end
+    handle_exhibition_selection(params[:exhibition][:exhibition_id])
   end
 
   def new
     @review = Review.new
-
-    if session_exhibition_present?
-      @selected_exhibition_id = session[:selected_exhibition_id]
-      session.delete(:selected_exhibition_id)
-    else
-      set_flash_message("選択に問題があります")
-      redirect_to select_museums_path
-    end
+    handle_exhibition_selection_session(session[:selected_exhibition_id])
   end
 
   def create
@@ -69,24 +43,18 @@ class Public::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     redirect_if_review_not_found(@review)
-    @review_comments = @review.review_comments.page(params[:page]).per(10)
+    @review_comments = @review.review_comments
+                      .includes(:member)
+                      .where(members: { is_active: true })
+                      .order(created_at: :desc)
+                      .page(params[:page]).per(10)
     @review_comment = ReviewComment.new
   end
 
   def index
-    @all_reviews = Review.includes(:member)
-                .where(members: { is_active: true })
-                .order(created_at: :desc)
-                .page(params[:page])
-                .per(50)
-
+    @all_reviews = fetch_reviews(50)
     following_member_ids = current_member.followings.pluck(:id)
-    @following_member_reviews = Review.includes(:member)
-                .where(members: { is_active: true })
-                .where(member_id: following_member_ids)
-                .order(created_at: :desc)
-                .page(params[:page])
-                .per(50)
+    @following_member_reviews = fetch_reviews(50, following_member_ids)
   end
 
 
@@ -118,20 +86,44 @@ class Public::ReviewsController < ApplicationController
 
   protected
 
-  def params_museum_id_present?
-    params[:museum][:museum_id].present?
+  def handle_museum_selection(selected_museum_id)
+    if selected_museum_id.present?
+      session[:selected_museum_id] = selected_museum_id
+      redirect_to select_exhibitions_path
+    else
+      set_flash_message("選択に問題があります")
+      redirect_to select_museums_path
+    end
   end
 
-  def session_museum_present?
-    session[:selected_museum_id].present?
+  def handle_museum_selection_session(selected_museum_session)
+    if selected_museum_session.present?
+      @selected_museum_id = selected_museum_session
+      session.delete(:selected_museum_id)
+    else
+      set_flash_message("選択に問題があります")
+      redirect_to select_museums_path
+    end
   end
 
-  def params_exhibition_id_present?
-    params[:exhibition][:exhibition_id].present?
+  def handle_exhibition_selection(selected_exhibition_id)
+    if selected_exhibition_id.present?
+      session[:selected_exhibition_id] = selected_exhibition_id
+      redirect_to new_review_path
+    else
+      set_flash_message("選択に問題があります")
+      redirect_to select_museums_path
+    end
   end
 
-  def session_exhibition_present?
-    session[:selected_exhibition_id].present?
+  def handle_exhibition_selection_session(selected_exhibition_session)
+    if selected_exhibition_session.present?
+      @selected_exhibition_id = selected_exhibition_session
+      session.delete(:selected_exhibition_id)
+    else
+      set_flash_message("選択に問題があります")
+      redirect_to select_museums_path
+    end
   end
 
   def review_params
@@ -151,6 +143,15 @@ class Public::ReviewsController < ApplicationController
     set_flash_message("権限がありません ブロックされました")
     redirect_to reviews_path
     end
+  end
+
+  def fetch_reviews(page_size, member_ids = nil)
+    reviews = Review.includes(:member, :review_comments, :exhibition)
+                      .where(members: { is_active: true })
+                      .order(created_at: :desc)
+                      .page(params[:page]).per(page_size)
+    reviews = reviews.where(member_id: member_ids) if member_ids.present?
+    reviews
   end
 
   # エラー箇所に元のデータを代入する

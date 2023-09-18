@@ -34,21 +34,17 @@
   </div>
 
   <div class="row justify-content-center">
-<%= render 'public/reviews/event', review: @review %>
+    <%= render 'public/reviews/event', review: @review %>
   </div>
 
   <div class="row justify-content-center">
-    <div class="btn">
-      <i class="fa-regular fa-comment" aria-hidden="true"></i>
-        <span id="comments_count_<%= @review.id %>">
-          <%= @review.review_comments.count %>
-        </span>
+    <div id="comments_count_<%= @review.id %>">
+      <%= render "public/review_comments/btn", review: @review %>
     </div>
     <div id="favorite_<%= @review.id %>">
-      <%= render "public/favorites/favorite", review: @review %>
+      <%= render "public/favorites/btn", review: @review %>
     </div>
   </div>
   <div class="border my-5"></div>
 </div>
-
 <%= render 'public/review_comments/comments', review: @review, review_comment: @review_comment, review_comments: @review_comments %>

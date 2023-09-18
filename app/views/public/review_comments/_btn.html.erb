@@ -1,0 +1,4 @@
+<%= link_to review_review_comments_path(review), class: "btn" do %>
+  <i class="fa-regular fa-comment" aria-hidden="true"></i>
+  <%= ReviewComment.joins(:member).where(review_id: review.id, members: { is_active: true }).count %>
+<% end %>

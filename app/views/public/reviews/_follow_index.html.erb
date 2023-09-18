@@ -20,15 +20,12 @@
               <p><%= link_to review.exhibition.name, exhibition_path(review.exhibition) %></p>
             </div>
             <div class="row">
-              <%= link_to review_review_comments_path(review), class: "btn" do %>
-                <i class="fa-regular fa-comment" aria-hidden="true"></i>
-                <%= review.review_comments.count %>
-              <% end %>
+              <%= render "public/review_comments/btn", review: review %>
               <div id="following_member_review_favorite_<%= review.id %>">
-                <%= render "public/favorites/favorite", review: review %>
+                <%= render "public/favorites/btn", review: review %>
               </div>
               <% if review.review_image.attached? %>
-                  <i class="fa-regular fa-images btn"></i>
+                <i class="fa-regular fa-images btn"></i>
               <% end %>
             </div>
           </div>

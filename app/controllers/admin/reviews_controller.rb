@@ -2,13 +2,18 @@ class Admin::ReviewsController < ApplicationController
   before_action :get_review_id, except: [:index]
 
   def show
+    @review_comments = @review.review_comments
+                      .includes(:member)
+                      .where(members: { is_active: true })
+                      .order(created_at: :desc)
+                      .page(params[:page]).per(10)
   end
 
   def index
-    @reviews = Review.includes(:member)
-                .order(created_at: :desc)
-                .page(params[:page])
-                .per(50)
+    @reviews = Review.includes(:member, :review_comments, :exhibition)
+                      .where(members: { is_active: true })
+                      .order(created_at: :desc)
+                      .page(params[:page]).per(50)
   end
 
   def destroy

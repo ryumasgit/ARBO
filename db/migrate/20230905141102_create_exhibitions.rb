@@ -1,7 +1,7 @@
 class CreateExhibitions < ActiveRecord::Migration[6.1]
   def change
     create_table :exhibitions do |t|
-      t.references :museum, null: false, foreign_key: true
+      t.integer :museum_id, null: false
       t.string :name, null: false
       t.string :introduction, null: false
       t.string :official_website, null: false

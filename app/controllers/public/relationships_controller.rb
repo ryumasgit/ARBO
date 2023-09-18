@@ -30,8 +30,7 @@ class Public::RelationshipsController < ApplicationController
   private
 
   def get_member
-    member = Member.page(params[:page]).per(10)
-    @member = member.find_by(name: params[:member_member_name])
+    @member = Member.find_by(name: params[:member_member_name])
   end
 
   def get_followed_member_name

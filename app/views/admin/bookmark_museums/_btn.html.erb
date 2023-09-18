@@ -1,0 +1,2 @@
+<i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
+<%= BookmarkMuseum.joins(:member).where(museum_id: museum.id, members: { is_active: true }).count %>

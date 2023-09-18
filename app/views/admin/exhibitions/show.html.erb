@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="row justify-content-center">
     <% if @exhibition.introduction.present? %>
       <%= @exhibition.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
@@ -31,9 +31,9 @@
   <div class="row justify-content-center m-3">
     <%= link_to "#{@exhibition.name} 公式サイト", @exhibition.official_website, target: "_blank" %>
   </div>
+
   <div class="row justify-content-center align-items-center">
-    <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-    <%= @exhibition.members.count %>
+    <%= render "admin/bookmark_exhibitions/btn", exhibition: @exhibition %>
   </div>
 
   <div class="border mt-5"></div>

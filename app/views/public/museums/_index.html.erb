@@ -21,7 +21,7 @@
           <% end %>
         </td>
         <td><%= museum.exhibitions.count %></td>
-        <td><%= museum.bookmark_museums.count %></td>
+        <td><%= BookmarkMuseum.joins(:member).where(museum_id: museum.id, members: { is_active: true }).count %></td>
       </tr>
       <% end %>
     </tbody>

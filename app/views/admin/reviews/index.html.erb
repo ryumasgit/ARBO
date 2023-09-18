@@ -23,11 +23,8 @@
                   <p><%= link_to review.exhibition.name, admin_exhibition_path(review.exhibition) %></p>
                 </div>
                 <div class="row">
-                  <%= link_to admin_review_review_comments_path(review), class: "btn" do %>
-                    <i class="fa-regular fa-comment" aria-hidden="true"></i>
-                    <%= review.review_comments.count %>
-                  <% end %>
-                    <%= render 'admin/favorites/favorite', review: review %>
+                    <%= render "admin/review_comments/btn", review: review %>
+                    <%= render 'admin/favorites/btn', review: review %>
                   <% if review.review_image.attached? %>
                       <i class="fa-regular fa-images btn"></i>
                   <% end %>

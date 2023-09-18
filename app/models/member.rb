@@ -8,7 +8,6 @@ class Member < ApplicationRecord
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :follower, source: :followed
   has_many :followers, through: :followed, source: :follower
-  has_one :report, dependent: :destroy
   has_many :earned_badges, dependent: :destroy
   has_many :badges, through: :earned_badges
   has_many :member_tags, dependent: :destroy

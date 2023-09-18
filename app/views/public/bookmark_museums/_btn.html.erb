@@ -2,17 +2,17 @@
   <% if museum.bookmarked_by?(current_member) %>
     <%= link_to museum_bookmark_museums_path(museum), method: :delete, remote: true, data: {"turbolinks" => false} do %>
       <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-      <%= museum.members.count %>
+      <%= BookmarkMuseum.joins(:member).where(museum_id: museum.id, members: { is_active: true }).count %>
     <% end %>
   <% else %>
     <%= link_to museum_bookmark_museums_path(museum), method: :post, remote: true, data: {"turbolinks" => false} do %>
       <i class="fa-regular fa-bookmark mr-1" aria-hidden="true"></i>
-      <%= museum.members.count %>
+      <%= BookmarkMuseum.joins(:member).where(museum_id: museum.id, members: { is_active: true }).count %>
     <% end %>
   <% end %>
 <% else %>
   <div class="btn">
     <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-    <%= museum.members.count %>
+    <%= BookmarkMuseum.joins(:member).where(museum_id: museum.id, members: { is_active: true }).count %>
   </div>
 <% end %>

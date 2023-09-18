@@ -153,15 +153,6 @@ ActiveRecord::Schema.define(version: 2023_09_05_142614) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "reports", force: :cascade do |t|
-    t.integer "member_id", null: false
-    t.integer "total_favorited", default: 0, null: false
-    t.integer "museum_visits", default: 0, null: false
-    t.integer "exhibition_visits", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "review_comments", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "review_id", null: false

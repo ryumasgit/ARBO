@@ -28,15 +28,15 @@ class Public::ReviewCommentsController < ApplicationController
 
   def get_review_id
     @review = Review.includes(:member)
-            .where(members: { is_active: true })
-            .find(params[:review_id])
+                      .where(members: { is_active: true })
+                      .find(params[:review_id])
   end
 
   def get_review_comments
     @review_comments = @review.review_comments
-            .includes(:member)
-            .where(members: { is_active: true })
-            .order(created_at: :desc)
-            .page(params[:page]).per(10)
+                      .includes(:member)
+                      .where(members: { is_active: true })
+                      .order(created_at: :desc)
+                      .page(params[:page]).per(10)
   end
 end

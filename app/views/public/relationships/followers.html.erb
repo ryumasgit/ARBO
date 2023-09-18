@@ -5,6 +5,8 @@
   <div class="row d-flex justify-content-center">
     <% if @members.exists? %>
       <%= render 'index',members: @members %>
+    <% else %>
+      <p>メンバーはいません</p>
     <% end %>
   </div>
 </div>

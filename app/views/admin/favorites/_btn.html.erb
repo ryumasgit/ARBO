@@ -1,4 +1,4 @@
 <div class="btn">
   <i class="fa-solid fa-heart" aria-hidden="true"></i>
-  <%= review.favorites.count %>
+  <%= Favorite.joins(:member).where(review_id: review.id, members: { is_active: true }).count %>
 </div>

@@ -44,10 +44,10 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     redirect_if_review_not_found(@review)
     @review_comments = @review.review_comments
-                  .includes(:member)
-                  .where(members: { is_active: true })
-                  .order(created_at: :desc)
-                  .page(params[:page]).per(10)
+                      .includes(:member)
+                      .where(members: { is_active: true })
+                      .order(created_at: :desc)
+                      .page(params[:page]).per(10)
     @review_comment = ReviewComment.new
   end
 
@@ -147,9 +147,9 @@ class Public::ReviewsController < ApplicationController
 
   def fetch_reviews(page_size, member_ids = nil)
     reviews = Review.includes(:member, :review_comments, :exhibition)
-                    .where(members: { is_active: true })
-                    .order(created_at: :desc)
-                    .page(params[:page]).per(page_size)
+                      .where(members: { is_active: true })
+                      .order(created_at: :desc)
+                      .page(params[:page]).per(page_size)
     reviews = reviews.where(member_id: member_ids) if member_ids.present?
     reviews
   end

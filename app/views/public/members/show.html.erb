@@ -30,7 +30,7 @@
             <%= render "public/reviews/latest_index", reviews: @favorited_reviews %>
           </div>
           <div id="section3" class="tab-pane fade">
-
+            <%= render "public/members/report", total_favorited_count: @total_favorited_count, calculate_total_commented_count: @calculate_total_commented_count %>
           </div>
         </div>
       </div>

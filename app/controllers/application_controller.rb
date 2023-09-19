@@ -36,13 +36,13 @@ class ApplicationController < ActionController::Base
     return
   end
 
-  def public_memeber_handle_record_not_found
+  def public_member_handle_record_not_found
     set_flash_message("指定されたURLは見つかりませんでした")
     redirect_to member_my_page_path(member_member_name: current_member.name)
     return
   end
 
-  def admin_memeber_handle_record_not_found
+  def admin_member_handle_record_not_found
     set_flash_message("指定されたURLは見つかりませんでした")
     redirect_to admin_members_path
     return

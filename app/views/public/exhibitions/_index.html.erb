@@ -8,27 +8,27 @@
       <th>レビュー</th>
     </tr>
   </thead>
-    <tbody>
-      <% exhibitions.each do |exhibition| %>
-      <tr>
-        <td>
-          <%= link_to exhibition_path(exhibition) do %>
-            <%= image_tag exhibition.get_exhibition_images(100, 100) %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to exhibition_path(exhibition) do %>
-            <%= exhibition.name %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to museum_path(exhibition.museum) do %>
-            <%= exhibition.museum.name %>
-          <% end %>
-        </td>
-        <td><%= BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
-        <td><%= Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
-      </tr>
-      <% end %>
-    </tbody>
+  <tbody>
+    <% exhibitions.each do |exhibition| %>
+    <tr>
+      <td>
+        <%= link_to exhibition_path(exhibition) do %>
+          <%= image_tag exhibition.get_exhibition_images(100, 100) %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to exhibition_path(exhibition) do %>
+          <%= exhibition.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to museum_path(exhibition.museum) do %>
+          <%= exhibition.museum.name %>
+        <% end %>
+      </td>
+      <td><%= BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
+      <td><%= Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>

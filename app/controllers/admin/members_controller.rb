@@ -3,8 +3,13 @@ class Admin::MembersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :admin_member_handle_record_not_found
 
   def show
-    @reviews = @member.reviews
+    @reviews = @member.reviews.order(created_at: :desc)
     @favorited_reviews = get_favorited_reviews
+    @total_favorited_count = calculate_total_favorited_count
+    @total_commented_count = calculate_total_commented_count
+    @total_visited_museum = calculate_total_visited_museum
+    @total_visited_exhibition = calculate_total_visited_exhibition
+    @earned_badges = get_earned_badges
   end
 
   def index
@@ -50,10 +55,49 @@ class Admin::MembersController < ApplicationController
   protected
 
   def get_favorited_reviews
-    Review.joins(:favorites)
+    @member.favorite_reviews
           .joins(:member)
-          .where(favorites: { member_id: @member.id })
           .where(members: { is_active: true })
+          .order(created_at: :desc)
+  end
+
+  def calculate_total_favorited_count
+    Favorite.joins(review: :member)
+            .where(reviews: { member_id: @member.id })
+            .joins("INNER JOIN members AS favoriting_members ON favoriting_members.id = favorites.member_id")
+            .where(favoriting_members: { is_active: true })
+            .count
+  end
+
+  def calculate_total_commented_count
+    ReviewComment.joins(review: :member)
+          .where(review: { member_id: @member.id })
+          .joins("INNER JOIN members AS commenting_members ON commenting_members.id = review_comments.member_id")
+          .where(commenting_members: { is_active: true })
+          .count
+  end
+
+  def calculate_total_visited_museum
+    Museum.joins(exhibitions: {reviews: :member})
+          .where(museums: { is_active: true })
+          .where(members: { id: @member.id })
+          .distinct
+          .count
+  end
+
+  def calculate_total_visited_exhibition
+    Exhibition.joins(reviews: :member)
+          .where(exhibitions: { is_active: true })
+          .where(members: { id: @member.id })
+          .distinct
+          .count
+  end
+
+  def get_earned_badges
+    @member.badges
+          .joins(:earned_badges)
+          .where(badges: { is_active: true })
+          .order("earned_badges.created_at DESC")
   end
 
   def member_params

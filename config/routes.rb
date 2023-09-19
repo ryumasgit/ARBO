@@ -25,7 +25,6 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
-      resources :badges, only: [:index]
       resources :member_tags, only: [:index]
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]
@@ -48,6 +47,7 @@ Rails.application.routes.draw do
     end
     resources :searches, only: [:new, :index]
     resources :artists, only: [:show]
+    resources :badges, only: [:show]
   end
 
   namespace :admin do
@@ -55,9 +55,6 @@ Rails.application.routes.draw do
     resources :members, only: [:index, :show, :edit, :update, :destroy] do
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
-      resources :badges, only: [] do
-        get "earned" => "badges#badges"
-      end
       resources :member_tags, only: [:index]
       resources :bookmark_museums, only: [:index]
       resources :bookmark_exhibitions, only: [:index]

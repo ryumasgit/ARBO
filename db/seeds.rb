@@ -397,28 +397,28 @@
   # badgeモデル初期データ
   first_post = Badge.create!(
   name: 'First Post',
-  introduction: 'このバッジは、初めて投稿したメンバーに授与されます。アイデアや情報を共有してコミュニティに貢献しましょう。',
+  introduction: 'このバッジは、初めてレビューを投稿したメンバーに授与されます。アイデアや情報を共有してコミュニティに貢献しましょう。',
   is_active: true
   )
   first_post.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_post.png')), filename: 'first_post.png')
 
   first_comment = Badge.create!(
   name: 'First Comment',
-  introduction: ' このバッジは、他のメンバーの投稿に初めてコメントしたメンバーに授与されます。他のメンバーとの対話を楽しんで、意見を交換しましょう。',
+  introduction: ' このバッジは、他のメンバーのレビューに初めてコメントしたメンバーに授与されます。他のメンバーとの対話を楽しんで、意見を交換しましょう。',
   is_active: true
   )
   first_comment.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_comment.png')), filename: 'first_comment.png')
 
   first_follower = Badge.create!(
   name: 'First Follower',
-  introduction: 'このバッジは���他のメンバーから初めてフォローされたメンバーに授与されます。コンテンツが注目されていることを示します。',
+  introduction: 'このバッジは他のメンバーから初めてフォローされたメンバーに授与されます。コンテンツが注目されていることを示します。',
   is_active: true
   )
   first_follower.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_follower.png')), filename: 'first_follower.png')
 
   first_favorited = Badge.create!(
   name: 'First Favorited',
-  introduction: 'このバッジは、他のメンバーから初めてお気に入りに登録されたメンバーに授与されます。あなたのコンテンツが人々に愛されています。',
+  introduction: 'このバッジは、他のメンバーから初めていいねされたメンバーに授与されます。あなたのコンテンツが人々に愛されています。',
   is_active: true
   )
   first_favorited.badge_image.attach(io: File.open(Rails.root.join('app/assets/images/badges/first_favorited.png')), filename: 'first_favorited.png')

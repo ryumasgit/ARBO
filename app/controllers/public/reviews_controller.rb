@@ -32,8 +32,8 @@ class Public::ReviewsController < ApplicationController
     @review.exhibition_id = params[:review][:exhibition_id]
 
     if @review.save
-      set_flash_message("レビューの作成に成功しました")
-      redirect_to review_path(@review)
+      session[:check_condition] = @review.id
+      redirect_to check_condition_badges_path
     else
       set_flash_message("レビューの作成に失敗しました")
       render :new

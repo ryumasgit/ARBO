@@ -47,7 +47,9 @@ Rails.application.routes.draw do
     end
     resources :searches, only: [:new, :index]
     resources :artists, only: [:show]
-    resources :badges, only: [:show]
+    resources :badges, only: [:show] do
+      get "check_condition", on: :collection
+    end
   end
 
   namespace :admin do

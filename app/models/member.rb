@@ -9,7 +9,7 @@ class Member < ApplicationRecord
   has_many :followings, through: :follower, source: :followed
   has_many :followers, through: :followed, source: :follower
   has_many :earned_badges, dependent: :destroy
-  has_many :badges, through: :earned_badges
+  has_many :badges, through: :earned_badges, source: :badge
   has_many :member_tags, dependent: :destroy
   has_many :tags, through: :member_tags
   has_many :reviews, dependent: :destroy

@@ -58,9 +58,6 @@ class Admin::BadgesController < ApplicationController
     end
   end
 
-  def earned
-  end
-
   protected
 
   def badge_params

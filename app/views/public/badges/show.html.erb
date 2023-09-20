@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="row d-flex justify-content-center m-3">
+        <div class="col-md-6">
+          <div class="text-center">
+            <%= image_tag @badge.get_badge_image(400, 400) %>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+          <%= content_tag :h4, @badge.name %>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="row justify-content-center">
+    <% if @badge.introduction.present? %>
+      <%= @badge.introduction.scan(/.{1,80}/).join("<br>").html_safe %>
+    <% end %>
+  </div>
+</div>

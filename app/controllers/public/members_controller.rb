@@ -86,10 +86,11 @@ class Public::MembersController < ApplicationController
   end
 
   def get_earned_badges
-    @member.badges
-          .joins(:earned_badges)
-          .where(badges: { is_active: true })
-          .order("earned_badges.created_at DESC")
+    EarnedBadge.joins(:member)
+      .joins(:badge)
+      .where(members: { id: @member.id })
+      .where(badges: { is_active: true })
+      .order(created_at: :desc)
   end
 
   def member_params

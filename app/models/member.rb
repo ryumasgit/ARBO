@@ -15,6 +15,7 @@ class Member < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_reviews, through: :favorites, source: :review
+  has_many :favorite_members, through: :favorites, source: :member
   has_many :review_comments, dependent: :destroy
   has_many :bookmark_museums, dependent: :destroy
   has_many :museums, through: :bookmark_museums
@@ -31,6 +32,7 @@ class Member < ApplicationRecord
   def follow(name)
     followed_member = Member.find_by(name: name)
     follower.create(followed: followed_member)
+    BadgeJob.perform_later(followed_member)
   end
 
   def unfollow(name)

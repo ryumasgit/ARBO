@@ -60,6 +60,8 @@ gem 'kaminari','~> 1.2.1'
 gem 'rmagick'
 gem "jquery-rails"
 gem 'dotenv-rails'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
 group :production do
   gem 'mysql2'
 end

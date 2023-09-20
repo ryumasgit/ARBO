@@ -30,7 +30,10 @@
                 <%= badge.name %>
               <% end %>
             </td>
-            <td><%= badge.earned_badges.count %></td>
+            <td>
+              <% if badge.is_active == true %>
+                <%= badge.earned_badges.count %></td>
+              <% end %>
             <td><%= badge_is_active_display(badge) %></td>
             <td>
               <%= link_to edit_admin_badge_path(badge), class: "btn" do %>

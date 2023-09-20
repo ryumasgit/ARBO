@@ -14,12 +14,12 @@
           <% earned_badges.each do |earned_badges| %>
           <tr>
             <td>
-              <%= link_to badge_path(earned_badges.badge) do %>
+              <%= link_to admin_badge_path(earned_badges.badge) do %>
                 <%= image_tag earned_badges.badge.get_badge_image(150, 150) %>
               <% end %>
             </td>
             <td>
-              <%= link_to badge_path(earned_badges.badge) do %>
+              <%= link_to admin_badge_path(earned_badges.badge) do %>
                 <%= earned_badges.badge.name %>
               <% end %>
             </td>

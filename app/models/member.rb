@@ -9,12 +9,13 @@ class Member < ApplicationRecord
   has_many :followings, through: :follower, source: :followed
   has_many :followers, through: :followed, source: :follower
   has_many :earned_badges, dependent: :destroy
-  has_many :badges, through: :earned_badges
+  has_many :badges, through: :earned_badges, source: :badge
   has_many :member_tags, dependent: :destroy
   has_many :tags, through: :member_tags
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_reviews, through: :favorites, source: :review
+  has_many :favorite_members, through: :favorites, source: :member
   has_many :review_comments, dependent: :destroy
   has_many :bookmark_museums, dependent: :destroy
   has_many :museums, through: :bookmark_museums
@@ -31,6 +32,7 @@ class Member < ApplicationRecord
   def follow(name)
     followed_member = Member.find_by(name: name)
     follower.create(followed: followed_member)
+    BadgeJob.perform_later(followed_member)
   end
 
   def unfollow(name)

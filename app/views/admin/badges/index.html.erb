@@ -17,29 +17,32 @@
             <th></th>
           </tr>
         </thead>
-          <tbody>
-            <% @badges.each do |badge| %>
-            <tr>
-              <td>
-                <%= link_to admin_badge_path(badge) do %>
-                  <%= image_tag badge.get_badge_image(100, 100) %>
-                <% end %>
-              </td>
-              <td>
-                <%= link_to admin_badge_path(badge) do %>
-                  <%= badge.name %>
-                <% end %>
-              </td>
-              <td><%= badge.earned_badges.count %></td>
-              <td><%= badge_is_active_display(badge) %></td>
-              <td>
-                <%= link_to edit_admin_badge_path(badge), class: "btn" do %>
-                  <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
-                <% end %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
+        <tbody>
+          <% @badges.each do |badge| %>
+          <tr>
+            <td>
+              <%= link_to admin_badge_path(badge) do %>
+                <%= image_tag badge.get_badge_image(100, 100) %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to admin_badge_path(badge) do %>
+                <%= badge.name %>
+              <% end %>
+            </td>
+            <td>
+              <% if badge.is_active == true %>
+                <%= badge.earned_badges.count %></td>
+              <% end %>
+            <td><%= badge_is_active_display(badge) %></td>
+            <td>
+              <%= link_to edit_admin_badge_path(badge), class: "btn" do %>
+                <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
   </div>

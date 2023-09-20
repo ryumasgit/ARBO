@@ -1,5 +1,6 @@
 class Admin::ReviewsController < ApplicationController
   before_action :get_review_id, except: [:index]
+  rescue_from ActiveRecord::RecordNotFound, with: :admin_review_handle_record_not_found
 
   def show
     @review_comments = @review.review_comments

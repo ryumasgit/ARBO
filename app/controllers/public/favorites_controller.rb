@@ -6,6 +6,7 @@ class Public::FavoritesController < ApplicationController
   def create
     favorite = current_member.favorites.new(review_id: @review.id)
     favorite.save
+    BadgeJob.perform_later(@review.member)
   end
 
   def destroy

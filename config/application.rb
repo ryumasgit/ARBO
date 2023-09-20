@@ -20,5 +20,6 @@ module ArboApp
     config.time_zone = 'Tokyo'
     # config.eager_load_paths << Rails.root.join("extras")
     config.session_store :cookie_store, key: '_arbo_app_session'
+    config.active_job.queue_adapter = :delayed_job
   end
 end

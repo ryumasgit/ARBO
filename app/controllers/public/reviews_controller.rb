@@ -32,6 +32,7 @@ class Public::ReviewsController < ApplicationController
     @review.exhibition_id = params[:review][:exhibition_id]
 
     if @review.save
+      BadgeJob.perform_later(@review.member)
       set_flash_message("レビューの作成に成功しました")
       redirect_to review_path(@review)
     else

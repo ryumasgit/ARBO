@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
     <div class="col-md-2">
       <div class="text-center">
-        <h2>Member Log In</h2>
+        <%= image_tag 'member_sign_in_logo.png', width: '200%', height: 'auto', class: "img-fluid" %>
         <%= form_with model: @member, url: member_session_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
 

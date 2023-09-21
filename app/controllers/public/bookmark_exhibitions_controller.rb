@@ -2,9 +2,6 @@ class Public::BookmarkExhibitionsController < ApplicationController
   before_action :authenticate_member!
   before_action :member_is_guest?, only: [:create, :destroy]
 
-  def index
-  end
-
   def create
     @exhibition = Exhibition.find(params[:exhibition_id])
     bookmark_exhibition = current_member.bookmark_exhibitions.new(exhibition_id: @exhibition.id)

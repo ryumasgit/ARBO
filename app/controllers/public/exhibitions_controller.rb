@@ -11,9 +11,6 @@ class Public::ExhibitionsController < ApplicationController
     @artists = artists.page(params[:page]).per(10)
   end
 
-  def reviews
-  end
-
   protected
 
   def exhibition_not_active_redirect

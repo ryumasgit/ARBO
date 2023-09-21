@@ -4,11 +4,11 @@
       <div class="row d-flex justify-content-center m-3">
         <div class="col-md-6">
           <div class="text-center">
-            <%= image_tag @badge.get_badge_image(400, 400) %>
+            <%= image_tag @badge.get_badge_image(400, 400), class: "img-fluid"%>
           </div>
         </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <%= content_tag :h4, @badge.name %>
+        <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
+          <h4><%= @badge.name %></h4>
         </div>
       </div>
     </div>

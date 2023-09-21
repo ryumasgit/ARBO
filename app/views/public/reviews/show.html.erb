@@ -14,20 +14,31 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center m-5">
     <div class="col-md-5">
-      <div class="row justify-content-center m-3">
+      <div class="row justify-content-center m-5">
         <% if @review.review_image.attached? %>
           <div class="col-md-6">
             <div class="images my-auto">
               <%= image_tag @review.get_review_image(600, 600), class: "img-fluid" %>
             </div>
           </div>
-          <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <%= content_tag :h4, @review.body %>
+          <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
+            <h4><%= @review.body %></h4>
           </div>
         <% else %>
-            <%= content_tag :h4, @review.body %>
+          <h4><%= @review.body %></h4>
+        <% end %>
+      </div>
+
+      <div class="row justify-content-center">
+        <% if @review.tags.any? %>
+          <% @review.tags.each do |tag| %>
+            <div class="btn pt-3">
+              <i class="fa-solid fa-tag " aria-hidden="true"></i>
+              <%= link_to tag.name, tag_search_path(tag.name) %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -46,5 +57,5 @@
     </div>
   </div>
   <div class="border my-5"></div>
-</div>
 <%= render 'public/review_comments/comments', review: @review, review_comment: @review_comment, review_comments: @review_comments %>
+</div>

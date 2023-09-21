@@ -4,7 +4,6 @@
       <%= image_tag 'search_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
       </div>
       <%= render 'form' %>
-      <% if @reviews.present? || @members.present? %>
       <div class="tabs">
         <ul class="nav nav-tabs justify-content-center">
           <li class="nav-item">
@@ -27,7 +26,6 @@
           </div>
         </div>
       </div>
-      <% end %>
     </div>
   </div>
 </div>

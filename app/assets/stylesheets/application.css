@@ -15,6 +15,28 @@
  */
 
 
+
+header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: #fff;
+  z-index: 8;
+}
+
+main {
+  margin: 8% auto 5% auto;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: #efefef;
+}
+
 /* ---- ハンバーガーアイコン ---- */
 #hm-icon {
   position: fixed;
@@ -81,27 +103,6 @@
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-}
-
-header {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  background-color: #fff;
-  z-index: 8;
-}
-
-main {
-  margin: 8% auto 5% auto;
-}
-
-footer {
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  background-color: #efefef;
 }
 
 .review-new-btn {

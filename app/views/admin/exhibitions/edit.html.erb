@@ -1,9 +1,9 @@
 <div class="container-fluid">
+  <h2 class="text-center">EXHIBITION INFORMATION EDIT</h2>
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>Exhibition Information Edit</h2>
         <%= form_with model: @exhibition, url: admin_exhibition_path(@exhibition) do |f| %>
         <p>選択した特定の画像を削除できます</p>
 

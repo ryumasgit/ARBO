@@ -4,12 +4,10 @@
   <div class="border"></div>
 
   <div class="row justify-content-center m-5">
-    <div class="text-center">
-      <%= image_tag 'review_detail_logo.png', width: '275px', height: 'auto', class: "img-fluid" %>
-        <%= link_to admin_review_path(@review), method: :delete, class: "btn" do %>
-          <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-        <% end %>
-    </div>
+    <h3>REVIEW DETAIL</h3>
+    <%= link_to admin_review_path(@review), method: :delete, class: "btn" do %>
+      <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+    <% end %>
   </div>
 
   <div class="row justify-content-center m-5">

@@ -5,7 +5,7 @@
 
   <div class="row justify-content-center m-5">
     <div class="text-center">
-      <%= image_tag 'review_detail_logo.png', width: '175px', height: 'auto', class: "img-fluid" %>
+      <h3>REVIEW DETAIL</h3>
       <% if @review.member == current_member %>
         <%= link_to edit_review_path(@review), class: "btn pt-3" do %>
           <i class="fa-solid fa-gear align-top" aria-hidden="true"></i>

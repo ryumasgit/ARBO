@@ -1,9 +1,9 @@
 <div class="container-fluid">
+  <h2 class="text-center">BADGE INFORMATION EDIT</h2>
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>Badge Information Edit</h2>
         <%= form_with model: @badge, url: admin_badge_path(@badge) do |f| %>
 
           <div class="field m-5">

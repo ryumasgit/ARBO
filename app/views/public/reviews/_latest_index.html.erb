@@ -7,7 +7,7 @@
             <%= image_tag review.member.get_member_image(100, 100), class: "rounded-circle img-fluid" %>
           <% end %>
         </div>
-        <div class="col-10">
+        <div class="col-10 text-break">
           <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
             <h6 class="text-muted text-left"><%= review.member.name %></h6>
           <% end %>

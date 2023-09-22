@@ -22,6 +22,7 @@
       <%= @exhibition.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
     <% end %>
   </div>
+  
   <div class="row justify-content-center m-3">
     <%= link_to "#{@exhibition.name} 公式サイト", @exhibition.official_website, target: "_blank" %>
   </div>

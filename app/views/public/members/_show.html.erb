@@ -4,7 +4,7 @@
   </div>
   <div class="col">
     <div class="row">
-      <%= content_tag :h3, member.name %>
+      <h3><%= member.name %></h3>
       <div class="col">
         <% if member == current_member %>
           <%= link_to member_information_edit_path(member_member_name: current_member.name), class: "btn btn-sm" do %>
@@ -26,7 +26,7 @@
 </div>
 <div class="row d-flex justify-content-center">
   <%= member.reviews.count %>レビュー
-  <%= content_tag :span, member.earned_badges.count, class: "ml-3" %>バッジ
+  <span class="ml-3"><%= member.earned_badges.count %></span>バッジ
   <%= link_to member_follows_path(member_member_name: member.name) do %>
     <p class="ml-3"><%= member.followings.where(members: { is_active: true }).count %>フォロー</p>
   <% end %>

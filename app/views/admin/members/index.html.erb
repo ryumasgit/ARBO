@@ -34,8 +34,10 @@
             <td><%= member.followers.where(members: { is_active: true }).count %></td>
             <td><%= member_is_active_display(member) %></td>
             <td>
-              <%= link_to edit_admin_member_path(member), class: "btn" do %>
-                <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
+              <% if member.is_guest == false %>
+                <%= link_to edit_admin_member_path(member), class: "btn" do %>
+                  <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
+                <% end %>
               <% end %>
             </td>
           </tr>

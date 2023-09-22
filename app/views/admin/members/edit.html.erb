@@ -4,7 +4,7 @@
     <div class="col-md-6">
       <div class="text-center">
         <h2>Member Information Edit</h2>
-        <% unless @member.name == "guest" %>
+        <% if @member.is_guest == false %>
           <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
 
             <div class="field m-5">

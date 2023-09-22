@@ -7,7 +7,7 @@
   <div class="col">
     <div class="row">
       <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
-        <%= content_tag :h3, review.member.name, class: "text-dark" %>
+        <h3 class="text-dark" ><%= review.member.name %></h3>
       <% end %>
       <div class="col">
         <% unless review.member == current_member %>
@@ -19,7 +19,7 @@
     </div>
     <div class="row d-flex">
       <%= review.member.reviews.count %>レビュー
-      <%= content_tag :span, review.member.earned_badges.count, class: "ml-3" %>バッジ
+      <span class="ml-3"><%= review.member.earned_badges.count %></span>バッジ
       <%= link_to member_follows_path(member_member_name: review.member.name) do %>
         <p class="ml-3"><%= review.member.follower.count %>フォロー</p>
       <% end %>

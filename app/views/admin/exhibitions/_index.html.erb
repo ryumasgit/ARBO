@@ -1,44 +1,42 @@
-<div class="table-responsive text-nowrap">
-  <table class="table border-bottom">
-    <thead>
-      <tr>
-        <th></th>
-        <th>展示会</th>
-        <th>開催美術館</th>
-        <th>レビュー</th>
-        <th>出展アーティスト</th>
-        <th>公開ステータス</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% exhibitions.each do |exhibition| %>
-      <tr>
-        <td>
-          <%= link_to admin_exhibition_path(exhibition) do %>
-            <%= image_tag exhibition.get_exhibition_images(100, 100), class: "img-fluid" %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to admin_exhibition_path(exhibition) do %>
-            <%= exhibition.name %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to admin_museum_path(exhibition.museum) do %>
-            <%= exhibition.museum.name %>
-          <% end %>
-        </td>
-        <td><%= Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
-        <td><%= exhibition.artists.where(is_active: true).count %></td>
-        <td><%= exhibition_is_active_display(exhibition) %></td>
-        <td>
-          <%= link_to edit_admin_exhibition_path(exhibition), class: "btn" do %>
-            <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<table class="table table-hover border-bottom">
+  <thead>
+    <tr>
+      <th></th>
+      <th>展示会</th>
+      <th>開催美術館</th>
+      <th>レビュー</th>
+      <th>出展アーティスト</th>
+      <th>公開ステータス</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% exhibitions.each do |exhibition| %>
+    <tr>
+      <td>
+        <%= link_to admin_exhibition_path(exhibition) do %>
+          <%= image_tag exhibition.get_exhibition_images(100, 100), class: "img-fluid" %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to admin_exhibition_path(exhibition) do %>
+          <%= exhibition.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to admin_museum_path(exhibition.museum) do %>
+          <%= exhibition.museum.name %>
+        <% end %>
+      </td>
+      <td><%= Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
+      <td><%= exhibition.artists.where(is_active: true).count %></td>
+      <td><%= exhibition_is_active_display(exhibition) %></td>
+      <td>
+        <%= link_to edit_admin_exhibition_path(exhibition), class: "btn" do %>
+          <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

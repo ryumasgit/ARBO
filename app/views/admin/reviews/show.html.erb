@@ -1,34 +1,38 @@
 <div class="container-fluid">
   <p class="text-center"><%= flash[:notice] %></p>
-  <%= render 'admin/reviews/member', review: @review %>
+  <%= render 'admin/members/show', member: @review.member %>
   <div class="border"></div>
 
-  <div class="row justify-content-center m-5">
-    <div class="text-center">
-      <%= image_tag 'review_detail_logo.png', width: '275px', height: 'auto', class: "img-fluid" %>
-        <%= link_to admin_review_path(@review), method: :delete, class: "btn" do %>
-          <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-        <% end %>
-    </div>
+  <div class="row justify-content-center my-5">
+    <h3>REVIEW DETAIL</h3>
+    <%= link_to admin_review_path(@review), method: :delete, class: "btn btn-sm" do %>
+      <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+    <% end %>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="row justify-content-center m-3">
-        <% if @review.review_image.attached? %>
-          <div class="col-md-6">
-            <div class="images my-auto">
-              <%= image_tag @review.get_review_image(600, 600), class: "img-fluid" %>
-            </div>
-          </div>
-          <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <%= content_tag :h4, @review.body %>
-          </div>
-        <% else %>
-            <%= content_tag :h4, @review.body %>
-        <% end %>
+  <div class="row justify-content-center my-5">
+    <% if @review.review_image.attached? %>
+      <div class="col-md-6">
+        <div class="images my-auto">
+          <%= image_tag @review.get_review_image(600, 600), class: "img-fluid" %>
+        </div>
       </div>
-    </div>
+      <div class="col-md-6 p-3 d-flex justify-content-center align-items-center text-break">
+        <h4><%= @review.body %></h4>
+      </div>
+    <% else %>
+      <h4><%= @review.body %></h4>
+    <% end %>
+  </div>
+  <div class="row justify-content-center">
+    <% if @review.tags.any? %>
+      <% @review.tags.each do |tag| %>
+        <div class="btn pt-3">
+          <i class="fa-solid fa-tag " aria-hidden="true"></i>
+          <%= tag.name %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="row justify-content-center">
@@ -40,5 +44,5 @@
       <%= render "admin/favorites/btn", review: @review %>
   </div>
   <div class="border my-5"></div>
-</div>
 <%= render 'admin/review_comments/comments', review_comments: @review_comments %>
+</div>

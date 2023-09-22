@@ -1,7 +1,25 @@
 class ApplicationController < ActionController::Base
   before_action :check_admin_access
+  before_action :prevent_concurrent_sessions_to_administrators
+  before_action :prevent_concurrent_sessions_to_memberstrators
 
   private
+
+  def prevent_concurrent_sessions_to_administrators
+    if request.path == '/admin/sign_in' && member_signed_in?
+      # メンバーがログインしている場合、管理者のアクセスを制限
+      flash[:notice] = "ブロックされました ログアウト後にもう一度お確かめください"
+      redirect_to root_path
+    end
+  end
+
+  def prevent_concurrent_sessions_to_memberstrators
+    if request.path == '/members/sign_in' && admin_signed_in?
+      # 管理者がログインしている場合、一般ユーザーのアクセスを制限
+      flash[:notice] = "ブロックされました ログアウト後にもう一度お確かめください"
+      redirect_to admin_root_path
+    end
+  end
 
   def check_admin_access
     if admin_controller? && !admin_signed_in? && request.path != '/admin/sign_in'

@@ -1,14 +1,14 @@
 <div class="container-fluid">
+  <h2 class="text-center">MEMBER INFORMATION EDIT</h2>
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>Member Information Edit</h2>
-        <% unless @member.name == "guest" %>
+        <% if @member.is_guest == false %>
           <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
 
             <div class="field m-5">
-              <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle mb-3" %>
+              <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle img-fluid mb-3" %>
             </div>
 
             <div class="field my-2">

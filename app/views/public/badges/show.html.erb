@@ -1,16 +1,13 @@
 <div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="row d-flex justify-content-center m-3">
-        <div class="col-md-6">
-          <div class="text-center">
-            <%= image_tag @badge.get_badge_image(400, 400) %>
-          </div>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <%= content_tag :h4, @badge.name %>
-        </div>
+  <h2 class="text-center">BADGE DETAIL</h2>
+  <div class="row justify-content-center my-5">
+    <div class="col-md-6">
+      <div class="text-center">
+        <%= image_tag @badge.get_badge_image(400, 400), class: "img-fluid"%>
       </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
+      <h4><%= @badge.name %></h4>
     </div>
   </div>
     

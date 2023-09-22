@@ -30,6 +30,7 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.exhibition_id = params[:review][:exhibition_id]
+    extract_tags_from_space_separated_string
 
     if @review.save
       BadgeJob.perform_later(@review.member)
@@ -60,10 +61,12 @@ class Public::ReviewsController < ApplicationController
 
 
   def edit
+    @tags = @review.tags
   end
 
   def update
     @original_review = Review.find(params[:id])
+    extract_tags_from_space_separated_string
 
     if @review.update(review_params)
       set_flash_message("レビュー情報の保存に成功しました")
@@ -127,6 +130,21 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+  def extract_tags_from_space_separated_string
+    @review.tags.destroy_all
+    if params[:review][:tags_name].present?
+      # フォームから送信されたタグの文字列を受け取り、スペースで分割する
+      tag_names = params[:review][:tags_name].split(" ").map(&:strip)
+      # 各タグをデータベースに保存
+      tag_names.each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        unless @review.tags.include?(tag)
+          @review.tags << tag
+        end
+      end
+    end
+  end
+
   def review_params
     params.require(:review).permit(:body, :review_image)
   end
@@ -148,9 +166,9 @@ class Public::ReviewsController < ApplicationController
 
   def fetch_reviews(page_size, member_ids = nil)
     reviews = Review.includes(:member, :review_comments, :exhibition)
-                      .where(members: { is_active: true })
-                      .order(created_at: :desc)
-                      .page(params[:page]).per(page_size)
+                    .where(members: { is_active: true })
+                    .order(created_at: :desc)
+                    .page(params[:page]).per(page_size)
     reviews = reviews.where(member_id: member_ids) if member_ids.present?
     reviews
   end

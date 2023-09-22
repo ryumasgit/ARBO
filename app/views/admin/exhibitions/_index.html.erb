@@ -1,4 +1,4 @@
-<table class="table border-bottom">
+<table class="table table-hover border-bottom">
   <thead>
     <tr>
       <th></th>
@@ -15,7 +15,7 @@
     <tr>
       <td>
         <%= link_to admin_exhibition_path(exhibition) do %>
-          <%= image_tag exhibition.get_exhibition_images(100, 100) %>
+          <%= image_tag exhibition.get_exhibition_images(100, 100), class: "img-fluid" %>
         <% end %>
       </td>
       <td>

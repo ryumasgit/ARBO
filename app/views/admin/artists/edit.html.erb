@@ -1,9 +1,9 @@
 <div class="container-fluid">
+  <h2 class="text-center">ARTIST INFORMATION EDIT</h2>
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>Artist Information Edit</h2>
         <%= form_with model: @artist, url: admin_artist_path(@artist) do |f| %>
 
         <p>選択した特定の画像を削除できます</p>
@@ -12,7 +12,7 @@
             <% @artist.artist_images.each do |image| %>
               <div class="delete-image-check">
                 <%= f.check_box :artist_image_id, { multiple: true }, image.id, false %>
-                <%= image_tag image.variant(resize: "200x100", gravity: 'center', extent: "200x100").processed, class: "m-1" %>
+                <%= image_tag image.variant(resize: "200x100", gravity: 'center', extent: "200x100").processed, class: "m-1 img-fluid" %>
               </div>
             <% end %>
           </div>

@@ -1,4 +1,4 @@
-<table class="table border-bottom">
+<table class="table table-hover border-bottom">
   <thead>
     <tr>
       <th></th>
@@ -13,7 +13,7 @@
     <tr>
       <td>
         <%= link_to admin_museum_path(museum) do %>
-          <%= image_tag museum.get_museum_images(100, 100) %>
+          <%= image_tag museum.get_museum_images(100, 100), class: "img-fluid" %>
         <% end %>
       </td>
       <td>

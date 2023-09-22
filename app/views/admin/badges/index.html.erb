@@ -7,7 +7,7 @@
           <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
         <% end %>
       </div>
-      <table class="table border-bottom">
+      <table class="table table-hover border-bottom">
         <thead>
           <tr>
             <th></th>
@@ -22,7 +22,7 @@
           <tr>
             <td>
               <%= link_to admin_badge_path(badge) do %>
-                <%= image_tag badge.get_badge_image(100, 100) %>
+                <%= image_tag badge.get_badge_image(100, 100), class: "img-fluid" %>
               <% end %>
             </td>
             <td>

@@ -1,9 +1,9 @@
 <div class="container-fluid">
+  <h2 class="text-center">NEW ARTIST CREATE</h2>
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>New Artist Create</h2>
         <%= form_with model: @artist, url: admin_artists_path do |f| %>
 
           <div class="field m-5">

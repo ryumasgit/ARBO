@@ -1,8 +1,8 @@
-<table class="table border-bottom">
+<table class="table table-hover border-bottom">
   <thead>
     <tr>
       <th></th>
-      <th>メンバーネーム</th>
+      <th>メンバー</th>
       <th>レビュー</th>
       <th>バッジ</th>
       <th>フォロー</th>
@@ -11,23 +11,24 @@
   </thead>
   <tbody>
     <% members.each do |member| %>
-    <tr>
-      <td>
-        <%= link_to member_my_page_path(member) do %>
-          <%= image_tag member.get_member_image(100, 100), class: "rounded-circle" %>
-        <% end %>
-      </td>
-      <td>
-        <%= link_to member_my_page_path(member) do %>
-          <%= member.name %>
-        <% end %>
-      </td>
-      <td><%= member.reviews.count %></td>
-      <td><%= member.earned_badges.count %></td>
-      <td><%= member.followings.where(members: { is_active: true }).count %></td>
-      <td><%= member.followers.where(members: { is_active: true }).count %></td>
-    </tr>
+      <% if member.is_guest == false %>
+        <tr>
+          <td>
+            <%= link_to member_my_page_path(member) do %>
+              <%= image_tag member.get_member_image(100, 100), class: "rounded-circle img-fluid" %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to member_my_page_path(member) do %>
+              <%= member.name %>
+            <% end %>
+          </td>
+          <td><%= member.reviews.count %></td>
+          <td><%= member.earned_badges.count %></td>
+          <td><%= member.followings.where(members: { is_active: true }).count %></td>
+          <td><%= member.followers.where(members: { is_active: true }).count %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
-</div>

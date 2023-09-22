@@ -4,23 +4,20 @@
   <% if @exhibition.is_active == false %>
     <h4 class="text-danger text-center">現在非公開中です</h4>
   <% end %>
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="row d-flex justify-content-center m-3">
-        <div class="col-md-6">
-          <div class="images my-auto">
-            <% @exhibition.exhibition_images.each do |image| %>
-              <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
-          <h4><%= @exhibition.name %></h4>
-          <%= link_to edit_admin_exhibition_path(@exhibition), class: "btn" do %>
-            <i class="fa-solid fa-gear align-top"></i>
-          <% end %>
-        </div>
+  
+  <div class="row justify-content-center my-5">
+    <div class="col-md-6">
+      <div class="images my-auto">
+        <% @exhibition.exhibition_images.each do |image| %>
+          <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
+        <% end %>
       </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
+      <h4><%= @exhibition.name %></h4>
+      <%= link_to edit_admin_exhibition_path(@exhibition), class: "btn" do %>
+        <i class="fa-solid fa-gear align-top"></i>
+      <% end %>
     </div>
   </div>
 
@@ -30,7 +27,7 @@
     <% end %>
   </div>
   <div class="row justify-content-center m-3">
-    <%= link_to "#{@exhibition.name} 公式サイト", @exhibition.official_website, target: "_blank" %>
+    <%= link_to "公式サイト", @exhibition.official_website, target: "_blank" %>
   </div>
 
   <div class="row justify-content-center align-items-center">

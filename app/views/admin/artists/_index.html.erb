@@ -1,34 +1,36 @@
-<table class="table border-bottom">
-  <thead>
-    <tr>
-      <th></th>
-      <th>アーティスト</th>
-      <th>出展展示会</th>
-      <th>公開ステータス</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% artists.each do |artist| %>
-    <tr>
-      <td>
-        <%= link_to admin_artist_path(artist) do %>
-          <%= image_tag artist.get_artist_images(100, 100), class: "img-fluid" %>
-        <% end %>
-      </td>
-      <td>
-        <%= link_to admin_artist_path(artist) do %>
-          <%= artist.name %>
-        <% end %>
-      </td>
-      <td><%= artist.exhibitions.where(is_active: true).count %></td>
-      <td><%= artist_is_active_display(artist) %></td>
-      <td>
-        <%= link_to edit_admin_artist_path(artist), class: "btn" do %>
-          <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="table-responsive text-nowrap">
+  <table class="table border-bottom">
+    <thead>
+      <tr>
+        <th></th>
+        <th>アーティスト</th>
+        <th>出展展示会</th>
+        <th>公開ステータス</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% artists.each do |artist| %>
+      <tr>
+        <td>
+          <%= link_to admin_artist_path(artist) do %>
+            <%= image_tag artist.get_artist_images(100, 100) %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to admin_artist_path(artist) do %>
+            <%= artist.name %>
+          <% end %>
+        </td>
+        <td><%= artist.exhibitions.where(is_active: true).count %></td>
+        <td><%= artist_is_active_display(artist) %></td>
+        <td>
+          <%= link_to edit_admin_artist_path(artist), class: "btn" do %>
+            <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

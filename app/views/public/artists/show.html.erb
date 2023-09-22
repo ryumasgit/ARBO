@@ -1,19 +1,16 @@
 <div class="container-fluid">
   <h2 class="text-center">ARTIST DETAIL</h2>
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="row d-flex justify-content-center m-3">
-        <div class="col-md-6">
-          <div class="images my-auto">
-            <% @artist.artist_images.each do |image| %>
-              <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
-          <h4><%= @artist.name %></h4>
-        </div>
+
+  <div class="row justify-content-center my-5">
+    <div class="col-md-6">
+      <div class="images my-auto">
+        <% @artist.artist_images.each do |image| %>
+          <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
+        <% end %>
       </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
+      <h4><%= @artist.name %></h4>
     </div>
   </div>
   

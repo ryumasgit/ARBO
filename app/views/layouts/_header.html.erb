@@ -1,14 +1,26 @@
 <div class="container-fluid">
   <div class="row m-4">
     <div class="col">
+      <div id="notification-icon">
+        <% if member_signed_in? %>
+          <%= link_to notifications_path do %>
+            <% if unchecked_notifications.any? %>
+              <i class="fa-regular fa-bell btn btn-lg" aria-hidden="true"></i>
+              <i class="fa-solid fa-circle-exclamation new-notification" aria-hidden="true"></i>
+            <% else %>
+              <i class="fa-regular fa-bell btn btn-lg" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
       <div class="text-center">
         <% if admin_signed_in? %>
           <%= link_to admin_root_path do %>
-            <%= image_tag 'header_logo.png', width: '155px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'header_logo.png', width: '155px', height: 'auto' %>
           <% end %>
         <% else %>
           <%= link_to root_path do %>
-            <%= image_tag 'header_logo.png', width: '155px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'header_logo.png', width: '155px', height: 'auto' %>
           <% end %>
         <% end %>
       </div>

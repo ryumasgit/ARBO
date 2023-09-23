@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "\"badge_id\"", name: "index_badges_on_badge_id"
+    t.index "\"member_id\"", name: "index_badges_on_member_id"
   end
 
   create_table "bookmark_exhibitions", force: :cascade do |t|
@@ -74,6 +76,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "exhibition_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["exhibition_id"], name: "index_bookmark_exhibitions_on_exhibition_id"
+    t.index ["member_id"], name: "index_bookmark_exhibitions_on_member_id"
   end
 
   create_table "bookmark_museums", force: :cascade do |t|
@@ -81,6 +85,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "museum_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_bookmark_museums_on_member_id"
+    t.index ["museum_id"], name: "index_bookmark_museums_on_museum_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -110,6 +116,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "artist_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id"], name: "index_entry_artists_on_artist_id"
+    t.index ["exhibition_id"], name: "index_entry_artists_on_exhibition_id"
   end
 
   create_table "exhibitions", force: :cascade do |t|
@@ -120,6 +128,7 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["museum_id"], name: "index_exhibitions_on_museum_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -127,13 +136,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "member_tags", force: :cascade do |t|
-    t.integer "member_id", null: false
-    t.integer "tag_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_favorites_on_member_id"
+    t.index ["review_id"], name: "index_favorites_on_review_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -167,13 +171,15 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "review_id"
     t.integer "review_comment_id"
     t.integer "earned_badge_id"
+    t.integer "badge_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"comment_id\"", name: "index_notifications_on_comment_id"
-    t.index "\"post_id\"", name: "index_notifications_on_post_id"
+    t.index ["badge_id"], name: "index_notifications_on_badge_id"
     t.index ["earned_badge_id"], name: "index_notifications_on_earned_badge_id"
+    t.index ["review_comment_id"], name: "index_notifications_on_review_comment_id"
+    t.index ["review_id"], name: "index_notifications_on_review_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
@@ -183,6 +189,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "followed_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "review_comments", force: :cascade do |t|
@@ -191,6 +199,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.string "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_review_comments_on_member_id"
+    t.index ["review_id"], name: "index_review_comments_on_review_id"
   end
 
   create_table "review_tags", force: :cascade do |t|
@@ -198,6 +208,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_review_tags_on_review_id"
+    t.index ["tag_id"], name: "index_review_tags_on_tag_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -206,6 +218,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["exhibition_id"], name: "index_reviews_on_exhibition_id"
+    t.index ["member_id"], name: "index_reviews_on_member_id"
   end
 
   create_table "tags", force: :cascade do |t|

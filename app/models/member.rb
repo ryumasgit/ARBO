@@ -10,8 +10,6 @@ class Member < ApplicationRecord
   has_many :followers, through: :followed, source: :follower
   has_many :earned_badges, dependent: :destroy
   has_many :badges, through: :earned_badges, source: :badge
-  has_many :member_tags, dependent: :destroy
-  has_many :tags, through: :member_tags
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_reviews, through: :favorites, source: :review
@@ -35,7 +33,7 @@ class Member < ApplicationRecord
   def follow(name)
     followed_member = Member.find_by(name: name)
     follower.create(followed: followed_member)
-    create_notification_follow!(current_member)
+
     BadgeJob.perform_later(followed_member)
   end
 
@@ -71,12 +69,13 @@ class Member < ApplicationRecord
       member.is_guest = "true"
     end
   end
-  
-  def create_notification_follow!(current_member)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_member.id, id, 'follow'])
+
+  def create_notification_follow!(current_member, followed_member_name)
+    followed_member = Member.find_by(name: followed_member_name)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_member.id, followed_member.id, 'follow'])
     if temp.blank?
-      notification = current_user.active_notifications.new(
-        visited_id: id,
+      notification = current_member.active_notifications.new(
+        visited_id: followed_member.id,
         action: 'follow'
       )
       notification.save if notification.valid?

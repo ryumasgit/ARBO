@@ -6,6 +6,7 @@ class CreateNotifications < ActiveRecord::Migration[6.1]
       t.integer :review_id
       t.integer :review_comment_id
       t.integer :earned_badge_id
+      t.integer :badge_id
       t.string :action, default: '', null: false
       t.boolean :checked, default: false, null: false
 
@@ -14,8 +15,9 @@ class CreateNotifications < ActiveRecord::Migration[6.1]
 
     add_index :notifications, :visitor_id
     add_index :notifications, :visited_id
-    add_index :notifications, :post_id
-    add_index :notifications, :comment_id
+    add_index :notifications, :review_id
+    add_index :notifications, :review_comment_id
     add_index :notifications, :earned_badge_id
+    add_index :notifications, :badge_id
   end
 end

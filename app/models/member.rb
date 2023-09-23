@@ -21,6 +21,9 @@ class Member < ApplicationRecord
   has_many :museums, through: :bookmark_museums
   has_many :bookmark_exhibitions, dependent: :destroy
   has_many :exhibitions, through: :bookmark_exhibitions
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
 
   has_one_attached :member_image
 
@@ -32,6 +35,7 @@ class Member < ApplicationRecord
   def follow(name)
     followed_member = Member.find_by(name: name)
     follower.create(followed: followed_member)
+    create_notification_follow!(current_member)
     BadgeJob.perform_later(followed_member)
   end
 
@@ -65,6 +69,17 @@ class Member < ApplicationRecord
       member.password = SecureRandom.urlsafe_base64
       member.name = GUEST_MEMBER_NAME
       member.is_guest = "true"
+    end
+  end
+  
+  def create_notification_follow!(current_member)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_member.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
     end
   end
 end

@@ -25,9 +25,9 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
-      resources :member_tags, only: [:index]
-      resources :bookmark_museums, only: [:index]
-      resources :bookmark_exhibitions, only: [:index]
+      resources :member_tags, only: :index
+      resources :bookmark_museums, only: :index
+      resources :bookmark_exhibitions, only: :index
     end
     resources :reviews, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :review_comments, only: [:create, :index, :destroy]
@@ -41,14 +41,15 @@ Rails.application.routes.draw do
     resources :museums, only: [:show, :index] do
       resource :bookmark_museums, only: [:create, :destroy]
     end
-    resources :exhibitions, only: [:show] do
+    resources :exhibitions, only: :show do
       get "reviews" => "exhibitions#reviews"
       resource :bookmark_exhibitions, only: [:create, :destroy]
     end
-    resources :searches, only: [:index]
+    resources :searches, only: :index
     get 'searches/:tag', to: 'searches#index', as: :tag_search, constraints: { tag: /[^\/]+/ }
-    resources :artists, only: [:show]
-    resources :badges, only: [:show]
+    resources :artists, only: :show
+    resources :badges, only: :show
+    resources :notifications, only: :index
   end
 
   namespace :admin do
@@ -56,9 +57,9 @@ Rails.application.routes.draw do
     resources :members, only: [:index, :show, :edit, :update, :destroy] do
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
-      resources :member_tags, only: [:index]
-      resources :bookmark_museums, only: [:index]
-      resources :bookmark_exhibitions, only: [:index]
+      resources :member_tags, only: :index
+      resources :bookmark_museums, only: :index
+      resources :bookmark_exhibitions, only: :index
     end
     resources :badges, only: [:new, :create, :show, :index, :edit, :update, :destroy]
     resources :reviews, only: [:show, :index, :destroy] do

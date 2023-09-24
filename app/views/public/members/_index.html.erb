@@ -14,12 +14,12 @@
       <% if member.is_guest == false %>
         <tr>
           <td>
-            <%= link_to member_my_page_path(member) do %>
+            <%= link_to member_my_page_path(member_member_name: member.name) do %>
               <%= image_tag member.get_member_image(100, 100), class: "rounded-circle img-fluid" %>
             <% end %>
           </td>
           <td>
-            <%= link_to member_my_page_path(member) do %>
+            <%= link_to member_my_page_path(member_member_name: member.name) do %>
               <%= member.name %>
             <% end %>
           </td>
@@ -32,3 +32,8 @@
     <% end %>
   </tbody>
 </table>
+<div class="row justify-content-center">
+  <% if members.present? %>
+    <%= paginate members %>
+  <% end %>
+</div>

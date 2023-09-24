@@ -8,13 +8,13 @@ class Public::MuseumsController < ApplicationController
     return museum_not_active_redirect unless museum_is_active?(@museum)
 
     exhibitions = @museum.exhibitions.where(is_active: :true)
-    @exhibitions = exhibitions.page(params[:page]).per(10)
+    @exhibitions = exhibitions.page(params[:page])
   end
 
   def index
-    @museums = Museum.where(is_active: true).page(params[:page]).per(10)
-    @exhibitions = Exhibition.where(museum_id: @museums.pluck(:id), is_active: true)
-    @artists = Artist.where(is_active: true).page(params[:page]).per(10)
+    @museums = Museum.where(is_active: true).page(params[:page])
+    @exhibitions = Exhibition.where(museum_id: @museums.pluck(:id), is_active: true).page(params[:page])
+    @artists = Artist.where(is_active: true).page(params[:page])
   end
 
   protected

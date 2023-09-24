@@ -32,13 +32,13 @@ class Admin::MuseumsController < ApplicationController
 
   def show
     exhibitions = @museum.exhibitions.where(is_active: :true)
-    @exhibitions = exhibitions.page(params[:page]).per(10)
+    @exhibitions = exhibitions.page(params[:page])
   end
 
   def index
-    @museums = Museum.page(params[:page]).per(10)
-    @exhibitions = Exhibition.page(params[:page]).per(10)
-    @artists = Artist.page(params[:page]).per(10)
+    @museums = Museum.page(params[:page])
+    @exhibitions = Exhibition.page(params[:page])
+    @artists = Artist.page(params[:page])
   end
 
   def edit
@@ -110,7 +110,7 @@ class Admin::MuseumsController < ApplicationController
       end
     end
   end
-  
+
   # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_museum
     @original_museum.attributes.each do |attr, value|

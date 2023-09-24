@@ -26,7 +26,7 @@ class Admin::BadgesController < ApplicationController
   end
 
   def index
-    @badges = Badge.page(params[:page]).per(10)
+    @badges = Badge.page(params[:page])
   end
 
   def show

@@ -8,7 +8,7 @@ class Public::ArtistsController < ApplicationController
     return artist_not_active_redirect unless artist_is_active?(@artist)
 
     exhibitions = @artist.exhibitions.where(is_active: :true)
-    @exhibitions = exhibitions.page(params[:page]).per(10)
+    @exhibitions = exhibitions.page(params[:page])
   end
 
   protected

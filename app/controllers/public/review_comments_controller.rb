@@ -39,6 +39,6 @@ class Public::ReviewCommentsController < ApplicationController
                       .includes(:member)
                       .where(members: { is_active: true })
                       .order(created_at: :desc)
-                      .page(params[:page]).per(10)
+                      .page(params[:page])
   end
 end

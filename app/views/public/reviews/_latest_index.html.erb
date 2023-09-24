@@ -46,3 +46,8 @@
     </div>
   </div>
 <% end %>
+<div class="row justify-content-center">
+  <% if reviews.present? %>
+    <%= paginate reviews %>
+  <% end %>
+</div>

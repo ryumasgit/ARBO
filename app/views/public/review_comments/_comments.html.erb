@@ -12,4 +12,7 @@
       <%= render "public/review_comments/index", review_comments: review_comments %>
     <% end %>
   </div>
+  <div class="row justify-content-center">
+    <%= paginate review_comments %>
+  </div>
 </div>

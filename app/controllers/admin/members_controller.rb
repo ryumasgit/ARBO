@@ -3,7 +3,7 @@ class Admin::MembersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :admin_member_handle_record_not_found
 
   def show
-    @reviews = @member.reviews.order(created_at: :desc)
+    @reviews = @member.reviews.order(created_at: :desc).page(params[:page])
     @favorited_reviews = get_favorited_reviews
     @total_favorited_count = calculate_total_favorited_count
     @total_commented_count = calculate_total_commented_count
@@ -13,7 +13,7 @@ class Admin::MembersController < ApplicationController
   end
 
   def index
-    @members = Member.page(params[:page]).per(10)
+    @members = Member.page(params[:page])
   end
 
   def edit
@@ -59,6 +59,7 @@ class Admin::MembersController < ApplicationController
           .joins(:member)
           .where(members: { is_active: true })
           .order(created_at: :desc)
+          .page(params[:page])
   end
 
   def calculate_total_favorited_count

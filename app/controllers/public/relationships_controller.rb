@@ -20,18 +20,18 @@ class Public::RelationshipsController < ApplicationController
 
   def follows
     get_member
-    @members = @member.followings
+    @members = @member.followings.page(params[:page])
   end
 
   def followers
     get_member
-    @members = @member.followers
+    @members = @member.followers.page(params[:page])
   end
 
   private
 
   def get_member
-    @member = Member.page(params[:page]).per(10).find_by(name: params[:member_member_name])
+    @member = Member.find_by(name: params[:member_member_name])
   end
 
 

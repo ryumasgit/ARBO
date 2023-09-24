@@ -1,11 +1,16 @@
 <div class="container-fluid">
   <h2 class="text-center">MEMBER SIGN UP</h2>
-  <p class="text-center"><%= flash[:notice] %></p>
+  <% if flash[:notice].present? %>
+    <div id="error_explanation" data-turbo-cache="false" class="text-center">
+      <% flash[:notice].each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </div>
+  <% end %>
   <div class="row justify-content-center">
     <div class="col-md-2">
       <div class="text-center">
         <%= form_with model: @member, url: member_registration_path do |f| %>
-          <%= render "public/shared/error_messages", resource: resource %>
 
           <div class="field m-5">
             <%= f.label :member_image, "プロフィール画像" %>

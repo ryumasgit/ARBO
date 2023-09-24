@@ -91,6 +91,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n-views (0.3.7)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -277,6 +278,7 @@ DEPENDENCIES
   delayed_job
   delayed_job_active_record
   devise
+  devise-i18n-views
   dotenv-rails
   image_processing (~> 1.2)
   jbuilder (~> 2.7)

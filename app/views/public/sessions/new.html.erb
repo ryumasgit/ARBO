@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <h2 class="text-center">MEMBER LOG IN</h2>
   <p class="text-center"><%= flash[:notice] %></p>
+  <%= render "layouts/error", obj: @member %>
   <div class="row justify-content-center">
     <div class="col-md-2">
       <div class="text-center">

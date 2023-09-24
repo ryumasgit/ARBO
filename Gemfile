@@ -63,6 +63,7 @@ gem 'dotenv-rails'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'rails-i18n'
+gem 'devise-i18n-views'
 group :production do
   gem 'mysql2'
 end

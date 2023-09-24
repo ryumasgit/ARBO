@@ -5,6 +5,7 @@
   <div class="row d-flex justify-content-center">
     <% if @members.exists? && !all_members_are_withdrew?(@members) %>
       <%= render 'index',members: @members %>
+      <%= paginate @members %>
     <% end %>
   </div>
 </div>

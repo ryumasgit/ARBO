@@ -49,14 +49,14 @@ class Public::ReviewsController < ApplicationController
                       .includes(:member)
                       .where(members: { is_active: true })
                       .order(created_at: :desc)
-                      .page(params[:page]).per(10)
+                      .page(params[:page])
     @review_comment = ReviewComment.new
   end
 
   def index
-    @all_reviews = fetch_reviews(50)
+    @all_reviews = fetch_reviews
     following_member_ids = current_member.followings.pluck(:id)
-    @following_member_reviews = fetch_reviews(50, following_member_ids)
+    @following_member_reviews = fetch_reviews(following_member_ids)
   end
 
 
@@ -164,12 +164,11 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
-  def fetch_reviews(page_size, member_ids = nil)
+  def fetch_reviews(member_ids = nil)
     reviews = Review.includes(:member, :review_comments, :exhibition)
                     .where(members: { is_active: true })
-                    .order(created_at: :desc)
-                    .page(params[:page]).per(page_size)
     reviews = reviews.where(member_id: member_ids) if member_ids.present?
+    reviews = reviews.order(created_at: :desc).page(params[:page])
     reviews
   end
 

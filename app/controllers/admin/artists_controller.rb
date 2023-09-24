@@ -32,7 +32,7 @@ class Admin::ArtistsController < ApplicationController
 
   def show
     exhibitions = @artist.exhibitions.where(is_active: :true)
-    @exhibitions = exhibitions.page(params[:page]).per(10)
+    @exhibitions = exhibitions.page(params[:page])
   end
 
   def edit

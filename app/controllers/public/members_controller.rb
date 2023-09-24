@@ -8,7 +8,7 @@ class Public::MembersController < ApplicationController
 
 
   def show
-    @reviews = @member.reviews.order(created_at: :desc)
+    @reviews = @member.reviews.order(created_at: :desc).page(params[:page])
     @favorited_reviews = get_favorited_reviews
     @total_favorited_count = calculate_total_favorited_count
     @total_commented_count = calculate_total_commented_count
@@ -51,6 +51,7 @@ class Public::MembersController < ApplicationController
           .joins(:member)
           .where(members: { is_active: true })
           .order(created_at: :desc)
+          .page(params[:page])
   end
 
   def calculate_total_favorited_count

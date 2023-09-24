@@ -1,7 +1,10 @@
 <div class="container-fluid">
-    <% if @notifications.exists? %>
-      <%= render 'notifications', notifications: @notifications %>
-    <% else %>
-      <p class="text-center">通知はありません</p>
-    <% end %>
+  <% if @notifications.exists? %>
+    <%= render 'notifications', notifications: @notifications %>
+    <div class="row justify-content-center">
+      <%= paginate @notifications %>
+    </div>
+  <% else %>
+    <p class="text-center">通知はありません</p>
+  <% end %>
 </div>

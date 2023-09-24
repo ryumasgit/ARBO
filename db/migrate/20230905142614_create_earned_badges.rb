@@ -6,5 +6,8 @@ class CreateEarnedBadges < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    
+    add_index :badges, :member_id
+    add_index :badges, :badge_id
   end
 end

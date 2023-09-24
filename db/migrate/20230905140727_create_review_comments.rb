@@ -7,5 +7,8 @@ class CreateReviewComments < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    
+    add_index :review_comments, :member_id
+    add_index :review_comments, :review_id
   end
 end

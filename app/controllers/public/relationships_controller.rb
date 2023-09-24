@@ -7,6 +7,7 @@ class Public::RelationshipsController < ApplicationController
   def create
     unless @followed_member_name == "guest"
       current_member.follow(@followed_member_name)
+      current_member.create_notification_follow!(current_member, @followed_member_name)
     else
       set_flash_message("このユーザーはフォローできません")
       redirect_to member_my_page_path(member_member_name: current_member.name)

@@ -14,7 +14,7 @@
   )
 
   # memberモデル(guest)初期データ
-  guest = Member.create!(
+  member1 = Member.create!(
   name: 'guest',
   introduction: "ようこそ、ゲストメンバーのプロフィールへ！私はこのコミュニティへの新しい訪問者です。美術と文化に興味があり、さまざまなアーティストの作品を楽しんでいます。どうぞお気軽にコミュニティに参加してください。",
   email: 'guest@example.com',
@@ -22,10 +22,10 @@
   is_guest: true,
   password: '111111'
   )
-  guest.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/GeorgiaO’Keeffe.jpg')), filename: 'GeorgiaO’Keeffe.jpg')
+  member1.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/GeorgiaO’Keeffe.jpg')), filename: 'GeorgiaO’Keeffe.jpg')
 
   # memberモデル初期データ
-  member1 =  Member.create!(
+  member2 =  Member.create!(
   name: 'John Doe',
   introduction: "こんにちは、私はJohn Doeです。美術愛好者で、特に印象派の作品が大好きです。美術館やギャラリーで新しい芸術体験を探すことが趣味です。アートについて語り合いましょう！",
   email: 'john@example.com',
@@ -33,9 +33,9 @@
   is_guest: false,
   password: '111111'
   )
-  member1.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/ClaudeMonet.jpg')), filename: 'ClaudeMonet.jpg')
+  member2.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/ClaudeMonet.jpg')), filename: 'ClaudeMonet.jpg')
 
-  member2 = Member.create!(
+  member3 = Member.create!(
   name: 'Robert Johnson',
   introduction: "私の名前はRobert Johnsonです。建築家で、美術館や建築デザインに興味を持っています。美術館の建築や展示会の空間デザインについて議論したり、アイデアを共有したりできる仲間を探しています。",
   email: 'robert@example.com',
@@ -43,9 +43,9 @@
   is_guest: false,
   password: '111111'
   )
-  member2.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/StanleyTigerman.png')), filename: 'StanleyTigerman.png')
+  member3.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/StanleyTigerman.png')), filename: 'StanleyTigerman.png')
 
-  member3 = Member.create!(
+  member4 = Member.create!(
   name: 'Mike',
   introduction: "こんにちは、私はMikeです。アートと音楽が大好きなエンターテイメント愛好者です。美術館での音楽イベントやアートフェスティバルに参加するのが楽しみです。アートと音楽の世界に一緒に浸りましょう！",
   email: 'mike@com',
@@ -53,7 +53,7 @@
   is_guest: false,
   password: '111111'
   )
-  member3.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/AlmaThomas.jpg')), filename: 'AlmaThomas.jpg')
+  member4.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/AlmaThomas.jpg')), filename: 'AlmaThomas.jpg')
 
 
   # museumモデル初期データ

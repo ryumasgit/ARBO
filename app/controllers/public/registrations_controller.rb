@@ -7,11 +7,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
     flash[:notice] = "新規登録しました"
     welcome_path
   end
-  
+
   # POST /resource
   def create
     build_resource(sign_up_params)
-    unless resource.member_image.present?
+    if resource.member_image.blank?
       flash[:notice] =  "画像が最低1つは必要です"
       redirect_to new_member_registration_path
       return

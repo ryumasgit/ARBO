@@ -22,9 +22,19 @@
         </ul>
         <div class="tab-content border-top">
           <div id="section1" class="tab-pane fade show active">
+            <div class="row justify-content-end mt-4">
+              <%= link_to bookmark_museums_path do %>
+                <p>ブックマークした美術館</p>
+              <% end %>
+            </div>
             <%= render "index", museums: @museums %>
           </div>
           <div id="section2" class="tab-pane fade">
+            <div class="row justify-content-end mt-4">
+              <%= link_to bookmark_exhibitions_path do %>
+                <p>ブックマークした展示会</p>
+              <% end %>
+            </div>
             <%= render "public/exhibitions/index", exhibitions: @exhibitions %>
           </div>
           <div id="section3" class="tab-pane fade">

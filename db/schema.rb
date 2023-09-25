@@ -170,14 +170,12 @@ ActiveRecord::Schema.define(version: 2023_09_23_013232) do
     t.integer "visited_id", null: false
     t.integer "review_id"
     t.integer "review_comment_id"
-    t.integer "earned_badge_id"
     t.integer "badge_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["badge_id"], name: "index_notifications_on_badge_id"
-    t.index ["earned_badge_id"], name: "index_notifications_on_earned_badge_id"
     t.index ["review_comment_id"], name: "index_notifications_on_review_comment_id"
     t.index ["review_id"], name: "index_notifications_on_review_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"

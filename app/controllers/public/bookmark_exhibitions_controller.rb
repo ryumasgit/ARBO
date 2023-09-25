@@ -8,6 +8,10 @@ class Public::BookmarkExhibitionsController < ApplicationController
     bookmark_exhibition.save
   end
 
+  def index
+    @bookmark_exhibitions = current_member.exhibitions.page(params[:page]).per(20)
+  end
+
   def destroy
     @exhibition = Exhibition.find(params[:exhibition_id])
     bookmark_exhibition = current_member.bookmark_exhibitions.find_by(exhibition_id: @exhibition.id)

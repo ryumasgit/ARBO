@@ -10,6 +10,10 @@ class Public::ExhibitionsController < ApplicationController
     artists = @exhibition.artists.where(is_active: :true)
     @artists = artists.page(params[:page])
   end
+  
+  def index
+    
+  end
 
   protected
 

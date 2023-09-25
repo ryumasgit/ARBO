@@ -8,6 +8,10 @@ class Public::BookmarkMuseumsController < ApplicationController
     bookmark_museum.save
   end
 
+  def index
+    @bookmark_museums = current_member.museums.page(params[:page]).per(20)
+  end
+
   def destroy
     @museum = Museum.find(params[:museum_id])
     bookmark_museum = current_member.bookmark_museums.find_by(museum_id: @museum.id)

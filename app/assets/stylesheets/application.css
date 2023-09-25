@@ -157,6 +157,11 @@ footer {
   padding-right: 10%;
 }
 
+.tab-responsive {
+  width: 25%;
+  height: auto;
+}
+
 @media screen and (max-width:1000px) {
   main {
     margin: 20% auto 30% auto;

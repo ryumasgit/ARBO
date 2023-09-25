@@ -1,46 +1,46 @@
 <div class="container-fluid">
   <div class="row m-2">
-    <div class="col">
+    <div class="col text-nowrap">
       <div class="text-center">
         <% if member_signed_in? %>
           <%= link_to reviews_path do %>
-            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
           <% end %>
           <%= link_to searches_path do %>
-            <%= image_tag 'search_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'search_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
           <% end %>
           <% unless current_member.is_guest? %>
             <%= link_to select_museums_path do %>
-              <i class="review-new-btn fa-solid fa-circle-plus text-dark" aria-hidden="true"></i>
+              <i class="review-new-btn fa-solid fa-circle-plus text-dark footer-responsive" aria-hidden="true"></i>
             <% end %>
           <% end %>
           <%= link_to museums_path do %>
-            <%= image_tag 'event_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'event_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
           <% end %>
           <% unless current_member.is_guest? %>
             <%= link_to member_my_page_path(member_member_name: current_member.name) do %>
-              <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+              <%= image_tag 'mypage_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
             <% end %>
           <% end %>
 
         <% elsif admin_signed_in? %>
           <%= link_to admin_reviews_path do %>
-            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'timeline_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
           <% end %>
           <%= link_to admin_members_path do %>
-            <%= image_tag 'member_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'member_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
           <% end %>
           <%= link_to admin_museums_path do %>
-            <%= image_tag 'event_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'event_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
           <% end %>
           <%= link_to admin_badges_path do %>
-            <%= image_tag 'badge_logo.png', width: '145px', height: 'auto', class: "img-fluid" %>
+            <%= image_tag 'badge_logo.png', width: '145px', height: 'auto', class: "img-fluid footer-responsive" %>
           <% end %>
 
         <% else %>
-          <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-          <i class="fa-brands fa-instagram m-5" aria-hidden="true"></i>
-          <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+          <i class="fa-brands fa-x-twitter footer-responsive" aria-hidden="true"></i>
+          <i class="fa-brands fa-instagram mx-sm-5 my-xl-3 footer-responsive" aria-hidden="true"></i>
+          <i class="fa-brands fa-facebook footer-responsive" aria-hidden="true"></i>
         <% end %>
       </div>
     </div>

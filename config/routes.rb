@@ -25,9 +25,6 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
-      resources :member_tags, only: :index
-      resources :bookmark_museums, only: :index
-      resources :bookmark_exhibitions, only: :index
     end
     resources :reviews, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       resources :review_comments, only: [:create, :index, :destroy]
@@ -37,12 +34,10 @@ Rails.application.routes.draw do
     get "select_exhibitions" => "reviews#select_exhibitions"
     post "selected_museum" => "reviews#selected_museum"
     post "selected_exhibition" => "reviews#selected_exhibition"
-    resources :member_tags, only: [:create, :destroy]
     resources :museums, only: [:show, :index] do
       resource :bookmark_museums, only: [:create, :destroy]
     end
     resources :exhibitions, only: :show do
-      get "reviews" => "exhibitions#reviews"
       resource :bookmark_exhibitions, only: [:create, :destroy]
     end
     resources :searches, only: :index
@@ -50,6 +45,8 @@ Rails.application.routes.draw do
     resources :artists, only: :show
     resources :badges, only: :show
     resources :notifications, only: :index
+    resources :bookmark_museums, only: :index
+    resources :bookmark_exhibitions, only: :index
   end
 
   namespace :admin do
@@ -57,18 +54,13 @@ Rails.application.routes.draw do
     resources :members, only: [:index, :show, :edit, :update, :destroy] do
       get "follows" => "relationships#follows"
       get "followers" => "relationships#followers"
-      resources :member_tags, only: :index
-      resources :bookmark_museums, only: :index
-      resources :bookmark_exhibitions, only: :index
     end
     resources :badges, only: [:new, :create, :show, :index, :edit, :update, :destroy]
     resources :reviews, only: [:show, :index, :destroy] do
       resources :review_comments, only: [:index, :destroy]
     end
     resources :museums, only: [:new, :create, :show, :index, :edit, :update, :destroy]
-    resources :exhibitions, only: [:new, :create, :show, :edit, :update, :destroy] do
-      get "reviews" => "exhibitions#reviews"
-    end
+    resources :exhibitions, only: [:new, :create, :show, :edit, :update, :destroy]
     resources :artists, only: [:new, :create, :show, :edit, :update, :destroy]
   end
 end

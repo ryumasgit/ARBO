@@ -10,13 +10,13 @@ class Admin::ArtistsController < ApplicationController
     @artist = Artist.new(artist_params)
 
     if params[:artist][:artist_images].nil?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to new_admin_artist_path
       return
     end
 
     if params[:artist][:artist_images].length > 4
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
       redirect_to new_admin_artist_path
       return
     end
@@ -42,13 +42,13 @@ class Admin::ArtistsController < ApplicationController
     @original_artist = Artist.find(params[:id])
 
     if artist_images_count_exceeds_limit?
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
       redirect_to edit_admin_artist_path(@artist)
       return
     end
 
     if artist_images_count_equals_zero?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to edit_admin_artist_path(@artist)
       return
     end

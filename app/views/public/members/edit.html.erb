@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <h2 class="text-center">MEMBER INFORMATION EDIT</h2>
   <p class="text-center"><%= flash[:notice] %></p>
+  <%= render 'layouts/error', obj: @member %>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
@@ -16,7 +17,7 @@
 
           <div class="field text-left my-2">
             <%= f.label :name, "氏名" %>
-            <%= f.text_field :name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control" %>
+            <%= f.text_field :name, placeholder: "メンバー名（25文字以下）", autofocus: true, class: "form-control" %>
           </div>
 
           <div class="field text-left my-2">

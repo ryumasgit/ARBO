@@ -33,11 +33,13 @@ class Public::ReviewsController < ApplicationController
     extract_tags_from_space_separated_string
 
     if @review.save
+      session.delete(:selected_exhibition_id)
       BadgeJob.perform_later(@review.member)
       set_flash_message("レビューの作成に成功しました")
       redirect_to review_path(@review)
     else
       set_flash_message("レビューの作成に失敗しました")
+      handle_exhibition_selection_session(session[:selected_exhibition_id])
       render :new
     end
   end
@@ -123,7 +125,6 @@ class Public::ReviewsController < ApplicationController
   def handle_exhibition_selection_session(selected_exhibition_session)
     if selected_exhibition_session.present?
       @selected_exhibition_id = selected_exhibition_session
-      session.delete(:selected_exhibition_id)
     else
       set_flash_message("選択に問題があります")
       redirect_to select_museums_path

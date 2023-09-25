@@ -11,7 +11,7 @@ class Admin::BadgesController < ApplicationController
 
     # 画像データがない場合は保存禁止
     if params[:badge][:badge_image].nil?
-      set_flash_message("画像が必要です")
+      flash[:alert] = "画像が必要です"
       redirect_to new_admin_badge_path
       return
     end

@@ -27,6 +27,7 @@ class Member < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :introduction, length: { maximum: 255 }
+  validates :email, length: { maximum: 255 }
   validates :is_active, inclusion: { in: [true, false] }
   validates :is_guest, inclusion: { in: [true, false] }
 

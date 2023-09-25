@@ -7,16 +7,34 @@ class Public::RegistrationsController < Devise::RegistrationsController
     flash[:notice] = "新規登録しました"
     welcome_path
   end
-  
+
   # POST /resource
   def create
     build_resource(sign_up_params)
-    unless resource.member_image.present?
-      flash[:notice] =  "画像が最低1つは必要です"
+    if resource.member_image.blank?
+      flash[:alert] =  ["プロフィール画像が必要です"]
       redirect_to new_member_registration_path
       return
     end
-    super
+
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      flash[:alert] = resource.errors.full_messages
+      redirect_to new_member_registration_path
+    end
   end
 
   protected

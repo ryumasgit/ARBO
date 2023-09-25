@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <h2 class="text-center">NEW REVIEW CREATE</h2>
   <p class="text-center"><%= flash[:notice] %></p>
+  <%= render 'layouts/error', obj: @review %>
   <div class="row justify-content-center">
     <div class="col-md-2">
       <div class="d-flex m-3">

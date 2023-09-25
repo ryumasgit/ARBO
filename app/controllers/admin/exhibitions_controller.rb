@@ -10,13 +10,19 @@ class Admin::ExhibitionsController < ApplicationController
     @exhibition = Exhibition.new(exhibition_params)
 
     if params[:exhibition][:exhibition_images].nil?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to new_admin_exhibition_path
       return
     end
 
     if params[:exhibition][:exhibition_images].length > 4
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
+      redirect_to new_admin_exhibition_path
+      return
+    end
+
+    if params[:exhibition][:artist_ids].all?(&:blank?)
+      flash[:alert] = "アーティストの登録が必要です"
       redirect_to new_admin_exhibition_path
       return
     end
@@ -43,14 +49,20 @@ class Admin::ExhibitionsController < ApplicationController
     @original_exhibition = Exhibition.find(params[:id])
 
     if exhibition_images_count_exceeds_limit?
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
       redirect_to edit_admin_exhibition_path(@exhibition)
       return
     end
 
     if exhibition_images_count_equals_zero?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to edit_admin_exhibition_path(@exhibition)
+      return
+    end
+
+    if params[:exhibition][:artist_ids].blank?
+      flash[:alert] = "アーティストの登録が必要です"
+      redirect_to edit_admin_exhibition_path
       return
     end
 
@@ -81,7 +93,7 @@ class Admin::ExhibitionsController < ApplicationController
   protected
 
   def exhibition_params
-    params.require(:exhibition).permit(:museum_id, :artist_ids, :name, :introduction, :official_website, :is_active, exhibition_images: [] )
+    params.require(:exhibition).permit(:museum_id, :name, :introduction, :official_website, :is_active, exhibition_images: [] )
   end
 
   def get_exhibition_id
@@ -111,10 +123,8 @@ class Admin::ExhibitionsController < ApplicationController
   # 選択されたアーティストを関連付ける
   def attach_selected_artists
     artist_ids = params[:exhibition][:artist_ids]
-    if artist_ids.present?
-      artist_ids.each do |artist_id|
-        EntryArtist.create(exhibition_id: @exhibition.id, artist_id: artist_id)
-      end
+    artist_ids.each do |artist_id|
+      EntryArtist.create(exhibition_id: @exhibition.id, artist_id: artist_id)
     end
   end
 

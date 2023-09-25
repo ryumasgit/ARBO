@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <h2 class="text-center">NEW ARTIST CREATE</h2>
-  <p class="text-center"><%= flash[:notice] %></p>
+  <p class="text-center <%= flash[:alert] ? 'text-danger' : '' %>"><%= flash[:notice] || flash[:alert] %></p>
+  <%= render 'layouts/error', obj: @artist %>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">

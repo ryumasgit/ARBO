@@ -7,8 +7,12 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
+      admin:
+        email: "メールアドレス"
+        password: "パスワード"
     models:
       member: "メンバー"
+      admin: "管理者"
   devise:
     confirmations:
       new:
@@ -65,3 +69,13 @@ ja:
     unlocks:
       new:
         resend_unlock_instructions: "アカウントの凍結解除方法を再送する"
+    failure:
+      already_authenticated: "あなたはすでにサインインしています"
+      inactive: "あなたのアカウントはまだ有効になっていません"
+      invalid: "無効な%{authentication_keys}またはパスワードです"
+      locked: "あなたのアカウントはロックされています"
+      last_attempt: "アカウントがロックされるまでに、あと 1 回試行できます"
+      not_found_in_database: "%{authentication_keys}またはパスワードが無効です"
+      timeout: "セッションの有効期限が切れました。続行するには、もう一度サインインしてください"
+      unauthenticated: "続行する前に、サインインまたはサインアップする必要があります"
+      unconfirmed: "続行する前に、電子メール アドレスを確認する必要があります"

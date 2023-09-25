@@ -2,8 +2,39 @@ ja:
   activerecord:
     models:
       member: メンバー
+      badge: バッジ
+      review: レビュー
+      tag: タグ
+      museum: 美術館
+      exhibition: 展示会
+      artist: アーティスト
+      review_comment: コメント
     attributes:
       member:
         name: メンバー名
+        introduction: 自己紹介
         email: メールアドレス
         password: パスワード
+      badge:
+        name: バッジ名
+        introduction: 紹介文
+      review:
+        body: 本文
+        tags: タグ
+      tag:
+        name: タグ名
+      review_comment:
+        comment: コメント
+      museum:
+        name: 美術館名
+        introduction: 紹介文
+        official_website: 公式HP
+      exhibition:
+        name: 展示会名
+        introduction: 紹介文
+        official_website: 公式HP
+        museum: 美術館
+        artist: アーティスト
+      artist:
+        name: アーティスト名
+        introduction: 紹介文

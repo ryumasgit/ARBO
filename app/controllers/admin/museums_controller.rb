@@ -10,13 +10,13 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.new(museum_params)
 
     if params[:museum][:museum_images].nil?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to new_admin_museum_path
       return
     end
 
     if params[:museum][:museum_images].length > 4
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
       redirect_to new_admin_museum_path
       return
     end
@@ -48,13 +48,13 @@ class Admin::MuseumsController < ApplicationController
     @original_museum = Museum.find(params[:id])
 
     if museum_images_count_exceeds_limit?
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
       redirect_to edit_admin_museum_path(@museum)
       return
     end
 
     if museum_images_count_equals_zero?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to edit_admin_museum_path(@museum)
       return
     end

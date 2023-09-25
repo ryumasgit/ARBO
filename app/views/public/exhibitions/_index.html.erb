@@ -1,4 +1,4 @@
-<table class="table border-bottom m-3">
+<table class="table table-hover border-bottom m-3">
   <thead>
     <tr>
       <th></th>
@@ -13,7 +13,7 @@
     <tr>
       <td>
         <%= link_to exhibition_path(exhibition) do %>
-          <%= image_tag exhibition.get_exhibition_images(100, 100) %>
+          <%= image_tag exhibition.get_exhibition_images(100, 100), class: "img-fluid" %>
         <% end %>
       </td>
       <td>
@@ -32,3 +32,6 @@
     <% end %>
   </tbody>
 </table>
+<div class="row justify-content-center">
+  <%= paginate exhibitions %>
+</div>

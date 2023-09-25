@@ -3,28 +3,38 @@
   <div class="row justify-content-center m-2">
     <div class="text-center">
       <div class="tabs">
-        <ul class="nav nav-tabs justify-content-center">
+        <ul class="nav nav-tabs justify-content-center nav-justified">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#section1">
-              <%= image_tag 'museum_logo.png', width: '150px', height: 'auto' %>
+              <%= image_tag 'museum_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#section2">
-              <%= image_tag 'exhibition_logo.png', width: '150px', height: 'auto' %>
+              <%= image_tag 'exhibition_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#section3">
-              <%= image_tag 'artist_logo.png', width: '150px', height: 'auto' %>
+              <%= image_tag 'artist_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
             </a>
           </li>
         </ul>
         <div class="tab-content border-top">
           <div id="section1" class="tab-pane fade show active">
+            <div class="row justify-content-end mt-4">
+              <%= link_to bookmark_museums_path do %>
+                <p>ブックマークした美術館</p>
+              <% end %>
+            </div>
             <%= render "index", museums: @museums %>
           </div>
           <div id="section2" class="tab-pane fade">
+            <div class="row justify-content-end mt-4">
+              <%= link_to bookmark_exhibitions_path do %>
+                <p>ブックマークした展示会</p>
+              <% end %>
+            </div>
             <%= render "public/exhibitions/index", exhibitions: @exhibitions %>
           </div>
           <div id="section3" class="tab-pane fade">

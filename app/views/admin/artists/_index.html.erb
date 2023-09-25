@@ -1,4 +1,4 @@
-<table class="table border-bottom">
+<table class="table table-hover border-bottom">
   <thead>
     <tr>
       <th></th>
@@ -13,7 +13,7 @@
     <tr>
       <td>
         <%= link_to admin_artist_path(artist) do %>
-          <%= image_tag artist.get_artist_images(100, 100) %>
+          <%= image_tag artist.get_artist_images(100, 100), class: "img-fluid" %>
         <% end %>
       </td>
       <td>
@@ -32,3 +32,6 @@
     <% end %>
   </tbody>
 </table>
+<div class="row justify-content-center">
+  <%= paginate artists %>
+</div>

@@ -1,13 +1,14 @@
 <div class="container-fluid">
+  <h2 class="text-center">MEMBER INFORMATION EDIT</h2>
   <p class="text-center"><%= flash[:notice] %></p>
+  <%= render 'layouts/error', obj: @member %>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>Member Information Edit</h2>
         <%= form_with model: @member, url: member_update_path(member_member_name: current_member.name) do |f| %>
 
           <div class="field m-5">
-            <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle mb-3" %>
+            <%= image_tag @member.get_member_image(200, 200), class: "rounded-circle img-fluid mb-3" %>
           </div>
 
           <div class="field my-2">
@@ -16,7 +17,7 @@
 
           <div class="field text-left my-2">
             <%= f.label :name, "氏名" %>
-            <%= f.text_field :name, placeholder: "メンバーネーム（25文字以下）", autofocus: true, class: "form-control" %>
+            <%= f.text_field :name, placeholder: "メンバー名（25文字以下）", autofocus: true, class: "form-control" %>
           </div>
 
           <div class="field text-left my-2">

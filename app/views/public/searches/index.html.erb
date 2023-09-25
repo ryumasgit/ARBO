@@ -1,20 +1,19 @@
 <div class="container-fluid my-5">
   <div class="row justify-content-center">
     <div class="text-center">
-      <%= image_tag 'search_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+      <h3>SEARCH</h3>
       </div>
       <%= render 'form' %>
-      <% if @reviews.present? || @members.present? %>
       <div class="tabs">
-        <ul class="nav nav-tabs justify-content-center">
+        <ul class="nav nav-tabs justify-content-center nav-justified">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#section1">
-              <%= image_tag 'review_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+              <%= image_tag 'review_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#section2">
-              <%= image_tag 'member_logo.png', width: '150px', height: 'auto', class: "img-fluid" %>
+              <%= image_tag 'member_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
             </a>
           </li>
         </ul>
@@ -27,7 +26,6 @@
           </div>
         </div>
       </div>
-      <% end %>
     </div>
   </div>
 </div>

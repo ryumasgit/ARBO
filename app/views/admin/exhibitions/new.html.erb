@@ -1,9 +1,10 @@
 <div class="container-fluid">
-  <p class="text-center"><%= flash[:notice] %></p>
+  <h2 class="text-center">NEW EXHIBITION CREATE</h2>
+  <p class="text-center <%= flash[:alert] ? 'text-danger' : '' %>"><%= flash[:notice] || flash[:alert] %></p>
+  <%= render 'layouts/error', obj: @exhibition %>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>New Exhibition Create</h2>
         <%= form_with model: @exhibition, url: admin_exhibitions_path do |f| %>
 
           <div class="field m-5">

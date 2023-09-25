@@ -7,14 +7,14 @@ class Admin::ReviewsController < ApplicationController
                       .includes(:member)
                       .where(members: { is_active: true })
                       .order(created_at: :desc)
-                      .page(params[:page]).per(10)
+                      .page(params[:page])
   end
 
   def index
     @reviews = Review.includes(:member, :review_comments, :exhibition)
                       .where(members: { is_active: true })
                       .order(created_at: :desc)
-                      .page(params[:page]).per(50)
+                      .page(params[:page])
   end
 
   def destroy

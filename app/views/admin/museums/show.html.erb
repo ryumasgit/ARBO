@@ -1,25 +1,23 @@
 <div class="container-fluid">
+  <h2 class="text-center">MUSEUM DETAIL</h2>
   <p class="text-center"><%= flash[:notice] %></p>
   <% if @museum.is_active == false %>
     <h4 class="text-danger text-center">現在非公開中です</h4>
   <% end %>
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="row d-flex justify-content-center m-3">
-        <div class="col-md-6">
-          <div class="images my-auto">
-            <% @museum.museum_images.each do |image| %>
-              <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed %>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <%= content_tag :h4, @museum.name %>
-          <%= link_to edit_admin_museum_path(@museum), class: "btn" do %>
-            <i class="fa-solid fa-gear align-top"></i>
-          <% end %>
-        </div>
+
+  <div class="row justify-content-center my-5">
+    <div class="col-md-6">
+      <div class="images my-auto">
+        <% @museum.museum_images.each do |image| %>
+          <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
+        <% end %>
       </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
+      <h4><%= @museum.name %></h4>
+      <%= link_to edit_admin_museum_path(@museum), class: "btn" do %>
+        <i class="fa-solid fa-gear align-top"></i>
+      <% end %>
     </div>
   </div>
 
@@ -28,13 +26,14 @@
       <%= @museum.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
     <% end %>
   </div>
+
   <div class="row justify-content-center m-3">
-    <%= link_to "#{@museum.name} 公式サイト", @museum.official_website, target: "_blank", class: "mr-3" %>
+    <%= link_to "公式サイト", @museum.official_website, target: "_blank", class: "mr-3" %>
     <%= link_to "https://goo.gl/maps/Pue94AkNR1e5rwGt6", target: "_blank", class: "text-dark" do %>
       MAP <i class="fa-solid fa-map-location-dot"></i>
     <% end %>
   </div>
-  
+
   <div class="row justify-content-center align-items-center">
     <%= render "admin/bookmark_museums/btn", museum: @museum %>
   </div>
@@ -44,13 +43,13 @@
   <div class="row justify-content-center">
     <div class="text-center">
       <% @exhibitions.each_slice(2) do |exhibitions| %>
-        <div class="d-flex">
+        <div class="d-flex flex-wrap">
           <% exhibitions.each do |exhibition| %>
             <div class="d-flex flex-column m-5">
               <%= link_to admin_exhibition_path(exhibition) do %>
-                <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1" %>
+                <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1 img-fluid" %>
               <% end %>
-              <%= exhibition.name %>
+              <%= exhibition.name.scan(/.{1,30}/).join("<br>").html_safe %>
             </div>
           <% end %>
         </div>

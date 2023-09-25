@@ -7,5 +7,8 @@ class CreateReviews < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    
+    add_index :reviews, :member_id
+    add_index :reviews, :exhibition_id
   end
 end

@@ -30,13 +30,16 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.exhibition_id = params[:review][:exhibition_id]
+    extract_tags_from_space_separated_string
 
     if @review.save
+      session.delete(:selected_exhibition_id)
       BadgeJob.perform_later(@review.member)
       set_flash_message("レビューの作成に成功しました")
       redirect_to review_path(@review)
     else
       set_flash_message("レビューの作成に失敗しました")
+      handle_exhibition_selection_session(session[:selected_exhibition_id])
       render :new
     end
   end
@@ -48,22 +51,24 @@ class Public::ReviewsController < ApplicationController
                       .includes(:member)
                       .where(members: { is_active: true })
                       .order(created_at: :desc)
-                      .page(params[:page]).per(10)
+                      .page(params[:page])
     @review_comment = ReviewComment.new
   end
 
   def index
-    @all_reviews = fetch_reviews(50)
+    @all_reviews = fetch_reviews
     following_member_ids = current_member.followings.pluck(:id)
-    @following_member_reviews = fetch_reviews(50, following_member_ids)
+    @following_member_reviews = fetch_reviews(following_member_ids)
   end
 
 
   def edit
+    @tags = @review.tags
   end
 
   def update
     @original_review = Review.find(params[:id])
+    extract_tags_from_space_separated_string
 
     if @review.update(review_params)
       set_flash_message("レビュー情報の保存に成功しました")
@@ -120,10 +125,24 @@ class Public::ReviewsController < ApplicationController
   def handle_exhibition_selection_session(selected_exhibition_session)
     if selected_exhibition_session.present?
       @selected_exhibition_id = selected_exhibition_session
-      session.delete(:selected_exhibition_id)
     else
       set_flash_message("選択に問題があります")
       redirect_to select_museums_path
+    end
+  end
+
+  def extract_tags_from_space_separated_string
+    @review.tags.destroy_all
+    if params[:review][:tags_name].present?
+      # フォームから送信されたタグの文字列を受け取り、スペースで分割する
+      tag_names = params[:review][:tags_name].split(" ").map(&:strip)
+      # 各タグをデータベースに保存
+      tag_names.each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        unless @review.tags.include?(tag)
+          @review.tags << tag
+        end
+      end
     end
   end
 
@@ -146,12 +165,11 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
-  def fetch_reviews(page_size, member_ids = nil)
+  def fetch_reviews(member_ids = nil)
     reviews = Review.includes(:member, :review_comments, :exhibition)
-                      .where(members: { is_active: true })
-                      .order(created_at: :desc)
-                      .page(params[:page]).per(page_size)
+                    .where(members: { is_active: true })
     reviews = reviews.where(member_id: member_ids) if member_ids.present?
+    reviews = reviews.order(created_at: :desc).page(params[:page])
     reviews
   end
 

@@ -1,7 +1,8 @@
 <div class="container-fluid">
-  <div class="row justify-content-center m-5">
-    <div class="text-center">
-      <%= image_tag 'review_comment_logo.png', width: '425px', height: 'auto', class: "img-fluid" %>
+  <div class="row justify-content-center my-5">
+    <div class="text-center text-nowrap">
+      <h3>REVIEW COMMENT</h3>
+      <%= render 'layouts/error', obj: review_comment %>
     </div>
   </div>
   <% unless current_member.is_guest? %>
@@ -11,5 +12,8 @@
     <% if review_comments.present? %>
       <%= render "public/review_comments/index", review_comments: review_comments %>
     <% end %>
+  </div>
+  <div class="row justify-content-center">
+    <%= paginate review_comments %>
   </div>
 </div>

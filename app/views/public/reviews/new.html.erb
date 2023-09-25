@@ -1,8 +1,9 @@
 <div class="container-fluid">
+  <h2 class="text-center">NEW REVIEW CREATE</h2>
   <p class="text-center"><%= flash[:notice] %></p>
+  <%= render 'layouts/error', obj: @review %>
   <div class="row justify-content-center">
     <div class="col-md-2">
-      <h2 class="text-center">New Review Create</h2>
       <div class="d-flex m-3">
         <div class="progress review-progress">
           <div class="progress-bar review-progress-body" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">レビュー記入</div>
@@ -22,7 +23,12 @@
 
           <div class="field text-left my-2">
             <%= f.label :body, "レビュー" %>
-            <%= f.text_area :body, placeholder: "レビュー（255文字以下）", class: "form-control", rows: 8 %>
+            <%= f.text_area :body, placeholder: "（255文字以下）", class: "form-control", rows: 8 %>
+          </div>
+
+          <div class="field text-left my-2">
+            <%= f.label :tags_name, "タグ" %>
+            <%= f.text_field :tags_name, placeholder: "タグをスペースで区切って入力（255文字以下）", class: "form-control" %>
           </div>
 
           <%= f.hidden_field :exhibition_id, :value => @selected_exhibition_id %>

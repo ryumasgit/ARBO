@@ -10,13 +10,13 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.new(museum_params)
 
     if params[:museum][:museum_images].nil?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to new_admin_museum_path
       return
     end
 
     if params[:museum][:museum_images].length > 4
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
       redirect_to new_admin_museum_path
       return
     end
@@ -32,13 +32,13 @@ class Admin::MuseumsController < ApplicationController
 
   def show
     exhibitions = @museum.exhibitions.where(is_active: :true)
-    @exhibitions = exhibitions.page(params[:page]).per(10)
+    @exhibitions = exhibitions.page(params[:page])
   end
 
   def index
-    @museums = Museum.page(params[:page]).per(10)
-    @exhibitions = Exhibition.page(params[:page]).per(10)
-    @artists = Artist.page(params[:page]).per(10)
+    @museums = Museum.page(params[:page])
+    @exhibitions = Exhibition.page(params[:page])
+    @artists = Artist.page(params[:page])
   end
 
   def edit
@@ -48,13 +48,13 @@ class Admin::MuseumsController < ApplicationController
     @original_museum = Museum.find(params[:id])
 
     if museum_images_count_exceeds_limit?
-      set_flash_message("画像は最大4つまでです")
+      flash[:alert] = "画像は最大4つまでです"
       redirect_to edit_admin_museum_path(@museum)
       return
     end
 
     if museum_images_count_equals_zero?
-      set_flash_message("画像は最低1つは必要です")
+      flash[:alert] = "画像は最低1つは必要です"
       redirect_to edit_admin_museum_path(@museum)
       return
     end
@@ -110,7 +110,7 @@ class Admin::MuseumsController < ApplicationController
       end
     end
   end
-  
+
   # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_museum
     @original_museum.attributes.each do |attr, value|

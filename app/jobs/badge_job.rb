@@ -5,29 +5,32 @@ class BadgeJob < ApplicationJob
     if member_is_guest?(member)
       return
     end
-    if first_review_badge_condition_met?(member)
-      badge = member.earned_badges.new(badge_id: 1)
-      badge.save
-    end
-    if first_comment_badge_condition_met?(member)
-      badge = member.earned_badges.new(badge_id: 2)
-      badge.save
-    end
-    if first_follower_badge_condition_met?(member)
-      badge = member.earned_badges.new(badge_id: 3)
-      badge.save
-    end
-    if first_favorited_badge_condition_met?(member)
-      badge = member.earned_badges.new(badge_id: 4)
-      badge.save
-    end
-    if museum_enthusiast_badge_condition_met?(member)
-      badge = member.earned_badges.new(badge_id: 5)
-      badge.save
-    end
-    if exhibition_enthusiast_badge_condition_met?(member)
-      badge = member.earned_badges.new(badge_id: 6)
-      badge.save
+    # バッジ条件と対応するバッジIDのハッシュ
+    badge_conditions = {
+      first_review_badge_condition_met?: 1,
+      first_comment_badge_condition_met?: 2,
+      first_follower_badge_condition_met?: 3,
+      first_favorited_badge_condition_met?: 4,
+      museum_enthusiast_badge_condition_met?: 5,
+      exhibition_enthusiast_badge_condition_met?: 6
+    }
+
+    # 各条件をチェックし、条件が満たされた場合にバッジを付与
+    badge_conditions.each do |condition_method, badge_id|
+      if send(condition_method, member)
+        badge = member.earned_badges.new(badge_id: badge_id)
+        badge.save
+        # バッジを付与した後に通知を作成
+        temp = Notification.where(["visitor_id = ? and visited_id = ? and badge_id = ? and action = ? ", member.id, member.id, badge_id, 'badge'])
+        if temp.blank?
+          notification = member.active_notifications.new(
+            visited_id: member.id,
+            badge_id: badge_id,
+            action: 'badge'
+          )
+          notification.save if notification.valid?
+        end
+      end
     end
   end
 
@@ -90,7 +93,7 @@ class BadgeJob < ApplicationJob
           .distinct
           .count
   end
-  
+
   def member_is_guest?(member)
     if member.is_guest == true
       return true

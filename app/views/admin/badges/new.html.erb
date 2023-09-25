@@ -1,9 +1,10 @@
 <div class="container-fluid">
-  <p class="text-center"><%= flash[:notice] %></p>
+  <h2 class="text-center">NEW BADGE CREATE</h2>
+  <p class="text-center <%= flash[:alert] ? 'text-danger' : '' %>"><%= flash[:notice] || flash[:alert] %></p>
+  <%= render 'layouts/error', obj: @badge %>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>New Badge Create</h2>
         <%= form_with model: @badge, url: admin_badges_path do |f| %>
 
           <div class="field m-5">

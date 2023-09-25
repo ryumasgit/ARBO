@@ -15,7 +15,7 @@
           <tr>
             <td>
               <%= link_to badge_path(earned_badges.badge) do %>
-                <%= image_tag earned_badges.badge.get_badge_image(150, 150) %>
+                <%= image_tag earned_badges.badge.get_badge_image(150, 150), class: "img-fluid" %>
               <% end %>
             </td>
             <td>

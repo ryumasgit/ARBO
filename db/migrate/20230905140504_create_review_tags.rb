@@ -6,5 +6,8 @@ class CreateReviewTags < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    
+    add_index :review_tags, :review_id
+    add_index :review_tags, :tag_id
   end
 end

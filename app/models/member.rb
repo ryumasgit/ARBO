@@ -10,8 +10,6 @@ class Member < ApplicationRecord
   has_many :followers, through: :followed, source: :follower
   has_many :earned_badges, dependent: :destroy
   has_many :badges, through: :earned_badges, source: :badge
-  has_many :member_tags, dependent: :destroy
-  has_many :tags, through: :member_tags
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_reviews, through: :favorites, source: :review
@@ -21,17 +19,22 @@ class Member < ApplicationRecord
   has_many :museums, through: :bookmark_museums
   has_many :bookmark_exhibitions, dependent: :destroy
   has_many :exhibitions, through: :bookmark_exhibitions
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
 
   has_one_attached :member_image
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :introduction, length: { maximum: 255 }
+  validates :email, length: { maximum: 255 }
   validates :is_active, inclusion: { in: [true, false] }
   validates :is_guest, inclusion: { in: [true, false] }
 
   def follow(name)
     followed_member = Member.find_by(name: name)
     follower.create(followed: followed_member)
+
     BadgeJob.perform_later(followed_member)
   end
 
@@ -65,6 +68,18 @@ class Member < ApplicationRecord
       member.password = SecureRandom.urlsafe_base64
       member.name = GUEST_MEMBER_NAME
       member.is_guest = "true"
+    end
+  end
+
+  def create_notification_follow!(current_member, followed_member_name)
+    followed_member = Member.find_by(name: followed_member_name)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_member.id, followed_member.id, 'follow'])
+    if temp.blank?
+      notification = current_member.active_notifications.new(
+        visited_id: followed_member.id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
     end
   end
 end

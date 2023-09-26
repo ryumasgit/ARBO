@@ -1543,6 +1543,86 @@ action: 'badge',
 checked: false,
 )
 
+Notification.create!(
+visitor_id: 3,
+visited_id: 6,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 6,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 6,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 6,
+review_id: 15,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 6,
+review_id: 17,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 6,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 1,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 6,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 2,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 6,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 3,
+action: 'badge',
+checked: false,
+)
+
 EarnedBadge.create!(
 member_id: 2,
 badge_id: 1

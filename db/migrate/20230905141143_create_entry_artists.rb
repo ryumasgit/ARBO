@@ -6,8 +6,5 @@ class CreateEntryArtists < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    
-    add_index :entry_artists, :exhibition_id
-    add_index :entry_artists, :artist_id
   end
 end

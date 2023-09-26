@@ -6,8 +6,5 @@ class CreateFavorites < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-
-    add_index :favorites, :member_id
-    add_index :favorites, :review_id
   end
 end

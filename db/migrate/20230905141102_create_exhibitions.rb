@@ -9,7 +9,5 @@ class CreateExhibitions < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    
-    add_index :exhibitions, :museum_id
   end
 end

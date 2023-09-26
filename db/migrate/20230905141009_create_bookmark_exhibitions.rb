@@ -6,8 +6,5 @@ class CreateBookmarkExhibitions < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    
-    add_index :bookmark_exhibitions, :member_id
-    add_index :bookmark_exhibitions, :exhibition_id
   end
 end

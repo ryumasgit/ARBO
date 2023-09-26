@@ -3,7 +3,7 @@
   <p class="text-center"><%= flash[:notice] %></p>
   <%= render 'layouts/error', obj: @review %>
   <div class="row justify-content-center">
-    <div class="col-md-2">
+    <div class="col-md-6">
       <div class="d-flex m-3">
         <div class="progress review-progress">
           <div class="progress-bar review-progress-body" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">レビュー記入</div>
@@ -13,7 +13,7 @@
   </div>
 
    <div class="row justify-content-center">
-    <div class="col-md-2">
+    <div class="col-md-4">
       <div class="text-center review-form">
         <%= form_with model: @review, url: reviews_path do |f| %>
 

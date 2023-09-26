@@ -2,33 +2,35 @@ class BadgeJob < ApplicationJob
   queue_as :default
 
   def perform(member)
-    if member_is_guest?(member)
+    if member.is_guest
       return
     end
     # バッジ条件と対応するバッジIDのハッシュ
     badge_conditions = {
-      first_review_badge_condition_met?: 1,
-      first_comment_badge_condition_met?: 2,
-      first_follower_badge_condition_met?: 3,
-      first_favorited_badge_condition_met?: 4,
-      museum_enthusiast_badge_condition_met?: 5,
-      exhibition_enthusiast_badge_condition_met?: 6
+      first_review_badge_condition_met?: { badge_id: 1, active_check: true },
+      first_comment_badge_condition_met?: { badge_id: 2, active_check: true },
+      first_follower_badge_condition_met?: { badge_id: 3, active_check: true },
+      first_favorited_badge_condition_met?: { badge_id: 4, active_check: true },
+      museum_enthusiast_badge_condition_met?: { badge_id: 5, active_check: true },
+      exhibition_enthusiast_badge_condition_met?: { badge_id: 6, active_check: true }
     }
 
     # 各条件をチェックし、条件が満たされた場合にバッジを付与
-    badge_conditions.each do |condition_method, badge_id|
-      if send(condition_method, member)
-        badge = member.earned_badges.new(badge_id: badge_id)
-        badge.save
-        # バッジを付与した後に通知を作成
-        temp = Notification.where(["visitor_id = ? and visited_id = ? and badge_id = ? and action = ? ", member.id, member.id, badge_id, 'badge'])
-        if temp.blank?
-          notification = member.active_notifications.new(
-            visited_id: member.id,
-            badge_id: badge_id,
-            action: 'badge'
-          )
-          notification.save if notification.valid?
+    badge_conditions.each do |condition_method, options|
+      if options[:active_check] && send(condition_method, member)
+        badge = Badge.find_by(id: options[:badge_id], is_active: true)
+        if badge.present?
+          member.earned_badges.create(badge_id: options[:badge_id])
+          # バッジを付与した後に通知を作成
+          temp = Notification.where(["visitor_id = ? and visited_id = ? and badge_id = ? and action = ? ", member.id, member.id, options[:badge_id], 'badge'])
+          if temp.blank?
+            notification = member.active_notifications.new(
+              visited_id: member.id,
+              badge_id: options[:badge_id],
+              action: 'badge'
+            )
+            notification.save if notification.valid?
+          end
         end
       end
     end
@@ -92,12 +94,5 @@ class BadgeJob < ApplicationJob
           .where(members: { id: member.id })
           .distinct
           .count
-  end
-
-  def member_is_guest?(member)
-    if member.is_guest == true
-      return true
-    end
-    false
   end
 end

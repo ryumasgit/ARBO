@@ -1027,8 +1027,8 @@ tag_id: 4
 )
 
 ReviewTag.create!(
-review_id: 16,
-tag_id: 4
+review_id: 17,
+tag_id: 5
 )
 
 

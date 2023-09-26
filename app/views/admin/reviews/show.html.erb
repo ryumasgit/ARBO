@@ -24,6 +24,7 @@
       <h4><%= @review.body %></h4>
     <% end %>
   </div>
+
   <div class="row justify-content-center">
     <% if @review.tags.any? %>
       <% @review.tags.each do |tag| %>
@@ -34,15 +35,16 @@
       <% end %>
     <% end %>
   </div>
-
   <div class="row justify-content-center">
-<%= render 'admin/reviews/event', review: @review %>
+    <%= render 'admin/reviews/event', review: @review %>
   </div>
-
   <div class="row justify-content-center">
-      <%= render "admin/review_comments/btn", review: @review %>
-      <%= render "admin/favorites/btn", review: @review %>
+    <%= render "admin/review_comments/btn", review: @review %>
+    <%= render "admin/favorites/btn", review: @review %>
+  </div>
+  <div class="small text-muted text-right mr-3">
+    <%= time_ago_in_words(@review.created_at).upcase %>
   </div>
   <div class="border my-5"></div>
-<%= render 'admin/review_comments/comments', review_comments: @review_comments %>
+  <%= render 'admin/review_comments/comments', review_comments: @review_comments %>
 </div>

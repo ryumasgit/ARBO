@@ -18,7 +18,7 @@
 
 <div class="row justify-content-center">
   <% if member.introduction.present? %>
-    <%= member.introduction.scan(/.{1,25}/).join("<br>").html_safe %>
+    <%= raw member.introduction.scan(/.{1,25}/).join("<br>") %>
   <% end %>
 </div>
 

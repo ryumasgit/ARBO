@@ -6,9 +6,9 @@
     <div class="col-md-6">
       <div class="text-center">
         <%= form_with model: @exhibition, url: admin_exhibition_path(@exhibition) do |f| %>
-        <p>選択した画像を削除できます</p>
-
-          <div class="field d-flex justify-content-center my-3">
+        
+          <p>選択した画像を削除できます</p>
+          <div class="field d-flex justify-content-center m-5">
             <% @exhibition.exhibition_images.each do |image| %>
               <div class="delete-image-check">
                 <%= f.check_box :exhibition_image_id, { multiple: true }, image.id, false %>

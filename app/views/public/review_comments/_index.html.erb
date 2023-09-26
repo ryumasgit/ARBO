@@ -21,6 +21,9 @@
           <% end %>
         </div>
       </div>
+      <div class="small text-muted text-right">
+        <%= time_ago_in_words(review_comment.created_at).upcase %>
+      </div>
     </div>
   </div>
 <% end %>

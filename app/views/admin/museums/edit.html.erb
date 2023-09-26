@@ -7,9 +7,8 @@
       <div class="text-center">
         <%= form_with model: @museum, url: admin_museum_path(@museum) do |f| %>
 
-        <p>選択した画像を削除できます</p>
-
-          <div class="field d-flex justify-content-center my-3">
+          <p>選択した画像を削除できます</p>
+          <div class="field d-flex justify-content-center m-5">
             <% @museum.museum_images.each do |image| %>
               <div class="delete-image-check">
                 <%= f.check_box :museum_image_id, { multiple: true }, image.id, false %>

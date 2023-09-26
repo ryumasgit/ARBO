@@ -16,7 +16,7 @@
   
   <div class="row justify-content-center">
     <% if @artist.introduction.present? %>
-      <%= @artist.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
+      <%= raw @artist.introduction.scan(/.{1,85}/).join("<br>") %>
     <% end %>
   </div>
 
@@ -31,7 +31,7 @@
               <%= link_to exhibition_path(exhibition) do %>
                 <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1 img-fluid" %>
               <% end %>
-              <%= exhibition.name.scan(/.{1,30}/).join("<br>").html_safe %>
+              <%= raw exhibition.name.scan(/.{1,30}/).join("<br>") %>
             </div>
           <% end %>
         </div>

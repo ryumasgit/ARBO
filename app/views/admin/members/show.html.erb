@@ -1,3 +1,4 @@
+<% tab_attributes = { width: '150px', height: 'auto', class: "tab-responsive" } %>
 <div class="container-fluid">
   <p class="text-center"><%= flash[:notice] %></p>
   <%= render 'show', member: @member %>
@@ -7,17 +8,17 @@
         <ul class="nav nav-tabs justify-content-center nav-justified">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#section1">
-              <%= image_tag 'review_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
+              <%= image_tag 'review_logo.png', tab_attributes %>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#section2">
-              <%= image_tag 'favorite_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
+              <%= image_tag 'favorite_logo.png', tab_attributes %>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#section3">
-              <%= image_tag 'report_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
+              <%= image_tag 'report_logo.png', tab_attributes %>
             </a>
           </li>
         </ul>
@@ -30,8 +31,9 @@
             <%= render "admin/reviews/index", reviews: @favorited_reviews %>
           </div>
           <div id="section3" class="tab-pane fade">
-            <%= render "public/members/report", total_favorited_count: @total_favorited_count, total_commented_count: @total_commented_count,
-            total_visited_museum: @total_visited_museum, total_visited_exhibition: @total_visited_exhibition %>
+            <%= render "public/members/report", total_favorited_count: @total_favorited_count,
+            total_commented_count: @total_commented_count, total_visited_museum: @total_visited_museum,
+            total_visited_exhibition: @total_visited_exhibition %>
             <% if @earned_badges.present? %>
               <%= render 'admin/members/earned_badges', earned_badges: @earned_badges %>
             <% end %>

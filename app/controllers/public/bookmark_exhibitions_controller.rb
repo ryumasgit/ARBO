@@ -9,7 +9,8 @@ class Public::BookmarkExhibitionsController < ApplicationController
   end
 
   def index
-    @bookmark_exhibitions = current_member.exhibitions.page(params[:page]).per(20)
+    @bookmark_exhibitions = current_member.exhibitions.where(is_active: :true)
+                                                      .page(params[:page]).per(20)
   end
 
   def destroy

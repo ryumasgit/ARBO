@@ -4,7 +4,7 @@
   </div>
   <div class="d-flex align-items-center text-break">
     <h3><%= member.name %></h3>
-    <% if member.is_guest == false %>
+    <% unless member.is_guest %>
       <%= link_to edit_admin_member_path(member), class: "btn pb-4" do %>
         <i class="fa-solid fa-gear align-bottom" aria-hidden="true"></i>
       <% end %>
@@ -14,7 +14,7 @@
 
 <div class="row justify-content-center">
    <% if member.introduction.present? %>
-    <%= member.introduction.scan(/.{1,25}/).join("<br>").html_safe %>
+    <%= raw member.introduction.scan(/.{1,25}/).join("<br>") %>
   <% end %>
 </div>
 

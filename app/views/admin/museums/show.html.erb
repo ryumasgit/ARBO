@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <h2 class="text-center">MUSEUM DETAIL</h2>
   <p class="text-center"><%= flash[:notice] %></p>
-  <% if @museum.is_active == false %>
+
+  <% unless @museum.is_active %>
     <h4 class="text-danger text-center">現在非公開中です</h4>
   <% end %>
 
@@ -16,21 +17,21 @@
     <div class="col-md-6 d-flex justify-content-center align-items-center text-break">
       <h4><%= @museum.name %></h4>
       <%= link_to edit_admin_museum_path(@museum), class: "btn" do %>
-        <i class="fa-solid fa-gear align-top"></i>
+        <i class="fa-solid fa-gear align-top" aria-hidden="true"></i>
       <% end %>
     </div>
   </div>
 
   <div class="row justify-content-center">
     <% if @museum.introduction.present? %>
-      <%= @museum.introduction.scan(/.{1,85}/).join("<br>").html_safe %>
+      <%= raw @museum.introduction.scan(/.{1,85}/).join("<br>") %>
     <% end %>
   </div>
 
   <div class="row justify-content-center m-3">
     <%= link_to "公式サイト", @museum.official_website, target: "_blank", class: "mr-3" %>
     <%= link_to "https://goo.gl/maps/Pue94AkNR1e5rwGt6", target: "_blank", class: "text-dark" do %>
-      MAP <i class="fa-solid fa-map-location-dot"></i>
+      MAP <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
     <% end %>
   </div>
 
@@ -49,7 +50,7 @@
               <%= link_to admin_exhibition_path(exhibition) do %>
                 <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1 img-fluid" %>
               <% end %>
-              <%= exhibition.name.scan(/.{1,30}/).join("<br>").html_safe %>
+              <%= raw exhibition.name.scan(/.{1,30}/).join("<br>") %>
             </div>
           <% end %>
         </div>

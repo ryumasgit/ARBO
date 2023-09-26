@@ -5,23 +5,16 @@
         <% if member_signed_in? %>
           <%= link_to notifications_path do %>
             <% if unchecked_notifications.any? %>
-              <i class="fa-regular fa-bell btn btn-lg" aria-hidden="true"></i>
-              <i class="fa-solid fa-circle-exclamation new-notification" aria-hidden="true"></i>
+              <%= render 'layouts/notifications_with_alert' %>
             <% else %>
-              <i class="fa-regular fa-bell btn btn-lg" aria-hidden="true"></i>
+              <%= render 'layouts/notifications_without_alert' %>
             <% end %>
           <% end %>
         <% end %>
       </div>
-      <div class="text-center">
-        <% if admin_signed_in? %>
-          <%= link_to admin_root_path do %>
-            <%= image_tag 'header_logo.png', width: '155px', height: 'auto' %>
-          <% end %>
-        <% else %>
-          <%= link_to root_path do %>
-            <%= image_tag 'header_logo.png', width: '155px', height: 'auto' %>
-          <% end %>
+     <div class="text-center">
+        <%= link_to (admin_signed_in? ? admin_root_path : root_path) do %>
+          <%= image_tag 'header_logo.png', width: '155px', height: 'auto' %>
         <% end %>
       </div>
     </div>
@@ -47,9 +40,7 @@
           <div><%= link_to 'sign up', new_member_registration_path, class: "btn" %></div>
           <div><%= link_to 'log in', member_session_path, class: "btn" %></div>
         <% end %>
-        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-        <i class="fa-brands fa-instagram m-5" aria-hidden="true"></i>
-        <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+        <%= render '/layouts/header_sns_icons' %>
       </div>
     </div>
   </div>

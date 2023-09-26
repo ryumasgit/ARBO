@@ -5,7 +5,7 @@ class Badge < ApplicationRecord
 
   has_one_attached :badge_image
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :introduction, presence: true, length: { maximum: 255 }
   validates :is_active, inclusion: { in: [true, false] }
 

@@ -8,7 +8,7 @@ class Exhibition < ApplicationRecord
 
   has_many_attached :exhibition_images
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 255 }
   validates :introduction, presence: true, length: { maximum: 255 }
   validates :official_website, presence: true, length: { maximum: 255 }
   validates :is_active, inclusion: { in: [true, false] }

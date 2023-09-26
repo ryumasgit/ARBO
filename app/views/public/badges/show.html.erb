@@ -13,7 +13,7 @@
     
   <div class="row justify-content-center">
     <% if @badge.introduction.present? %>
-      <%= @badge.introduction.scan(/.{1,80}/).join("<br>").html_safe %>
+      <%= raw @badge.introduction.scan(/.{1,80}/).join("<br>") %>
     <% end %>
   </div>
 </div>

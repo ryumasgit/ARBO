@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center">
-        <% if @member.is_guest == false %>
+        <% unless @member.is_guest %>
           <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
 
             <div class="field m-5">

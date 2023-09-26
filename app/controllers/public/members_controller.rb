@@ -46,6 +46,7 @@ class Public::MembersController < ApplicationController
 
   protected
 
+  # メンバーがいいねしたレビュー取得
   def get_favorited_reviews
     @member.favorite_reviews
           .joins(:member)
@@ -54,6 +55,7 @@ class Public::MembersController < ApplicationController
           .page(params[:page])
   end
 
+  # メンバーが受けたいいね数取得
   def calculate_total_favorited_count
     Favorite.joins(review: :member)
             .where(reviews: { member_id: @member.id })
@@ -62,6 +64,7 @@ class Public::MembersController < ApplicationController
             .count
   end
 
+  # メンバーが受けたコメント数取得
   def calculate_total_commented_count
     ReviewComment.joins(review: :member)
           .where(review: { member_id: @member.id })
@@ -70,6 +73,7 @@ class Public::MembersController < ApplicationController
           .count
   end
 
+  # メンバーが訪れた美術館数取得
   def calculate_total_visited_museum
     Museum.joins(exhibitions: {reviews: :member})
           .where(museums: { is_active: true })
@@ -78,6 +82,7 @@ class Public::MembersController < ApplicationController
           .count
   end
 
+  # メンバーが訪れた展示会数取得
   def calculate_total_visited_exhibition
     Exhibition.joins(reviews: :member)
           .where(exhibitions: { is_active: true })
@@ -86,6 +91,7 @@ class Public::MembersController < ApplicationController
           .count
   end
 
+  # メンバーが獲得したバッジ取得
   def get_earned_badges
     EarnedBadge.joins(:member)
       .joins(:badge)
@@ -104,11 +110,8 @@ class Public::MembersController < ApplicationController
 
   def get_member_name
     @member = Member.find_by(name: params[:member_member_name])
-    redirect_if_member_not_found
-  end
 
-  def redirect_if_member_not_found
-    if @member.nil? || @member.is_active == false || @member.is_guest == true
+    if @member.nil? || @member.is_active == false || @member.is_guest
       set_flash_message("メンバーが見つかりません")
       redirect_to root_path
     end

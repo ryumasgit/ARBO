@@ -30,6 +30,7 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.member_id = current_member.id
     @review.exhibition_id = params[:review][:exhibition_id]
+
     extract_tags_from_space_separated_string
 
     if @review.save
@@ -92,6 +93,7 @@ class Public::ReviewsController < ApplicationController
 
   protected
 
+  # 選択された美術館データを一時保存
   def handle_museum_selection(selected_museum_id)
     if selected_museum_id.present?
       session[:selected_museum_id] = selected_museum_id
@@ -102,6 +104,7 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+  # 一時保存した美術館データを変数に格納
   def handle_museum_selection_session(selected_museum_session)
     if selected_museum_session.present?
       @selected_museum_id = selected_museum_session
@@ -112,6 +115,7 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+  # 選択された展示会データを一時保存
   def handle_exhibition_selection(selected_exhibition_id)
     if selected_exhibition_id.present?
       session[:selected_exhibition_id] = selected_exhibition_id
@@ -122,6 +126,7 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+  # 一時保存した展示会データを変数に格納
   def handle_exhibition_selection_session(selected_exhibition_session)
     if selected_exhibition_session.present?
       @selected_exhibition_id = selected_exhibition_session
@@ -131,6 +136,7 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+  # タグをレビューに紐づける
   def extract_tags_from_space_separated_string
     @review.tags.destroy_all
     if params[:review][:tags_name].present?

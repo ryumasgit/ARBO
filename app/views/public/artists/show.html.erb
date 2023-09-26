@@ -1,6 +1,5 @@
 <div class="container-fluid">
   <h2 class="text-center">ARTIST DETAIL</h2>
-
   <div class="row justify-content-center my-5">
     <div class="col-md-6">
       <div class="images my-auto">
@@ -13,7 +12,7 @@
       <h4><%= @artist.name %></h4>
     </div>
   </div>
-  
+
   <div class="row justify-content-center">
     <% if @artist.introduction.present? %>
       <%= raw @artist.introduction.scan(/.{1,85}/).join("<br>") %>
@@ -38,5 +37,4 @@
       <% end %>
     </div>
   </div>
-</div>
 </div>

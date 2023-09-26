@@ -22,7 +22,7 @@ class Admin::MembersController < ApplicationController
   def update
     @original_member = Member.find(params[:id])
 
-    unless is_guest?
+    unless @member.is_guest
       if @member.update(member_params)
         set_flash_message("メンバー情報の保存に成功しました")
         redirect_to admin_member_path(@member)
@@ -38,7 +38,7 @@ class Admin::MembersController < ApplicationController
   end
 
   def destroy
-    unless is_guest?
+    unless  @member.is_guest
       if @member.destroy
         set_flash_message("メンバーの削除に成功しました")
         redirect_to admin_members_path
@@ -54,6 +54,7 @@ class Admin::MembersController < ApplicationController
 
   protected
 
+  # メンバーがいいねしたレビュー取得
   def get_favorited_reviews
     @member.favorite_reviews
           .joins(:member)
@@ -62,6 +63,7 @@ class Admin::MembersController < ApplicationController
           .page(params[:page])
   end
 
+  # メンバーが受けたいいね数取得
   def calculate_total_favorited_count
     Favorite.joins(review: :member)
             .where(reviews: { member_id: @member.id })
@@ -70,6 +72,7 @@ class Admin::MembersController < ApplicationController
             .count
   end
 
+  # メンバーが受けたコメント数取得
   def calculate_total_commented_count
     ReviewComment.joins(review: :member)
           .where(review: { member_id: @member.id })
@@ -78,6 +81,7 @@ class Admin::MembersController < ApplicationController
           .count
   end
 
+  # メンバーが訪れた美術館数取得
   def calculate_total_visited_museum
     Museum.joins(exhibitions: {reviews: :member})
           .where(museums: { is_active: true })
@@ -86,6 +90,7 @@ class Admin::MembersController < ApplicationController
           .count
   end
 
+  # メンバーが訪れた展示会数取得
   def calculate_total_visited_exhibition
     Exhibition.joins(reviews: :member)
           .where(exhibitions: { is_active: true })
@@ -94,6 +99,7 @@ class Admin::MembersController < ApplicationController
           .count
   end
 
+  # メンバーが獲得したバッジ取得
   def get_earned_badges
     EarnedBadge.joins(:member)
       .joins(:badge)
@@ -111,10 +117,7 @@ class Admin::MembersController < ApplicationController
     redirect_if_member_not_found
   end
 
-  def is_guest?
-    @member.is_guest == true
-  end
-
+  # メンバーが存在するか確認
   def redirect_if_member_not_found
     if @member.nil?
       set_flash_message("メンバーが見つかりません")

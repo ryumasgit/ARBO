@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <% members.each do |member| %>
-            <% if member.is_active == true %>
+            <% if member.is_active %>
               <tr>
                 <td>
                   <%= link_to member_my_page_path(member_member_name: member.name) do %>

@@ -1,3 +1,4 @@
+<% tab_attributes = { width: '150px', height: 'auto', class: "tab-responsive" } %>
 <div class="container-fluid">
   <p class="text-center"><%= flash[:notice] %></p>
   <div class="row justify-content-center">
@@ -6,12 +7,12 @@
         <ul class="nav nav-tabs justify-content-center nav-justified">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#section1">
-              <%= image_tag 'latest_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
+              <%= image_tag 'latest_logo.png', tab_attributes %>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#section2">
-              <%= image_tag 'follow_logo.png', width: '150px', height: 'auto', class: "tab-responsive" %>
+              <%= image_tag 'follow_logo.png', tab_attributes %>
             </a>
           </li>
         </ul>

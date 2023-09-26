@@ -9,20 +9,7 @@ class Admin::ExhibitionsController < ApplicationController
   def create
     @exhibition = Exhibition.new(exhibition_params)
 
-    if params[:exhibition][:exhibition_images].nil?
-      flash[:alert] = "画像は最低1つは必要です"
-      redirect_to new_admin_exhibition_path
-      return
-    end
-
-    if params[:exhibition][:exhibition_images].length > 4
-      flash[:alert] = "画像は最大4つまでです"
-      redirect_to new_admin_exhibition_path
-      return
-    end
-
-    if params[:exhibition][:artist_ids].all?(&:blank?)
-      flash[:alert] = "アーティストの登録が必要です"
+    if validate_exhibition_creation
       redirect_to new_admin_exhibition_path
       return
     end
@@ -38,8 +25,7 @@ class Admin::ExhibitionsController < ApplicationController
   end
 
   def show
-    artists = @exhibition.artists.where(is_active: :true)
-    @artists = artists.page(params[:page])
+    @artists = @exhibition.artists.where(is_active: :true).page(params[:page])
   end
 
   def edit
@@ -48,25 +34,13 @@ class Admin::ExhibitionsController < ApplicationController
   def update
     @original_exhibition = Exhibition.find(params[:id])
 
-    if exhibition_images_count_exceeds_limit?
-      flash[:alert] = "画像は最大4つまでです"
+    if validate_exhibition_update
       redirect_to edit_admin_exhibition_path(@exhibition)
-      return
-    end
-
-    if exhibition_images_count_equals_zero?
-      flash[:alert] = "画像は最低1つは必要です"
-      redirect_to edit_admin_exhibition_path(@exhibition)
-      return
-    end
-
-    if params[:exhibition][:artist_ids].blank?
-      flash[:alert] = "アーティストの登録が必要です"
-      redirect_to edit_admin_exhibition_path
       return
     end
 
     exhibition_images_delete
+
     if @exhibition.update(exhibition_params)
       remove_unused_artists(@exhibition, params[:exhibition][:artist_ids])
       attach_selected_artists
@@ -81,6 +55,7 @@ class Admin::ExhibitionsController < ApplicationController
 
   def destroy
     exhibition_images_all_delete
+
     if @exhibition.destroy
       set_flash_message("展示会の削除に成功しました")
       redirect_to admin_museums_path
@@ -100,14 +75,26 @@ class Admin::ExhibitionsController < ApplicationController
     @exhibition = Exhibition.find(params[:id])
   end
 
-  # 画像登録数規制（最大）
-  def exhibition_images_count_exceeds_limit?
-    params[:exhibition][:exhibition_images].present? && params[:exhibition][:exhibition_images].length > 4
+  # 画像登録数規制（新規作成時）
+  def validate_exhibition_creation
+    if params[:exhibition][:exhibition_images].nil?
+      flash[:alert] = "画像は最低1つは必要です"
+    elsif params[:exhibition][:exhibition_images].length > 4
+      flash[:alert] = "画像は最大4つまでです"
+    elsif params[:exhibition][:artist_ids].all?(&:blank?)
+      flash[:alert] = "アーティストの登録が必要です"
+    end
   end
 
-  # 画像登録数規制（0）
-  def exhibition_images_count_equals_zero?
-    params[:exhibition][:exhibition_image_id].present? && params[:exhibition][:exhibition_image_id].count == @exhibition.exhibition_images.count
+  # 画像登録数規制（編集時）
+  def validate_exhibition_update
+    if params[:exhibition][:exhibition_images].present? && params[:exhibition][:exhibition_images].length > 4
+      flash[:alert] = "画像は最大4つまでです"
+    elsif params[:exhibition][:exhibition_image_id].present? && params[:exhibition][:exhibition_image_id].count == @exhibition.exhibition_images.count
+      flash[:alert] = "画像は最低1つは必要です"
+    elsif params[:exhibition][:artist_ids].blank?
+      flash[:alert] = "アーティストの登録が必要です"
+    end
   end
 
   # 選択された画像ファイルを削除

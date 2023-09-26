@@ -19,8 +19,8 @@
             <p><%= link_to review.exhibition.name, admin_exhibition_path(review.exhibition) %></p>
           </div>
           <div class="row align-items-center">
-              <%= render "admin/review_comments/btn", review: review %>
-              <%= render 'admin/favorites/btn', review: review %>
+            <%= render "admin/review_comments/btn", review: review %>
+            <%= render 'admin/favorites/btn', review: review %>
             <% if review.review_image.attached? %>
               <div class="ml-2">
                 <i class="fa-regular fa-images btn"></i>

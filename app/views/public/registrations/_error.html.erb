@@ -1,0 +1,9 @@
+<% if flash[:alert].present? %>
+  <div id="error_explanation" data-turbo-cache="false" class="text-center">
+    <ul class="list-unstyled text-danger">
+    <% flash[:alert].each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

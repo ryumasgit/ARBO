@@ -9,14 +9,7 @@ class Admin::ArtistsController < ApplicationController
   def create
     @artist = Artist.new(artist_params)
 
-    if params[:artist][:artist_images].nil?
-      flash[:alert] = "画像は最低1つは必要です"
-      redirect_to new_admin_artist_path
-      return
-    end
-
-    if params[:artist][:artist_images].length > 4
-      flash[:alert] = "画像は最大4つまでです"
+    if validate_artist_images_creation
       redirect_to new_admin_artist_path
       return
     end
@@ -31,8 +24,7 @@ class Admin::ArtistsController < ApplicationController
   end
 
   def show
-    exhibitions = @artist.exhibitions.where(is_active: :true)
-    @exhibitions = exhibitions.page(params[:page])
+    @exhibitions = @artist.exhibitions.where(is_active: :true).page(params[:page])
   end
 
   def edit
@@ -41,19 +33,13 @@ class Admin::ArtistsController < ApplicationController
   def update
     @original_artist = Artist.find(params[:id])
 
-    if artist_images_count_exceeds_limit?
-      flash[:alert] = "画像は最大4つまでです"
-      redirect_to edit_admin_artist_path(@artist)
-      return
-    end
-
-    if artist_images_count_equals_zero?
-      flash[:alert] = "画像は最低1つは必要です"
+    if validate_artist_images_update
       redirect_to edit_admin_artist_path(@artist)
       return
     end
 
     artist_images_delete
+
     if @artist.update(artist_params)
       set_flash_message("アーティスト情報の保存に成功しました")
       redirect_to admin_artist_path(@artist)
@@ -66,6 +52,7 @@ class Admin::ArtistsController < ApplicationController
 
   def destroy
     artist_images_all_delete
+    
     if @artist.destroy
       set_flash_message("アーティストの削除に成功しました")
       redirect_to admin_museums_path
@@ -85,14 +72,22 @@ class Admin::ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
   end
 
-  # 画像登録数規制（最大）
-  def artist_images_count_exceeds_limit?
-    params[:artist][:artist_images].present? && params[:artist][:artist_images].length > 4
+  # 画像登録数規制（新規作成時）
+  def validate_artist_images_creation
+    if params[:artist][:artist_images].nil?
+      flash[:alert] = "画像は最低1つは必要です"
+    elsif params[:artist][:artist_images].length > 4
+      flash[:alert] = "画像は最大4つまでです"
+    end
   end
 
-  # 画像登録数規制（0）
-  def artist_images_count_equals_zero?
-    params[:artist][:artist_image_id].present? && params[:artist][:artist_image_id].count == @artist.artist_images.count
+  # 画像登録数規制（編集時）
+  def validate_artist_images_update
+    if params[:artist][:artist_images].present? && params[:artist][:artist_images].length > 4
+      flash[:alert] = "画像は最大4つまでです"
+    elsif params[:artist][:artist_image_id].present? && params[:artist][:artist_image_id].count == @artist.artist_images.count
+      flash[:alert] = "画像は最低1つは必要です"
+    end
   end
 
   # 選択された画像ファイルを削除
@@ -114,8 +109,6 @@ class Admin::ArtistsController < ApplicationController
 
   # 画像ファイルを全削除
   def artist_images_all_delete
-    @artist.artist_images.each do |image|
-      image.purge
-    end
+    @artist.artist_images.each(&:purge)
   end
 end

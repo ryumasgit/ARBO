@@ -9,14 +9,7 @@ class Admin::MuseumsController < ApplicationController
   def create
     @museum = Museum.new(museum_params)
 
-    if params[:museum][:museum_images].nil?
-      flash[:alert] = "画像は最低1つは必要です"
-      redirect_to new_admin_museum_path
-      return
-    end
-
-    if params[:museum][:museum_images].length > 4
-      flash[:alert] = "画像は最大4つまでです"
+    if validate_museum_images_creation
       redirect_to new_admin_museum_path
       return
     end
@@ -47,19 +40,13 @@ class Admin::MuseumsController < ApplicationController
   def update
     @original_museum = Museum.find(params[:id])
 
-    if museum_images_count_exceeds_limit?
-      flash[:alert] = "画像は最大4つまでです"
-      redirect_to edit_admin_museum_path(@museum)
-      return
-    end
-
-    if museum_images_count_equals_zero?
-      flash[:alert] = "画像は最低1つは必要です"
+    if validate_museum_images_update
       redirect_to edit_admin_museum_path(@museum)
       return
     end
 
     museum_images_delete
+    
     if @museum.update(museum_params)
       set_flash_message("美術館情報の保存に成功しました")
       redirect_to admin_museum_path(@museum)
@@ -72,6 +59,7 @@ class Admin::MuseumsController < ApplicationController
 
   def destroy
     museum_images_all_delete
+    
     if @museum.destroy
       set_flash_message("美術館の削除に成功しました")
       redirect_to admin_museums_path
@@ -91,14 +79,22 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.find(params[:id])
   end
 
-  # 画像登録数規制（最大）
-  def museum_images_count_exceeds_limit?
-    params[:museum][:museum_images].present? && params[:museum][:museum_images].length > 4
+  # 画像登録数規制（新規作成時）
+  def validate_museum_images_creation
+    if params[:museum][:museum_images].nil?
+      flash[:alert] = "画像は最低1つは必要です"
+    elsif params[:museum][:museum_images].length > 4
+      flash[:alert] = "画像は最大4つまでです"
+    end
   end
 
-  # 画像登録数規制（0）
-  def museum_images_count_equals_zero?
-    params[:museum][:museum_image_id].present? && params[:museum][:museum_image_id].count == @museum.museum_images.count
+  # 画像登録数規制（編集時）
+  def validate_museum_images_update
+    if params[:museum][:museum_images].present? && params[:museum][:museum_images].length > 4
+      flash[:alert] = "画像は最大4つまでです"
+    elsif params[:museum][:museum_image_id].present? && params[:museum][:museum_image_id].count == @museum.museum_images.count
+      flash[:alert] = "画像は最低1つは必要です"
+    end
   end
 
   # 選択された画像ファイルを削除

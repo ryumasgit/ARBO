@@ -9,9 +9,7 @@ class Admin::BadgesController < ApplicationController
   def create
     @badge = Badge.new(badge_params)
 
-    # 画像データがない場合は保存禁止
-    if params[:badge][:badge_image].nil?
-      flash[:alert] = "画像が必要です"
+    if validate_badge_image_creation
       redirect_to new_admin_badge_path
       return
     end
@@ -68,6 +66,13 @@ class Admin::BadgesController < ApplicationController
     @badge = Badge.find(params[:id])
   end
 
+  # 画像登録数規制
+  def validate_badge_image_creation
+    if params[:badge][:badge_image].nil?
+      flash[:alert] = "画像が必要です"
+    end
+  end
+  
   # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_badge
     @original_badge.attributes.each do |attr, value|

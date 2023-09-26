@@ -23,12 +23,12 @@
 
           <div class="field text-left my-2">
             <%= f.label :body, "レビュー" %>
-            <%= f.text_area :body, placeholder: "（255文字以下）", class: "form-control", rows: 8 %>
+            <%= f.text_area :body, placeholder: "本文（255文字以下）", class: "form-control", rows: 8 %>
           </div>
 
           <div class="field text-left my-2">
             <%= f.label :tags_name, "タグ" %>
-            <%= f.text_field :tags_name, placeholder: "タグをスペースで区切って入力（50文字以下）", class: "form-control" %>
+            <%= f.text_field :tags_name, placeholder: "タグをスペースで区切って入力（150文字以下）", class: "form-control" %>
           </div>
 
           <%= f.hidden_field :exhibition_id, :value => @selected_exhibition_id %>

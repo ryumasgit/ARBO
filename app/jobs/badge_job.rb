@@ -5,6 +5,7 @@ class BadgeJob < ApplicationJob
     if member.is_guest
       return
     end
+    
     # バッジ条件と対応するバッジIDのハッシュ
     badge_conditions = {
       first_review_badge_condition_met?: { badge_id: 1, active_check: true },

@@ -22,7 +22,7 @@
           </div>
           <div class="row align-items-center">
             <%= render "public/review_comments/btn", review: review %>
-            <div id="following_member_review_favorite_<%= review.id %>" class="ml-2">
+            <div id="favorite_<%= review.id %>" class="ml-2">
               <%= render "public/favorites/btn", review: review %>
             </div>
             <% if review.review_image.attached? %>

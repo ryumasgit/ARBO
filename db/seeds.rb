@@ -686,7 +686,7 @@ Favorite.create!(
 
 Favorite.create!(
   member_id: 5,
-  review_id: 14,
+  review_id: 15,
 )
 
 Favorite.create!(
@@ -723,16 +723,11 @@ followed_id: 3,
 
 Relationship.create!(
 follower_id: 2,
-followed_id: 3,
+followed_id: 4,
 )
 
 Relationship.create!(
 follower_id: 2,
-followed_id: 4,
-)
-
-Relationship.create!(
-follower_id: 3,
 followed_id: 5,
 )
 
@@ -747,8 +742,8 @@ followed_id: 2,
 )
 
 Relationship.create!(
-follower_id: 4,
-followed_id: 3,
+follower_id: 3,
+followed_id: 4,
 )
 
 Relationship.create!(
@@ -762,7 +757,7 @@ followed_id: 6,
 )
 
 Relationship.create!(
-follower_id: 5,
+follower_id: 4,
 followed_id: 2,
 )
 
@@ -777,8 +772,8 @@ followed_id: 4,
 )
 
 Relationship.create!(
-follower_id: 6,
-followed_id: 5,
+follower_id: 5,
+followed_id: 6,
 )
 
 Relationship.create!(
@@ -789,6 +784,11 @@ followed_id: 2,
 Relationship.create!(
 follower_id: 6,
 followed_id: 3,
+)
+
+Relationship.create!(
+follower_id: 6,
+followed_id: 4,
 )
 
 
@@ -857,29 +857,783 @@ exhibition_id: 1
 
 BookmarkExhibition.create!(
 member_id: 2,
-exhibition_id: 1
+exhibition_id: 2
 )
 
 BookmarkExhibition.create!(
 member_id: 3,
-exhibition_id: 1
+exhibition_id: 3
 )
 
 BookmarkExhibition.create!(
 member_id: 3,
-exhibition_id: 1
+exhibition_id: 4
 )
 
 BookmarkExhibition.create!(
 member_id: 3,
+exhibition_id: 5
+)
+
+BookmarkExhibition.create!(
+member_id: 4,
+exhibition_id: 6
+)
+
+BookmarkExhibition.create!(
+member_id: 4,
+exhibition_id: 7
+)
+
+BookmarkExhibition.create!(
+member_id: 4,
+exhibition_id: 8
+)
+
+BookmarkExhibition.create!(
+member_id: 5,
 exhibition_id: 1
 )
 
 BookmarkExhibition.create!(
-member_id: 3,
-exhibition_id: 1
+member_id: 5,
+exhibition_id: 2
 )
+
 BookmarkExhibition.create!(
+member_id: 5,
+exhibition_id: 3
+)
+
+BookmarkExhibition.create!(
+member_id: 6,
+exhibition_id: 4
+)
+
+BookmarkExhibition.create!(
+member_id: 6,
+exhibition_id: 5
+)
+
+BookmarkExhibition.create!(
+member_id: 6,
+exhibition_id: 6
+)
+
+# tagsモデル初期データ
+Tag.create!(
+name: '芸術'
+)
+
+Tag.create!(
+name: 'コレクション'
+)
+
+Tag.create!(
+name: '美術館巡り'
+)
+
+Tag.create!(
+name: 'アートギャラリー'
+)
+
+Tag.create!(
+name: '現代アート'
+)
+
+Tag.create!(
+name: '美術展'
+)
+
+# review_tagsモデル初期データ
+ReviewTag.create!(
+review_id: 1,
+tag_id: 1
+)
+
+ReviewTag.create!(
+review_id: 2,
+tag_id: 2
+)
+
+ReviewTag.create!(
+review_id: 3,
+tag_id: 3
+)
+
+ReviewTag.create!(
+review_id: 4,
+tag_id: 4
+)
+
+ReviewTag.create!(
+review_id: 5,
+tag_id: 5
+)
+
+ReviewTag.create!(
+review_id: 6,
+tag_id: 6
+)
+
+ReviewTag.create!(
+review_id: 7,
+tag_id: 1
+)
+
+ReviewTag.create!(
+review_id: 8,
+tag_id: 2
+)
+
+ReviewTag.create!(
+review_id: 9,
+tag_id: 3
+)
+
+ReviewTag.create!(
+review_id: 10,
+tag_id: 4
+)
+
+ReviewTag.create!(
+review_id: 11,
+tag_id: 5
+)
+
+ReviewTag.create!(
+review_id: 12,
+tag_id: 6
+)
+
+ReviewTag.create!(
+review_id: 13,
+tag_id: 1
+)
+
+ReviewTag.create!(
+review_id: 14,
+tag_id: 2
+)
+
+ReviewTag.create!(
+review_id: 15,
+tag_id: 3
+)
+
+ReviewTag.create!(
+review_id: 16,
+tag_id: 4
+)
+
+ReviewTag.create!(
+review_id: 16,
+tag_id: 4
+)
+
+
+# notificationsモデル初期データ
+Notification.create!(
+visitor_id: 3,
+visited_id: 2,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 2,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 2,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 2,
+review_id: 4,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 2,
+review_id: 7,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 2,
+review_id: 4,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 2,
+review_id: 10,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 2,
+review_id: 1,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 2,
+review_id: 4,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 2,
+review_id: 7,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 2,
+review_id: 10,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 2,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 1,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 2,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 2,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 2,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 3,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 2,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 4,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 3,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 3,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 3,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 3,
+review_id: 2,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 3,
+review_id: 2,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 3,
+review_id: 5,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 3,
+review_id: 8,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 3,
+review_id: 11,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 3,
+review_id: 2,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 3,
+review_id: 5,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 3,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 1,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 3,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 2,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 3,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 3,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 3,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 4,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 4,
+review_id: 3,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 4,
+review_id: 3,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 4,
+review_id: 6,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 4,
+review_id: 9,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 3,
+visited_id: 4,
+review_id: 9,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 1,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 2,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 3,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 4,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 4,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 5,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 5,
+review_id: nil,
+review_comment_id: nil,
+badge_id: nil,
+action: 'follow',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 6,
+visited_id: 5,
+review_id: 13,
+review_comment_id: nil,
+badge_id: nil,
+action: 'favorite',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 2,
+visited_id: 5,
+review_id: 13,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 4,
+visited_id: 5,
+review_id: 14,
+review_comment_id: nil,
+badge_id: nil,
+action: 'comment',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 5,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 1,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 5,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 2,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 5,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 3,
+action: 'badge',
+checked: false,
+)
+
+Notification.create!(
+visitor_id: 5,
+visited_id: 5,
+review_id: nil,
+review_comment_id: nil,
+badge_id: 4,
+action: 'badge',
+checked: false,
+)
+
+EarnedBadge.create!(
+member_id: 2,
+badge_id: 1
+)
+
+EarnedBadge.create!(
+member_id: 2,
+badge_id: 2
+)
+
+EarnedBadge.create!(
+member_id: 2,
+badge_id: 3
+)
+
+EarnedBadge.create!(
+member_id: 2,
+badge_id: 4
+)
+
+EarnedBadge.create!(
 member_id: 3,
-exhibition_id: 1
+badge_id: 1
+)
+
+EarnedBadge.create!(
+member_id: 3,
+badge_id: 2
+)
+
+EarnedBadge.create!(
+member_id: 3,
+badge_id: 3
+)
+
+EarnedBadge.create!(
+member_id: 3,
+badge_id: 4
+)
+
+EarnedBadge.create!(
+member_id: 4,
+badge_id: 1
+)
+
+EarnedBadge.create!(
+member_id: 4,
+badge_id: 2
+)
+
+EarnedBadge.create!(
+member_id: 4,
+badge_id: 3
+)
+
+EarnedBadge.create!(
+member_id: 4,
+badge_id: 4
+)
+
+EarnedBadge.create!(
+member_id: 5,
+badge_id: 1
+)
+
+EarnedBadge.create!(
+member_id: 5,
+badge_id: 2
+)
+
+EarnedBadge.create!(
+member_id: 5,
+badge_id: 3
+)
+
+EarnedBadge.create!(
+member_id: 5,
+badge_id: 4
+)
+
+EarnedBadge.create!(
+member_id: 6,
+badge_id: 1
+)
+
+EarnedBadge.create!(
+member_id: 6,
+badge_id: 2
+)
+
+EarnedBadge.create!(
+member_id: 6,
+badge_id: 3
 )

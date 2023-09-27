@@ -1,0 +1,58 @@
+<% if current_member.followings.present? %>
+  <% reviews.each do |review| %>
+    <div class="card m-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2">
+            <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
+              <%= image_tag review.member.get_member_image(100, 100), class: "rounded-circle img-fluid" %>
+            <% end %>
+          </div>
+          <div class="col-10 text-break">
+            <%= link_to member_my_page_path(member_member_name: review.member.name) do %>
+              <h6 class="text-muted text-left"><%= review.member.name %></h6>
+            <% end %>
+            <%= link_to review_path(review) do %>
+              <p class="text-dark text-left"><%= review.body %></p>
+            <% end %>
+            <div class="row">
+              <p>
+                <i class="fa-solid fa-shoe-prints" aria-hidden="true"></i>
+                <%= link_to review.exhibition.name, exhibition_path(review.exhibition) %>
+              </p>
+            </div>
+            <div class="row align-items-center">
+              <%= render "public/review_comments/btn", review: review %>
+              <div id="following_member_review_favorite_<%= review.id %>" class="ml-2">
+                <%= render "public/favorites/btn", review: review %>
+              </div>
+              <% if review.review_image.attached? %>
+                <div class="ml-2">
+                  <i class="fa-regular fa-images btn"></i>
+                </div>
+              <% end %>
+              <% if review.tags.any? %>
+                <div class="ml-2">
+                  <% review.tags.each do |tag| %>
+                    <div class="btn">
+                      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+                      <%= link_to tag.name, tag_search_path(tag.name) %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="small text-muted text-right">
+          <%= time_ago_in_words(review.created_at).upcase %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row justify-content-center">
+    <% if reviews.present? %>
+      <%= paginate reviews %>
+    <% end %>
+  </div>
+<% end %>

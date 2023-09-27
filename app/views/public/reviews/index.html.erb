@@ -21,9 +21,7 @@
             <%= render "index", reviews: @all_reviews %>
           </div>
           <div id="section2" class="tab-pane fade">
-            <% if current_member.followings.present? %>
-              <%= render "index", reviews: @following_member_reviews %>
-            <% end %>
+            <%= render "following_member_index", reviews: @following_member_reviews %>
           </div>
         </div>
       </div>

@@ -118,7 +118,7 @@ class Public::MembersController < ApplicationController
     @member = Member.find_by(name: params[:member_member_name])
 
     if @member.nil? || @member.is_active == false || @member.is_guest
-      set_flash_message("メンバーが見つかりません")
+      set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
       redirect_to root_path
     end
   end

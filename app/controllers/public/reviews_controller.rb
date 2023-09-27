@@ -163,7 +163,7 @@ class Public::ReviewsController < ApplicationController
 
   def redirect_if_review_not_found(review)
     if review.member.is_active == false || review.member.name == "guest"
-      set_flash_message("レビューが見つかりません")
+      set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
       redirect_to reviews_path
     end
   end

@@ -14,7 +14,7 @@ class Public::ArtistsController < ApplicationController
   protected
 
   def artist_not_active_redirect
-    set_flash_message("権限がありません ブロックされました")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to museums_path
   end
 end

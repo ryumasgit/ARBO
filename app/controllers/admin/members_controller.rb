@@ -3,7 +3,7 @@ class Admin::MembersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :admin_member_handle_record_not_found
 
   def show
-    @reviews = @member.reviews.order(created_at: :desc).page(params[:page])
+    @reviews = get_reviews
     @favorited_reviews = get_favorited_reviews
     @total_favorited_count = calculate_total_favorited_count
     @total_commented_count = calculate_total_commented_count
@@ -53,6 +53,12 @@ class Admin::MembersController < ApplicationController
   end
 
   protected
+
+  def get_reviews
+   @member.reviews
+          .order(created_at: :desc)
+          .page(params[:page])
+  end
 
   # メンバーがいいねしたレビュー取得
   def get_favorited_reviews

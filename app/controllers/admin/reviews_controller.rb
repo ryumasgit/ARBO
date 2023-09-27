@@ -11,8 +11,10 @@ class Admin::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.includes(:member, :review_comments, :exhibition)
+    @reviews = Review.includes(:member, :review_comments, :exhibition, :museums)
                       .where(members: { is_active: true })
+                      .where(exhibitions: { is_active: true })
+                      .where(museums: { is_active: true })
                       .order(created_at: :desc)
                       .page(params[:page])
   end

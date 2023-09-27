@@ -177,8 +177,11 @@ class Public::ReviewsController < ApplicationController
   end
 
   def fetch_reviews(member_ids = nil)
-    reviews = Review.includes(:member, :review_comments, :exhibition)
+    reviews = Review.includes(:member, :review_comments, :exhibition, :museums)
                     .where(members: { is_active: true })
+                    .where(exhibitions: { is_active: true })
+                    .where(museums: { is_active: true })
+                    
     reviews = reviews.where(member_id: member_ids) if member_ids.present?
     reviews = reviews.order(created_at: :desc).page(params[:page])
     reviews

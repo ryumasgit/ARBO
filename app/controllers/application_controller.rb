@@ -37,61 +37,61 @@ class ApplicationController < ActionController::Base
   end
 
   def public_event_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to museums_path
     return
   end
 
   def admin_event_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to admin_museums_path
     return
   end
 
   def public_badge_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to member_my_page_path(member_member_name: current_member.name)
     return
   end
 
   def admin_badge_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to admin_badges_path
     return
   end
 
   def public_member_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to member_my_page_path(member_member_name: current_member.name)
     return
   end
 
   def admin_member_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to admin_members_path
     return
   end
 
   def public_review_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to reviews_path
     return
   end
 
   def admin_review_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to admin_reviews_path
     return
   end
 
   def public_review_comment_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to reviews_path
     return
   end
 
   def admin_review_comment_handle_record_not_found
-    set_flash_message("指定されたURLは見つかりませんでした")
+    set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
     redirect_to admin_reviews_path
     return
   end

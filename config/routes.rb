@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       resource :bookmark_exhibitions, only: [:create, :destroy]
     end
     resources :searches, only: :index
-    get 'searches/:tag', to: 'searches#index', as: :tag_search, constraints: { tag: /[^\/]+/ }
+    get 'searches/:tag', to: 'searches#index', as: :tag_search
     resources :artists, only: :show
     resources :badges, only: :show
     resources :notifications, only: :index

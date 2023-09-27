@@ -35,7 +35,7 @@ class Public::ReviewsController < ApplicationController
 
     if @review.save
       session.delete(:selected_exhibition_id)
-      BadgeJob.perform_later(@review.member)
+      badge_condition_met(@review.member)
       set_flash_message("レビューの作成に成功しました")
       redirect_to review_path(@review)
     else

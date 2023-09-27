@@ -7,7 +7,7 @@ class Public::FavoritesController < ApplicationController
     favorite = current_member.favorites.new(review_id: @review.id)
     favorite.save
     @review.create_notification_favorite!(current_member)
-    BadgeJob.perform_later(@review.member)
+    badge_condition_met(@review.member)
   end
 
   def destroy

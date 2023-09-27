@@ -14,7 +14,7 @@ class Public::ReviewCommentsController < ApplicationController
     review_comment.review_id = @review.id
     review_comment.save
     @review.create_notification_comment!(current_member, review_comment.id)
-    BadgeJob.perform_later(review_comment.member)
+    badge_condition_met(review_comment.member)
   end
 
   def destroy

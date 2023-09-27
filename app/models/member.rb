@@ -34,8 +34,6 @@ class Member < ApplicationRecord
   def follow(name)
     followed_member = Member.find_by(name: name)
     follower.create(followed: followed_member)
-
-    BadgeJob.perform_later(followed_member)
   end
 
   def unfollow(name)

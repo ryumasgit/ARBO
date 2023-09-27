@@ -8,6 +8,8 @@ class Public::RelationshipsController < ApplicationController
     unless @followed_member_name == "guest"
       current_member.follow(@followed_member_name)
       current_member.create_notification_follow!(current_member, @followed_member_name)
+      followed_member_id = Member.find_by(name: @followed_member_name)
+      badge_condition_met(followed_member_id)
     else
       set_flash_message("このユーザーはフォローできません")
       redirect_to member_my_page_path(member_member_name: current_member.name)

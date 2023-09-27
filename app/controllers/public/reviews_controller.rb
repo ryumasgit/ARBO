@@ -69,16 +69,15 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @original_review = Review.find(params[:id])
-    @original_tags = @original_review.tags
-    extract_tags_from_space_separated_string
 
     if @review.update(review_params)
+      extract_tags_from_space_separated_string
       set_flash_message("レビュー情報の保存に成功しました")
       redirect_to review_path(@review)
     else
       copy_error_attributes_from_original_review
-      @review.tags = @original_tags
       set_flash_message("レビュー情報の保存に失敗しました")
+      @tags = @review.tags
       render :edit
     end
   end
@@ -146,9 +145,13 @@ class Public::ReviewsController < ApplicationController
       tag_names = params[:review][:tags_name].split(/[ 　]+/).map(&:strip)
       # 各タグをデータベースに保存
       tag_names.each do |tag_name|
-        tag = Tag.find_or_create_by(name: tag_name)
-        unless @review.tags.include?(tag)
-          @review.tags << tag
+        # タグ名から記号を削除して保存
+        filtered_tag_name = tag_name.gsub(/[^0-9A-Za-zぁ-んァ-ヶ一-龠々ー〆ヽヾ゛゜]/, '')
+        if filtered_tag_name.present?
+          tag = Tag.find_or_create_by(name: filtered_tag_name)
+          unless @review.tags.include?(tag)
+            @review.tags << tag
+          end
         end
       end
     end

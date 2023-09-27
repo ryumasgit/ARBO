@@ -18,7 +18,7 @@
       <%= raw @exhibition.introduction.scan(/.{1,85}/).join("<br>") %>
     <% end %>
   </div>
-  
+
   <div class="row justify-content-center m-3">
     <%= link_to "公式サイト", @exhibition.official_website, target: "_blank" %>
   </div>
@@ -31,7 +31,7 @@
   <h2 class="text-center m-3">開催美術館</h2>
   <div class="row justify-content-center">
     <div class="text-center">
-      <%= link_to museum_path(@exhibition) do %>
+      <%= link_to museum_path(@exhibition.museum) do %>
         <%= @exhibition.museum.name %>
       <% end %>
     </div>

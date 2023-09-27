@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <h2 class="text-center">EXHIBITION DETAIL</h2>
   <p class="text-center"><%= flash[:notice] %></p>
-  
+
   <% unless @exhibition.is_active %>
     <h4 class="text-danger text-center">現在非公開中です</h4>
   <% end %>
-  
+
   <div class="row justify-content-center my-5">
     <div class="col-md-6">
       <div class="images my-auto">
@@ -27,7 +27,7 @@
       <%= raw @exhibition.introduction.scan(/.{1,85}/).join("<br>") %>
     <% end %>
   </div>
-  
+
   <div class="row justify-content-center m-3">
     <%= link_to "公式サイト", @exhibition.official_website, target: "_blank" %>
   </div>
@@ -40,7 +40,7 @@
   <h2 class="text-center m-3">開催美術館</h2>
   <div class="row justify-content-center">
     <div class="text-center">
-      <%= link_to admin_museum_path(@exhibition) do %>
+      <%= link_to admin_museum_path(@exhibition.museum) do %>
         <%= @exhibition.museum.name %>
       <% end %>
     </div>

@@ -12,7 +12,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     if resource.member_image.blank?
-      flash[:alert] =  ["プロフィール画像が必要です"]
+      flash[:alert] = ["プロフィール画像が必要です"]
       redirect_to new_member_registration_path
       return
     end

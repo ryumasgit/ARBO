@@ -6,9 +6,9 @@
       <div class="text-center">
         <%= form_with model: @member, url: member_registration_path do |f| %>
 
-          <div class="field m-5">
-            <%= f.label :member_image, "プロフィール画像" %>
-            <%= f.file_field :member_image, accept: "image/*", class: "form-control-file" %>
+          <div class="field my-5">
+            <p>プロフィール画像</p>
+            <%= f.file_field :member_image, accept: "image/*" %>
           </div>
 
           <div class="field">

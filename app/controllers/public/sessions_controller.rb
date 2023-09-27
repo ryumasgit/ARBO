@@ -48,7 +48,7 @@ class Public::SessionsController < Devise::SessionsController
     @member = Member.find_by(email: params[:member][:email])
     return if !@member
     if @member.valid_password?(params[:member][:password]) && !@member.is_active
-      flash[:alert] =  "入力されたメンバーは退会済みです 新規登録をご利用ください"
+      flash[:alert] = ["入力されたメンバーは退会済みです 新規登録をご利用ください"]
       redirect_to new_member_registration_path
     end
   end

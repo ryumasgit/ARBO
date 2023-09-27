@@ -1,8 +1,9 @@
 <div class="container-fluid">
+  <h2 class="text-center">REVIEW INFORMATION EDIT</h2>
   <p class="text-center"><%= flash[:notice] %></p>
+  <%= render 'layouts/error', obj: @review %>
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <h2 class="text-center">Review Information Edit</h2>
       <div class="text-center review-form">
         <%= form_with model: @review, url: review_path do |f| %>
 
@@ -19,8 +20,9 @@
 
           <div class="field text-left my-2">
             <%= f.label :tags_name, "タグ" %>
-            <%= f.text_field :tags_name, value: @tags.map(&:name).join(' '), placeholder: "タグをスペースで区切って入力（150文字以下）", class: "form-control" %>
+            <%= f.text_field :tags_name, value: (@tags&.map(&:name)&.join(' ') || ''), placeholder: "タグをスペースで区切って入力（150文字以下）", class: "form-control" %>
           </div>
+
 
           <div class="actions m-3">
             <%= link_to  "キャンセル", review_path(@review), class: "btn btn-secondary mr-3" %>

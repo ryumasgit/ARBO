@@ -69,6 +69,7 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @original_review = Review.find(params[:id])
+    @original_tags = @review.tags
     extract_tags_from_space_separated_string
 
     if @review.update(review_params)
@@ -76,6 +77,7 @@ class Public::ReviewsController < ApplicationController
       redirect_to review_path(@review)
     else
       copy_error_attributes_from_original_review
+      @tags = @original_tags
       set_flash_message("レビュー情報の保存に失敗しました")
       render :edit
     end
@@ -140,8 +142,8 @@ class Public::ReviewsController < ApplicationController
   def extract_tags_from_space_separated_string
     @review.tags.destroy_all
     if params[:review][:tags_name].present?
-      # フォームから送信されたタグの文字列を受け取り、スペースで分割する
-      tag_names = params[:review][:tags_name].split(" ").map(&:strip)
+      # フォームから送信されたタグの文字列を受け取り、スペース（半角・全角）で分割する
+      tag_names = params[:review][:tags_name].split(/[ 　]+/).map(&:strip)
       # 各タグをデータベースに保存
       tag_names.each do |tag_name|
         tag = Tag.find_or_create_by(name: tag_name)

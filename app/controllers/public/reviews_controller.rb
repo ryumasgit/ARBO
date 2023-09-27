@@ -69,7 +69,7 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @original_review = Review.find(params[:id])
-    @original_tags = @review.tags
+    @original_tags = @original_review.tags
     extract_tags_from_space_separated_string
 
     if @review.update(review_params)
@@ -77,7 +77,7 @@ class Public::ReviewsController < ApplicationController
       redirect_to review_path(@review)
     else
       copy_error_attributes_from_original_review
-      @tags = @original_tags
+      @review.tags = @original_tags
       set_flash_message("レビュー情報の保存に失敗しました")
       render :edit
     end

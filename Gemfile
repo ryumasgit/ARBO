@@ -62,6 +62,7 @@ gem "jquery-rails"
 gem 'dotenv-rails'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
+gem 'listen', '~> 3.3'
 gem 'rails-i18n'
 gem 'devise-i18n-views'
 group :production do

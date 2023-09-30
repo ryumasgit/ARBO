@@ -20,7 +20,7 @@
 
           <div class="field text-left my-2">
             <%= f.label :tags_name, "タグ" %>
-            <%= f.text_field :tags_name, value: (@tags&.map(&:name)&.join(' ') || ''), placeholder: "タグをスペースで区切って入力（記号以外 150文字以下）", class: "form-control" %>
+            <%= f.text_field :tags_name, value: (@tags&.map(&:name)&.join(' ') || ''), placeholder: "タグをスペースで区切って入力（記号以外 50文字以下）", class: "form-control" %>
           </div>
 
 

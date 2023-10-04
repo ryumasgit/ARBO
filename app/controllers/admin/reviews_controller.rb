@@ -4,18 +4,17 @@ class Admin::ReviewsController < ApplicationController
 
   def show
     @review_comments = @review.review_comments
-                      .includes(:member)
-                      .where(members: { is_active: true })
-                      .order(created_at: :desc)
-                      .page(params[:page])
+    .includes(:member)
+    .where(members: { is_active: true })
+    .order(created_at: :desc)
+    .page(params[:page])
   end
 
   def index
     @reviews = Review.includes(:member, :review_comments, :exhibition)
-                      .where(members: { is_active: true })
-                      .where(exhibitions: { is_active: true })
-                      .order(created_at: :desc)
-                      .page(params[:page])
+    .where(members: { is_active: true }, exhibitions: { is_active: true })
+    .order(created_at: :desc)
+    .page(params[:page])
   end
 
   def destroy

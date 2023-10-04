@@ -17,27 +17,18 @@
           <%= image_tag @review.get_review_image(600, 600), class: "img-fluid" %>
         </div>
       </div>
-      <div class="col-md-6 p-3 d-flex justify-content-center align-items-center text-break">
-        <h4><%= @review.body %></h4>
-      </div>
-    <% else %>
-      <h4><%= @review.body %></h4>
     <% end %>
+    <div class="col-md-6 p-3 d-flex justify-content-center align-items-center text-break">
+      <h4><%= @review.body %></h4>
+    </div>
   </div>
 
-  <div class="row justify-content-center">
-    <% if @review.tags.any? %>
-      <% @review.tags.each do |tag| %>
-        <div class="btn pt-3">
-          <i class="fa-solid fa-tag " aria-hidden="true"></i>
-          <%= tag.name %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="row justify-content-center">
-    <%= render 'admin/reviews/event', review: @review %>
-  </div>
+  <%= render 'admin/reviews/score', review: @review %>
+  
+  <%= render 'admin/reviews/tag', review: @review %>
+
+  <%= render 'admin/reviews/event', review: @review %>
+  
   <div class="row justify-content-center">
     <%= render "admin/review_comments/btn", review: @review %>
     <%= render "admin/favorites/btn", review: @review %>

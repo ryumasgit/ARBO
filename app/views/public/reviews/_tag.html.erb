@@ -1,0 +1,10 @@
+  <div class="row justify-content-center">
+    <% if review.tags.any? %>
+      <% review.tags.each do |tag| %>
+        <div class="btn pt-3">
+          <i class="fa-solid fa-tag " aria-hidden="true"></i>
+          <%= link_to tag.name, tag_search_path(tag.name) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>

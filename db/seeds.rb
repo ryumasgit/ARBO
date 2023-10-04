@@ -464,6 +464,7 @@ exhibition_enthusiast.badge_image.attach(io: File.open(Rails.root.join('app/asse
 review1 = Review.create!(
 member_id: 2,
 exhibition_id: 1,
+score: 0.6,
 body: 'この展示会は美しい色彩と芸術の調和を楽しむ素晴らしい機会でした。特に『未来の色彩』という作品には驚きました。'
 )
 review1.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/A Sunday on La Grande Jatte — 1884.jpg')), filename: 'A Sunday on La Grande Jatte — 1884.jpg')
@@ -471,6 +472,7 @@ review1.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review2 = Review.create!(
 member_id: 3,
 exhibition_id: 2,
+score: 0.2,
 body: '美術館の展示会は、現代アートの真髄を捉えたもので、芸術家の創造力に感銘を受けました。'
 )
 review2.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Arrival of the Normandy Train, Gare Saint-Lazare.jpg')), filename: 'Arrival of the Normandy Train, Gare Saint-Lazare.jpg')
@@ -478,6 +480,7 @@ review2.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review3 = Review.create!(
 member_id: 4,
 exhibition_id: 3,
+score: 0.7,
 body: '印象派の名作が多数展示されており、風景画や人物画に魅了されました。特に、クロード・モネの作品は素晴らしかった。'
 )
 review3.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Ballet at the Paris Opera.jpg')), filename: 'Ballet at the Paris Opera.jpg')
@@ -485,6 +488,7 @@ review3.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review4 = Review.create!(
 member_id: 2,
 exhibition_id: 4,
+score: 0.8,
 body: '現代アートの展示会は斬新で興味深いもので、芸術の新しい方向性に触れることができました。'
 )
 review4.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Coronation Stone of Motecuhzoma II (Stone of the....jpg')), filename: 'Coronation Stone of Motecuhzoma II (Stone of the....jpg')
@@ -492,6 +496,7 @@ review4.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review5 = Review.create!(
 member_id: 3,
 exhibition_id: 5,
+score: 0.6,
 body: '美術館の展示会は私にとって驚きの体験でした。異なるスタイルや時代の作品が共存し、多様性に触れました。'
 )
 review5.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Assumption of the Virgin.jpg')), filename: 'The Assumption of the Virgin.jpg')
@@ -499,6 +504,7 @@ review5.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review6 = Review.create!(
 member_id: 4,
 exhibition_id: 8,
+score: 0.2,
 body: '美術館の展示会は美的な体験で、芸術家の創造力に敬意を表します。'
 )
 review6.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Beach at Sainte-Adresse.jpg')), filename: 'The Beach at Sainte-Adresse.jpg')
@@ -506,6 +512,7 @@ review6.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review7 = Review.create!(
 member_id: 2,
 exhibition_id: 7,
+score: 0.6,
 body: 'この展示会は美しい色彩と芸術の調和を楽しむ素晴らしい機会でした。特に『未来の色彩』という作品には驚きました。'
 )
 review7.review_image.attach(io: File.open(Rails.root.join("app/assets/images/reviews/The Child's Bath.jpg")), filename: "The Child's Bath.jpg")
@@ -513,6 +520,7 @@ review7.review_image.attach(io: File.open(Rails.root.join("app/assets/images/rev
 review8 = Review.create!(
 member_id: 3,
 exhibition_id: 8,
+score: 0.6,
 body: 'この展示会は美しい色彩と芸術の調和を楽しむ素晴らしい機会でした。特に『未来の色彩』という作品には驚きました。'
 )
 review8.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Herring Net.jpg')), filename: 'The Herring Net.jpg')
@@ -520,6 +528,7 @@ review8.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review9 = Review.create!(
 member_id: 4,
 exhibition_id: 6,
+score: 0.6,
 body: 'この展示会は感情的な旅で、作品が魂に触れる瞬間でした。特に、ヴィンセント・ファン・ゴッホの作品に感動しました。'
 )
 review9.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/The Watermill with the Great Red Roof.jpg')), filename: 'The Watermill with the Great Red Roof.jpg')
@@ -527,6 +536,7 @@ review9.review_image.attach(io: File.open(Rails.root.join('app/assets/images/rev
 review10 = Review.create!(
 member_id: 2,
 exhibition_id: 1,
+score: 0.9,
 body: '美術館の展示会には魅力的な作品が展示されており、芸術愛好家には必見の場所です。'
 )
 review10.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Under the Wave off Kanagawa (Kanagawa oki nami....jpg')), filename: 'Under the Wave off Kanagawa (Kanagawa oki nami....jpg')
@@ -534,6 +544,7 @@ review10.review_image.attach(io: File.open(Rails.root.join('app/assets/images/re
 review11 = Review.create!(
 member_id: 3,
 exhibition_id: 2,
+score: 0.3,
 body: '美術館の展示会は美の探求の旅で、芸術作品が魔法のように魅了しました。心に残る体験でした。'
 )
 review11.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Veranda Post.jpg')), filename: 'Veranda Post.jpg')
@@ -541,6 +552,7 @@ review11.review_image.attach(io: File.open(Rails.root.join('app/assets/images/re
 review12 = Review.create!(
 member_id: 4,
 exhibition_id: 3,
+score: 0.5,
 body: 'この展示会は歴史と対話する機会であり、過去から現在への美的な旅でした。展示作品は感動的でした。'
 )
 review12.review_image.attach(io: File.open(Rails.root.join('app/assets/images/reviews/Woman at Her Toilette.jpg')), filename: 'Woman at Her Toilette.jpg')
@@ -548,30 +560,35 @@ review12.review_image.attach(io: File.open(Rails.root.join('app/assets/images/re
 Review.create!(
   member_id: 5,
   exhibition_id: 4,
+  score: 0.9,
   body: '美術館の展示会には魅力的な作品が展示されており、芸術愛好家には必見の場所です。'
 )
 
 Review.create!(
   member_id: 5,
   exhibition_id: 5,
+  score: 0.3,
   body: '美術館の展示会は美の探求の旅で、芸術作品が魔法のように魅了しました。心に残る体験でした。'
 )
 
 Review.create!(
   member_id: 6,
   exhibition_id: 6,
+  score: 0.5,
   body: 'この展示会は歴史と対話する機会であり、過去から現在への美的な旅でした。展示作品は感動的でした。'
 )
 
 Review.create!(
   member_id: 6,
   exhibition_id: 7,
+  score: 0.9,
   body: '美術館の雰囲気が非常に落ち着いており、作品をじっくり鑑賞できました。'
 )
 
 Review.create!(
   member_id: 6,
   exhibition_id: 1,
+  score: 0.9,
   body: '美術館のスタッフはとても親切で、ギャラリー内の案内がわかりやすかったです。'
 )
 

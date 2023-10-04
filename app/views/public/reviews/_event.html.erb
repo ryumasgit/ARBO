@@ -1,8 +1,10 @@
-<div>
-  <i class="fa-solid fa-building-columns btn-sm" aria-hidden="true"></i>
-  <%= link_to review.exhibition.museum.name, museum_path(review.exhibition) %>
-</div>
-<div>
-  <i class="fa-solid fa-shoe-prints pt-1 btn-sm" aria-hidden="true"></i>
-  <%= link_to review.exhibition.name, exhibition_path(review.exhibition) %>
+<div class="row justify-content-center">
+  <div>
+    <i class="fa-solid fa-building-columns btn-sm" aria-hidden="true"></i>
+    <%= link_to review.exhibition.museum.name, museum_path(review.exhibition) %>
+  </div>
+  <div>
+    <i class="fa-solid fa-shoe-prints pt-1 btn-sm" aria-hidden="true"></i>
+    <%= link_to review.exhibition.name, exhibition_path(review.exhibition) %>
+  </div>
 </div>

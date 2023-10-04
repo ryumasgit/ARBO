@@ -27,14 +27,11 @@ class Public::ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
-    @review.member_id = current_member.id
-    @review.exhibition_id = params[:review][:exhibition_id]
+    set_review_attributes
+    extract_tags_from_space_separated_string
 
     if @review.save
-      # extract_tags_from_space_separated_string
       extract_tags_from_google_vision_api
-      session.delete(:selected_exhibition_id)
       badge_condition_met(@review.member)
       set_flash_message("レビューの作成に成功しました")
       redirect_to review_path(@review)
@@ -47,13 +44,9 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    redirect_if_review_not_found(@review)
-    @review_comments = @review.review_comments
-                      .includes(:member)
-                      .where(members: { is_active: true })
-                      .order(created_at: :desc)
-                      .page(params[:page])
     @review_comment = ReviewComment.new
+    redirect_if_review_not_found
+    fetch_comments
   end
 
   def index
@@ -69,15 +62,15 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @original_review = Review.find(params[:id])
+    @review.score = Language.get_data(review_params[:body])
+    extract_tags_from_space_separated_string
 
     if @review.update(review_params)
-      # extract_tags_from_space_separated_string
       set_flash_message("レビュー情報の保存に成功しました")
       redirect_to review_path(@review)
     else
       copy_error_attributes_from_original_review
       set_flash_message("レビュー情報の保存に失敗しました")
-      @tags = @review.tags
       render :edit
     end
   end
@@ -93,6 +86,10 @@ class Public::ReviewsController < ApplicationController
   end
 
   protected
+
+  def review_params
+    params.require(:review).permit(:body, :review_image)
+  end
 
   # 選択された美術館データを一時保存
   def handle_museum_selection(selected_museum_id)
@@ -137,60 +134,75 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
-  # # タグをレビューに紐づける
-  # def extract_tags_from_space_separated_string
-  #   @review.tags.destroy_all
-  #   if params[:review][:tags_name].present?
-  #     # フォームから送信されたタグの文字列を受け取り、スペース（半角・全角）で分割する
-  #     tag_names = params[:review][:tags_name].split(/[ 　]+/).map(&:strip)
-  #     # 各タグをデータベースに保存
-  #     tag_names.each do |tag_name|
-  #       # タグ名から記号を削除して保存
-  #       filtered_tag_name = tag_name.gsub(/[^0-9A-Za-zぁ-んァ-ヶ一-龠々ー〆ヽヾ゛゜]/, '')
-  #       if filtered_tag_name.present?
-  #         tag = Tag.find_or_create_by(name: filtered_tag_name)
-  #         unless @review.tags.include?(tag)
-  #           @review.tags << tag
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
-
-  def extract_tags_from_google_vision_api
-    tags = Vision.get_image_data(review_params[:review_image])
-    tags.each do |tag|
-      @review.tags.create(name: tag)
+  def set_review_attributes
+    @review = Review.new(review_params)
+    @review.member_id = current_member.id
+    @review.exhibition_id = params[:review][:exhibition_id]
+    @review.score = Language.get_data(review_params[:body])
+    if params[:review][:review_image].present?
+      @tags = Vision.get_image_data(review_params[:review_image])
     end
   end
 
-  def review_params
-    params.require(:review).permit(:body, :review_image)
+  # 入力されたタグをレビューに紐づける
+  def extract_tags_from_space_separated_string
+    @review.tags.destroy_all
+    if params[:review][:tags_name].present?
+      # フォームから送信されたタグの文字列を受け取り、スペース（半角・全角）で分割する
+      tag_names = params[:review][:tags_name].split(/[ 　]+/).map(&:strip)
+      # タグ名から記号を削除して保存
+      tag_names.each do |tag_name|
+        filtered_tag_name = tag_name.gsub(/[^0-9A-Za-zぁ-んァ-ヶ一-龠々ー〆ヽヾ゛゜]/, '')
+        if filtered_tag_name.present?
+          tag = Tag.find_or_create_by(name: filtered_tag_name)
+          unless @review.tags.include?(tag)
+            @review.tags << tag
+          end
+        end
+      end
+    end
   end
 
-  def redirect_if_review_not_found(review)
-    if review.member.is_active == false || review.member.name == "guest"
+  # google vision apiより生成されたタグをレビューに紐づける
+  def extract_tags_from_google_vision_api
+    if @tags.present?
+      @tags.each do |tag|
+        @review.tags.create(name: tag)
+      end
+    end
+  end
+
+  def redirect_if_review_not_found
+    if @review.member.is_active == false || @review.member.is_guest
       set_flash_message("指定されたURLは見つかりませんでした、現在非公開の可能性があります。")
       redirect_to reviews_path
     end
   end
 
+  # 条件に合うコメントデータの代入
+  def fetch_comments
+    @review_comments = @review.review_comments
+    .includes(:member)
+    .where(members: { is_active: true })
+    .order(created_at: :desc)
+    .page(params[:page])
+  end
+
   def ensure_correct_member
     @review = Review.find(params[:id])
-    unless @review.member == current_member
+    if @review.member != current_member
     set_flash_message("権限がありません ブロックされました")
     redirect_to reviews_path
     end
   end
 
+  # 条件に合うレビューデータの代入
   def fetch_reviews(member_ids = nil)
     reviews = Review.includes(:member, :review_comments, :exhibition)
-                    .where(members: { is_active: true })
-                    .where(exhibitions: { is_active: true })
+                    .where(members: { is_active: true }, exhibitions: { is_active: true })
 
     reviews = reviews.where(member_id: member_ids) if member_ids.present?
-    reviews = reviews.order(created_at: :desc).page(params[:page])
-    reviews
+    return reviews = reviews.order(created_at: :desc).page(params[:page])
   end
 
   # エラー箇所に元のデータを代入する

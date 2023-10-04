@@ -22,13 +22,14 @@
       <h4><%= @review.body %></h4>
     </div>
   </div>
+  <div class="row justify-content-center my-2">
+    <%= render 'public/reviews/score', review: @review %>
+  </div>
 
-  <%= render 'admin/reviews/score', review: @review %>
-  
   <%= render 'admin/reviews/tag', review: @review %>
 
   <%= render 'admin/reviews/event', review: @review %>
-  
+
   <div class="row justify-content-center">
     <%= render "admin/review_comments/btn", review: @review %>
     <%= render "admin/favorites/btn", review: @review %>

@@ -4,7 +4,7 @@
       <th></th>
       <th>展示会</th>
       <th>開催美術館</th>
-      <th>レビュー</th>
+      <th>感情分析スコア</th>
       <th>出展アーティスト</th>
       <th>公開ステータス</th>
       <th></th>
@@ -28,7 +28,8 @@
           <%= exhibition.museum.name %>
         <% end %>
       </td>
-      <td><%= Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
+      <% review =Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }) %>
+      <td><%= review_score_average(review) %></td>
       <td><%= exhibition.artists.where(is_active: true).count %></td>
       <td><%= exhibition_is_active_display(exhibition) %></td>
       <td>

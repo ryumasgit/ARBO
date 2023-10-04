@@ -44,6 +44,9 @@
         </div>
       </div>
       <div class="small text-muted text-right">
+        <span class="mr-5">
+          <%= render 'public/reviews/score', review: review %>
+        </span>
         <%= time_ago_in_words(review.created_at).upcase %>
       </div>
     </div>

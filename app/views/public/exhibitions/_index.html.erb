@@ -5,7 +5,7 @@
       <th>展示会</th>
       <th>開催美術館</th>
       <th><i class="fa-solid fa-bookmark" aria-hidden="true"></i></th>
-      <th>レビュー</th>
+      <th>感情分析スコア</th>
     </tr>
   </thead>
   <tbody>
@@ -27,7 +27,8 @@
         <% end %>
       </td>
       <td><%= BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
-      <td><%= Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %></td>
+      <% review =Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }) %>
+      <td><%= review_score_average(review) %></td>
     </tr>
     <% end %>
   </tbody>

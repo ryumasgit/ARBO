@@ -118,13 +118,9 @@ class Admin::MembersController < ApplicationController
     params.require(:member).permit(:member_image, :name, :introduction, :email, :is_active)
   end
 
+  # メンバーが存在するか確認
   def get_member_id
     @member = Member.find(params[:id])
-    redirect_if_member_not_found
-  end
-
-  # メンバーが存在するか確認
-  def redirect_if_member_not_found
     if @member.nil?
       set_flash_message("メンバーが見つかりません")
       redirect_to admin_root_path

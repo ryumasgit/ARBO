@@ -82,8 +82,7 @@ class Public::MembersController < ApplicationController
   # メンバーが訪れた美術館数取得
   def calculate_total_visited_museum
     Museum.joins(exhibitions: {reviews: :member})
-          .where(museums: { is_active: true })
-          .where(members: { id: @member.id })
+          .where(museums: { is_active: true }, members: { id: @member.id })
           .distinct
           .count
   end
@@ -91,8 +90,7 @@ class Public::MembersController < ApplicationController
   # メンバーが訪れた展示会数取得
   def calculate_total_visited_exhibition
     Exhibition.joins(reviews: :member)
-          .where(exhibitions: { is_active: true })
-          .where(members: { id: @member.id })
+          .where(exhibitions: { is_active: true }, members: { id: @member.id })
           .distinct
           .count
   end
@@ -101,8 +99,7 @@ class Public::MembersController < ApplicationController
   def get_earned_badges
     EarnedBadge.joins(:member)
       .joins(:badge)
-      .where(members: { id: @member.id })
-      .where(badges: { is_active: true })
+      .where(members: { id: @member.id }, badges: { is_active: true })
       .order(created_at: :desc)
   end
 

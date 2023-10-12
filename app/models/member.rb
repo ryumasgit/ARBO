@@ -66,6 +66,8 @@ class Member < ApplicationRecord
       member.password = SecureRandom.urlsafe_base64
       member.name = GUEST_MEMBER_NAME
       member.is_guest = "true"
+      file_path = Rails.root.join("app/assets/images/member_image.jpeg")
+      member_image.attach(io: File.open(file_path), filename: "member_image.jpeg", content_type: "image/jpeg")
     end
   end
 

@@ -58,16 +58,20 @@ class Member < ApplicationRecord
     is_guest
   end
 
-  GUEST_MEMBER_EMAIL = "guest@example.com"
-  GUEST_MEMBER_NAME = "guest"
-
   def self.guest
-    find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |member|
-      member.password = SecureRandom.urlsafe_base64
-      member.name = GUEST_MEMBER_NAME
-      member.is_guest = "true"
-      file_path = Rails.root.join("app/assets/images/member_image.jpeg")
-      member_image.attach(io: File.open(file_path), filename: "member_image.jpeg", content_type: "image/jpeg")
+    email = "guest" + SecureRandom.base64(3) + "@example.com"
+    password = SecureRandom.urlsafe_base64
+    name = "guest" + SecureRandom.base64(3)
+    introduction = "ようこそ、ゲストメンバーのプロフィールへ。"
+    file_path = Rails.root.join("app/assets/images/member_image.jpeg")
+
+    find_or_create_by!(email: email) do |member|
+      member.password = password
+      member.name = name
+      member.introduction = introduction
+      member.is_active = true
+      member.is_guest = true
+      member.member_image.attach(io: File.open(file_path), filename: "member_image.jpeg", content_type: "image/jpeg")
     end
   end
 

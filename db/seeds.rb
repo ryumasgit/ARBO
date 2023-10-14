@@ -13,13 +13,13 @@ email: 'admin@login',
 password: '111111'
 )
 
-# membersモデル(guest)初期データ
+# membersモデル(test)初期データ
 member1 = Member.create!(
-name: 'guest',
-introduction: "ようこそ、ゲストメンバーのプロフィールへ！私はこのコミュニティへの新しい訪問者です。美術と文化に興味があり、さまざまなアーティストの作品を楽しんでいます。どうぞお気軽にコミュニティに参加してください。",
-email: 'guest@example.com',
+name: 'test',
+introduction: "ようこそ、テストメンバーのプロフィールへ！私はこのコミュニティへの新しい訪問者です。美術と文化に興味があり、さまざまなアーティストの作品を楽しんでいます。どうぞお気軽にコミュニティに参加してください。",
+email: 'test@example.com',
 is_active: true,
-is_guest: true,
+is_guest: false,
 password: '111111'
 )
 member1.member_image.attach(io: File.open(Rails.root.join('app/assets/images/members/GeorgiaO’Keeffe.jpg')), filename: 'GeorgiaO’Keeffe.jpg')
@@ -48,7 +48,7 @@ member3.member_image.attach(io: File.open(Rails.root.join('app/assets/images/mem
 member4 = Member.create!(
 name: 'Mike',
 introduction: "こんにちは、私はMikeです。アートと音楽が大好きなエンターテイメント愛好者です。美術館での音楽イベントやアートフェスティバルに参加するのが楽しみです。アートと音楽の世界に一緒に浸りましょう！",
-email: 'mike@com',
+email: 'mike@example.com',
 is_active: true,
 is_guest: false,
 password: '111111'

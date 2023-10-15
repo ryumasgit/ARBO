@@ -33,9 +33,10 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   # # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+    delete_guest_members
+  end
 
   # protected
 
@@ -44,6 +45,7 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  # ログイン時、退会ステータスを確認する
   def member_state
     @member = Member.find_by(email: params[:member][:email])
     return if !@member
@@ -51,5 +53,10 @@ class Public::SessionsController < Devise::SessionsController
       flash[:alert] = ["入力されたメンバーは退会済みです 新規登録をご利用ください"]
       redirect_to new_member_registration_path
     end
+  end
+  
+  #ログインしていないゲストメンバーを削除する
+  def delete_guest_members
+    Member.where(is_guest: true).delete_all
   end
 end

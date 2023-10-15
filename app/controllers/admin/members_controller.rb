@@ -32,7 +32,7 @@ class Admin::MembersController < ApplicationController
         render :edit
       end
     else
-      set_flash_message("このメンバーの情報は編集できません")
+      set_flash_message("このメンバーの情報は管理者権限では編集できません")
       redirect_to admin_root_path
     end
   end
@@ -47,7 +47,7 @@ class Admin::MembersController < ApplicationController
         render :edit
       end
     else
-      set_flash_message("このメンバーは削除できません")
+      set_flash_message("このメンバーは管理者権限では削除できません")
       redirect_to admin_root_path
     end
   end

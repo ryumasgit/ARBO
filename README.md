@@ -40,14 +40,6 @@ https://docs.google.com/spreadsheets/d/1wR-112WYZpwvsbtdh3nHNEnc5AYZRr2q39jUhWAI
 
 https://docs.google.com/spreadsheets/d/1P8854L5xH0_X5BMEGUnfdblPfQCOKh4PqKbt6CrI9C4/edit#gid=1773513600
 
-- UI FLOW
-
-https://app.diagrams.net/#G11Q5D5pTKIOyV5tsmFNcGQR40zrshL3LM
-
-- ワイヤーフレーム
-
-https://app.diagrams.net/#G11CYU8Clf8sIl7wBrnjWO50Ov51t4NK0j#%7B%22pageId%22%3A%221I2uSup_9oQ0vCWFcfs_%22%7D
-
 - ER図
 
 https://app.diagrams.net/#G1-8RffLi1O6WpRtxVwpz64g1cFhevN4MZ

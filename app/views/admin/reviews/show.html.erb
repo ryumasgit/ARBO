@@ -31,7 +31,9 @@
   <%= render 'admin/reviews/event', review: @review %>
 
   <div class="row justify-content-center">
-    <%= render "admin/review_comments/btn", review: @review %>
+    <div id="comments_count_<%= @review.id %>">
+      <%= render "admin/review_comments/btn", review: @review %>
+    </div>
     <%= render "admin/favorites/btn", review: @review %>
   </div>
   <div class="small text-muted text-right mr-3">

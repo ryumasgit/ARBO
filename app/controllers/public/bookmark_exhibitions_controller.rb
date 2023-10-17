@@ -12,6 +12,8 @@ class Public::BookmarkExhibitionsController < ApplicationController
   def index
     @bookmark_exhibitions = current_member.exhibitions.where(is_active: :true)
                                                       .page(params[:page]).per(20)
+    extract_bookmark_count
+    extract_review
   end
 
   def destroy
@@ -23,5 +25,19 @@ class Public::BookmarkExhibitionsController < ApplicationController
 
   def bookmark_exhibition_count
     @bookmark_exhibition_counts = BookmarkExhibition.joins(:member).where(exhibition_id: @exhibition.id, members: { is_active: true }).count
+  end
+
+  def extract_bookmark_count
+    @bookmark_exhibition_counts = {}
+    @bookmark_exhibitions.each do |exhibition|
+      @bookmark_exhibition_counts[exhibition.id] = BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count
+    end
+  end
+
+  def extract_review
+    @review = {}
+    @bookmark_exhibitions.each do |exhibition|
+      @review[exhibition.id] = Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true })
+    end
   end
 end

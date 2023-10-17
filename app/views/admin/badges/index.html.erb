@@ -32,8 +32,9 @@
             </td>
             <td>
               <% if badge.is_active == true %>
-                <%= badge.earned_badges.count %></td>
+                <%= badge.members.where(members: { is_active: true }).count %>
               <% end %>
+            </td>
             <td><%= badge_is_active_display(badge) %></td>
             <td>
               <%= link_to edit_admin_badge_path(badge), class: "btn" do %>

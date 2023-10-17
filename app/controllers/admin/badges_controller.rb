@@ -24,7 +24,7 @@ class Admin::BadgesController < ApplicationController
   end
 
   def index
-    @badges = Badge.page(params[:page])
+    @badges = Badge.includes(:earned_badges).page(params[:page])
   end
 
   def show
@@ -72,7 +72,7 @@ class Admin::BadgesController < ApplicationController
       flash[:alert] = "画像が必要です"
     end
   end
-  
+
   # エラー箇所に元のデータを代入する
   def copy_error_attributes_from_original_badge
     @original_badge.attributes.each do |attr, value|

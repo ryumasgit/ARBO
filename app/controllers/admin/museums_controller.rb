@@ -31,7 +31,7 @@ class Admin::MuseumsController < ApplicationController
   def index
     @museums = Museum.page(params[:page])
     @exhibitions = Exhibition.page(params[:page])
-    @artists = Artist.page(params[:page])
+    @artists = Artist.includes(:exhibitions).page(params[:page])
   end
 
   def edit
@@ -46,7 +46,7 @@ class Admin::MuseumsController < ApplicationController
     end
 
     museum_images_delete
-    
+
     if @museum.update(museum_params)
       set_flash_message("美術館情報の保存に成功しました")
       redirect_to admin_museum_path(@museum)
@@ -59,7 +59,7 @@ class Admin::MuseumsController < ApplicationController
 
   def destroy
     museum_images_all_delete
-    
+
     if @museum.destroy
       set_flash_message("美術館の削除に成功しました")
       redirect_to admin_museums_path

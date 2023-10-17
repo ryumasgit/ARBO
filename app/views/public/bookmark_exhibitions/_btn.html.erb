@@ -2,17 +2,17 @@
   <% if exhibition.bookmarked_by?(current_member) %>
     <%= link_to exhibition_bookmark_exhibitions_path(exhibition), method: :delete, remote: true, data: {"turbolinks" => false} do %>
       <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-      <%= BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %>
+      <%= bookmark_exhibition_counts %>
     <% end %>
   <% else %>
     <%= link_to exhibition_bookmark_exhibitions_path(exhibition), method: :post, remote: true, data: {"turbolinks" => false} do %>
       <i class="fa-regular fa-bookmark mr-1" aria-hidden="true"></i>
-      <%= BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %>
+      <%= bookmark_exhibition_counts %>
     <% end %>
   <% end %>
 <% else %>
   <div class="btn">
     <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-    <%= BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %>
+    <%= bookmark_exhibition_counts %>
   </div>
 <% end %>

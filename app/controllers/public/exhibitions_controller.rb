@@ -4,11 +4,11 @@ class Public::ExhibitionsController < ApplicationController
 
   def show
     @exhibition = Exhibition.find(params[:id])
-
     return exhibition_not_active_redirect unless @exhibition.is_active?
 
     artists = @exhibition.artists.where(is_active: :true)
     @artists = artists.page(params[:page])
+    @bookmark_exhibition_counts = BookmarkExhibition.joins(:member).where(exhibition_id: @exhibition.id, members: { is_active: true }).count
   end
 
   protected

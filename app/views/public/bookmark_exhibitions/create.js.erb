@@ -1,1 +1,1 @@
-$("#bookmark_<%= @exhibition.id %>").html("<%= j(render "public/bookmark_exhibitions/btn", exhibition: @exhibition) %>");
+$("#bookmark_<%= @exhibition.id %>").html("<%= j(render "public/bookmark_exhibitions/btn", exhibition: @exhibition, bookmark_exhibition_counts: @bookmark_exhibition_counts) %>");

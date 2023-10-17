@@ -27,7 +27,7 @@
   </div>
 
   <div id="bookmark_<%= @museum.id %>", class="row justify-content-center align-items-center">
-    <%= render "public/bookmark_museums/btn", museum: @museum %>
+    <%= render "public/bookmark_museums/btn", museum: @museum, bookmark_museum_counts: @bookmark_museum_counts %>
   </div>
 
   <div class="border mt-5"></div>

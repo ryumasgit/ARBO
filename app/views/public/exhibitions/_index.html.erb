@@ -27,7 +27,11 @@
         <% end %>
       </td>
       <td><%= @bookmark_exhibition_counts[exhibition.id] %></td>
-      <td><%= review_score_average(@review[exhibition.id]) %></td>
+      <td>
+        <% if @review[exhibition.id].present? %>
+          <%= review_score_average(@review[exhibition.id]) %>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

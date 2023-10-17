@@ -26,12 +26,14 @@ class Admin::MuseumsController < ApplicationController
   def show
     exhibitions = @museum.exhibitions.where(is_active: :true)
     @exhibitions = exhibitions.page(params[:page])
+    @bookmark_museum_counts = BookmarkMuseum.joins(:member).where(museum_id: @museum.id, members: { is_active: true }).count
   end
 
   def index
-    @museums = Museum.page(params[:page])
-    @exhibitions = Exhibition.page(params[:page])
+    @museums = Museum.includes(:exhibitions).page(params[:page])
+    @exhibitions = Exhibition.includes(:artists).page(params[:page])
     @artists = Artist.includes(:exhibitions).page(params[:page])
+    extract_review
   end
 
   def edit
@@ -118,6 +120,13 @@ class Admin::MuseumsController < ApplicationController
   def museum_images_all_delete
     @museum.museum_images.each do |image|
       image.purge
+    end
+  end
+
+  def extract_review
+    @review = {}
+    @exhibitions.each do |exhibition|
+      @review[exhibition.id] = Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true })
     end
   end
 end

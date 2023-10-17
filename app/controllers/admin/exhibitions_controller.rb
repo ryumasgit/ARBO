@@ -26,6 +26,7 @@ class Admin::ExhibitionsController < ApplicationController
 
   def show
     @artists = @exhibition.artists.where(is_active: :true).page(params[:page])
+    @bookmark_exhibition_counts = BookmarkExhibition.joins(:member).where(exhibition_id: @exhibition.id, members: { is_active: true }).count
   end
 
   def edit

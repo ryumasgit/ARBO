@@ -31,13 +31,13 @@
   <div class="row justify-content-center m-3">
     <%= render 'public/exhibitions/score', exhibition: @exhibition %>
   </div>
-  
+
   <div class="row justify-content-center m-3">
     <%= link_to "公式サイト", @exhibition.official_website, target: "_blank" %>
   </div>
 
   <div class="row justify-content-center align-items-center">
-    <%= render "admin/bookmark_exhibitions/btn", exhibition: @exhibition %>
+    <%= render "admin/bookmark_exhibitions/btn", exhibition: @exhibition, bookmark_exhibition_counts: @bookmark_exhibition_counts %>
   </div>
 
   <div class="border mt-5"></div>

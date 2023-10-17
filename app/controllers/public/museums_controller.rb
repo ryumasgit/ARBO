@@ -11,11 +11,11 @@ class Public::MuseumsController < ApplicationController
   end
 
   def index
-    @museums = Museum.where(is_active: true).page(params[:page])
-    @exhibitions = Exhibition.where(museum_id: @museums.pluck(:id), is_active: true).page(params[:page])
+    @museums = Museum.includes(:exhibitions).where(is_active: true).page(params[:page])
+    @exhibitions = Exhibition.includes(:artists).where(museum_id: @museums.pluck(:id), is_active: true).page(params[:page])
     @artists = Artist.includes(:exhibitions).where(is_active: true).page(params[:page])
-    bookmark_museum_count
-    bookmark_exhibitions_count
+    extract_bookmark_count
+    extract_review
   end
 
   protected
@@ -25,17 +25,21 @@ class Public::MuseumsController < ApplicationController
     redirect_to museums_path
   end
 
-  def bookmark_museum_count
+  def extract_bookmark_count
     @bookmark_museum_counts = {}
+    @bookmark_exhibition_counts = {}
     @museums.each do |museum|
       @bookmark_museum_counts[museum.id] = BookmarkMuseum.joins(:member).where(museum_id: museum.id, members: { is_active: true }).count
     end
-  end
-
-  def bookmark_exhibitions_count
-    @bookmark_exhibition_counts = {}
     @exhibitions.each do |exhibition|
       @bookmark_exhibition_counts[exhibition.id] = BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count
+    end
+  end
+  
+  def extract_review
+    @review = {}
+    @exhibitions.each do |exhibition|
+      @review[exhibition.id] = Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true })
     end
   end
 end

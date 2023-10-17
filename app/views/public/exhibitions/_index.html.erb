@@ -27,8 +27,7 @@
         <% end %>
       </td>
       <td><%= @bookmark_exhibition_counts[exhibition.id] %></td>
-      <% review =Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }) %>
-      <td><%= review_score_average(review) %></td>
+      <td><%= review_score_average(@review[exhibition.id]) %></td>
     </tr>
     <% end %>
   </tbody>

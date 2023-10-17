@@ -1,2 +1,2 @@
 <i class="fa-solid fa-bookmark mr-1" aria-hidden="true"></i>
-<%= BookmarkExhibition.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }).count %>
+<%= bookmark_exhibition_counts %>

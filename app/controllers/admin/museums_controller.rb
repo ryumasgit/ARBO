@@ -10,8 +10,11 @@ class Admin::MuseumsController < ApplicationController
     @museum = Museum.new(museum_params)
 
     if validate_museum_images_creation
-      redirect_to new_admin_museum_path
-      return
+      if @museum.valid?
+      # redirect_to new_admin_museum_path
+        render :new
+        return
+      end
     end
 
     if @museum.save

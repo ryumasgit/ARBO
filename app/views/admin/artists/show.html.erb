@@ -10,7 +10,8 @@
     <div class="col-md-6">
       <div class="images my-auto">
         <% @artist.artist_images.each do |image| %>
-          <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
+          <%= image_tag image.variant(resize: "600x400",
+            gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
         <% end %>
       </div>
     </div>
@@ -38,7 +39,11 @@
           <% exhibitions.each do |exhibition| %>
             <div class="d-flex flex-column m-5">
               <%= link_to admin_exhibition_path(exhibition) do %>
-                <%= image_tag exhibition.exhibition_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1 img-fluid" %>
+                <%= image_tag exhibition.exhibition_images.first.variant(
+                    resize: "400x300",
+                    gravity: 'center',
+                    extent: "300x200"
+                  ).processed, class: "mb-1 img-fluid" %>
               <% end %>
               <%= raw exhibition.name.scan(/.{1,30}/).join("<br>") %>
             </div>

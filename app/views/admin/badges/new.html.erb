@@ -12,14 +12,18 @@
           </div>
 
           <div class="field text-left my-2">
-            <p class="text-info text-center">バッジを登録した後、獲得条件追加をエンジニアに依頼して下さい。</p>
+            <p class="text-info text-center">
+              バッジを登録した後、獲得条件追加をエンジニアに依頼して下さい。
+            </p>
             <%= f.label :name, "バッジ名" %>
-            <%= f.text_field :name, placeholder: "バッジ名（255文字以下）", autofocus: true, class: "form-control" %>
+            <%= f.text_field :name, placeholder: "バッジ名（255文字以下）",
+              autofocus: true, class: "form-control" %>
           </div>
 
           <div class="field text-left my-2">
             <%= f.label :introduction, "紹介文" %>
-            <%= f.text_area :introduction, placeholder: "紹介文（255文字以下）", class: "form-control", rows: 10 %>
+            <%= f.text_area :introduction, placeholder: "紹介文（255文字以下）",
+              class: "form-control", rows: 10 %>
           </div>
 
           <div class="field text-left my-2">

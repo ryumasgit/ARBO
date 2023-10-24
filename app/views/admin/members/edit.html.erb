@@ -43,7 +43,8 @@
               <%= f.submit "保存", class: "btn btn-success" %>
             </div>
           <% end %>
-          <%= link_to "削除する", admin_member_path(@member), method: :delete, data: { confirm: "元には戻せません、本当に削除しますか？" } %>
+          <%= link_to "削除する", admin_member_path(@member), method: :delete,
+            data: { confirm: "元には戻せません、本当に削除しますか？" } %>
         <% else %>
           <p class="text-danger">このメンバーの情報を変えるはできません</p>
         <% end %>

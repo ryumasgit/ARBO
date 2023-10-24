@@ -14,27 +14,32 @@
 
           <div class="field text-left my-2">
             <%= f.label :name, "展示会名" %>
-            <%= f.text_field :name, placeholder: "展示会名（255文字以下）", autofocus: true, class: "form-control" %>
+            <%= f.text_field :name, placeholder: "展示会名（255文字以下）",
+              autofocus: true, class: "form-control" %>
           </div>
 
           <div class="field text-left my-2">
             <%= f.label :introduction, "紹介文" %>
-            <%= f.text_area :introduction, placeholder: "紹介文（255文字以下）", class: "form-control", rows: 10 %>
+            <%= f.text_area :introduction, placeholder: "紹介文（255文字以下）",
+              class: "form-control", rows: 10 %>
           </div>
 
           <div class="field text-left my-2">
             <%= f.label :official_website, "公式WEBサイトURL" %>
-            <%= f.text_area :official_website, placeholder: "公式WEBサイトURL（255文字以下）", class: "form-control" %>
+            <%= f.text_area :official_website, placeholder: "公式WEBサイトURL（255文字以下）",
+              class: "form-control" %>
           </div>
 
           <div class="field text-left my-4">
             <%= f.label :museum_id, "開催元の美術館" %>
-            <%= f.collection_select :museum_id, Museum.where(is_active: true), :id, :name, prompt: "美術館を選択してください", class: "form-control" %>
+            <%= f.collection_select :museum_id, Museum.where(is_active: true),
+              :id, :name, prompt: "美術館を選択してください", class: "form-control" %>
           </div>
 
           <div class="field text-left my-4">
             <%= f.label :artists_ids, "参加アーティスト" %>
-            <%= f.collection_select :artist_ids, Artist.where(is_active: true), :id, :name, { include_blank: false}, multiple: true, class: "form-control" %>
+            <%= f.collection_select :artist_ids, Artist.where(is_active: true),  
+              :id, :name, { include_blank: false}, multiple: true, class: "form-control" %>
           </div>
 
           <div class="field text-left my-2">

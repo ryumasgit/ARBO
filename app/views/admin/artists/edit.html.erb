@@ -12,8 +12,11 @@
             <% @artist.artist_images.each do |image| %>
               <div class="delete-image-check">
                 <%= f.check_box :artist_image_id, { multiple: true }, image.id, false %>
-                <%= image_tag image.variant(resize: "200x100",
-                  gravity: 'center', extent: "200x100").processed, class: "m-1 img-fluid" %>
+                <%= image_tag image.variant(
+                    resize: "200x100",
+                    gravity: 'center',
+                    extent: "200x100"
+                  ).processed, class: "m-1 img-fluid" %>
               </div>
             <% end %>
           </div>

@@ -1,6 +1,10 @@
 <% review =Review.joins(:member).where(exhibition_id: exhibition.id, members: { is_active: true }) %>
 <% if review.present? %>
-  <span class="text-warning border-bottom">感情分析スコア<%= review_score_average(review) %></span>
+  <span class="text-warning border-bottom">
+    感情分析スコア<%= review_score_average(review) %>
+  </span>
 <% else %>
-  <span class="text-warning border-bottom">感情分析スコアはまだありません</span>
+  <span class="text-warning border-bottom">
+    感情分析スコアはまだありません
+  </span>
 <% end %>

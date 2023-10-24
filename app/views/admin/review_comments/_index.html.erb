@@ -16,10 +16,9 @@
         </div>
         <div class="col-3 text-right">
           <%= link_to admin_review_review_comment_path(review_comment.review, review_comment),
-            method: :delete, remote: true, data: {
-                "turbolinks" => false,
-                confirm: "元には戻せません、本当に削除しますか？"
-              }, class: "btn btn-sm" do %>
+            method: :delete, remote: true,
+            data: {"turbolinks" => false, confirm: "元には戻せません、本当に削除しますか？"},
+            class: "btn btn-sm" do %>
             <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
           <% end %>
         </div>

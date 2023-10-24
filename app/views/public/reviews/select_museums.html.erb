@@ -20,8 +20,8 @@
         <%= form_with model: @museums, url: selected_museum_path do |f| %>
           <div class="field my-4">
             <%= f.collection_select :museum_id,
-              Museum.where(is_active: true), :id, :name,
-              prompt: "美術館を選択してください", class: "form-control" %>
+              Museum.where(is_active: true),
+              :id, :name, prompt: "美術館を選択してください", class: "form-control" %>
           </div>
           <div class="actions m-3">
             <%= f.submit "展示会選択へ", class: "btn btn-success" %>

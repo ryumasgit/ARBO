@@ -6,7 +6,9 @@
     <div class="col-md-6">
       <div class="d-flex m-3">
         <div class="progress review-progress">
-          <div class="progress-bar review-progress-body" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">レビュー記入</div>
+          <div class="progress-bar review-progress-body"role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            レビュー記入
+          </div>
         </div>
       </div>
     </div>
@@ -22,15 +24,23 @@
           </div>
 
           <div class="field text-left my-2">
-            <p class="text-info text-center">AIが文章から感情を分析し、その感情に基づいて評価スコアを算出します。</p>
+            <p class="text-info text-center">
+              AIが文章から感情を分析し、その感情に基づいて評価スコアを算出します。
+            </p>
             <%= f.label :body, "レビュー" %>
-            <%= f.text_area :body, placeholder: "本文（255文字以下）", class: "form-control", rows: 8 %>
+            <%= f.text_area :body,
+              placeholder: "本文（255文字以下）",
+              class: "form-control", rows: 8 %>
           </div>
 
           <div class="field text-left my-5">
-            <p class="text-info text-center">AIが選択された画像を解析し、自動的に関連するタグを生成します。</p>
+            <p class="text-info text-center">
+              AIが選択された画像を解析し、自動的に関連するタグを生成します。
+            </p>
             <%= f.label :tags_name, "タグ" %>
-            <%= f.text_area :tags_name, placeholder: "タグをスペースで区切って入力（記号以外 50文字以下）", class: "form-control", rows: 2 %>
+            <%= f.text_area :tags_name,
+              placeholder: "タグをスペースで区切って入力（記号以外 50文字以下）",
+              class: "form-control", rows: 2 %>
           </div>
 
           <%= f.hidden_field :exhibition_id, :value => @selected_exhibition_id %>

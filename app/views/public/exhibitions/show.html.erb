@@ -4,7 +4,11 @@
     <div class="col-md-6">
       <div class="images my-auto">
         <% @exhibition.exhibition_images.each do |image| %>
-          <%= image_tag image.variant(resize: "600x400", gravity: 'center', extent: "600x400").processed, class: "img-fluid" %>
+          <%= image_tag image.variant(
+              resize: "600x400",
+              gravity: 'center',
+              extent: "600x400"
+            ).processed, class: "img-fluid" %>
         <% end %>
       </div>
     </div>
@@ -28,7 +32,8 @@
   </div>
 
   <div id="bookmark_<%= @exhibition.id %>", class="row justify-content-center align-items-center">
-    <%= render "public/bookmark_exhibitions/btn", exhibition: @exhibition, bookmark_exhibition_counts: @bookmark_exhibition_counts %>
+    <%= render "public/bookmark_exhibitions/btn", exhibition: @exhibition,
+    bookmark_exhibition_counts: @bookmark_exhibition_counts %>
   </div>
 
   <div class="border mt-5"></div>
@@ -50,7 +55,11 @@
           <% artists.each do |artist| %>
             <div class="d-flex flex-column m-5">
               <%= link_to artist_path(artist) do %>
-                <%= image_tag artist.artist_images.first.variant(resize: "400x300", gravity: 'center', extent: "300x200").processed, class: "mb-1 img-fluid" %>
+                <%= image_tag artist.artist_images.first.variant(
+                    resize: "400x300",
+                    gravity: 'center',
+                    extent: "300x200"
+                  ).processed, class: "mb-1 img-fluid" %>
               <% end %>
               <%= raw artist.name.scan(/.{1,30}/).join("<br>") %>
             </div>

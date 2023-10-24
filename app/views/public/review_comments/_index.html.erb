@@ -15,7 +15,8 @@
         </div>
         <div class="col-3 text-right">
           <% if can_comments_be_deleted?(review_comment) %>
-            <%= link_to review_review_comment_path(review_comment.review, review_comment), method: :delete, remote: true, data: {"turbolinks" => false}, class: "btn" do %>
+            <%= link_to review_review_comment_path(review_comment.review, review_comment),
+              method: :delete, remote: true, data: {"turbolinks" => false}, class: "btn" do %>
               <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
             <% end %>
           <% end %>

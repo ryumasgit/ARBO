@@ -3,7 +3,8 @@
     <%= form_with model: [review, review_comment], local: false do |f| %>
       <div class="row">
         <div class="col-8">
-          <%= f.text_area :comment, placeholder: "コメント（140文字以下）", rows: '1', class: 'form-control' %>
+          <%= f.text_area :comment, placeholder: "コメント（140文字以下）",
+            rows: '1', class: 'form-control' %>
         </div>
         <div class="col-4">
           <%= f.submit "送信", class: 'btn btn-primary' %>

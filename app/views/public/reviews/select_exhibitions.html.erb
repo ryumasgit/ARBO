@@ -5,7 +5,9 @@
     <div class="col-md-6">
       <div class="d-flex m-3">
         <div class="progress review-progress">
-          <div class="progress-bar review-progress-exhibitions" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">展示会選択</div>
+          <div class="progress-bar review-progress-exhibitions" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
+            展示会選択
+          </div>
         </div>
       </div>
     </div>
@@ -17,7 +19,9 @@
         <h4 class="m-3">ご鑑賞になった展示会をお選びください</h4>
         <%= form_with model: @exhibitions, url: selected_exhibition_path do |f| %>
           <div class="field my-4">
-            <%= f.collection_select :exhibition_id, Exhibition.where(museum_id: @selected_museum_id, is_active: true), :id, :name, prompt: "展示会を選択してください", class: "form-control" %>
+            <%= f.collection_select :exhibition_id,
+              Exhibition.where(museum_id: @selected_museum_id, is_active: true),
+              :id, :name, prompt: "展示会を選択してください", class: "form-control" %>
           </div>
           <div class="actions m-3">
             <%= f.submit "レビュー記入へ", class: "btn btn-success" %>

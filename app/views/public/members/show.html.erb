@@ -30,8 +30,10 @@
             <%= render "public/reviews/index", reviews: @favorited_reviews %>
           </div>
           <div id="section3" class="tab-pane fade">
-            <%= render "public/members/report", total_favorited_count: @total_favorited_count, total_commented_count: @total_commented_count,
-            total_visited_museum: @total_visited_museum, total_visited_exhibition: @total_visited_exhibition %>
+            <%= render "public/members/report", total_favorited_count: @total_favorited_count, 
+              total_commented_count: @total_commented_count,
+              total_visited_museum: @total_visited_museum,
+              total_visited_exhibition: @total_visited_exhibition %>
             <% if @earned_badges.present? %>
               <%= render 'public/members/earned_badges', earned_badges: @earned_badges %>
             <% end %>

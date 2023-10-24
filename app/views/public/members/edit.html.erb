@@ -17,17 +17,20 @@
 
           <div class="field text-left my-2">
             <%= f.label :name, "メンバー名" %>
-            <%= f.text_field :name, placeholder: "メンバー名（25文字以下）", autofocus: true, class: "form-control" %>
+            <%= f.text_field :name, placeholder: "メンバー名（25文字以下）",
+              autofocus: true, class: "form-control" %>
           </div>
 
           <div class="field text-left my-2">
             <%= f.label :introduction, "自己紹介" %>
-            <%= f.text_area :introduction, placeholder: "自己紹介（255文字以下）", class: "form-control", rows: 5 %>
+            <%= f.text_area :introduction, placeholder: "自己紹介（255文字以下）",
+              class: "form-control", rows: 5 %>
           </div>
 
           <div class="field text-left my-2">
             <%= f.label :email, "email" %>
-            <%= f.email_field :email, placeholder: "メールアドレス（255文字以下）", class: "form-control" %>
+            <%= f.email_field :email, placeholder: "メールアドレス（255文字以下）",
+              class: "form-control" %>
           </div>
 
           <div class="actions m-3">

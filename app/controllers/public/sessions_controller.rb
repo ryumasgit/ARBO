@@ -35,7 +35,7 @@ class Public::SessionsController < Devise::SessionsController
   # # DELETE /resource/sign_out
   def destroy
     #ゲストメンバーのデータを削除する
-    if current_member.is_geust?
+    if current_member.is_guest?
       current_member.destroy
     end
     super

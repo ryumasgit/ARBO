@@ -34,8 +34,11 @@ class Public::SessionsController < Devise::SessionsController
 
   # # DELETE /resource/sign_out
   def destroy
+    #ゲストメンバーのデータを削除する
+    if current_member.is_geust?
+      current_member.destroy
+    end
     super
-    delete_guest_members
   end
 
   # protected
@@ -53,10 +56,5 @@ class Public::SessionsController < Devise::SessionsController
       flash[:alert] = ["入力されたメンバーは退会済みです 新規登録をご利用ください"]
       redirect_to new_member_registration_path
     end
-  end
-  
-  #ログインしていないゲストメンバーを削除する
-  def delete_guest_members
-    Member.where(is_guest: true).delete_all
   end
 end

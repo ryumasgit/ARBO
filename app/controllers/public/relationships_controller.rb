@@ -5,15 +5,10 @@ class Public::RelationshipsController < ApplicationController
   before_action :get_followed_member_name, only: [:create, :destroy]
 
   def create
-    unless @followed_member_name == "guest"
-      current_member.follow(@followed_member_name)
-      current_member.create_notification_follow!(current_member, @followed_member_name)
-      followed_member_id = Member.find_by(name: @followed_member_name)
-      badge_condition_met(followed_member_id)
-    else
-      set_flash_message("このユーザーはフォローできません")
-      redirect_to member_my_page_path(member_member_name: current_member.name)
-    end
+    current_member.follow(@followed_member_name)
+    current_member.create_notification_follow!(current_member, @followed_member_name)
+    followed_member_id = Member.find_by(name: @followed_member_name)
+    badge_condition_met(followed_member_id)
   end
 
   def destroy
@@ -34,10 +29,19 @@ class Public::RelationshipsController < ApplicationController
 
   def get_member
     @member = Member.find_by(name: params[:member_member_name])
+    if @member.nil?
+      set_flash_message("指定されたURLは見つかりませんでした。")
+      redirect_to member_my_page_path(member_member_name: current_member.name)
+    end
   end
 
 
   def get_followed_member_name
     @followed_member_name = params[:member_member_name]
+    member = Member.find_by(name: @followed_member_name)
+    if member.is_guest?
+      set_flash_message("このユーザーはフォローできません")
+      redirect_to member_my_page_path(member_member_name: current_member.name)
+    end
   end
 end
